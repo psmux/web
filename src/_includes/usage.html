@@ -1,0 +1,83 @@
+    <!-- Usage Section -->
+    <section id="usage" class="usage">
+      <div class="container">
+        <h2 class="section-title">Getting Started</h2>
+        <div class="usage-content">
+          <div class="usage-examples">
+            <h3>Basic Commands</h3>
+            <div class="usage-grid">
+              <div class="usage-item">
+                <h4>Start psmux</h4>
+                <div class="code-block">
+                  <code>psmux</code>
+                  <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+              </div>
+              
+              <div class="usage-item">
+                <h4>New Named Session</h4>
+                <div class="code-block">
+                  <code>psmux new-session -s work</code>
+                  <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+              </div>
+              
+              <div class="usage-item">
+                <h4>List Sessions</h4>
+                <div class="code-block">
+                  <code>psmux ls</code>
+                  <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+              </div>
+              
+              <div class="usage-item">
+                <h4>Attach to Session</h4>
+                <div class="code-block">
+                  <code>psmux attach -t work</code>
+                  <button class="copy-btn" onclick="copyToClipboard(this)">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="keybindings">
+            <h3>Essential Keybindings</h3>
+            <p>Default prefix: <code>Ctrl+b</code></p>
+            <div class="keybindings-grid">
+              <div class="keybinding">
+                <span class="key">Prefix + c</span>
+                <span class="desc">Create new window</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + %</span>
+                <span class="desc">Split pane left/right</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + "</span>
+                <span class="desc">Split pane top/bottom</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + x</span>
+                <span class="desc">Kill current pane</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + n</span>
+                <span class="desc">Next window</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + p</span>
+                <span class="desc">Previous window</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + d</span>
+                <span class="desc">Detach from session</span>
+              </div>
+              <div class="keybinding">
+                <span class="key">Prefix + Arrow</span>
+                <span class="desc">Navigate between panes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
