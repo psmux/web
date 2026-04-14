@@ -1,0 +1,108 @@
+.wrap {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 100px 48px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #f0f0f5 0%, #a0a0b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.15;
+}
+
+.cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: center;
+  justify-content: center;
+}
+
+.company {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+  color: rgba(240, 240, 245, 0.3);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: default;
+  white-space: nowrap;
+}
+
+.company:hover {
+  color: var(--text-primary);
+  transform: translateY(-4px) scale(1.05);
+}
+
+.company:hover .count {
+  background: rgba(129, 140, 248, 0.18);
+  border-color: rgba(129, 140, 248, 0.45);
+  color: var(--accent-bright);
+  transform: scale(1.1);
+}
+
+.name {
+  font-size: 1.35rem;
+  transition: text-shadow 0.3s ease;
+}
+
+.company:hover .name {
+  text-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  padding: 2px 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: all 0.3s ease;
+}
+
+.xl .name { font-size: clamp(2rem, 3.5vw, 3rem); }
+.lg .name { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
+.md .name { font-size: clamp(1.2rem, 2vw, 1.6rem); }
+.sm .name { font-size: clamp(1rem, 1.5vw, 1.3rem); }
+
+@media (max-width: 768px) {
+  .wrap { padding: 56px 20px; }
+  .cloud { gap: 12px 20px; }
+}
+
+@media (max-width: 480px) {
+  .xl .name { font-size: 1.8rem; }
+  .lg .name { font-size: 1.4rem; }
+  .md .name, .sm .name { font-size: 1.1rem; }
+}
