@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { stats as staticStats } from "../data";
 
-type LiveStats = typeof staticStats;
+type LiveStats = typeof staticStats & { lastUpdated?: string };
 
 const CACHE_KEY = "psmux-live-stats";
 const CACHE_TTL = 1000 * 60 * 15; // 15 min
@@ -59,7 +59,9 @@ export function useLiveStats(): LiveStats {
           if (data.companiesRepresented) merged.companiesRepresented = data.companiesRepresented;
           if (data.ecosystemRepos) merged.ecosystemRepos = data.ecosystemRepos;
           if (data.contributors) merged.contributors = data.contributors;
+          if (data.universities) merged.universities = data.universities;
           if (data.issues) merged.issues = data.issues;
+          if (data.lastUpdated) merged.lastUpdated = data.lastUpdated;
         }
       })
       .catch(() => {});

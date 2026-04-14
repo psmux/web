@@ -3,17 +3,58 @@
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 100px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
 }
 
-.grid {
+.category {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-left: 4px;
+}
+
+.categoryTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.categoryHeader.accent .categoryTitle {
+  color: var(--accent-bright);
+}
+
+.categoryHeader.rust .categoryTitle {
+  color: var(--rust);
+}
+
+.categoryHeader.green .categoryTitle {
+  color: var(--green);
+}
+
+.categoryDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.categoryGrid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .statCard {
   position: relative;
-  padding: 36px 20px;
+  padding: 32px 20px;
   text-align: center;
   overflow: hidden;
   cursor: default;
@@ -37,9 +78,33 @@
   transform: translateY(-6px) scale(1.02);
 }
 
+.statIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.statCard:hover .statIcon {
+  opacity: 0.8;
+}
+
+.statCard.accent .statIcon {
+  color: var(--accent-bright);
+}
+
+.statCard.rust .statIcon {
+  color: var(--rust);
+}
+
+.statCard.green .statIcon {
+  color: var(--green);
+}
+
 .statValue {
   font-family: var(--font-sans);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   font-weight: 800;
   line-height: 1;
   background: linear-gradient(180deg, var(--accent-bright) 0%, var(--accent) 100%);
@@ -47,7 +112,7 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: -0.02em;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -82,16 +147,21 @@
   color: var(--text-secondary);
 }
 
-@media (max-width: 1200px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+.updated {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin-top: -16px;
 }
 
 @media (max-width: 768px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-  .wrap { padding: 56px 20px; }
+  .wrap { padding: 56px 20px; gap: 36px; }
+  .categoryGrid { gap: 12px; }
 }
 
 @media (max-width: 480px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .statCard { padding: 24px 12px; }
+  .categoryGrid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .statCard { padding: 20px 8px; }
+  .statIcon { margin-bottom: 8px; }
 }

@@ -2,8 +2,8 @@ name: Update PSMUX Data
 
 on:
   schedule:
-    # Runs every Monday at 6am UTC
-    - cron: "0 6 * * 1"
+    # Runs every Monday and Thursday at 6am UTC
+    - cron: "0 6 * * 1,4"
   workflow_dispatch: # Allow manual trigger
 
 permissions:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Fetch stargazer data
+      - name: Fetch all stats
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -26,62 +26,93 @@ jobs:
           STARS=$(echo "$REPO_JSON" | jq '.stargazers_count')
           FORKS=$(echo "$REPO_JSON" | jq '.forks_count')
           ISSUES=$(echo "$REPO_JSON" | jq '.open_issues_count')
-
           echo "Stars: $STARS, Forks: $FORKS, Issues: $ISSUES"
+
+          echo "=== Fetching contributors ==="
+          CONTRIBUTORS=$(gh api repos/psmux/psmux/contributors --paginate --jq 'length')
+          echo "Contributors: $CONTRIBUTORS"
 
           echo "=== Fetching all stargazer logins ==="
           gh api repos/psmux/psmux/stargazers --paginate --jq '.[].login' > /tmp/stargazers.txt
           TOTAL_STARS=$(wc -l < /tmp/stargazers.txt)
-          echo "Total stargazers: $TOTAL_STARS"
+          echo "Total stargazers fetched: $TOTAL_STARS"
 
-          echo "=== Fetching user profiles (company info) ==="
-          mkdir -p /tmp/profiles
-          COMPANY_COUNT=0
+          echo "=== Fetching user profiles (company + university) ==="
           COMPANIES_FILE=/tmp/companies.txt
-
+          UNIVERSITIES_FILE=/tmp/universities.txt
           > "$COMPANIES_FILE"
+          > "$UNIVERSITIES_FILE"
 
-          # Process in batches to stay within rate limits
+          # Patterns that identify academic/university affiliations
+          EDU_PATTERN='\.edu|\.ac\.|university|universit|institut|college|school of|polytechnic|akademi|hochschule|ucl |eth |mit |kaist|cnrs|inria|cas\.cn|pku|tsinghua'
+
           while IFS= read -r login; do
-            PROFILE=$(gh api "users/$login" --jq '{login, company: .company, bio: .bio, followers: .followers}' 2>/dev/null || echo '{}')
+            PROFILE=$(gh api "users/$login" --jq '{company: .company, bio: .bio}' 2>/dev/null || echo '{}')
             COMPANY=$(echo "$PROFILE" | jq -r '.company // empty')
+            BIO=$(echo "$PROFILE" | jq -r '.bio // empty')
+
             if [ -n "$COMPANY" ]; then
               echo "$COMPANY" >> "$COMPANIES_FILE"
-              COMPANY_COUNT=$((COMPANY_COUNT + 1))
+              # Check if the company looks like a university
+              if echo "$COMPANY" | grep -iqE "$EDU_PATTERN"; then
+                echo "$COMPANY" >> "$UNIVERSITIES_FILE"
+              fi
             fi
-            # Brief pause to be kind to the API
+            # Also check bio for university affiliations
+            if [ -n "$BIO" ]; then
+              if echo "$BIO" | grep -iqE "$EDU_PATTERN"; then
+                # Extract just the matching part for dedup
+                echo "$BIO" | grep -ioE '[A-Za-z ]+([Uu]niversity|[Ii]nstitut[eo]?|[Cc]ollege|[Pp]olytechnic|KAIST|ETH|MIT|CNRS|INRIA)[A-Za-z ]*' >> "$UNIVERSITIES_FILE" 2>/dev/null || true
+              fi
+            fi
+
             sleep 0.05
           done < /tmp/stargazers.txt
 
-          UNIQUE_COMPANIES=$(sort -u "$COMPANIES_FILE" | wc -l)
-          echo "Users with company: $COMPANY_COUNT, Unique companies: $UNIQUE_COMPANIES"
-
-          echo "=== Fetching contributors ==="
-          CONTRIBUTORS=$(gh api repos/psmux/psmux/contributors --jq 'length')
-
-          echo "=== Fetching forks ==="
-          FORK_COUNT=$(gh api repos/psmux/psmux/forks --paginate --jq 'length' | paste -sd+ | bc)
+          UNIQUE_COMPANIES=$(sort -uf "$COMPANIES_FILE" | wc -l)
+          UNIQUE_UNIVERSITIES=$(sort -uf "$UNIVERSITIES_FILE" | wc -l)
+          echo "Unique companies: $UNIQUE_COMPANIES"
+          echo "Unique universities: $UNIQUE_UNIVERSITIES"
 
           echo "=== Searching ecosystem repos ==="
-          ECOSYSTEM=$(gh search repos "psmux" --limit 100 --json fullName --jq 'length')
+          ECOSYSTEM=$(gh search repos "psmux" --limit 200 --json fullName --jq 'length')
+          echo "Ecosystem repos: $ECOSYSTEM"
+
+          echo "=== Searching dotfiles repos ==="
+          DOTFILES=$(gh search code "psmux" --filename ".tmux.conf" --limit 200 --json path --jq 'length' 2>/dev/null || echo "0")
+          DOTFILES2=$(gh search code "psmux" --filename "dotfiles" --limit 200 --json path --jq 'length' 2>/dev/null || echo "0")
+          DOTFILES_TOTAL=$((DOTFILES + DOTFILES2))
+          echo "Dotfiles references: $DOTFILES_TOTAL"
+
+          echo "=== Fetching fork count ==="
+          FORK_COUNT=$(gh api repos/psmux/psmux/forks --paginate --jq 'length' | paste -sd+ | bc)
+          echo "Total forks: $FORK_COUNT"
 
           echo "=== Writing output ==="
-          cat > /tmp/live-stats.json <<EOF
-          {
-            "stars": $STARS,
-            "forks": $FORKS,
-            "contributors": $CONTRIBUTORS,
-            "issues": $ISSUES,
-            "companiesRepresented": $UNIQUE_COMPANIES,
-            "ecosystemRepos": $ECOSYSTEM,
-            "lastUpdated": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          }
-          EOF
+          jq -n \
+            --argjson stars "$STARS" \
+            --argjson forks "${FORK_COUNT:-$FORKS}" \
+            --argjson contributors "$CONTRIBUTORS" \
+            --argjson issues "$ISSUES" \
+            --argjson companiesRepresented "$UNIQUE_COMPANIES" \
+            --argjson universities "$UNIQUE_UNIVERSITIES" \
+            --argjson ecosystemRepos "$ECOSYSTEM" \
+            --argjson dotfilesReferences "$DOTFILES_TOTAL" \
+            --arg lastUpdated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            '{
+              stars: $stars,
+              forks: $forks,
+              contributors: $contributors,
+              issues: $issues,
+              companiesRepresented: $companiesRepresented,
+              universities: $universities,
+              ecosystemRepos: $ecosystemRepos,
+              dotfilesReferences: $dotfilesReferences,
+              lastUpdated: $lastUpdated
+            }' > public/live-stats.json
 
-          cat /tmp/live-stats.json
-
-          # Copy to repo
-          cp /tmp/live-stats.json public/live-stats.json
+          echo "=== Final output ==="
+          cat public/live-stats.json
 
       - name: Commit updated data
         run: |
