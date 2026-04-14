@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, Terminal, ExternalLink } from 'lucide-react';
+import { useLiveStats } from '../hooks/useLiveStats';
 import styles from './Hero.module.css';
 
 const fadeUp = {
@@ -12,6 +13,7 @@ const fadeUp = {
 };
 
 export default function Hero() {
+  const liveStats = useLiveStats();
   return (
     <section className={styles.hero}>
       <div className={styles.bgGlow} />
@@ -78,7 +80,7 @@ export default function Hero() {
             View on GitHub
             <span className={styles.starBadge}>
               <Star size={12} fill="currentColor" />
-              1,144
+              {liveStats.stars.toLocaleString()}
             </span>
           </a>
         </motion.div>

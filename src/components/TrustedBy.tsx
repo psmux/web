@@ -8,6 +8,12 @@ const SIZE_BY_NAME: Record<string, 'xl' | 'lg' | 'md' | 'sm'> = {
   Meta: 'lg',
   IBM: 'lg',
   Sony: 'lg',
+  'NTT Data': 'lg',
+  Nexon: 'md',
+  Agoda: 'md',
+  'Serasa Experian': 'md',
+  Fiverr: 'md',
+  'CI&T': 'md',
 };
 
 function sizeFor(name: string): 'xl' | 'lg' | 'md' | 'sm' {

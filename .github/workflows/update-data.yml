@@ -32,57 +32,54 @@ jobs:
           CONTRIBUTORS=$(gh api repos/psmux/psmux/contributors --paginate --jq 'length')
           echo "Contributors: $CONTRIBUTORS"
 
-          echo "=== Fetching all stargazer logins ==="
-          gh api repos/psmux/psmux/stargazers --paginate --jq '.[].login' > /tmp/stargazers.txt
-          TOTAL_STARS=$(wc -l < /tmp/stargazers.txt)
-          echo "Total stargazers fetched: $TOTAL_STARS"
-
-          echo "=== Fetching user profiles (company + university) ==="
-          COMPANIES_FILE=/tmp/companies.txt
-          UNIVERSITIES_FILE=/tmp/universities.txt
+          echo "=== Fetching stargazer companies via GraphQL ==="
+          COMPANIES_FILE=/tmp/companies_raw.txt
           > "$COMPANIES_FILE"
-          > "$UNIVERSITIES_FILE"
+          CURSOR=""
+          PAGE=0
 
-          # Patterns that identify academic/university affiliations
-          EDU_PATTERN='\.edu|\.ac\.|university|universit|institut|college|school of|polytechnic|akademi|hochschule|ucl |eth |mit |kaist|cnrs|inria|cas\.cn|pku|tsinghua'
-
-          while IFS= read -r login; do
-            PROFILE=$(gh api "users/$login" --jq '{company: .company, bio: .bio}' 2>/dev/null || echo '{}')
-            COMPANY=$(echo "$PROFILE" | jq -r '.company // empty')
-            BIO=$(echo "$PROFILE" | jq -r '.bio // empty')
-
-            if [ -n "$COMPANY" ]; then
-              echo "$COMPANY" >> "$COMPANIES_FILE"
-              # Check if the company looks like a university
-              if echo "$COMPANY" | grep -iqE "$EDU_PATTERN"; then
-                echo "$COMPANY" >> "$UNIVERSITIES_FILE"
-              fi
-            fi
-            # Also check bio for university affiliations
-            if [ -n "$BIO" ]; then
-              if echo "$BIO" | grep -iqE "$EDU_PATTERN"; then
-                # Extract just the matching part for dedup
-                echo "$BIO" | grep -ioE '[A-Za-z ]+([Uu]niversity|[Ii]nstitut[eo]?|[Cc]ollege|[Pp]olytechnic|KAIST|ETH|MIT|CNRS|INRIA)[A-Za-z ]*' >> "$UNIVERSITIES_FILE" 2>/dev/null || true
-              fi
+          while true; do
+            PAGE=$((PAGE + 1))
+            if [ -z "$CURSOR" ]; then
+              QUERY='query { repository(owner:"psmux",name:"psmux") { stargazers(first:100) { pageInfo { hasNextPage endCursor } nodes { login company } } } }'
+            else
+              QUERY="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } nodes { login company } } } }"
             fi
 
-            sleep 0.05
-          done < /tmp/stargazers.txt
+            RESULT=$(gh api graphql -f "query=$QUERY" 2>/dev/null)
+            echo "$RESULT" | jq -r '.data.repository.stargazers.nodes[] | select(.company != null and .company != "") | .company' >> "$COMPANIES_FILE"
 
+            HAS_NEXT=$(echo "$RESULT" | jq -r '.data.repository.stargazers.pageInfo.hasNextPage')
+            CURSOR=$(echo "$RESULT" | jq -r '.data.repository.stargazers.pageInfo.endCursor')
+            echo "Page $PAGE done"
+
+            if [ "$HAS_NEXT" != "true" ]; then
+              break
+            fi
+          done
+
+          echo "=== Processing companies ==="
+          # Normalize: trim whitespace, remove leading @
+          sed -i 's/^[[:space:]]*//;s/[[:space:]]*$//;s/^@//' "$COMPANIES_FILE"
+
+          # Count unique companies
           UNIQUE_COMPANIES=$(sort -uf "$COMPANIES_FILE" | wc -l)
-          UNIQUE_UNIVERSITIES=$(sort -uf "$UNIVERSITIES_FILE" | wc -l)
           echo "Unique companies: $UNIQUE_COMPANIES"
+
+          # Build top companies JSON array (sorted by frequency)
+          COMPANIES_JSON=$(sort "$COMPANIES_FILE" | uniq -ic | sort -rn | head -60 | \
+            awk '{count=$1; $1=""; sub(/^[[:space:]]+/,""); print "{\"name\":\""$0"\",\"count\":"count"}"}' | \
+            jq -s '.')
+          echo "Top companies: $(echo "$COMPANIES_JSON" | jq 'length')"
+
+          # Count universities from company field
+          EDU_PATTERN='\.edu|\.ac\.|[Uu]niversity|[Uu]niversit|[Ii]nstitut|[Cc]ollege|[Pp]olytechnic|KAIST|ETH|MIT'
+          UNIQUE_UNIVERSITIES=$(grep -iE "$EDU_PATTERN" "$COMPANIES_FILE" | sort -uf | wc -l)
           echo "Unique universities: $UNIQUE_UNIVERSITIES"
 
           echo "=== Searching ecosystem repos ==="
           ECOSYSTEM=$(gh search repos "psmux" --limit 200 --json fullName --jq 'length')
           echo "Ecosystem repos: $ECOSYSTEM"
-
-          echo "=== Searching dotfiles repos ==="
-          DOTFILES=$(gh search code "psmux" --filename ".tmux.conf" --limit 200 --json path --jq 'length' 2>/dev/null || echo "0")
-          DOTFILES2=$(gh search code "psmux" --filename "dotfiles" --limit 200 --json path --jq 'length' 2>/dev/null || echo "0")
-          DOTFILES_TOTAL=$((DOTFILES + DOTFILES2))
-          echo "Dotfiles references: $DOTFILES_TOTAL"
 
           echo "=== Fetching fork count ==="
           FORK_COUNT=$(gh api repos/psmux/psmux/forks --paginate --jq 'length' | paste -sd+ | bc)
@@ -97,7 +94,7 @@ jobs:
             --argjson companiesRepresented "$UNIQUE_COMPANIES" \
             --argjson universities "$UNIQUE_UNIVERSITIES" \
             --argjson ecosystemRepos "$ECOSYSTEM" \
-            --argjson dotfilesReferences "$DOTFILES_TOTAL" \
+            --argjson topCompanies "$COMPANIES_JSON" \
             --arg lastUpdated "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             '{
               stars: $stars,
@@ -107,7 +104,7 @@ jobs:
               companiesRepresented: $companiesRepresented,
               universities: $universities,
               ecosystemRepos: $ecosystemRepos,
-              dotfilesReferences: $dotfilesReferences,
+              topCompanies: $topCompanies,
               lastUpdated: $lastUpdated
             }' > public/live-stats.json
 
