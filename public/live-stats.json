@@ -1,11 +1,252 @@
 {
-  "stars": 1259,
-  "forks": 89,
-  "contributors": 8,
-  "issues": 37,
-  "companiesRepresented": 247,
-  "universities": 33,
-  "ecosystemRepos": 30,
-  "dotfilesReferences": 15,
-  "lastUpdated": "2026-04-14T12:00:00Z"
+  "stars": 1430,
+  "forks": 96,
+  "contributors": 11,
+  "issues": 36,
+  "companiesRepresented": 280,
+  "universities": 39,
+  "ecosystemRepos": 22,
+  "topCompanies": [
+    {
+      "name": "Microsoft",
+      "count": 11
+    },
+    {
+      "name": "Uptime Development",
+      "count": 2
+    },
+    {
+      "name": "Tencent",
+      "count": 2
+    },
+    {
+      "name": "Beijing Jiaotong University",
+      "count": 2
+    },
+    {
+      "name": "深圳市土椒科技有限公司",
+      "count": 1
+    },
+    {
+      "name": "无",
+      "count": 1
+    },
+    {
+      "name": "哈尔滨工程大学",
+      "count": 1
+    },
+    {
+      "name": "合肥工业大学",
+      "count": 1
+    },
+    {
+      "name": "中国科学院数字生命研究所",
+      "count": 1
+    },
+    {
+      "name": "ОКОЛО Маркет",
+      "count": 1
+    },
+    {
+      "name": "yunquna",
+      "count": 1
+    },
+    {
+      "name": "youtouchcl",
+      "count": 1
+    },
+    {
+      "name": "yours.org",
+      "count": 1
+    },
+    {
+      "name": "xdrobotics",
+      "count": 1
+    },
+    {
+      "name": "weibo.com",
+      "count": 1
+    },
+    {
+      "name": "violet-void",
+      "count": 1
+    },
+    {
+      "name": "ubisoftinc",
+      "count": 1
+    },
+    {
+      "name": "thisisartium",
+      "count": 1
+    },
+    {
+      "name": "thinkertankApps",
+      "count": 1
+    },
+    {
+      "name": "test",
+      "count": 1
+    },
+    {
+      "name": "tencat-dev @ncscvietnam @oasm-platform",
+      "count": 1
+    },
+    {
+      "name": "sun-asterisk",
+      "count": 1
+    },
+    {
+      "name": "shuopensourcecommunity",
+      "count": 1
+    },
+    {
+      "name": "serasaexperian",
+      "count": 1
+    },
+    {
+      "name": "roxlu",
+      "count": 1
+    },
+    {
+      "name": "peksel",
+      "count": 1
+    },
+    {
+      "name": "odysseustech",
+      "count": 1
+    },
+    {
+      "name": "nxsyspro.com",
+      "count": 1
+    },
+    {
+      "name": "null",
+      "count": 1
+    },
+    {
+      "name": "neurocle",
+      "count": 1
+    },
+    {
+      "name": "mscad.ru",
+      "count": 1
+    },
+    {
+      "name": "midtown-technology-group",
+      "count": 1
+    },
+    {
+      "name": "microsoft",
+      "count": 1
+    },
+    {
+      "name": "meta-introspector",
+      "count": 1
+    },
+    {
+      "name": "longbrain-net, @fldev-mirror",
+      "count": 1
+    },
+    {
+      "name": "loanDepot",
+      "count": 1
+    },
+    {
+      "name": "kawaii-cs @AtriKawaii @biliup @UniiemStudio",
+      "count": 1
+    },
+    {
+      "name": "kangwon national university",
+      "count": 1
+    },
+    {
+      "name": "jaktestowac",
+      "count": 1
+    },
+    {
+      "name": "isikkaynak",
+      "count": 1
+    },
+    {
+      "name": "inampla",
+      "count": 1
+    },
+    {
+      "name": "immense",
+      "count": 1
+    },
+    {
+      "name": "https://www.cycraft.com/",
+      "count": 1
+    },
+    {
+      "name": "https://gloing.team",
+      "count": 1
+    },
+    {
+      "name": "http://ibm.github.io/",
+      "count": 1
+    },
+    {
+      "name": "home",
+      "count": 1
+    },
+    {
+      "name": "hasmeni",
+      "count": 1
+    },
+    {
+      "name": "grc-iit",
+      "count": 1
+    },
+    {
+      "name": "google",
+      "count": 1
+    },
+    {
+      "name": "erasin.wang",
+      "count": 1
+    },
+    {
+      "name": "energyworldnet",
+      "count": 1
+    },
+    {
+      "name": "elvezjp",
+      "count": 1
+    },
+    {
+      "name": "dtonic",
+      "count": 1
+    },
+    {
+      "name": "digital-ai",
+      "count": 1
+    },
+    {
+      "name": "designovel-labs",
+      "count": 1
+    },
+    {
+      "name": "cventech",
+      "count": 1
+    },
+    {
+      "name": "cosmigo",
+      "count": 1
+    },
+    {
+      "name": "cadwork",
+      "count": 1
+    },
+    {
+      "name": "broadcom",
+      "count": 1
+    },
+    {
+      "name": "borggames",
+      "count": 1
+    }
+  ],
+  "lastUpdated": "2026-04-20T07:56:07Z"
 }
