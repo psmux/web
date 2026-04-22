@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { Star, ExternalLink, Package } from "lucide-react";
-import { ecosystemProjects } from "../data";
+import { ExternalLink, Package } from "lucide-react";
+import { useLiveStats } from "../hooks/useLiveStats";
 
 const container = {
   hidden: { opacity: 0 },
@@ -49,6 +49,7 @@ function categoryLabel(category: Category): string {
 }
 
 export default function Ecosystem() {
+  const { ecosystemProjects, ecosystemRepos } = useLiveStats();
   return (
     <section className="section" id="ecosystem">
       <motion.h2
@@ -67,7 +68,7 @@ export default function Ecosystem() {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        30+ projects, plugins, and integrations built around psmux
+        {ecosystemRepos}+ projects, plugins, and integrations built around <span className="hl-psmux">psmux</span>
       </motion.p>
 
       <motion.div
@@ -165,23 +166,7 @@ export default function Ecosystem() {
               {project.description}
             </div>
 
-            {project.stars > 0 && (
-              <div
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontSize: "0.8rem",
-                  color: "var(--yellow)",
-                  fontFamily: "var(--font-mono)",
-                  paddingTop: 10,
-                  borderTop: "1px solid var(--border)",
-                }}
-              >
-                <Star size={14} fill="currentColor" />
-                {project.stars} stars
-              </div>
-            )}
+
           </motion.a>
         ))}
       </motion.div>

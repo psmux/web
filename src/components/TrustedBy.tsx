@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { companies } from '../data';
+import { useLiveStats } from '../hooks/useLiveStats';
 import styles from './TrustedBy.module.css';
 
 const SIZE_BY_NAME: Record<string, 'xl' | 'lg' | 'md' | 'sm'> = {
@@ -16,11 +16,18 @@ const SIZE_BY_NAME: Record<string, 'xl' | 'lg' | 'md' | 'sm'> = {
   'CI&T': 'md',
 };
 
-function sizeFor(name: string): 'xl' | 'lg' | 'md' | 'sm' {
-  return SIZE_BY_NAME[name] ?? 'md';
+function sizeFor(name: string, count: number): 'xl' | 'lg' | 'md' | 'sm' {
+  if (SIZE_BY_NAME[name]) return SIZE_BY_NAME[name];
+  if (count >= 8) return 'xl';
+  if (count >= 4) return 'lg';
+  if (count >= 2) return 'md';
+  return 'sm';
 }
 
 export default function TrustedBy() {
+  const { topCompanies } = useLiveStats();
+  const companies = topCompanies.slice(0, 36);
+
   return (
     <section className={styles.wrap}>
       <motion.div
@@ -38,7 +45,7 @@ export default function TrustedBy() {
 
       <div className={styles.cloud}>
         {companies.map((c, i) => {
-          const size = sizeFor(c.name);
+          const size = sizeFor(c.name, c.count);
           return (
             <motion.div
               key={c.name}

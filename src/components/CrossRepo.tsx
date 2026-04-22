@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { GitBranch, FolderGit2, FileCode2 } from 'lucide-react';
-import { crossRepoMentions, dotfilesRepos } from '../data';
+import { useLiveStats } from '../hooks/useLiveStats';
 
 const dotfilesContainer = {
   hidden: { opacity: 0 },
@@ -16,6 +16,7 @@ const dotfilesItem = {
 };
 
 const CrossRepo = () => {
+  const { crossRepoMentions, dotfilesRepos } = useLiveStats();
   return (
     <section className="section" id="cross-repo">
       <motion.h2
@@ -34,7 +35,7 @@ const CrossRepo = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        psmux is discussed in major open-source projects
+        <span className="hl-psmux">psmux</span> is discussed in major open-source projects
       </motion.p>
 
       <motion.div
@@ -167,7 +168,7 @@ const CrossRepo = () => {
               textAlign: 'center',
             }}
           >
-            15+ Developers Ship psmux in Their Dotfiles
+            {dotfilesRepos.length}+ Developers Ship <span className="hl-psmux">psmux</span> in Their Dotfiles
           </h3>
           <p
             style={{
@@ -177,7 +178,7 @@ const CrossRepo = () => {
               maxWidth: 500,
             }}
           >
-            Real developers trusting psmux as part of their daily setup
+            Real developers trusting <span className="hl-psmux">psmux</span> as part of their daily setup
           </p>
         </div>
 

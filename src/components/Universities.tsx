@@ -1,17 +1,18 @@
 import { motion } from "framer-motion";
 import { GraduationCap } from "lucide-react";
-import { universities } from "../data";
+import { useLiveStats } from "../hooks/useLiveStats";
 
-function logoUrl(domain: string) {
-  return `https://logo.clearbit.com/${domain}`;
+function logoUrl(domain?: string) {
+  return domain ? `https://logo.clearbit.com/${domain}` : "";
 }
 
-function fallbackUrl(domain: string) {
-  return `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+function fallbackUrl(domain?: string) {
+  return domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : "";
 }
 
 export default function Universities() {
-  const loop = [...universities, ...universities];
+  const { topUniversities, universities: uniCount } = useLiveStats();
+  const loop = [...topUniversities, ...topUniversities];
 
   return (
     <section className="section" id="universities">
@@ -31,7 +32,7 @@ export default function Universities() {
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        Researchers and students at 33+ universities worldwide
+        Researchers and students at {uniCount}+ universities worldwide
       </motion.p>
 
       <style>{`
@@ -117,24 +118,30 @@ export default function Universities() {
         <div className="uni-marquee-track">
           {loop.map((uni, i) => (
             <div key={`${uni.name}-${i}`} className="uni-pill">
-              <img
-                className="uni-logo"
-                src={logoUrl(uni.domain)}
-                alt={`${uni.name} logo`}
-                loading="lazy"
-                onError={(e) => {
-                  const img = e.currentTarget;
-                  if (!img.dataset.fallback) {
-                    img.dataset.fallback = "1";
-                    img.src = fallbackUrl(uni.domain);
-                  } else {
-                    img.style.display = "none";
-                    const svg = img.nextElementSibling as HTMLElement | null;
-                    if (svg) svg.style.display = "block";
-                  }
-                }}
-              />
-              <GraduationCap size={20} style={{ display: "none" }} />
+              {uni.domain ? (
+                <>
+                  <img
+                    className="uni-logo"
+                    src={logoUrl(uni.domain)}
+                    alt={`${uni.name} logo`}
+                    loading="lazy"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      if (!img.dataset.fallback) {
+                        img.dataset.fallback = "1";
+                        img.src = fallbackUrl(uni.domain);
+                      } else {
+                        img.style.display = "none";
+                        const svg = img.nextElementSibling as HTMLElement | null;
+                        if (svg) svg.style.display = "block";
+                      }
+                    }}
+                  />
+                  <GraduationCap size={20} style={{ display: "none" }} />
+                </>
+              ) : (
+                <GraduationCap size={20} />
+              )}
               {uni.name}
             </div>
           ))}

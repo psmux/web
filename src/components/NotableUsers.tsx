@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Users, Quote, Star } from "lucide-react";
-import { notableUsers } from "../data";
+import { useLiveStats } from "../hooks/useLiveStats";
 
 const container = {
   hidden: { opacity: 0 },
@@ -21,6 +21,7 @@ function formatFollowers(n: number): string {
 }
 
 export default function NotableUsers() {
+  const { notableUsers } = useLiveStats();
   return (
     <section className="section" id="notable-users">
       <motion.h2
@@ -195,7 +196,7 @@ export default function NotableUsers() {
                     marginTop: 2,
                   }}
                 />
-                <span>{user.quote}</span>
+                <span>{user.quote || user.title}</span>
               </div>
             </motion.a>
           );
