@@ -96,6 +96,8 @@ jobs:
             > .data/code.json || echo "[]" > .data/code.json
 
       - name: Build live-stats.json
+        env:
+          PYTHONUNBUFFERED: "1"
         run: |
           python3 scripts/build-live-stats.py \
             --repo-json .data/repo.json \
@@ -107,8 +109,6 @@ jobs:
             --psmux-src psmux-src \
             --fork-count "${FORK_COUNT:-0}" \
             --out public/live-stats.json
-        env:
-          PYTHONUNBUFFERED: "1"
 
           echo "=== output preview ==="
           jq '. | {stars, forks, contributors, issues, companiesRepresented, universities, ecosystemRepos,
