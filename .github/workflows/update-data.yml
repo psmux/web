@@ -121,10 +121,43 @@ jobs:
                    lastUpdated}' public/live-stats.json
 
       - name: Commit changes
+        id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/live-stats.json
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "chore: auto-refresh live stats $(date -u +%Y-%m-%d)"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "chore: auto-refresh live stats $(date -u +%Y-%m-%d)"
+            git push
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build site
+        run: npm run build
+
+      - name: Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: d4057c4445eddf457bff8bc5c19e1eb3
+        run: |
+          if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            echo "::warning::CLOUDFLARE_API_TOKEN secret is not set; skipping Pages deploy."
+            echo "Add the secret with:"
+            echo "  gh secret set CLOUDFLARE_API_TOKEN --repo psmux/psmux-website --body '<token>'"
+            exit 0
+          fi
+          npx wrangler@4 pages deploy dist \
+            --project-name psmux \
+            --branch psmux \
+            --commit-dirty=true
