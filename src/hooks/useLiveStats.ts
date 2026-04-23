@@ -9,7 +9,7 @@ import {
   dotfilesRepos as staticDotfiles,
 } from "../data";
 
-export type LiveCompany = { name: string; count: number; logo?: string };
+export type LiveCompany = { name: string; count: number; logo?: string; logoUrl?: string };
 export type LiveUniversity = { name: string; domain?: string };
 export type LiveNotableUser = {
   login: string;

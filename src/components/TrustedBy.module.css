@@ -67,6 +67,21 @@
   transform: scale(1.1);
 }
 
+.logo {
+  height: 1.1em;
+  width: auto;
+  max-width: 1.6em;
+  object-fit: contain;
+  opacity: 0.55;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+  filter: grayscale(100%);
+}
+
+.company:hover .logo {
+  opacity: 1;
+  filter: grayscale(0%) drop-shadow(0 0 8px rgba(129, 140, 248, 0.5));
+}
+
 .name {
   font-size: 1.35rem;
   transition: text-shadow 0.3s ease;

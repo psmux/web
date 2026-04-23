@@ -155,6 +155,8 @@ def main() -> int:
         entry = {"name": name, "count": count}
         if slug in COMPANY_LOGO_SLUGS:
             entry["logo"] = slug
+            # Simple Icons CDN: https://simpleicons.org/ — white-tinted SVG matches dark theme.
+            entry["logoUrl"] = f"https://cdn.simpleicons.org/{slug}/ffffff"
         top_companies.append(entry)
     out["topCompanies"] = top_companies
 

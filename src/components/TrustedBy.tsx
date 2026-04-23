@@ -60,6 +60,16 @@ export default function TrustedBy() {
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
             >
+              {c.logoUrl && (
+                <img
+                  className={styles.logo}
+                  src={c.logoUrl}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+              )}
               <span className={styles.name}>{c.name}</span>
               <span className={styles.count}>{c.count}</span>
             </motion.div>
