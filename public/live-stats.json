@@ -1,8 +1,8 @@
 {
-  "stars": 1492,
+  "stars": 1493,
   "forks": 99,
   "contributors": 12,
-  "issues": 38,
+  "issues": 37,
   "companiesRepresented": 294,
   "topCompanies": [
     {
@@ -383,7 +383,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5353,
+      "followers": 5355,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -852,5 +852,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-23T07:22:22Z"
+  "lastUpdated": "2026-04-23T07:59:38Z"
 }
