@@ -1,14 +1,15 @@
 {
-  "stars": 1493,
+  "stars": 1494,
   "forks": 99,
   "contributors": 12,
-  "issues": 37,
+  "issues": 38,
   "companiesRepresented": 294,
   "topCompanies": [
     {
       "name": "Microsoft",
       "count": 11,
-      "logo": "microsoft"
+      "logo": "microsoft",
+      "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
     {
       "name": "Beijing Jiaotong University",
@@ -21,7 +22,8 @@
     {
       "name": "Tencent",
       "count": 2,
-      "logo": "tencent"
+      "logo": "tencent",
+      "logoUrl": "https://cdn.simpleicons.org/tencent/ffffff"
     },
     {
       "name": "serasaexperian",
@@ -86,7 +88,8 @@
     {
       "name": "IBM",
       "count": 1,
-      "logo": "ibm"
+      "logo": "ibm",
+      "logoUrl": "https://cdn.simpleicons.org/ibm/ffffff"
     },
     {
       "name": "http://ibm.github.io/",
@@ -147,7 +150,8 @@
     {
       "name": "CI&T",
       "count": 1,
-      "logo": "cit"
+      "logo": "cit",
+      "logoUrl": "https://cdn.simpleicons.org/cit/ffffff"
     },
     {
       "name": "GraeInc",
@@ -224,7 +228,8 @@
     {
       "name": "Google",
       "count": 1,
-      "logo": "google"
+      "logo": "google",
+      "logoUrl": "https://cdn.simpleicons.org/google/ffffff"
     },
     {
       "name": "Gonnector",
@@ -391,7 +396,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 3976,
+      "followers": 3977,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -447,7 +452,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 717,
+      "followers": 718,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -852,5 +857,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-23T07:59:38Z"
+  "lastUpdated": "2026-04-23T10:51:02Z"
 }
