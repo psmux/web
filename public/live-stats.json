@@ -1,9 +1,9 @@
 {
-  "stars": 1482,
+  "stars": 1492,
   "forks": 99,
   "contributors": 12,
   "issues": 38,
-  "companiesRepresented": 292,
+  "companiesRepresented": 294,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -391,7 +391,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 3970,
+      "followers": 3976,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -423,7 +423,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 874,
+      "followers": 875,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -431,7 +431,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 814,
+      "followers": 817,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -759,8 +759,7 @@
         "#1751",
         "#912",
         "#1195",
-        "#1194",
-        "#1692"
+        "#1194"
       ],
       "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
     },
@@ -819,6 +818,15 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
+      "repo": "baekenough/oh-my-customcodex",
+      "issues": [
+        "#897",
+        "#851",
+        "#876"
+      ],
+      "context": "oh-my-codex v0.14.3"
+    },
+    {
       "repo": "joshmedeski/sesh",
       "issues": [
         "#358",
@@ -835,14 +843,6 @@
       "context": "Native support for Claude Code agent teams — open teammates in split panes"
     },
     {
-      "repo": "baekenough/oh-my-customcodex",
-      "issues": [
-        "#851",
-        "#876"
-      ],
-      "context": "oh-my-codex v0.10.6"
-    },
-    {
       "repo": "roosta/tmux-fuzzback",
       "issues": [
         "#27"
@@ -852,5 +852,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-22T20:10:14Z"
+  "lastUpdated": "2026-04-23T07:22:22Z"
 }
