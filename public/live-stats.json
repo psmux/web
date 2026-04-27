@@ -1,13 +1,13 @@
 {
-  "stars": 1494,
-  "forks": 99,
+  "stars": 1555,
+  "forks": 102,
   "contributors": 12,
-  "issues": 38,
-  "companiesRepresented": 294,
+  "issues": 36,
+  "companiesRepresented": 306,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 11,
+      "count": 12,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -256,7 +256,7 @@
       "count": 1
     }
   ],
-  "universities": 37,
+  "universities": 38,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -382,13 +382,16 @@
     },
     {
       "name": "Hanyang University"
+    },
+    {
+      "name": "University of Science and Technology of China"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5355,
+      "followers": 5354,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -396,7 +399,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 3977,
+      "followers": 4031,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -404,7 +407,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2125,
+      "followers": 2131,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -412,7 +415,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1421,
+      "followers": 1423,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -428,7 +431,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 875,
+      "followers": 874,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -436,7 +439,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 817,
+      "followers": 821,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -452,15 +455,31 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 718,
+      "followers": 719,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
     },
     {
+      "login": "adamdriscoll",
+      "name": "Adam Driscoll",
+      "followers": 696,
+      "title": "Software Developer and Open Source Developer",
+      "company": "Devolutions",
+      "highlight": false
+    },
+    {
+      "login": "yuiseki",
+      "name": "yuiseki",
+      "followers": 686,
+      "title": "Product manager & Software engineer",
+      "company": "Yuiseki Inc.",
+      "highlight": false
+    },
+    {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 598,
+      "followers": 600,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -476,7 +495,7 @@
     {
       "login": "VonC",
       "name": "VonC",
-      "followers": 478,
+      "followers": 479,
       "title": "Answer questions about Git and GitHub since 2009 on Stack Overflow.  \r",
       "company": "",
       "highlight": false
@@ -484,7 +503,7 @@
     {
       "login": "gkze",
       "name": "George Kontridze",
-      "followers": 473,
+      "followers": 471,
       "title": ":computer: computing",
       "company": "",
       "highlight": false
@@ -512,30 +531,14 @@
       "title": "PHP and Go, Java developer. @swoft-cloud, Creator of  @gookit, @php-toolkit @phppkg",
       "company": "X company",
       "highlight": false
-    },
-    {
-      "login": "JeffCarpenter",
-      "name": "Jeff Carpenter",
-      "followers": 429,
-      "title": "GitHub Developer",
-      "company": "",
-      "highlight": false
-    },
-    {
-      "login": "bl-ue",
-      "name": "bl-ue",
-      "followers": 427,
-      "title": "Check out piebald.ai (@Piebald-AI), tweakcc, splitrail.dev, Gemini CLI Desktop, Awesome Gemini CLI",
-      "company": "",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 22,
+  "ecosystemRepos": 23,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 8,
+      "stars": 11,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -549,7 +552,7 @@
     {
       "name": "portable-pty-patched",
       "author": "psmux",
-      "stars": 0,
+      "stars": 1,
       "description": "Fork of wez/portable-pty with psmux patches (ConPTY PASSTHROUGH_MODE, WIN32_INPUT_MODE, RESIZE_QUIRK flags)",
       "category": "official"
     },
@@ -614,6 +617,13 @@
       "author": "Oruga420",
       "stars": 1,
       "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
+      "category": "claude-code"
+    },
+    {
+      "name": "tebis",
+      "author": "johnkozaris",
+      "stars": 1,
+      "description": "Cross platform Telegram bridge. Drive AI coding agents running in tmux/psmux, like claude code, from Telegram. Rust, single binary, local-only.",
       "category": "claude-code"
     },
     {
@@ -719,14 +729,7 @@
         "#44",
         "#221",
         "#159",
-        "#47",
-        "#177",
-        "#213",
-        "#216",
-        "#105",
-        "#158",
-        "#112",
-        "#56"
+        "#47"
       ],
       "context": "Operator-facing startup paths still leak legacy 'psmux' terminology"
     },
@@ -755,18 +758,26 @@
       "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
     },
     {
-      "repo": "OneStepAt4time/aegis",
+      "repo": "savoy9/tackle",
       "issues": [
-        "#1987",
-        "#908",
-        "#1138",
-        "#907",
-        "#1751",
-        "#912",
-        "#1195",
-        "#1194"
+        "#88",
+        "#12",
+        "#62",
+        "#18",
+        "#4",
+        "#15",
+        "#64",
+        "#66",
+        "#27",
+        "#5",
+        "#26",
+        "#20",
+        "#65",
+        "#83",
+        "#16",
+        "#14"
       ],
-      "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
+      "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -774,24 +785,24 @@
         "#1843",
         "#1548",
         "#1171",
+        "#1871",
         "#1353",
         "#1361",
-        "#1264",
-        "#723"
+        "#1264"
       ],
       "context": "[Bug] omx team worker panes still fail to boot on native Windows + psmux in v0.14.2"
     },
     {
-      "repo": "primetimetank21/dev-setup",
+      "repo": "OneStepAt4time/aegis",
       "issues": [
-        "#154",
-        "#156",
-        "#139",
-        "#140",
-        "#144",
-        "#138"
+        "#908",
+        "#1138",
+        "#907",
+        "#1751",
+        "#912",
+        "#1195"
       ],
-      "context": "docs: add tmux and psmux to documentation"
+      "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
     },
     {
       "repo": "anthropics/claude-code",
@@ -803,6 +814,17 @@
         "#34150"
       ],
       "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
+    },
+    {
+      "repo": "primetimetank21/dev-setup",
+      "issues": [
+        "#139",
+        "#154",
+        "#140",
+        "#156",
+        "#144"
+      ],
+      "context": "Add psmux to Windows setup"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -823,15 +845,6 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "baekenough/oh-my-customcodex",
-      "issues": [
-        "#897",
-        "#851",
-        "#876"
-      ],
-      "context": "oh-my-codex v0.14.3"
-    },
-    {
       "repo": "joshmedeski/sesh",
       "issues": [
         "#358",
@@ -848,14 +861,15 @@
       "context": "Native support for Claude Code agent teams — open teammates in split panes"
     },
     {
-      "repo": "roosta/tmux-fuzzback",
+      "repo": "baekenough/oh-my-customcodex",
       "issues": [
-        "#27"
+        "#851",
+        "#876"
       ],
-      "context": "Anyone can adapt this tools for psmux https://github.com/psmux/psmux. It would be great"
+      "context": "oh-my-codex v0.10.6"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-23T10:51:02Z"
+  "lastUpdated": "2026-04-27T08:30:41Z"
 }
