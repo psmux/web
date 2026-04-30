@@ -1,9 +1,9 @@
 {
-  "stars": 1555,
-  "forks": 102,
+  "stars": 1614,
+  "forks": 105,
   "contributors": 12,
-  "issues": 36,
-  "companiesRepresented": 306,
+  "issues": 48,
+  "companiesRepresented": 311,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -256,7 +256,7 @@
       "count": 1
     }
   ],
-  "universities": 38,
+  "universities": 39,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -385,13 +385,16 @@
     },
     {
       "name": "University of Science and Technology of China"
+    },
+    {
+      "name": "RWTH Aachen University, @Pulsar-Photonics-GmbH"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5354,
+      "followers": 5353,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -399,7 +402,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4031,
+      "followers": 4090,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -409,6 +412,14 @@
       "name": "sudo rm -rf --no-preserve-root /",
       "followers": 2131,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
+      "company": "",
+      "highlight": false
+    },
+    {
+      "login": "dsherret",
+      "name": "David Sherret",
+      "followers": 2087,
+      "title": "Prev @denoland",
       "company": "",
       "highlight": false
     },
@@ -439,7 +450,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 821,
+      "followers": 824,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -447,7 +458,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 736,
+      "followers": 737,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -455,7 +466,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 719,
+      "followers": 720,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -471,7 +482,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 686,
+      "followers": 688,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -503,7 +514,7 @@
     {
       "login": "gkze",
       "name": "George Kontridze",
-      "followers": 471,
+      "followers": 472,
       "title": ":computer: computing",
       "company": "",
       "highlight": false
@@ -523,22 +534,14 @@
       "title": "Principal DevOps Engineer. Solving problems with code. 15x Microsoft MVP for PowerShell",
       "company": "loanDepot",
       "highlight": false
-    },
-    {
-      "login": "inhere",
-      "name": "Inhere",
-      "followers": 460,
-      "title": "PHP and Go, Java developer. @swoft-cloud, Creator of  @gookit, @php-toolkit @phppkg",
-      "company": "X company",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 23,
+  "ecosystemRepos": 22,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 11,
+      "stars": 13,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -634,13 +637,6 @@
       "category": "tool"
     },
     {
-      "name": "claude-agent-comm",
-      "author": "RockyPeng2026",
-      "stars": 0,
-      "description": "父子 Claude Code agent 通信框架 — psmux/tmux + CLI hook + subcommand 编排，事件驱动多 runtime (claude/codex) 子 agent 管理",
-      "category": "claude-code"
-    },
-    {
       "name": "claude-manager",
       "author": "raphaelbgr",
       "stars": 0,
@@ -701,6 +697,7 @@
     {
       "repo": "Sora-bluesky/winsmux",
       "issues": [
+        "#691",
         "#423",
         "#224",
         "#143",
@@ -719,19 +716,15 @@
         "#46",
         "#174",
         "#152",
-        "#131",
         "#139",
         "#57",
+        "#131",
         "#267",
         "#22",
         "#334",
-        "#218",
-        "#44",
-        "#221",
-        "#159",
-        "#47"
+        "#218"
       ],
-      "context": "Operator-facing startup paths still leak legacy 'psmux' terminology"
+      "context": "Remove legacy psmux compatibility contract before v1.0.0"
     },
     {
       "repo": "tellang/triflux",
@@ -742,18 +735,17 @@
         "#39",
         "#116",
         "#40",
-        "#43",
         "#28",
+        "#43",
         "#20",
         "#42",
         "#53",
         "#37",
         "#30",
         "#8",
-        "#144",
         "#108",
-        "#10",
-        "#18"
+        "#144",
+        "#10"
       ],
       "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
     },
@@ -782,15 +774,15 @@
     {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
+        "#1996",
         "#1843",
         "#1548",
         "#1171",
         "#1871",
         "#1353",
-        "#1361",
-        "#1264"
+        "#1361"
       ],
-      "context": "[Bug] omx team worker panes still fail to boot on native Windows + psmux in v0.14.2"
+      "context": "[Feature] Full Windows (psmux) support for OMX team mode (tmux pane / HUD compatibility)"
     },
     {
       "repo": "OneStepAt4time/aegis",
@@ -861,15 +853,15 @@
       "context": "Native support for Claude Code agent teams — open teammates in split panes"
     },
     {
-      "repo": "baekenough/oh-my-customcodex",
+      "repo": "vitalets/github-trending-repos",
       "issues": [
-        "#851",
-        "#876"
+        "#107",
+        "#106"
       ],
-      "context": "oh-my-codex v0.10.6"
+      "context": "New weekly trending repos in PowerShell"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-27T08:30:41Z"
+  "lastUpdated": "2026-04-30T08:26:26Z"
 }
