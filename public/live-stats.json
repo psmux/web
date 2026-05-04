@@ -1,13 +1,13 @@
 {
-  "stars": 1614,
+  "stars": 1702,
   "forks": 105,
   "contributors": 12,
-  "issues": 48,
-  "companiesRepresented": 311,
+  "issues": 38,
+  "companiesRepresented": 326,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 12,
+      "count": 13,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -256,7 +256,7 @@
       "count": 1
     }
   ],
-  "universities": 39,
+  "universities": 40,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -388,13 +388,16 @@
     },
     {
       "name": "RWTH Aachen University, @Pulsar-Photonics-GmbH"
+    },
+    {
+      "name": "George Mason University"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5353,
+      "followers": 5347,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -402,7 +405,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4090,
+      "followers": 4134,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -410,7 +413,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2131,
+      "followers": 2132,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -418,7 +421,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2087,
+      "followers": 2090,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -426,7 +429,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1423,
+      "followers": 1424,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -442,7 +445,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 874,
+      "followers": 875,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -450,7 +453,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 824,
+      "followers": 831,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -466,7 +469,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 720,
+      "followers": 721,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -482,7 +485,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 688,
+      "followers": 689,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -490,7 +493,7 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 600,
+      "followers": 602,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -498,7 +501,7 @@
     {
       "login": "amrbashir",
       "name": "Amr Bashir",
-      "followers": 509,
+      "followers": 511,
       "title": "An open source enthusiast\r",
       "company": "",
       "highlight": false
@@ -514,7 +517,7 @@
     {
       "login": "gkze",
       "name": "George Kontridze",
-      "followers": 472,
+      "followers": 473,
       "title": ":computer: computing",
       "company": "",
       "highlight": false
@@ -522,7 +525,7 @@
     {
       "login": "akemimadoka",
       "name": "Natsu",
-      "followers": 470,
+      "followers": 472,
       "title": "来创造一生难忘的奇迹吧",
       "company": "Tencent",
       "highlight": false
@@ -536,12 +539,12 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 22,
+  "ecosystemRepos": 23,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 13,
+      "stars": 14,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -651,6 +654,13 @@
       "category": "tool"
     },
     {
+      "name": "mosh-windows",
+      "author": "denoflore",
+      "stars": 0,
+      "description": "Native Windows port of mosh (mobile-shell) via ConPTY + Winsock2 + vcpkg. Spec-driven, psmux-harnessed, designed for Claude Code agent-team execution.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux",
       "author": "getlantern",
       "stars": 0,
@@ -720,34 +730,9 @@
         "#57",
         "#131",
         "#267",
-        "#22",
-        "#334",
-        "#218"
+        "#22"
       ],
       "context": "Remove legacy psmux compatibility contract before v1.0.0"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#112",
-        "#89",
-        "#41",
-        "#39",
-        "#116",
-        "#40",
-        "#28",
-        "#43",
-        "#20",
-        "#42",
-        "#53",
-        "#37",
-        "#30",
-        "#8",
-        "#108",
-        "#144",
-        "#10"
-      ],
-      "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
     },
     {
       "repo": "savoy9/tackle",
@@ -772,14 +757,49 @@
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#112",
+        "#89",
+        "#41",
+        "#39",
+        "#116",
+        "#40",
+        "#28",
+        "#43",
+        "#20",
+        "#42",
+        "#53",
+        "#37",
+        "#8",
+        "#30",
+        "#108",
+        "#144"
+      ],
+      "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
+    },
+    {
+      "repo": "primetimetank21/dev-setup",
+      "issues": [
+        "#179",
+        "#185",
+        "#139",
+        "#154",
+        "#140",
+        "#156",
+        "#144"
+      ],
+      "context": "fix(windows): verify or replace psmux winget package ID"
+    },
+    {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
         "#1996",
         "#1843",
         "#1548",
         "#1171",
-        "#1871",
         "#1353",
+        "#1871",
         "#1361"
       ],
       "context": "[Feature] Full Windows (psmux) support for OMX team mode (tmux pane / HUD compatibility)"
@@ -787,6 +807,7 @@
     {
       "repo": "OneStepAt4time/aegis",
       "issues": [
+        "#2574",
         "#908",
         "#1138",
         "#907",
@@ -808,15 +829,13 @@
       "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
     },
     {
-      "repo": "primetimetank21/dev-setup",
+      "repo": "JonathanRosado/claude-anyteam",
       "issues": [
-        "#139",
-        "#154",
-        "#140",
-        "#156",
-        "#144"
+        "#39",
+        "#38",
+        "#37"
       ],
-      "context": "Add psmux to Windows setup"
+      "context": "Windows: spawn shim registers backendType=\"in-process\" but harness expects pane-backed → teammates flagged dead-pane and mailbox poller never runs"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -851,17 +870,9 @@
         "#1012"
       ],
       "context": "Native support for Claude Code agent teams — open teammates in split panes"
-    },
-    {
-      "repo": "vitalets/github-trending-repos",
-      "issues": [
-        "#107",
-        "#106"
-      ],
-      "context": "New weekly trending repos in PowerShell"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-04-30T08:26:26Z"
+  "lastUpdated": "2026-05-04T08:33:45Z"
 }
