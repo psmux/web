@@ -1,13 +1,13 @@
 {
-  "stars": 1702,
-  "forks": 105,
+  "stars": 1903,
+  "forks": 107,
   "contributors": 12,
-  "issues": 38,
-  "companiesRepresented": 326,
+  "issues": 37,
+  "companiesRepresented": 374,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 13,
+      "count": 17,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -24,6 +24,16 @@
       "count": 2,
       "logo": "tencent",
       "logoUrl": "https://cdn.simpleicons.org/tencent/ffffff"
+    },
+    {
+      "name": "microsoft",
+      "count": 2,
+      "logo": "microsoft",
+      "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
+    },
+    {
+      "name": "Psmux",
+      "count": 1
     },
     {
       "name": "serasaexperian",
@@ -246,17 +256,9 @@
     {
       "name": "STBU",
       "count": 1
-    },
-    {
-      "name": "Anphabe JSC",
-      "count": 1
-    },
-    {
-      "name": "Senior Software Architect",
-      "count": 1
     }
   ],
-  "universities": 40,
+  "universities": 45,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -391,13 +393,28 @@
     },
     {
       "name": "George Mason University"
+    },
+    {
+      "name": "Regent University"
+    },
+    {
+      "name": "Jiangsu University"
+    },
+    {
+      "name": "University of Washington"
+    },
+    {
+      "name": "Xian Jiaotong university"
+    },
+    {
+      "name": "Huazhong University of Science & Technology"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5347,
+      "followers": 5351,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -405,7 +422,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4134,
+      "followers": 4202,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -413,7 +430,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2132,
+      "followers": 2135,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -421,7 +438,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2090,
+      "followers": 2092,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -429,7 +446,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1424,
+      "followers": 1425,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -437,7 +454,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1309,
+      "followers": 1308,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -445,7 +462,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 875,
+      "followers": 874,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -453,7 +470,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 831,
+      "followers": 839,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -469,7 +486,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 721,
+      "followers": 722,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -477,7 +494,7 @@
     {
       "login": "adamdriscoll",
       "name": "Adam Driscoll",
-      "followers": 696,
+      "followers": 697,
       "title": "Software Developer and Open Source Developer",
       "company": "Devolutions",
       "highlight": false
@@ -485,15 +502,23 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 689,
+      "followers": 692,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
     },
     {
+      "login": "elbruno",
+      "name": "El Bruno",
+      "followers": 605,
+      "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
+      "company": "Microsoft",
+      "highlight": false
+    },
+    {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 602,
+      "followers": 600,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -501,7 +526,7 @@
     {
       "login": "amrbashir",
       "name": "Amr Bashir",
-      "followers": 511,
+      "followers": 513,
       "title": "An open source enthusiast\r",
       "company": "",
       "highlight": false
@@ -515,27 +540,19 @@
       "highlight": false
     },
     {
-      "login": "gkze",
-      "name": "George Kontridze",
-      "followers": 473,
-      "title": ":computer: computing",
-      "company": "",
-      "highlight": false
-    },
-    {
       "login": "akemimadoka",
       "name": "Natsu",
-      "followers": 472,
+      "followers": 474,
       "title": "来创造一生难忘的奇迹吧",
       "company": "Tencent",
       "highlight": false
     },
     {
-      "login": "Jaykul",
-      "name": "Joel Bennett",
-      "followers": 462,
-      "title": "Principal DevOps Engineer. Solving problems with code. 15x Microsoft MVP for PowerShell",
-      "company": "loanDepot",
+      "login": "gkze",
+      "name": "George Kontridze",
+      "followers": 473,
+      "title": ":computer: computing",
+      "company": "",
       "highlight": false
     }
   ],
@@ -544,7 +561,7 @@
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 14,
+      "stars": 15,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -579,7 +596,7 @@
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 8,
+      "stars": 9,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -718,19 +735,12 @@
         "#24",
         "#179",
         "#91",
+        "#820",
         "#207",
         "#270",
         "#107",
         "#259",
-        "#211",
-        "#46",
-        "#174",
-        "#152",
-        "#139",
-        "#57",
-        "#131",
-        "#267",
-        "#22"
+        "#211"
       ],
       "context": "Remove legacy psmux compatibility contract before v1.0.0"
     },
@@ -763,18 +773,16 @@
         "#89",
         "#41",
         "#39",
-        "#116",
         "#40",
+        "#116",
         "#28",
         "#43",
         "#20",
         "#42",
-        "#53",
-        "#37",
-        "#8",
         "#30",
-        "#108",
-        "#144"
+        "#53",
+        "#8",
+        "#37"
       ],
       "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
     },
@@ -807,7 +815,6 @@
     {
       "repo": "OneStepAt4time/aegis",
       "issues": [
-        "#2574",
         "#908",
         "#1138",
         "#907",
@@ -829,13 +836,14 @@
       "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
     },
     {
-      "repo": "JonathanRosado/claude-anyteam",
+      "repo": "flora131/atomic",
       "issues": [
-        "#39",
-        "#38",
-        "#37"
+        "#875",
+        "#877",
+        "#903",
+        "#888"
       ],
-      "context": "Windows: spawn shim registers backendType=\"in-process\" but harness expects pane-backed → teammates flagged dead-pane and mailbox poller never runs"
+      "context": "[BUG] TUI: Visual glitch when background stages run on Windows [Claude Code, Opencode, Github Copilot] [Dev]"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -874,5 +882,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-04T08:33:45Z"
+  "lastUpdated": "2026-05-11T09:44:11Z"
 }
