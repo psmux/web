@@ -1,15 +1,19 @@
 {
-  "stars": 1903,
-  "forks": 107,
+  "stars": 1955,
+  "forks": 110,
   "contributors": 12,
-  "issues": 37,
-  "companiesRepresented": 374,
+  "issues": 38,
+  "companiesRepresented": 381,
   "topCompanies": [
     {
       "name": "Microsoft",
       "count": 17,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
+    },
+    {
+      "name": "Sun Yat-sen University",
+      "count": 2
     },
     {
       "name": "Beijing Jiaotong University",
@@ -236,6 +240,10 @@
       "count": 1
     },
     {
+      "name": "Zima Spa&Wellness",
+      "count": 1
+    },
+    {
       "name": "Google",
       "count": 1,
       "logo": "google",
@@ -248,17 +256,9 @@
     {
       "name": "UNESA",
       "count": 1
-    },
-    {
-      "name": "National and Kapodistrian University of Athens",
-      "count": 1
-    },
-    {
-      "name": "STBU",
-      "count": 1
     }
   ],
-  "universities": 45,
+  "universities": 47,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -408,13 +408,19 @@
     },
     {
       "name": "Huazhong University of Science & Technology"
+    },
+    {
+      "name": "Office of Medicaid Innovation @ University of Illinois"
+    },
+    {
+      "name": "Northwestern Polytechnical University"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5351,
+      "followers": 5352,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -422,7 +428,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4202,
+      "followers": 4235,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -438,7 +444,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2092,
+      "followers": 2091,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -454,7 +460,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1308,
+      "followers": 1307,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -462,7 +468,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 874,
+      "followers": 875,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -470,7 +476,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 839,
+      "followers": 842,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -494,7 +500,7 @@
     {
       "login": "adamdriscoll",
       "name": "Adam Driscoll",
-      "followers": 697,
+      "followers": 698,
       "title": "Software Developer and Open Source Developer",
       "company": "Devolutions",
       "highlight": false
@@ -510,7 +516,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 605,
+      "followers": 609,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -534,34 +540,34 @@
     {
       "login": "VonC",
       "name": "VonC",
-      "followers": 479,
+      "followers": 480,
       "title": "Answer questions about Git and GitHub since 2009 on Stack Overflow.  \r",
+      "company": "",
+      "highlight": false
+    },
+    {
+      "login": "gkze",
+      "name": "George Kontridze",
+      "followers": 474,
+      "title": ":computer: computing",
       "company": "",
       "highlight": false
     },
     {
       "login": "akemimadoka",
       "name": "Natsu",
-      "followers": 474,
+      "followers": 473,
       "title": "来创造一生难忘的奇迹吧",
       "company": "Tencent",
       "highlight": false
-    },
-    {
-      "login": "gkze",
-      "name": "George Kontridze",
-      "followers": 473,
-      "title": ":computer: computing",
-      "company": "",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 23,
+  "ecosystemRepos": 24,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 15,
+      "stars": 17,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -622,6 +628,13 @@
       "category": "claude-code"
     },
     {
+      "name": "claude-manager",
+      "author": "raphaelbgr",
+      "stars": 1,
+      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
+      "category": "claude-code"
+    },
+    {
       "name": "claude-notification",
       "author": "nappa0326",
       "stars": 1,
@@ -655,13 +668,6 @@
       "stars": 1,
       "description": "Patched Windows Terminal with close-tab and rename-tab CLI subcommands for psmux session sync",
       "category": "tool"
-    },
-    {
-      "name": "claude-manager",
-      "author": "raphaelbgr",
-      "stars": 0,
-      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
-      "category": "claude-code"
     },
     {
       "name": "dotfiles",
@@ -699,6 +705,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-config",
+      "author": "F4NT0",
+      "stars": 0,
+      "description": "My PSMUX (TMUX for windows) configuration",
+      "category": "tool"
+    },
+    {
       "name": "psmux-skill",
       "author": "zzj-Mark",
       "stars": 0,
@@ -722,29 +735,6 @@
   ],
   "crossRepoMentions": [
     {
-      "repo": "Sora-bluesky/winsmux",
-      "issues": [
-        "#691",
-        "#423",
-        "#224",
-        "#143",
-        "#329",
-        "#144",
-        "#62",
-        "#265",
-        "#24",
-        "#179",
-        "#91",
-        "#820",
-        "#207",
-        "#270",
-        "#107",
-        "#259",
-        "#211"
-      ],
-      "context": "Remove legacy psmux compatibility contract before v1.0.0"
-    },
-    {
       "repo": "savoy9/tackle",
       "issues": [
         "#88",
@@ -767,9 +757,29 @@
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
+      "repo": "Sora-bluesky/winsmux",
+      "issues": [
+        "#691",
+        "#423",
+        "#224",
+        "#143",
+        "#329",
+        "#144",
+        "#62",
+        "#265",
+        "#24",
+        "#179",
+        "#820",
+        "#91",
+        "#207",
+        "#270",
+        "#107"
+      ],
+      "context": "Remove legacy psmux compatibility contract before v1.0.0"
+    },
+    {
       "repo": "tellang/triflux",
       "issues": [
-        "#112",
         "#89",
         "#41",
         "#39",
@@ -781,14 +791,14 @@
         "#42",
         "#30",
         "#53",
-        "#8",
-        "#37"
+        "#8"
       ],
       "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
     },
     {
       "repo": "primetimetank21/dev-setup",
       "issues": [
+        "#197",
         "#179",
         "#185",
         "#139",
@@ -797,7 +807,7 @@
         "#156",
         "#144"
       ],
-      "context": "fix(windows): verify or replace psmux winget package ID"
+      "context": "fix(windows): PS 5.1 compatibility — psmux install fails + aliases broken"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -813,6 +823,18 @@
       "context": "[Feature] Full Windows (psmux) support for OMX team mode (tmux pane / HUD compatibility)"
     },
     {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#43840",
+        "#58664",
+        "#24384",
+        "#35148",
+        "#42848",
+        "#34150"
+      ],
+      "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
+    },
+    {
       "repo": "OneStepAt4time/aegis",
       "issues": [
         "#908",
@@ -823,17 +845,6 @@
         "#1195"
       ],
       "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#43840",
-        "#42848",
-        "#24384",
-        "#35148",
-        "#34150"
-      ],
-      "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
     },
     {
       "repo": "flora131/atomic",
@@ -864,23 +875,23 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "joshmedeski/sesh",
+      "repo": "smtg-ai/claude-squad",
       "issues": [
-        "#358",
-        "#367"
+        "#291",
+        "#275"
       ],
-      "context": "【Bug】Failed to attach to tmux session: exit status 1"
+      "context": "Error on Win11 with psmux or Msys2 tmux"
     },
     {
-      "repo": "manaflow-ai/cmux",
+      "repo": "joezhoujinjing/hydra",
       "issues": [
-        "#123",
-        "#1012"
+        "#111",
+        "#154"
       ],
-      "context": "Native support for Claude Code agent teams — open teammates in split panes"
+      "context": "feat: Windows support via PowerShell + psmux"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-11T09:44:11Z"
+  "lastUpdated": "2026-05-14T08:41:19Z"
 }
