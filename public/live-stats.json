@@ -1,9 +1,9 @@
 {
-  "stars": 1955,
-  "forks": 110,
+  "stars": 2014,
+  "forks": 114,
   "contributors": 12,
-  "issues": 38,
-  "companiesRepresented": 381,
+  "issues": 41,
+  "companiesRepresented": 389,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 47,
+  "universities": 49,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -318,7 +318,7 @@
       "name": "St. Petersburg College"
     },
     {
-      "name": "Sanno junior college"
+      "name": "Sanno University"
     },
     {
       "name": "Beijing Normal University"
@@ -414,13 +414,19 @@
     },
     {
       "name": "Northwestern Polytechnical University"
+    },
+    {
+      "name": "Inha University"
+    },
+    {
+      "name": "Korea Aerospace Research Institute (KARI)"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5352,
+      "followers": 5375,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -428,7 +434,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4235,
+      "followers": 4269,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -436,7 +442,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2135,
+      "followers": 2133,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -444,7 +450,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2091,
+      "followers": 2092,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -460,7 +466,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1307,
+      "followers": 1306,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -476,7 +482,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 842,
+      "followers": 848,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -508,7 +514,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 692,
+      "followers": 693,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -516,7 +522,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 609,
+      "followers": 610,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -524,7 +530,7 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 600,
+      "followers": 602,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -540,7 +546,7 @@
     {
       "login": "VonC",
       "name": "VonC",
-      "followers": 480,
+      "followers": 481,
       "title": "Answer questions about Git and GitHub since 2009 on Stack Overflow.  \r",
       "company": "",
       "highlight": false
@@ -548,7 +554,7 @@
     {
       "login": "gkze",
       "name": "George Kontridze",
-      "followers": 474,
+      "followers": 477,
       "title": ":computer: computing",
       "company": "",
       "highlight": false
@@ -556,13 +562,13 @@
     {
       "login": "akemimadoka",
       "name": "Natsu",
-      "followers": 473,
+      "followers": 475,
       "title": "来创造一生难忘的奇迹吧",
       "company": "Tencent",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 24,
+  "ecosystemRepos": 23,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -677,24 +683,17 @@
       "category": "tool"
     },
     {
-      "name": "mosh-windows",
-      "author": "denoflore",
+      "name": "psmux",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "Native Windows port of mosh (mobile-shell) via ConPTY + Winsock2 + vcpkg. Spec-driven, psmux-harnessed, designed for Claude Code agent-team execution.",
-      "category": "claude-code"
+      "description": "psmux-related project",
+      "category": "tool"
     },
     {
       "name": "psmux",
       "author": "getlantern",
       "stars": 0,
       "description": "experimental fork of smux with packet coalescing and padding",
-      "category": "tool"
-    },
-    {
-      "name": "psmux",
-      "author": "fangbaolei",
-      "stars": 0,
-      "description": "psmux-related project",
       "category": "tool"
     },
     {
@@ -769,45 +768,44 @@
         "#265",
         "#24",
         "#179",
-        "#820",
         "#91",
-        "#207",
-        "#270",
-        "#107"
+        "#820",
+        "#207"
       ],
       "context": "Remove legacy psmux compatibility contract before v1.0.0"
     },
     {
       "repo": "tellang/triflux",
       "issues": [
+        "#279",
+        "#278",
         "#89",
         "#41",
         "#39",
-        "#40",
         "#116",
+        "#40",
         "#28",
         "#43",
         "#20",
-        "#42",
-        "#30",
-        "#53",
-        "#8"
+        "#42"
       ],
-      "context": "chore(psmux): safety-guard kill-session 차단 대안 API 필요 — worker name 기반 wrapper"
+      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
     },
     {
       "repo": "primetimetank21/dev-setup",
       "issues": [
-        "#197",
         "#179",
-        "#185",
+        "#197",
         "#139",
         "#154",
         "#140",
+        "#144",
+        "#226",
         "#156",
-        "#144"
+        "#185",
+        "#239"
       ],
-      "context": "fix(windows): PS 5.1 compatibility — psmux install fails + aliases broken"
+      "context": "fix(windows): verify or replace psmux winget package ID"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -825,10 +823,10 @@
     {
       "repo": "anthropics/claude-code",
       "issues": [
-        "#43840",
         "#58664",
         "#24384",
         "#35148",
+        "#43840",
         "#42848",
         "#34150"
       ],
@@ -893,5 +891,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-14T08:41:19Z"
+  "lastUpdated": "2026-05-18T10:10:08Z"
 }
