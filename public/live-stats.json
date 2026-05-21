@@ -1,9 +1,9 @@
 {
-  "stars": 2014,
-  "forks": 114,
-  "contributors": 12,
-  "issues": 41,
-  "companiesRepresented": 389,
+  "stars": 2071,
+  "forks": 120,
+  "contributors": 13,
+  "issues": 39,
+  "companiesRepresented": 402,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -21,6 +21,10 @@
     },
     {
       "name": "Uptime Development",
+      "count": 2
+    },
+    {
+      "name": "Zhejiang University",
       "count": 2
     },
     {
@@ -252,13 +256,9 @@
     {
       "name": "Gonnector",
       "count": 1
-    },
-    {
-      "name": "UNESA",
-      "count": 1
     }
   ],
-  "universities": 49,
+  "universities": 50,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -420,13 +420,16 @@
     },
     {
       "name": "Korea Aerospace Research Institute (KARI)"
+    },
+    {
+      "name": "CVPR LAB, Sejong University"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5375,
+      "followers": 5363,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -434,7 +437,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4269,
+      "followers": 4299,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -442,7 +445,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2133,
+      "followers": 2136,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -450,7 +453,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2092,
+      "followers": 2091,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -466,7 +469,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1306,
+      "followers": 1307,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -482,7 +485,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 848,
+      "followers": 854,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -498,7 +501,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 722,
+      "followers": 721,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -514,7 +517,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 693,
+      "followers": 694,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -538,7 +541,7 @@
     {
       "login": "amrbashir",
       "name": "Amr Bashir",
-      "followers": 513,
+      "followers": 514,
       "title": "An open source enthusiast\r",
       "company": "",
       "highlight": false
@@ -554,7 +557,7 @@
     {
       "login": "gkze",
       "name": "George Kontridze",
-      "followers": 477,
+      "followers": 479,
       "title": ":computer: computing",
       "company": "",
       "highlight": false
@@ -562,7 +565,7 @@
     {
       "login": "akemimadoka",
       "name": "Natsu",
-      "followers": 475,
+      "followers": 474,
       "title": "来创造一生难忘的奇迹吧",
       "company": "Tencent",
       "highlight": false
@@ -573,21 +576,21 @@
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 17,
+      "stars": 20,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
     {
       "name": "scoop-psmux",
       "author": "psmux",
-      "stars": 3,
+      "stars": 4,
       "description": "Scoop bucket for psmux - terminal multiplexer for Windows",
       "category": "official"
     },
     {
       "name": "portable-pty-patched",
       "author": "psmux",
-      "stars": 1,
+      "stars": 2,
       "description": "Fork of wez/portable-pty with psmux patches (ConPTY PASSTHROUGH_MODE, WIN32_INPUT_MODE, RESIZE_QUIRK flags)",
       "category": "official"
     },
@@ -620,6 +623,13 @@
       "category": "tool"
     },
     {
+      "name": "claude-manager",
+      "author": "raphaelbgr",
+      "stars": 2,
+      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-restore",
       "author": "tarikguney",
       "stars": 2,
@@ -631,13 +641,6 @@
       "author": "johnhnguyen97",
       "stars": 1,
       "description": "Complete Claude Code setup: 151 specialist agents, global rules, hooks, psmux/Windows Terminal integration, and data recovery project example",
-      "category": "claude-code"
-    },
-    {
-      "name": "claude-manager",
-      "author": "raphaelbgr",
-      "stars": 1,
-      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
       "category": "claude-code"
     },
     {
@@ -660,6 +663,13 @@
       "stars": 1,
       "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
       "category": "claude-code"
+    },
+    {
+      "name": "psmux-config",
+      "author": "F4NT0",
+      "stars": 1,
+      "description": "My PSMUX (TMUX for windows) configuration",
+      "category": "tool"
     },
     {
       "name": "tebis",
@@ -701,13 +711,6 @@
       "author": "texane",
       "stars": 0,
       "description": "power supply multiplexer",
-      "category": "tool"
-    },
-    {
-      "name": "psmux-config",
-      "author": "F4NT0",
-      "stars": 0,
-      "description": "My PSMUX (TMUX for windows) configuration",
       "category": "tool"
     },
     {
@@ -756,25 +759,6 @@
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
-      "repo": "Sora-bluesky/winsmux",
-      "issues": [
-        "#691",
-        "#423",
-        "#224",
-        "#143",
-        "#329",
-        "#144",
-        "#62",
-        "#265",
-        "#24",
-        "#179",
-        "#91",
-        "#820",
-        "#207"
-      ],
-      "context": "Remove legacy psmux compatibility contract before v1.0.0"
-    },
-    {
       "repo": "tellang/triflux",
       "issues": [
         "#279",
@@ -814,6 +798,7 @@
         "#1843",
         "#1548",
         "#1171",
+        "#2428",
         "#1353",
         "#1871",
         "#1361"
@@ -845,14 +830,14 @@
       "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
     },
     {
-      "repo": "flora131/atomic",
+      "repo": "Knatte18/millhouse",
       "issues": [
-        "#875",
-        "#877",
-        "#903",
-        "#888"
+        "#351",
+        "#352",
+        "#350",
+        "#349"
       ],
-      "context": "[BUG] TUI: Visual glitch when background stages run on Windows [Claude Code, Opencode, Github Copilot] [Dev]"
+      "context": "_review_common.load_config: 'unknown key: llm.claude (in merged config)' warning spams stdout"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -887,9 +872,17 @@
         "#154"
       ],
       "context": "feat: Windows support via PowerShell + psmux"
+    },
+    {
+      "repo": "joshmedeski/sesh",
+      "issues": [
+        "#358",
+        "#367"
+      ],
+      "context": "【Bug】Failed to attach to tmux session: exit status 1"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-18T10:10:08Z"
+  "lastUpdated": "2026-05-21T09:47:12Z"
 }
