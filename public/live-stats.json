@@ -1,13 +1,19 @@
 {
-  "stars": 2071,
-  "forks": 120,
-  "contributors": 13,
+  "stars": 2147,
+  "forks": 125,
+  "contributors": 14,
   "issues": 39,
-  "companiesRepresented": 402,
+  "companiesRepresented": 411,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 17,
+      "count": 18,
+      "logo": "microsoft",
+      "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
+    },
+    {
+      "name": "microsoft",
+      "count": 3,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -32,12 +38,6 @@
       "count": 2,
       "logo": "tencent",
       "logoUrl": "https://cdn.simpleicons.org/tencent/ffffff"
-    },
-    {
-      "name": "microsoft",
-      "count": 2,
-      "logo": "microsoft",
-      "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
     {
       "name": "Psmux",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 50,
+  "universities": 51,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -423,13 +423,16 @@
     },
     {
       "name": "CVPR LAB, Sejong University"
+    },
+    {
+      "name": "University of Emergency Management"
     }
   ],
   "notableUsers": [
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5363,
+      "followers": 5358,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -437,7 +440,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4299,
+      "followers": 4319,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": true
@@ -445,7 +448,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2136,
+      "followers": 2135,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -453,7 +456,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2091,
+      "followers": 2092,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -461,7 +464,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1425,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -469,7 +472,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1307,
+      "followers": 1306,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -477,7 +480,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 875,
+      "followers": 877,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -485,7 +488,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 854,
+      "followers": 859,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -493,15 +496,23 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 737,
+      "followers": 738,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
     },
     {
+      "login": "dualface",
+      "name": "dualface",
+      "followers": 726,
+      "title": "GitHub Developer",
+      "company": "",
+      "highlight": false
+    },
+    {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 721,
+      "followers": 722,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -517,7 +528,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 694,
+      "followers": 696,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -525,7 +536,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 610,
+      "followers": 615,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -533,15 +544,23 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 602,
+      "followers": 604,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
     },
     {
+      "login": "Sandalots",
+      "name": "Sandalots",
+      "followers": 543,
+      "title": "Name's Sir Sandalots.‎  Cheesed to meet you.",
+      "company": "",
+      "highlight": false
+    },
+    {
       "login": "amrbashir",
       "name": "Amr Bashir",
-      "followers": 514,
+      "followers": 515,
       "title": "An open source enthusiast\r",
       "company": "",
       "highlight": false
@@ -553,22 +572,6 @@
       "title": "Answer questions about Git and GitHub since 2009 on Stack Overflow.  \r",
       "company": "",
       "highlight": false
-    },
-    {
-      "login": "gkze",
-      "name": "George Kontridze",
-      "followers": 479,
-      "title": ":computer: computing",
-      "company": "",
-      "highlight": false
-    },
-    {
-      "login": "akemimadoka",
-      "name": "Natsu",
-      "followers": 474,
-      "title": "来创造一生难忘的奇迹吧",
-      "company": "Tencent",
-      "highlight": false
     }
   ],
   "ecosystemRepos": 23,
@@ -576,21 +579,21 @@
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 20,
+      "stars": 21,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
     {
       "name": "scoop-psmux",
       "author": "psmux",
-      "stars": 4,
+      "stars": 5,
       "description": "Scoop bucket for psmux - terminal multiplexer for Windows",
       "category": "official"
     },
     {
       "name": "portable-pty-patched",
       "author": "psmux",
-      "stars": 2,
+      "stars": 3,
       "description": "Fork of wez/portable-pty with psmux patches (ConPTY PASSTHROUGH_MODE, WIN32_INPUT_MODE, RESIZE_QUIRK flags)",
       "category": "official"
     },
@@ -611,8 +614,15 @@
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 9,
+      "stars": 10,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
+      "category": "claude-code"
+    },
+    {
+      "name": "claude-manager",
+      "author": "raphaelbgr",
+      "stars": 3,
+      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
       "category": "claude-code"
     },
     {
@@ -623,10 +633,10 @@
       "category": "tool"
     },
     {
-      "name": "claude-manager",
-      "author": "raphaelbgr",
+      "name": "psmux-claude-skill",
+      "author": "Oruga420",
       "stars": 2,
-      "description": "Never lose track of a Claude Code session again. Fleet session manager for Claude Code and tmux/psmux across multiple machines.",
+      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
       "category": "claude-code"
     },
     {
@@ -656,13 +666,6 @@
       "stars": 1,
       "description": "🖥️ Experience native terminal multiplexing on Windows with psmux, the straightforward alternative to tmux, built for PowerShell and cmd.exe.",
       "category": "tool"
-    },
-    {
-      "name": "psmux-claude-skill",
-      "author": "Oruga420",
-      "stars": 1,
-      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
-      "category": "claude-code"
     },
     {
       "name": "psmux-config",
@@ -762,8 +765,8 @@
       "repo": "tellang/triflux",
       "issues": [
         "#279",
-        "#278",
         "#89",
+        "#278",
         "#41",
         "#39",
         "#116",
@@ -832,12 +835,13 @@
     {
       "repo": "Knatte18/millhouse",
       "issues": [
+        "#362",
         "#351",
         "#352",
         "#350",
         "#349"
       ],
-      "context": "_review_common.load_config: 'unknown key: llm.claude (in merged config)' warning spams stdout"
+      "context": "mill-go: holistic APPROVE path omits review file commit — review file never staged, deleted silently at cleanup"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -858,20 +862,20 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "smtg-ai/claude-squad",
-      "issues": [
-        "#291",
-        "#275"
-      ],
-      "context": "Error on Win11 with psmux or Msys2 tmux"
-    },
-    {
       "repo": "joezhoujinjing/hydra",
       "issues": [
         "#111",
         "#154"
       ],
       "context": "feat: Windows support via PowerShell + psmux"
+    },
+    {
+      "repo": "smtg-ai/claude-squad",
+      "issues": [
+        "#291",
+        "#275"
+      ],
+      "context": "Error on Win11 with psmux or Msys2 tmux"
     },
     {
       "repo": "joshmedeski/sesh",
@@ -884,5 +888,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-21T09:47:12Z"
+  "lastUpdated": "2026-05-25T10:13:26Z"
 }
