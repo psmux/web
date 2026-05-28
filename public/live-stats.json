@@ -1,13 +1,13 @@
 {
-  "stars": 2147,
-  "forks": 125,
+  "stars": 2251,
+  "forks": 134,
   "contributors": 14,
-  "issues": 39,
-  "companiesRepresented": 411,
+  "issues": 38,
+  "companiesRepresented": 431,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 18,
+      "count": 19,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -30,6 +30,10 @@
       "count": 2
     },
     {
+      "name": "Beijing Normal University",
+      "count": 2
+    },
+    {
       "name": "Zhejiang University",
       "count": 2
     },
@@ -38,6 +42,10 @@
       "count": 2,
       "logo": "tencent",
       "logoUrl": "https://cdn.simpleicons.org/tencent/ffffff"
+    },
+    {
+      "name": "Freelancer",
+      "count": 2
     },
     {
       "name": "Psmux",
@@ -246,19 +254,9 @@
     {
       "name": "Zima Spa&Wellness",
       "count": 1
-    },
-    {
-      "name": "Google",
-      "count": 1,
-      "logo": "google",
-      "logoUrl": "https://cdn.simpleicons.org/google/ffffff"
-    },
-    {
-      "name": "Gonnector",
-      "count": 1
     }
   ],
-  "universities": 51,
+  "universities": 54,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -426,13 +424,30 @@
     },
     {
       "name": "University of Emergency Management"
+    },
+    {
+      "name": "Anhui university"
+    },
+    {
+      "name": "sungkyunkwan university"
+    },
+    {
+      "name": "University of Information Technology VNU-HCM"
     }
   ],
   "notableUsers": [
     {
+      "login": "ardalis",
+      "name": "Steve \"Ardalis\" Smith",
+      "followers": 9744,
+      "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
+      "company": "NimblePros",
+      "highlight": true
+    },
+    {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5358,
+      "followers": 5356,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -440,15 +455,15 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4319,
+      "followers": 4345,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
-      "highlight": true
+      "highlight": false
     },
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2135,
+      "followers": 2136,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -462,9 +477,17 @@
       "highlight": false
     },
     {
+      "login": "mehdihadeli",
+      "name": "Mehdi Hadeli",
+      "followers": 1532,
+      "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
+      "company": "",
+      "highlight": false
+    },
+    {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1426,
+      "followers": 1427,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -480,7 +503,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 877,
+      "followers": 876,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -488,7 +511,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 859,
+      "followers": 865,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -518,6 +541,14 @@
       "highlight": false
     },
     {
+      "login": "yuiseki",
+      "name": "yuiseki",
+      "followers": 698,
+      "title": "Product manager & Software engineer",
+      "company": "Yuiseki Inc.",
+      "highlight": false
+    },
+    {
       "login": "adamdriscoll",
       "name": "Adam Driscoll",
       "followers": 698,
@@ -526,17 +557,9 @@
       "highlight": false
     },
     {
-      "login": "yuiseki",
-      "name": "yuiseki",
-      "followers": 696,
-      "title": "Product manager & Software engineer",
-      "company": "Yuiseki Inc.",
-      "highlight": false
-    },
-    {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 615,
+      "followers": 619,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -544,7 +567,7 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 604,
+      "followers": 605,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -552,29 +575,13 @@
     {
       "login": "Sandalots",
       "name": "Sandalots",
-      "followers": 543,
+      "followers": 544,
       "title": "Name's Sir Sandalots.‎  Cheesed to meet you.",
-      "company": "",
-      "highlight": false
-    },
-    {
-      "login": "amrbashir",
-      "name": "Amr Bashir",
-      "followers": 515,
-      "title": "An open source enthusiast\r",
-      "company": "",
-      "highlight": false
-    },
-    {
-      "login": "VonC",
-      "name": "VonC",
-      "followers": 481,
-      "title": "Answer questions about Git and GitHub since 2009 on Stack Overflow.  \r",
       "company": "",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 23,
+  "ecosystemRepos": 24,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -736,6 +743,13 @@
       "stars": 0,
       "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
       "category": "tool"
+    },
+    {
+      "name": "warp-stack-windows",
+      "author": "avielf04",
+      "stars": 0,
+      "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
+      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -803,8 +817,7 @@
         "#1171",
         "#2428",
         "#1353",
-        "#1871",
-        "#1361"
+        "#1871"
       ],
       "context": "[Feature] Full Windows (psmux) support for OMX team mode (tmux pane / HUD compatibility)"
     },
@@ -835,13 +848,22 @@
     {
       "repo": "Knatte18/millhouse",
       "issues": [
-        "#362",
         "#351",
         "#352",
         "#350",
-        "#349"
+        "#349",
+        "#362"
       ],
-      "context": "mill-go: holistic APPROVE path omits review file commit — review file never staged, deleted silently at cleanup"
+      "context": "_review_common.load_config: 'unknown key: llm.claude (in merged config)' warning spams stdout"
+    },
+    {
+      "repo": "sudoprivacy/hydra",
+      "issues": [
+        "#195",
+        "#154",
+        "#111"
+      ],
+      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -862,12 +884,13 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "joezhoujinjing/hydra",
+      "repo": "Yeachan-Heo/oh-my-claudecode",
       "issues": [
-        "#111",
-        "#154"
+        "#3075",
+        "#3151",
+        "#3150"
       ],
-      "context": "feat: Windows support via PowerShell + psmux"
+      "context": "buildWorkerStartCommand generates cmd.exe syntax for native Windows, but psmux panes run PowerShell - workers fail with ParserError"
     },
     {
       "repo": "smtg-ai/claude-squad",
@@ -876,17 +899,9 @@
         "#275"
       ],
       "context": "Error on Win11 with psmux or Msys2 tmux"
-    },
-    {
-      "repo": "joshmedeski/sesh",
-      "issues": [
-        "#358",
-        "#367"
-      ],
-      "context": "【Bug】Failed to attach to tmux session: exit status 1"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-05-25T10:13:26Z"
+  "lastUpdated": "2026-05-28T10:07:30Z"
 }
