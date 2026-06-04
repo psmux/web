@@ -1,9 +1,9 @@
 {
-  "stars": 2324,
+  "stars": 2353,
   "forks": 136,
-  "contributors": 15,
-  "issues": 40,
-  "companiesRepresented": 446,
+  "contributors": 16,
+  "issues": 33,
+  "companiesRepresented": 447,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -46,6 +46,12 @@
     {
       "name": "Freelancer",
       "count": 2
+    },
+    {
+      "name": "Alibaba",
+      "count": 2,
+      "logo": "alibaba",
+      "logoUrl": "https://cdn.simpleicons.org/alibaba/ffffff"
     },
     {
       "name": "Psmux",
@@ -250,13 +256,9 @@
     {
       "name": "mscad.ru",
       "count": 1
-    },
-    {
-      "name": "Zima Spa&Wellness",
-      "count": 1
     }
   ],
-  "universities": 54,
+  "universities": 55,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -433,13 +435,16 @@
     },
     {
       "name": "University of Information Technology VNU-HCM"
+    },
+    {
+      "name": "University of Texas at Arlington"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9746,
+      "followers": 9750,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -447,7 +452,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5356,
+      "followers": 5362,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -455,7 +460,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4380,
+      "followers": 4403,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -479,7 +484,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1531,
+      "followers": 1532,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -511,7 +516,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 868,
+      "followers": 869,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -519,7 +524,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 738,
+      "followers": 739,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -535,7 +540,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 723,
+      "followers": 725,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
@@ -543,7 +548,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 700,
+      "followers": 703,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -559,7 +564,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 622,
+      "followers": 623,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -567,7 +572,7 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 606,
+      "followers": 607,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -575,7 +580,7 @@
     {
       "login": "Sandalots",
       "name": "Sandalots",
-      "followers": 547,
+      "followers": 550,
       "title": "Name's Sir Sandalots.‎  Cheesed to meet you.",
       "company": "",
       "highlight": false
@@ -586,7 +591,7 @@
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 22,
+      "stars": 23,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -675,13 +680,6 @@
       "category": "tool"
     },
     {
-      "name": "psmux-config",
-      "author": "F4NT0",
-      "stars": 1,
-      "description": "My PSMUX (TMUX for windows) configuration",
-      "category": "tool"
-    },
-    {
       "name": "tebis",
       "author": "johnkozaris",
       "stars": 1,
@@ -721,6 +719,13 @@
       "author": "texane",
       "stars": 0,
       "description": "power supply multiplexer",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-config",
+      "author": "F4NT0",
+      "stars": 0,
+      "description": "My PSMUX (TMUX for windows) configuration",
       "category": "tool"
     },
     {
@@ -776,9 +781,7 @@
         "#26",
         "#20",
         "#65",
-        "#83",
-        "#16",
-        "#14"
+        "#83"
       ],
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
@@ -789,12 +792,12 @@
         "#415",
         "#410",
         "#416",
-        "#413",
-        "#412",
         "#351",
+        "#413",
         "#352",
         "#350",
         "#349",
+        "#412",
         "#393",
         "#362"
       ],
@@ -810,8 +813,7 @@
         "#140",
         "#144",
         "#156",
-        "#226",
-        "#185"
+        "#226"
       ],
       "context": "fix(windows): verify or replace psmux winget package ID"
     },
@@ -825,8 +827,7 @@
         "#39",
         "#116",
         "#40",
-        "#28",
-        "#43"
+        "#28"
       ],
       "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
     },
@@ -835,12 +836,24 @@
       "issues": [
         "#58664",
         "#24384",
+        "#65104",
         "#35148",
         "#43840",
         "#42848",
         "#34150"
       ],
       "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
+    },
+    {
+      "repo": "sudoprivacy/hydra",
+      "issues": [
+        "#205",
+        "#154",
+        "#111",
+        "#195",
+        "#213"
+      ],
+      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -862,15 +875,6 @@
         "#1751"
       ],
       "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
-    },
-    {
-      "repo": "sudoprivacy/hydra",
-      "issues": [
-        "#195",
-        "#154",
-        "#111"
-      ],
-      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -910,5 +914,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-01T11:39:55Z"
+  "lastUpdated": "2026-06-04T10:03:06Z"
 }
