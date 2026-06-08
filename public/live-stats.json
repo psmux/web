@@ -1,9 +1,9 @@
 {
-  "stars": 2353,
-  "forks": 136,
+  "stars": 2406,
+  "forks": 138,
   "contributors": 16,
-  "issues": 33,
-  "companiesRepresented": 447,
+  "issues": 37,
+  "companiesRepresented": 458,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 55,
+  "universities": 58,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -438,13 +438,23 @@
     },
     {
       "name": "University of Texas at Arlington"
+    },
+    {
+      "name": "University of Science and Technology Beijing"
+    },
+    {
+      "name": "Chinese Academy of Sciences",
+      "domain": "cas.cn"
+    },
+    {
+      "name": "Harbin Institute of Technology"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9750,
+      "followers": 9758,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -452,7 +462,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5362,
+      "followers": 5368,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -460,7 +470,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4403,
+      "followers": 4428,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -468,7 +478,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2137,
+      "followers": 2139,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -484,7 +494,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1532,
+      "followers": 1534,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -500,7 +510,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1306,
+      "followers": 1305,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -508,7 +518,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 876,
+      "followers": 875,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -516,7 +526,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 869,
+      "followers": 870,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -524,31 +534,31 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 739,
+      "followers": 738,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
     },
     {
-      "login": "dualface",
-      "name": "dualface",
-      "followers": 726,
-      "title": "GitHub Developer",
-      "company": "",
-      "highlight": false
-    },
-    {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 725,
+      "followers": 726,
       "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
       "company": "Worldline",
       "highlight": false
     },
     {
+      "login": "dualface",
+      "name": "dualface",
+      "followers": 725,
+      "title": "GitHub Developer",
+      "company": "",
+      "highlight": false
+    },
+    {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 703,
+      "followers": 704,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -564,7 +574,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 623,
+      "followers": 625,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -572,7 +582,7 @@
     {
       "login": "joshmedeski",
       "name": "Josh Medeski",
-      "followers": 607,
+      "followers": 608,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
@@ -580,13 +590,13 @@
     {
       "login": "Sandalots",
       "name": "Sandalots",
-      "followers": 550,
+      "followers": 551,
       "title": "Name's Sir Sandalots.‎  Cheesed to meet you.",
       "company": "",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 25,
+  "ecosystemRepos": 26,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -722,6 +732,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-agent-orchestrator",
+      "author": "kingkillery",
+      "stars": 0,
+      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-config",
       "author": "F4NT0",
       "stars": 0,
@@ -766,6 +783,28 @@
   ],
   "crossRepoMentions": [
     {
+      "repo": "Knatte18/millhouse",
+      "issues": [
+        "#414",
+        "#428",
+        "#415",
+        "#429",
+        "#410",
+        "#424",
+        "#416",
+        "#351",
+        "#413",
+        "#352",
+        "#433",
+        "#350",
+        "#349",
+        "#412",
+        "#393",
+        "#362"
+      ],
+      "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
+    },
+    {
       "repo": "savoy9/tackle",
       "issues": [
         "#88",
@@ -778,30 +817,9 @@
         "#66",
         "#27",
         "#5",
-        "#26",
-        "#20",
-        "#65",
-        "#83"
+        "#26"
       ],
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
-    },
-    {
-      "repo": "Knatte18/millhouse",
-      "issues": [
-        "#414",
-        "#415",
-        "#410",
-        "#416",
-        "#351",
-        "#413",
-        "#352",
-        "#350",
-        "#349",
-        "#412",
-        "#393",
-        "#362"
-      ],
-      "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
     {
       "repo": "primetimetank21/dev-setup",
@@ -816,20 +834,6 @@
         "#226"
       ],
       "context": "fix(windows): verify or replace psmux winget package ID"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#279",
-        "#89",
-        "#278",
-        "#41",
-        "#39",
-        "#116",
-        "#40",
-        "#28"
-      ],
-      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
     },
     {
       "repo": "anthropics/claude-code",
@@ -847,13 +851,25 @@
     {
       "repo": "sudoprivacy/hydra",
       "issues": [
-        "#205",
+        "#225",
         "#154",
         "#111",
         "#195",
-        "#213"
+        "#213",
+        "#205"
       ],
       "context": "feat: Windows support via PowerShell + psmux"
+    },
+    {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#279",
+        "#89",
+        "#278",
+        "#41",
+        "#39"
+      ],
+      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -861,20 +877,9 @@
         "#1996",
         "#1843",
         "#1548",
-        "#1171",
-        "#2428"
+        "#1171"
       ],
       "context": "[Feature] Full Windows (psmux) support for OMX team mode (tmux pane / HUD compatibility)"
-    },
-    {
-      "repo": "OneStepAt4time/aegis",
-      "issues": [
-        "#908",
-        "#1138",
-        "#907",
-        "#1751"
-      ],
-      "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -904,6 +909,15 @@
       "context": "buildWorkerStartCommand generates cmd.exe syntax for native Windows, but psmux panes run PowerShell - workers fail with ParserError"
     },
     {
+      "repo": "OneStepAt4time/aegis",
+      "issues": [
+        "#908",
+        "#1138",
+        "#907"
+      ],
+      "context": "[Windows] Sprint 0: Pre-gate investigation — Claude Code + psmux compatibility"
+    },
+    {
       "repo": "smtg-ai/claude-squad",
       "issues": [
         "#291",
@@ -914,5 +928,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-04T10:03:06Z"
+  "lastUpdated": "2026-06-08T11:01:13Z"
 }
