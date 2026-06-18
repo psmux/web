@@ -1,9 +1,9 @@
 {
-  "stars": 2529,
-  "forks": 149,
+  "stars": 2572,
+  "forks": 152,
   "contributors": 16,
-  "issues": 25,
-  "companiesRepresented": 485,
+  "issues": 31,
+  "companiesRepresented": 498,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -22,6 +22,10 @@
       "count": 3,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
+    },
+    {
+      "name": "Freelance",
+      "count": 2
     },
     {
       "name": "Sun Yat-sen University",
@@ -169,10 +173,6 @@
     },
     {
       "name": "elvezjp",
-      "count": 1
-    },
-    {
-      "name": "Freelance",
       "count": 1
     },
     {
@@ -466,7 +466,7 @@
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9769,
+      "followers": 9770,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -474,7 +474,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5382,
+      "followers": 5384,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -482,7 +482,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4481,
+      "followers": 4500,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -498,7 +498,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2088,
+      "followers": 2089,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -506,7 +506,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1537,
+      "followers": 1538,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -530,7 +530,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 877,
+      "followers": 875,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -538,7 +538,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 876,
+      "followers": 874,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -570,7 +570,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 701,
+      "followers": 704,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -586,7 +586,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 630,
+      "followers": 631,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -594,7 +594,7 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 609,
+      "followers": 610,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
@@ -608,7 +608,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 28,
+  "ecosystemRepos": 29,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -730,6 +730,13 @@
       "category": "claude-code"
     },
     {
+      "name": "clavity",
+      "author": "ckir",
+      "stars": 0,
+      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
+      "category": "claude-code"
+    },
+    {
       "name": "dotfiles",
       "author": "mikecubed",
       "stars": 0,
@@ -825,8 +832,7 @@
         "#350",
         "#349",
         "#412",
-        "#393",
-        "#362"
+        "#393"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
@@ -846,20 +852,6 @@
         "#26"
       ],
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
-    },
-    {
-      "repo": "primetimetank21/dev-setup",
-      "issues": [
-        "#179",
-        "#197",
-        "#139",
-        "#154",
-        "#140",
-        "#144",
-        "#156",
-        "#226"
-      ],
-      "context": "fix(windows): verify or replace psmux winget package ID"
     },
     {
       "repo": "sudoprivacy/hydra",
@@ -886,14 +878,37 @@
       "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
     },
     {
+      "repo": "primetimetank21/dev-setup",
+      "issues": [
+        "#179",
+        "#197",
+        "#139",
+        "#154",
+        "#140",
+        "#144"
+      ],
+      "context": "fix(windows): verify or replace psmux winget package ID"
+    },
+    {
       "repo": "Yeachan-Heo/oh-my-claudecode",
       "issues": [
         "#3265",
+        "#3285",
         "#3075",
         "#3151",
         "#3150"
       ],
       "context": "Windows/psmux: detached tmux sessions silently fail because tmuxEnv() doesn't strip PSMUX_SESSION"
+    },
+    {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#437",
+        "#279",
+        "#89",
+        "#278"
+      ],
+      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -903,6 +918,15 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
+    },
+    {
+      "repo": "inmanuscript/claude-squad-pwsh",
+      "issues": [
+        "#7",
+        "#9",
+        "#3"
+      ],
+      "context": "Step 7: psmux コマンド互換性の手動確認"
     },
     {
       "repo": "ARCJ137442/anymate-cc",
@@ -923,24 +947,6 @@
       "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     },
     {
-      "repo": "AscendyProject/redteam",
-      "issues": [
-        "#37",
-        "#31",
-        "#33"
-      ],
-      "context": "Pluggable reviewer execution behind the adapter seam (harden headless → sub-agent adapter → fallback ladder); reject multiplexer screen-scraping as a transport"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#279",
-        "#89",
-        "#278"
-      ],
-      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
-    },
-    {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
         "#1996",
@@ -952,5 +958,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-15T12:20:30Z"
+  "lastUpdated": "2026-06-18T10:27:29Z"
 }
