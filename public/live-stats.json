@@ -1,9 +1,9 @@
 {
-  "stars": 2624,
-  "forks": 157,
+  "stars": 2675,
+  "forks": 161,
   "contributors": 17,
-  "issues": 38,
-  "companiesRepresented": 507,
+  "issues": 48,
+  "companiesRepresented": 521,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 63,
+  "universities": 67,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -463,13 +463,25 @@
     },
     {
       "name": "Saxion University of Applied Sciences"
+    },
+    {
+      "name": "China University of Geosciences, Wuhan"
+    },
+    {
+      "name": "Department of CSIE, Cheng Shiu University"
+    },
+    {
+      "name": "Stellenbosch University"
+    },
+    {
+      "name": "University of Warsaw"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9773,
+      "followers": 9774,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -477,7 +489,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5383,
+      "followers": 5380,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -485,7 +497,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4515,
+      "followers": 4525,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -493,7 +505,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2140,
+      "followers": 2141,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -501,7 +513,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2091,
+      "followers": 2087,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -517,7 +529,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1427,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -525,7 +537,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1306,
+      "followers": 1307,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -533,7 +545,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 879,
+      "followers": 883,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -541,7 +553,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 874,
+      "followers": 875,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -565,7 +577,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 724,
+      "followers": 725,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -573,7 +585,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 705,
+      "followers": 706,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -589,9 +601,17 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 633,
+      "followers": 635,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
+      "highlight": false
+    },
+    {
+      "login": "joshmedeski",
+      "name": "Josh Medeski",
+      "followers": 611,
+      "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
+      "company": "Nutiliti",
       "highlight": false
     },
     {
@@ -601,17 +621,9 @@
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
-    },
-    {
-      "login": "joshmedeski",
-      "name": "Josh Medeski",
-      "followers": 609,
-      "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
-      "company": "Nutiliti",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 29,
+  "ecosystemRepos": 31,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -698,6 +710,13 @@
       "category": "claude-code"
     },
     {
+      "name": "clavity",
+      "author": "ckir",
+      "stars": 1,
+      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-agent-orchestrator",
       "author": "kingkillery",
       "stars": 1,
@@ -733,17 +752,24 @@
       "category": "claude-code"
     },
     {
-      "name": "clavity",
-      "author": "ckir",
-      "stars": 0,
-      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
-      "category": "claude-code"
-    },
-    {
       "name": "dotfiles",
       "author": "mikecubed",
       "stars": 0,
       "description": "Personal development environment configs: nvim, tmux, starship, psmux",
+      "category": "tool"
+    },
+    {
+      "name": "flux",
+      "author": "reddley",
+      "stars": 0,
+      "description": "smux/psmux clone with custom agent character personas, BYOAI support, and optional IRC-style interface that works on Windows, Linux, and macOS",
+      "category": "claude-code"
+    },
+    {
+      "name": "my-shell-suite",
+      "author": "Torahime3",
+      "stars": 0,
+      "description": "My personal shell configuration suite. Automates the deployment of Windows Terminal, Psmux, and Clink with my custom shortcuts and themes.",
       "category": "tool"
     },
     {
@@ -808,20 +834,12 @@
       "stars": 0,
       "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
       "category": "tool"
-    },
-    {
-      "name": "xmux",
-      "author": "zer0ken",
-      "stars": 0,
-      "description": "quickly switch between local and remote, tmux and psmux.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "Knatte18/millhouse",
       "issues": [
-        "#520",
         "#414",
         "#428",
         "#415",
@@ -830,6 +848,7 @@
         "#424",
         "#416",
         "#351",
+        "#520",
         "#413",
         "#352",
         "#433"
@@ -853,6 +872,19 @@
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#70219",
+        "#24384",
+        "#65104",
+        "#57203",
+        "#35148",
+        "#58664",
+        "#43840"
+      ],
+      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
+    },
+    {
       "repo": "sudoprivacy/hydra",
       "issues": [
         "#225",
@@ -863,18 +895,6 @@
         "#205"
       ],
       "context": "feat: Windows support via PowerShell + psmux"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#24384",
-        "#65104",
-        "#35148",
-        "#58664",
-        "#43840",
-        "#42848"
-      ],
-      "context": "Sandbox blocks tmux (psmux) when cwd is home directory on Windows"
     },
     {
       "repo": "Yeachan-Heo/oh-my-claudecode",
@@ -957,5 +977,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-22T12:09:06Z"
+  "lastUpdated": "2026-06-25T09:26:24Z"
 }
