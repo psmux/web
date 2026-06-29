@@ -1,9 +1,9 @@
 {
-  "stars": 2675,
-  "forks": 161,
+  "stars": 2726,
+  "forks": 162,
   "contributors": 17,
-  "issues": 48,
-  "companiesRepresented": 521,
+  "issues": 51,
+  "companiesRepresented": 535,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 67,
+  "universities": 68,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -475,13 +475,16 @@
     },
     {
       "name": "University of Warsaw"
+    },
+    {
+      "name": "South China University of Technology"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9774,
+      "followers": 9783,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -489,7 +492,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5380,
+      "followers": 5383,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -497,7 +500,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4525,
+      "followers": 4543,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -505,7 +508,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2141,
+      "followers": 2144,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -521,7 +524,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1540,
+      "followers": 1544,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -529,7 +532,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1426,
+      "followers": 1425,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -545,7 +548,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 883,
+      "followers": 892,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -553,7 +556,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 875,
+      "followers": 877,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -561,7 +564,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 739,
+      "followers": 740,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -570,8 +573,8 @@
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
       "followers": 726,
-      "title": "AI / Cloud Solutions @worldline. And lots of @streamlit Youtube videos",
-      "company": "Worldline",
+      "title": "AI /CX Strategy Advisor / Solutions Architecture",
+      "company": "Magellan",
       "highlight": false
     },
     {
@@ -607,23 +610,23 @@
       "highlight": false
     },
     {
+      "login": "Caldis",
+      "name": "Caldis_Chen",
+      "followers": 613,
+      "title": "Creating, Designing and Coding",
+      "company": "Shopee",
+      "highlight": false
+    },
+    {
       "login": "joshmedeski",
       "name": "Josh Medeski",
       "followers": 611,
       "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
       "company": "Nutiliti",
       "highlight": false
-    },
-    {
-      "login": "Caldis",
-      "name": "Caldis_Chen",
-      "followers": 610,
-      "title": "Creating, Designing and Coding",
-      "company": "Shopee",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 31,
+  "ecosystemRepos": 32,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -663,7 +666,7 @@
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 11,
+      "stars": 12,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -759,6 +762,13 @@
       "category": "tool"
     },
     {
+      "name": "dotfiles-Windows",
+      "author": "Gerrrt",
+      "stars": 0,
+      "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
+      "category": "tool"
+    },
+    {
       "name": "flux",
       "author": "reddley",
       "stars": 0,
@@ -774,16 +784,16 @@
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
@@ -827,13 +837,6 @@
       "stars": 0,
       "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
       "category": "tool"
-    },
-    {
-      "name": "warp-stack-windows",
-      "author": "avielf04",
-      "stars": 0,
-      "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -850,10 +853,25 @@
         "#351",
         "#520",
         "#413",
-        "#352",
-        "#433"
+        "#352"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
+    },
+    {
+      "repo": "Yeachan-Heo/gajae-code",
+      "issues": [
+        "#1275",
+        "#1118",
+        "#1130",
+        "#531",
+        "#1268",
+        "#916",
+        "#1240",
+        "#882",
+        "#1242",
+        "#1120"
+      ],
+      "context": "Clarify and isolate psmux sessions by project namespace on Windows"
     },
     {
       "repo": "savoy9/tackle",
@@ -865,9 +883,7 @@
         "#4",
         "#15",
         "#64",
-        "#66",
-        "#27",
-        "#5"
+        "#66"
       ],
       "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
@@ -957,15 +973,6 @@
       "context": "Step 7: psmux コマンド互換性の手動確認"
     },
     {
-      "repo": "Yeachan-Heo/gajae-code",
-      "issues": [
-        "#531",
-        "#916",
-        "#882"
-      ],
-      "context": "Windows: psmux-backed gjc session/team flow is only partially compatible"
-    },
-    {
       "repo": "j4rviscmd/Coderm",
       "issues": [
         "#200",
@@ -977,5 +984,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-25T09:26:24Z"
+  "lastUpdated": "2026-06-29T11:04:45Z"
 }
