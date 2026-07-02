@@ -1,13 +1,13 @@
 {
-  "stars": 2726,
-  "forks": 162,
-  "contributors": 17,
+  "stars": 2775,
+  "forks": 164,
+  "contributors": 18,
   "issues": 51,
-  "companiesRepresented": 535,
+  "companiesRepresented": 541,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 22,
+      "count": 23,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -56,6 +56,10 @@
       "count": 2,
       "logo": "alibaba",
       "logoUrl": "https://cdn.simpleicons.org/alibaba/ffffff"
+    },
+    {
+      "name": "FruVa",
+      "count": 2
     },
     {
       "name": "Psmux",
@@ -252,13 +256,9 @@
     {
       "name": "mscad.ru",
       "count": 1
-    },
-    {
-      "name": "Zima Spa&Wellness",
-      "count": 1
     }
   ],
-  "universities": 68,
+  "universities": 71,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -392,6 +392,9 @@
       "name": "RWTH Aachen University, @Pulsar-Photonics-GmbH"
     },
     {
+      "name": "Shanghai Jiao Tong University"
+    },
+    {
       "name": "George Mason University"
     },
     {
@@ -478,13 +481,19 @@
     },
     {
       "name": "South China University of Technology"
+    },
+    {
+      "name": "University of Illinois Urbana-Champaign"
+    },
+    {
+      "name": "Eastern Kentucky University"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9783,
+      "followers": 9788,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -492,7 +501,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5383,
+      "followers": 5389,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -500,7 +509,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4543,
+      "followers": 4565,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -508,7 +517,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2144,
+      "followers": 2145,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -524,7 +533,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1544,
+      "followers": 1546,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -540,7 +549,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1307,
+      "followers": 1308,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -548,7 +557,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 892,
+      "followers": 896,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -556,7 +565,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 877,
+      "followers": 876,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -564,7 +573,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 740,
+      "followers": 741,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -588,7 +597,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 706,
+      "followers": 705,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -610,28 +619,28 @@
       "highlight": false
     },
     {
+      "login": "bwya77",
+      "name": "Bradley Wyatt",
+      "followers": 616,
+      "title": "Former 6x Dual-Microsoft MVP | The Lazy Administrator | Sr Solution Engineer @ Microsoft",
+      "company": "Microsoft",
+      "highlight": false
+    },
+    {
       "login": "Caldis",
       "name": "Caldis_Chen",
       "followers": 613,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
-    },
-    {
-      "login": "joshmedeski",
-      "name": "Josh Medeski",
-      "followers": 611,
-      "title": "Full-stack developer, content-creator, all things neovim, fish, tmux, macos, and second brain.",
-      "company": "Nutiliti",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 32,
+  "ecosystemRepos": 34,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 26,
+      "stars": 28,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -763,7 +772,7 @@
     },
     {
       "name": "dotfiles-Windows",
-      "author": "Gerrrt",
+      "author": "dotgibson",
       "stars": 0,
       "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
       "category": "tool"
@@ -773,6 +782,13 @@
       "author": "reddley",
       "stars": 0,
       "description": "smux/psmux clone with custom agent character personas, BYOAI support, and optional IRC-style interface that works on Windows, Linux, and macOS",
+      "category": "claude-code"
+    },
+    {
+      "name": "mkcrew",
+      "author": "rayngnpc",
+      "stars": 0,
+      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
     },
     {
@@ -830,13 +846,6 @@
       "stars": 0,
       "description": "psmux fork with AI agent detection and optional status sidebar",
       "category": "claude-code"
-    },
-    {
-      "name": "tmux-demo",
-      "author": "BobKerns",
-      "stars": 0,
-      "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -850,16 +859,17 @@
         "#410",
         "#424",
         "#416",
+        "#593",
         "#351",
         "#520",
-        "#413",
-        "#352"
+        "#413"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
     {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
+        "#1391",
         "#1275",
         "#1118",
         "#1130",
@@ -868,24 +878,9 @@
         "#916",
         "#1240",
         "#882",
-        "#1242",
-        "#1120"
+        "#1242"
       ],
-      "context": "Clarify and isolate psmux sessions by project namespace on Windows"
-    },
-    {
-      "repo": "savoy9/tackle",
-      "issues": [
-        "#88",
-        "#12",
-        "#62",
-        "#18",
-        "#4",
-        "#15",
-        "#64",
-        "#66"
-      ],
-      "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
+      "context": "Improve Windows psmux attach recovery after transient connection refusal"
     },
     {
       "repo": "anthropics/claude-code",
@@ -899,6 +894,19 @@
         "#43840"
       ],
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
+    },
+    {
+      "repo": "savoy9/tackle",
+      "issues": [
+        "#88",
+        "#12",
+        "#62",
+        "#18",
+        "#4",
+        "#15",
+        "#64"
+      ],
+      "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
       "repo": "sudoprivacy/hydra",
@@ -936,16 +944,6 @@
       "context": "fix(windows): verify or replace psmux winget package ID"
     },
     {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#437",
-        "#279",
-        "#89",
-        "#278"
-      ],
-      "context": "macos-lifecycle follow-up: Windows openSession lacks psmux binary check (pre-existing)"
-    },
-    {
       "repo": "FrancisVarga/zed",
       "issues": [
         "#11",
@@ -973,6 +971,15 @@
       "context": "Step 7: psmux コマンド互換性の手動確認"
     },
     {
+      "repo": "Yeachan-Heo/oh-my-codex",
+      "issues": [
+        "#3013",
+        "#3016",
+        "#1996"
+      ],
+      "context": "Windows psmux: omx question still invisible/hangs in v0.18.11; tmux shell-pane + send-keys works locally"
+    },
+    {
       "repo": "j4rviscmd/Coderm",
       "issues": [
         "#200",
@@ -984,5 +991,5 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-06-29T11:04:45Z"
+  "lastUpdated": "2026-07-02T09:16:31Z"
 }
