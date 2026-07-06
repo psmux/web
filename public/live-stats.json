@@ -1,9 +1,9 @@
 {
-  "stars": 2775,
-  "forks": 164,
-  "contributors": 18,
-  "issues": 51,
-  "companiesRepresented": 541,
+  "stars": 2822,
+  "forks": 168,
+  "contributors": 21,
+  "issues": 45,
+  "companiesRepresented": 548,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -258,7 +258,7 @@
       "count": 1
     }
   ],
-  "universities": 71,
+  "universities": 73,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -462,7 +462,7 @@
       "name": "East China Jiaotong University"
     },
     {
-      "name": "University of Washington/GTRI"
+      "name": "Georgia Tech Research Institute"
     },
     {
       "name": "Saxion University of Applied Sciences"
@@ -487,13 +487,19 @@
     },
     {
       "name": "Eastern Kentucky University"
+    },
+    {
+      "name": "Xi'an Jiaotong University"
+    },
+    {
+      "name": "Washington University in St. Louis"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9788,
+      "followers": 9794,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -501,7 +507,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5389,
+      "followers": 5388,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -509,7 +515,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4565,
+      "followers": 4594,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -525,7 +531,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2087,
+      "followers": 2092,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -533,7 +539,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1546,
+      "followers": 1548,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -557,7 +563,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 896,
+      "followers": 899,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -565,7 +571,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 876,
+      "followers": 878,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -613,7 +619,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 635,
+      "followers": 638,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -629,7 +635,7 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 613,
+      "followers": 614,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
@@ -640,7 +646,7 @@
     {
       "name": "psmux-plugins",
       "author": "psmux",
-      "stars": 28,
+      "stars": 31,
       "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
       "category": "official"
     },
@@ -694,6 +700,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-agent-orchestrator",
+      "author": "kingkillery",
+      "stars": 2,
+      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-claude-skill",
       "author": "Oruga420",
       "stars": 2,
@@ -729,10 +742,10 @@
       "category": "claude-code"
     },
     {
-      "name": "psmux-agent-orchestrator",
-      "author": "kingkillery",
+      "name": "mkcrew",
+      "author": "rayngnpc",
       "stars": 1,
-      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
+      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
     },
     {
@@ -782,13 +795,6 @@
       "author": "reddley",
       "stars": 0,
       "description": "smux/psmux clone with custom agent character personas, BYOAI support, and optional IRC-style interface that works on Windows, Linux, and macOS",
-      "category": "claude-code"
-    },
-    {
-      "name": "mkcrew",
-      "author": "rayngnpc",
-      "stars": 0,
-      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
     },
     {
@@ -850,6 +856,22 @@
   ],
   "crossRepoMentions": [
     {
+      "repo": "Yeachan-Heo/gajae-code",
+      "issues": [
+        "#1391",
+        "#1275",
+        "#1118",
+        "#1130",
+        "#531",
+        "#1268",
+        "#916",
+        "#1459",
+        "#1240",
+        "#882"
+      ],
+      "context": "Improve Windows psmux attach recovery after transient connection refusal"
+    },
+    {
       "repo": "Knatte18/millhouse",
       "issues": [
         "#414",
@@ -861,26 +883,9 @@
         "#416",
         "#593",
         "#351",
-        "#520",
-        "#413"
+        "#520"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
-    },
-    {
-      "repo": "Yeachan-Heo/gajae-code",
-      "issues": [
-        "#1391",
-        "#1275",
-        "#1118",
-        "#1130",
-        "#531",
-        "#1268",
-        "#916",
-        "#1240",
-        "#882",
-        "#1242"
-      ],
-      "context": "Improve Windows psmux attach recovery after transient connection refusal"
     },
     {
       "repo": "anthropics/claude-code",
@@ -889,24 +894,12 @@
         "#24384",
         "#65104",
         "#57203",
+        "#43840",
         "#35148",
-        "#58664",
-        "#43840"
+        "#42848",
+        "#58664"
       ],
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
-    },
-    {
-      "repo": "savoy9/tackle",
-      "issues": [
-        "#88",
-        "#12",
-        "#62",
-        "#18",
-        "#4",
-        "#15",
-        "#64"
-      ],
-      "context": "TerminalOrchestrator - psmux-backed terminals in editor area"
     },
     {
       "repo": "sudoprivacy/hydra",
@@ -944,6 +937,15 @@
       "context": "fix(windows): verify or replace psmux winget package ID"
     },
     {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#58",
+        "#59",
+        "#40"
+      ],
+      "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
+    },
+    {
       "repo": "FrancisVarga/zed",
       "issues": [
         "#11",
@@ -951,6 +953,15 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
+    },
+    {
+      "repo": "savoy9/tackle",
+      "issues": [
+        "#88",
+        "#12",
+        "#62"
+      ],
+      "context": "opening an old agent session doesn't work."
     },
     {
       "repo": "ARCJ137442/anymate-cc",
@@ -978,18 +989,9 @@
         "#1996"
       ],
       "context": "Windows psmux: omx question still invisible/hangs in v0.18.11; tmux shell-pane + send-keys works locally"
-    },
-    {
-      "repo": "j4rviscmd/Coderm",
-      "issues": [
-        "#200",
-        "#201",
-        "#199"
-      ],
-      "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-07-02T09:16:31Z"
+  "lastUpdated": "2026-07-06T10:27:51Z"
 }
