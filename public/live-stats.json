@@ -1,13 +1,13 @@
 {
-  "stars": 2822,
-  "forks": 168,
+  "stars": 2876,
+  "forks": 174,
   "contributors": 21,
-  "issues": 45,
-  "companiesRepresented": 548,
+  "issues": 46,
+  "companiesRepresented": 561,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 23,
+      "count": 22,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -50,6 +50,16 @@
     {
       "name": "Freelancer",
       "count": 2
+    },
+    {
+      "name": "Samsung Electronics",
+      "count": 2
+    },
+    {
+      "name": "Huawei",
+      "count": 2,
+      "logo": "huawei",
+      "logoUrl": "https://cdn.simpleicons.org/huawei/ffffff"
     },
     {
       "name": "Alibaba",
@@ -247,14 +257,6 @@
     },
     {
       "name": "中国科学院数字生命研究所",
-      "count": 1
-    },
-    {
-      "name": "Wood Rodgers, Inc.",
-      "count": 1
-    },
-    {
-      "name": "mscad.ru",
       "count": 1
     }
   ],
@@ -499,7 +501,7 @@
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9794,
+      "followers": 9797,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -507,7 +509,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5388,
+      "followers": 5387,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -515,7 +517,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4594,
+      "followers": 4607,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -523,7 +525,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2145,
+      "followers": 2146,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -531,7 +533,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2092,
+      "followers": 2103,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -539,7 +541,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1548,
+      "followers": 1551,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -547,7 +549,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1425,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -563,7 +565,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 899,
+      "followers": 904,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -571,7 +573,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 878,
+      "followers": 877,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -595,7 +597,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 725,
+      "followers": 724,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -603,7 +605,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 705,
+      "followers": 708,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -619,7 +621,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 638,
+      "followers": 640,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -635,13 +637,13 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 614,
+      "followers": 615,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 34,
+  "ecosystemRepos": 35,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -721,6 +723,13 @@
       "category": "tool"
     },
     {
+      "name": "claude-auto-retry-windows",
+      "author": "reglisseblip",
+      "stars": 1,
+      "description": "Native Windows port of claude-auto-retry: auto-resume Claude Code after subscription rate limits, using psmux (no WSL/tmux). Opt-in monitoring via claude/claudem.",
+      "category": "claude-code"
+    },
+    {
       "name": "claude-code-config",
       "author": "johnhnguyen97",
       "stars": 1,
@@ -767,13 +776,6 @@
       "author": "stardino2lab",
       "stars": 0,
       "description": "Windows-native multi-agent orchestrator for Claude CLI and Codex CLI with psmux",
-      "category": "claude-code"
-    },
-    {
-      "name": "claude-auto-retry-windows",
-      "author": "reglisseblip",
-      "stars": 0,
-      "description": "Native Windows port of claude-auto-retry: auto-resume Claude Code after subscription rate limits, using psmux (no WSL/tmux). Opt-in monitoring via claude/claudem.",
       "category": "claude-code"
     },
     {
@@ -840,36 +842,57 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-win-build",
+      "author": "ghy020",
+      "stars": 0,
+      "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
+      "category": "tool"
+    },
+    {
       "name": "psmux-wt-sync",
       "author": "tobiowo",
       "stars": 0,
       "description": "psmux-related project",
       "category": "tool"
-    },
-    {
-      "name": "psmuxplus",
-      "author": "ZeroPointSix",
-      "stars": 0,
-      "description": "psmux fork with AI agent detection and optional status sidebar",
-      "category": "claude-code"
     }
   ],
   "crossRepoMentions": [
     {
+      "repo": "smota/omnigent",
+      "issues": [
+        "#1",
+        "#16",
+        "#4",
+        "#6",
+        "#3",
+        "#5",
+        "#2",
+        "#11",
+        "#14",
+        "#15",
+        "#7",
+        "#12",
+        "#9",
+        "#10",
+        "#8"
+      ],
+      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
+    },
+    {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
+        "#1849",
         "#1391",
         "#1275",
         "#1118",
-        "#1130",
         "#531",
+        "#1130",
         "#1268",
         "#916",
         "#1459",
-        "#1240",
-        "#882"
+        "#1240"
       ],
-      "context": "Improve Windows psmux attach recovery after transient connection refusal"
+      "context": "[Bug] Windows + psmux: gjc team launch still fails on default worker worktree path with Filename too long"
     },
     {
       "repo": "Knatte18/millhouse",
@@ -880,10 +903,7 @@
         "#429",
         "#410",
         "#424",
-        "#416",
-        "#593",
-        "#351",
-        "#520"
+        "#416"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
@@ -892,26 +912,12 @@
       "issues": [
         "#70219",
         "#24384",
-        "#65104",
         "#57203",
         "#43840",
         "#35148",
-        "#42848",
-        "#58664"
+        "#42848"
       ],
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
-    },
-    {
-      "repo": "sudoprivacy/hydra",
-      "issues": [
-        "#225",
-        "#154",
-        "#111",
-        "#195",
-        "#213",
-        "#205"
-      ],
-      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "Yeachan-Heo/oh-my-claudecode",
@@ -926,19 +932,20 @@
       "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     },
     {
-      "repo": "primetimetank21/dev-setup",
+      "repo": "sudoprivacy/hydra",
       "issues": [
-        "#179",
-        "#197",
-        "#139",
+        "#225",
         "#154",
-        "#140"
+        "#111",
+        "#195",
+        "#213"
       ],
-      "context": "fix(windows): verify or replace psmux winget package ID"
+      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
+        "#87",
         "#58",
         "#59",
         "#40"
@@ -982,16 +989,16 @@
       "context": "Step 7: psmux コマンド互換性の手動確認"
     },
     {
-      "repo": "Yeachan-Heo/oh-my-codex",
+      "repo": "j4rviscmd/Coderm",
       "issues": [
-        "#3013",
-        "#3016",
-        "#1996"
+        "#200",
+        "#201",
+        "#199"
       ],
-      "context": "Windows psmux: omx question still invisible/hangs in v0.18.11; tmux shell-pane + send-keys works locally"
+      "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-07-06T10:27:51Z"
+  "lastUpdated": "2026-07-09T09:48:27Z"
 }
