@@ -918,7 +918,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 26,
+  "ecosystemRepos": 32,
   "ecosystemProjects": [
     {
       "name": "LibGb28181PsMux",
@@ -1101,6 +1101,34 @@
       "stars": 0,
       "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
       "category": "tool"
+    },
+    {
+      "name": "psmux-wt-sync",
+      "author": "tobiowo",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
+      "name": "psmuxplus",
+      "author": "ZeroPointSix",
+      "stars": 0,
+      "description": "psmux fork with AI agent detection and optional status sidebar",
+      "category": "claude-code"
+    },
+    {
+      "name": "tmux",
+      "author": "omiritz",
+      "stars": 0,
+      "description": "minhas configs para tmux / psmux",
+      "category": "tool"
+    },
+    {
+      "name": "tmux-demo",
+      "author": "BobKerns",
+      "stars": 0,
+      "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
+      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -1245,101 +1273,8 @@
       "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     }
   ],
-  "dotfilesRepos": [
-    {
-      "repo": "david-risney/PwshProfile",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "DS-argus/window-dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "JoshuaAnderson0/Windows-Dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "MattKotsenas/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "victor-basurto/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "baked-potatoes/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "luisgui1757/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "FallenDeity/.config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "gen4438/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "sgruendel/dotfiles",
-      "detail": "install_tools.ps1"
-    },
-    {
-      "repo": "jeffersonjaily/iptv_app",
-      "detail": "profiles.ui"
-    },
-    {
-      "repo": "shaobin0604/faplayer",
-      "detail": "profiles.ui"
-    },
-    {
-      "repo": "BladeWDR/dotfiles",
-      "detail": "run_onchange_install-ppm.ps1.tmpl"
-    },
-    {
-      "repo": "ghostjvrmaster/vlc",
-      "detail": "profile_selector.cpp"
-    },
-    {
-      "repo": "ZeroPointSix/psmuxplus",
-      "detail": "install.ps1"
-    }
-  ],
-  "dotfilesReferences": 23,
+  "dotfilesRepos": [],
+  "dotfilesReferences": 0,
   "mapPoints": [
     {
       "lat": 36.4,
@@ -1791,5 +1726,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-11T14:46:58Z"
+  "lastUpdated": "2026-07-11T15:00:05Z"
 }
