@@ -1,9 +1,9 @@
 {
-  "stars": 2876,
-  "forks": 174,
-  "contributors": 21,
-  "issues": 46,
-  "companiesRepresented": 561,
+  "stars": 2907,
+  "forks": 176,
+  "contributors": 22,
+  "issues": 38,
+  "companiesRepresented": 549,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -22,6 +22,26 @@
       "count": 2
     },
     {
+      "name": "Google",
+      "count": 2,
+      "logo": "google",
+      "logoUrl": "https://cdn.simpleicons.org/google/ffffff"
+    },
+    {
+      "name": "Home",
+      "count": 2
+    },
+    {
+      "name": "Xi'an University of Technology",
+      "count": 2
+    },
+    {
+      "name": "Broadcom",
+      "count": 2,
+      "logo": "broadcom",
+      "logoUrl": "https://cdn.simpleicons.org/broadcom/ffffff"
+    },
+    {
       "name": "Sun Yat-sen University",
       "count": 2,
       "logoUrl": "https://www.google.com/s2/favicons?domain=sysu.edu.cn&sz=128"
@@ -37,11 +57,19 @@
       "logoUrl": "https://www.google.com/s2/favicons?domain=uptimedevelopment.com&sz=128"
     },
     {
+      "name": "Piebald-AI",
+      "count": 2
+    },
+    {
       "name": "Beijing Normal University",
       "count": 2
     },
     {
       "name": "Zhejiang University",
+      "count": 2
+    },
+    {
+      "name": "Xi’an Jiaotong University",
       "count": 2
     },
     {
@@ -239,7 +267,8 @@
     },
     {
       "name": "Kama INC.",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=kama.com&sz=128"
     },
     {
       "name": "Pixel Directive",
@@ -263,9 +292,173 @@
     {
       "name": "NomosArtificial",
       "count": 1
+    },
+    {
+      "name": "Wood Rodgers, Inc.",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=woodrodgers.com&sz=128"
+    },
+    {
+      "name": "mscad.ru",
+      "count": 1
+    },
+    {
+      "name": "Gonnector",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gonnector.com&sz=128"
+    },
+    {
+      "name": "UNESA",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=unesa.com&sz=128"
+    },
+    {
+      "name": "National and Kapodistrian University of Athens",
+      "count": 1
+    },
+    {
+      "name": "STBU",
+      "count": 1
+    },
+    {
+      "name": "Anphabe JSC",
+      "count": 1
+    },
+    {
+      "name": "Senior Software Architect",
+      "count": 1
+    },
+    {
+      "name": "X company",
+      "count": 1,
+      "logo": "x",
+      "logoUrl": "https://cdn.simpleicons.org/x/ffffff"
+    },
+    {
+      "name": "KRONIK",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=kronik.com&sz=128"
+    },
+    {
+      "name": "Google  / @SurprisingStudio",
+      "count": 1
+    },
+    {
+      "name": "Metrized Consulting",
+      "count": 1
+    },
+    {
+      "name": "Psychoflow Studio",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=psychoflowstudio.com&sz=128"
+    },
+    {
+      "name": "loanDepot",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=loandepot.com&sz=128"
+    },
+    {
+      "name": "WeAreInSpark",
+      "count": 1
+    },
+    {
+      "name": "B/S/H/",
+      "count": 1,
+      "logo": "bsh",
+      "logoUrl": "https://cdn.simpleicons.org/bsh/ffffff"
+    },
+    {
+      "name": "MonstaStudios",
+      "count": 1
+    },
+    {
+      "name": "SAGB0T",
+      "count": 1
+    },
+    {
+      "name": "Bank J. Safra Sarasin",
+      "count": 1
+    },
+    {
+      "name": "Buguard",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=buguard.com&sz=128"
+    },
+    {
+      "name": "SD Com",
+      "count": 1
+    },
+    {
+      "name": "TopSoftSolutions",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=topsoftsolutions.com&sz=128"
+    },
+    {
+      "name": "Elegant Solutions",
+      "count": 1
+    },
+    {
+      "name": "longbrain-net, @fldev-mirror",
+      "count": 1
+    },
+    {
+      "name": "Wiliot",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=wiliot.com&sz=128"
+    },
+    {
+      "name": "Techland GmbH",
+      "count": 1
+    },
+    {
+      "name": "Personal",
+      "count": 1
+    },
+    {
+      "name": "energyworldnet",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=energyworldnet.com&sz=128"
+    },
+    {
+      "name": "Layoff-Labs",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=layofflabs.com&sz=128"
+    },
+    {
+      "name": "Maestro-AI-Labs-LLC-FZ",
+      "count": 1
+    },
+    {
+      "name": "designovel-labs",
+      "count": 1
+    },
+    {
+      "name": "Private",
+      "count": 1
+    },
+    {
+      "name": "shuopensourcecommunity",
+      "count": 1
+    },
+    {
+      "name": "Linalab.io",
+      "count": 1
+    },
+    {
+      "name": "PT SUM Digital Konsultan",
+      "count": 1
+    },
+    {
+      "name": "Kyung Hee University",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=khu.ac.kr&sz=128"
+    },
+    {
+      "name": "AIMLWare Systems Private Limited",
+      "count": 1
     }
   ],
-  "universities": 73,
+  "universities": 74,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -500,13 +693,16 @@
     },
     {
       "name": "Washington University in St. Louis"
+    },
+    {
+      "name": "National Taiwan University of Science and Technology"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9797,
+      "followers": 9798,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -514,7 +710,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5387,
+      "followers": 5385,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -522,7 +718,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4607,
+      "followers": 4614,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -538,7 +734,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2103,
+      "followers": 2108,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -546,7 +742,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1551,
+      "followers": 1552,
       "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -554,7 +750,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1426,
+      "followers": 1425,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -570,7 +766,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 904,
+      "followers": 905,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -594,7 +790,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 726,
+      "followers": 727,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
@@ -632,23 +828,23 @@
       "highlight": false
     },
     {
+      "login": "Caldis",
+      "name": "Caldis_Chen",
+      "followers": 616,
+      "title": "Creating, Designing and Coding",
+      "company": "Shopee",
+      "highlight": false
+    },
+    {
       "login": "bwya77",
       "name": "Bradley Wyatt",
       "followers": 616,
       "title": "Former 6x Dual-Microsoft MVP | The Lazy Administrator | Sr Solution Engineer @ Microsoft",
       "company": "Microsoft",
       "highlight": false
-    },
-    {
-      "login": "Caldis",
-      "name": "Caldis_Chen",
-      "followers": 615,
-      "title": "Creating, Designing and Coding",
-      "company": "Shopee",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 35,
+  "ecosystemRepos": 36,
   "ecosystemProjects": [
     {
       "name": "psmux-plugins",
@@ -688,7 +884,7 @@
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 12,
+      "stars": 13,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -784,6 +980,13 @@
       "category": "claude-code"
     },
     {
+      "name": "devbox-cli",
+      "author": "ww4yne",
+      "stars": 0,
+      "description": "Persistent Windows development sessions over Dev Tunnels, OpenSSH, and psmux",
+      "category": "tool"
+    },
+    {
       "name": "dotfiles",
       "author": "mikecubed",
       "stars": 0,
@@ -813,16 +1016,16 @@
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
@@ -852,36 +1055,29 @@
       "stars": 0,
       "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
       "category": "tool"
-    },
-    {
-      "name": "psmux-wt-sync",
-      "author": "tobiowo",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "smota/omnigent",
       "issues": [
+        "#11",
         "#1",
+        "#14",
         "#16",
+        "#15",
         "#4",
+        "#7",
+        "#12",
         "#6",
         "#3",
         "#5",
-        "#2",
-        "#11",
-        "#14",
-        "#15",
-        "#7",
-        "#12",
         "#9",
         "#10",
-        "#8"
+        "#8",
+        "#2"
       ],
-      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
+      "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
     },
     {
       "repo": "Yeachan-Heo/gajae-code",
@@ -902,6 +1098,7 @@
     {
       "repo": "Knatte18/millhouse",
       "issues": [
+        "#628",
         "#414",
         "#428",
         "#415",
@@ -913,28 +1110,26 @@
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
     {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#58",
+        "#87",
+        "#59",
+        "#92",
+        "#40"
+      ],
+      "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
+    },
+    {
       "repo": "anthropics/claude-code",
       "issues": [
         "#70219",
         "#24384",
         "#57203",
         "#43840",
-        "#35148",
-        "#42848"
+        "#35148"
       ],
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
-    },
-    {
-      "repo": "Yeachan-Heo/oh-my-claudecode",
-      "issues": [
-        "#3311",
-        "#3265",
-        "#3285",
-        "#3075",
-        "#3151",
-        "#3150"
-      ],
-      "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     },
     {
       "repo": "sudoprivacy/hydra",
@@ -948,14 +1143,15 @@
       "context": "feat: Windows support via PowerShell + psmux"
     },
     {
-      "repo": "bmad-code-org/bmad-loop",
+      "repo": "Yeachan-Heo/oh-my-claudecode",
       "issues": [
-        "#87",
-        "#58",
-        "#59",
-        "#40"
+        "#3311",
+        "#3265",
+        "#3285",
+        "#3075",
+        "#3151"
       ],
-      "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
+      "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1005,5 +1201,456 @@
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "lastUpdated": "2026-07-09T09:48:27Z"
+  "mapPoints": [
+    {
+      "lat": 36.4,
+      "lng": 127.0,
+      "label": "South Korea",
+      "detail": "79 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
+      "size": "lg",
+      "country": "South Korea",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 35.9,
+      "lng": 104.2,
+      "label": "China",
+      "detail": "58 developers · Ke, erasin.wang, Home",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia"
+    },
+    {
+      "lat": 35.7,
+      "lng": 139.7,
+      "label": "Tokyo",
+      "detail": "50 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "size": "lg",
+      "country": "Japan",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 51.2,
+      "lng": 10.4,
+      "label": "Germany",
+      "detail": "33 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
+      "size": "lg",
+      "country": "Germany",
+      "continent": "Europe"
+    },
+    {
+      "lat": 31.2,
+      "lng": 121.5,
+      "label": "Shanghai",
+      "detail": "28 developers · Tongji University, 中国科学院数字生命研究所, Google  / @SurprisingStudio",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 39.8,
+      "lng": -98.6,
+      "label": "United States",
+      "detail": "27 developers · Blue Shark Friends, borggames, PLC PRODUCE INC",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America"
+    },
+    {
+      "lat": 46.6,
+      "lng": 2.2,
+      "label": "France",
+      "detail": "26 developers · BatchLabs, SAGB0T, OrAnGeS",
+      "size": "lg",
+      "country": "France",
+      "continent": "Europe"
+    },
+    {
+      "lat": 22.5,
+      "lng": 114.1,
+      "label": "Shenzhen",
+      "detail": "25 developers · Matrixworks, FOXCONN, Avc",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia"
+    },
+    {
+      "lat": 39.9,
+      "lng": 116.4,
+      "label": "Beijing",
+      "detail": "22 developers · Beijing Jiaotong University, weibo.com, DA Studio",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 20.6,
+      "lng": 79.0,
+      "label": "India",
+      "detail": "22 developers · midtown-technology-group, Visionary, intel-private",
+      "size": "lg",
+      "country": "India",
+      "continent": "Asia"
+    },
+    {
+      "lat": -33.9,
+      "lng": 151.2,
+      "label": "Australia",
+      "detail": "21 developers · InfoTrack, Transmax, Wallaby.js",
+      "size": "lg",
+      "country": "Australia",
+      "continent": "Oceania"
+    },
+    {
+      "lat": -14.2,
+      "lng": -51.9,
+      "label": "Brazil",
+      "detail": "19 developers · Averin, Software Engineer, Personal",
+      "size": "lg",
+      "country": "Brazil",
+      "continent": "South America"
+    },
+    {
+      "lat": 47.6,
+      "lng": -122.3,
+      "label": "Seattle",
+      "detail": "16 developers · Microsoft, Meta, University of Washington",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": -6.2,
+      "lng": 106.8,
+      "label": "Indonesia",
+      "detail": "15 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
+      "size": "lg",
+      "country": "Indonesia",
+      "continent": "Asia"
+    },
+    {
+      "lat": 52.2,
+      "lng": 21.0,
+      "label": "Warsaw",
+      "detail": "15 developers · IdeaThenGo, Ceneo.pl, Evotec",
+      "size": "lg",
+      "country": "Poland",
+      "continent": "Europe"
+    },
+    {
+      "lat": 52.4,
+      "lng": -1.5,
+      "label": "United Kingdom",
+      "detail": "13 developers · Pixel Inspiration, everstack, newscred",
+      "size": "lg",
+      "country": "United Kingdom",
+      "continent": "Europe"
+    },
+    {
+      "lat": 50.1,
+      "lng": 14.4,
+      "label": "Prague",
+      "detail": "12 developers · Wexia Digital | NaucimeAI | Delegating | SoulUp, Fine, Altap, Jaroslav Urbánek",
+      "size": "lg",
+      "country": "Czechia",
+      "continent": "Europe"
+    },
+    {
+      "lat": 37.4,
+      "lng": -122.1,
+      "label": "San Francisco Bay Area",
+      "detail": "12 developers · XeroSecInc, Forbes Asset Management Inc., Code Crafters",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America"
+    },
+    {
+      "lat": 25.0,
+      "lng": 121.6,
+      "label": "Taipei",
+      "detail": "12 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "size": "lg",
+      "country": "Taiwan",
+      "continent": "Asia"
+    },
+    {
+      "lat": 51.5,
+      "lng": -0.1,
+      "label": "London",
+      "detail": "12 developers · doublewordai, 64labs, Tech Proxy",
+      "size": "lg",
+      "country": "United Kingdom",
+      "continent": "Europe"
+    },
+    {
+      "lat": 21.0,
+      "lng": 105.9,
+      "label": "Vietnam",
+      "detail": "11 developers · Anphabe JSC, tencat-dev @ncscvietnam @oasm-platform, Full Stack .NET",
+      "size": "lg",
+      "country": "Vietnam",
+      "continent": "Asia"
+    },
+    {
+      "lat": 41.0,
+      "lng": 29.0,
+      "label": "Istanbul",
+      "detail": "11 developers · isikkaynak, GR Digital Products, Agito",
+      "size": "lg",
+      "country": "Turkey",
+      "continent": "Europe"
+    },
+    {
+      "lat": 30.3,
+      "lng": 120.2,
+      "label": "Hangzhou",
+      "detail": "11 developers · Zhejiang University, Huawei, Alibaba",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": 40.7,
+      "lng": -74.0,
+      "label": "New York",
+      "detail": "10 developers · Gentrace, NomosArtificial, Microsoft",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": 30.6,
+      "lng": -96.3,
+      "label": "Texas",
+      "detail": "10 developers · energyworldnet, Trading & Commodities, Nutiliti",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America"
+    },
+    {
+      "lat": 43.7,
+      "lng": -79.4,
+      "label": "Toronto",
+      "detail": "10 developers · Freelance, Microsoft, JC IT",
+      "size": "lg",
+      "country": "Canada",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": -23.5,
+      "lng": -46.6,
+      "label": "Sao Paulo",
+      "detail": "10 developers · CI&T, UNESA, Trela",
+      "size": "lg",
+      "country": "Brazil",
+      "continent": "South America"
+    },
+    {
+      "lat": 47.1,
+      "lng": 15.4,
+      "label": "Austria",
+      "detail": "9 developers · ACME, TU Graz, Tieto",
+      "size": "md",
+      "country": "Austria",
+      "continent": "Europe"
+    },
+    {
+      "lat": 47.4,
+      "lng": 8.5,
+      "label": "Zurich",
+      "detail": "9 developers · Bank J. Safra Sarasin, Innoveo, Accelleron",
+      "size": "md",
+      "country": "Switzerland",
+      "continent": "Europe"
+    },
+    {
+      "lat": 37.9,
+      "lng": 23.7,
+      "label": "Athens",
+      "detail": "9 developers · National and Kapodistrian University of Athens, Dragoon, ansys",
+      "size": "md",
+      "country": "Greece",
+      "continent": "Europe",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": -34.6,
+      "lng": -58.4,
+      "label": "Argentina",
+      "detail": "9 developers · Wiener lab., EcimTech, Halley Accurate Solutions",
+      "size": "md",
+      "country": "Argentina",
+      "continent": "South America"
+    },
+    {
+      "lat": 56.1,
+      "lng": -106.3,
+      "label": "Canada",
+      "detail": "9 developers · thinkertankApps, Electrovaya, SabioMobile",
+      "size": "md",
+      "country": "Canada",
+      "continent": "North America"
+    },
+    {
+      "lat": 52.4,
+      "lng": 4.9,
+      "label": "Netherlands",
+      "detail": "8 developers · roxlu, Senior Software Architect, WeAreInSpark",
+      "size": "md",
+      "country": "Netherlands",
+      "continent": "Europe"
+    },
+    {
+      "lat": 41.9,
+      "lng": 12.5,
+      "label": "Italy",
+      "detail": "8 developers · Six Degrees Consulting, Vaimoo, DotSp",
+      "size": "md",
+      "country": "Italy",
+      "continent": "Europe"
+    },
+    {
+      "lat": 59.9,
+      "lng": 10.8,
+      "label": "Oslo",
+      "detail": "8 developers · NorskRegnesentral, Jonsson Folkestad Software AS, SmartDok",
+      "size": "md",
+      "country": "Norway",
+      "continent": "Europe"
+    },
+    {
+      "lat": 48.9,
+      "lng": 2.3,
+      "label": "Paris",
+      "detail": "8 developers · Guerbet, Cellenza, School",
+      "size": "md",
+      "country": "France",
+      "continent": "Europe"
+    },
+    {
+      "lat": 55.7,
+      "lng": 12.6,
+      "label": "Copenhagen",
+      "detail": "7 developers · Uptime Development, Microsoft, DUOS",
+      "size": "md",
+      "country": "Denmark",
+      "continent": "Europe",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": 41.4,
+      "lng": 2.2,
+      "label": "Barcelona",
+      "detail": "7 developers · IBM, Genie, Orbhi",
+      "size": "md",
+      "country": "Spain",
+      "continent": "Europe",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": 55.8,
+      "lng": 37.6,
+      "label": "Moscow",
+      "detail": "7 developers · mscad.ru, ОКОЛО Маркет",
+      "size": "md",
+      "country": "Russia",
+      "continent": "Europe"
+    },
+    {
+      "lat": 30.7,
+      "lng": 104.1,
+      "label": "Chengdu",
+      "detail": "7 developers · X company, Merck, http://www.goludo.xyz/",
+      "size": "md",
+      "country": "China",
+      "continent": "Asia"
+    },
+    {
+      "lat": 40.4,
+      "lng": -3.7,
+      "label": "Madrid",
+      "detail": "7 developers · Marfeel, Protur Hotels",
+      "size": "md",
+      "country": "Spain",
+      "continent": "Europe"
+    },
+    {
+      "lat": 23.1,
+      "lng": 113.3,
+      "label": "Guangzhou",
+      "detail": "7 developers · Wuhan Polytechnic University, Fat Studio, South China University of Technology",
+      "size": "md",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 13.0,
+      "lng": 77.6,
+      "label": "Bangalore",
+      "detail": "7 developers · apache @aws @opensearch-project, Microsoft, EPAM Systems",
+      "size": "md",
+      "country": "India",
+      "continent": "Asia",
+      "color": "#60a5fa"
+    },
+    {
+      "lat": 53.3,
+      "lng": -6.3,
+      "label": "Ireland",
+      "detail": "6 developers · http://ibm.github.io/, Personal Account, Dev @Teicsoft",
+      "size": "md",
+      "country": "Ireland",
+      "continent": "Europe"
+    },
+    {
+      "lat": 13.8,
+      "lng": 100.5,
+      "label": "Bangkok",
+      "detail": "6 developers · ALSSoftware",
+      "size": "md",
+      "country": "Thailand",
+      "continent": "Asia"
+    },
+    {
+      "lat": 59.3,
+      "lng": 18.1,
+      "label": "Stockholm",
+      "detail": "6 developers · EmbarkStudios, Tradera AB",
+      "size": "md",
+      "country": "Sweden",
+      "continent": "Europe"
+    },
+    {
+      "lat": 1.4,
+      "lng": 103.8,
+      "label": "Singapore",
+      "detail": "5 developers",
+      "size": "md",
+      "country": "Singapore",
+      "continent": "Asia"
+    },
+    {
+      "lat": -33.4,
+      "lng": -70.7,
+      "label": "Chile",
+      "detail": "5 developers · youtouchcl, Pinflag",
+      "size": "md",
+      "country": "Chile",
+      "continent": "South America"
+    }
+  ],
+  "cities": 74,
+  "countries": 47,
+  "continents": 6,
+  "latestVersion": "3.3.6",
+  "lastUpdated": "2026-07-11T14:30:55Z"
 }
