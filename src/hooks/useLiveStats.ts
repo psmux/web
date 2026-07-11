@@ -281,7 +281,14 @@ export function useLiveStats(): LiveStats {
           Array.isArray(data.ecosystemProjects) &&
           data.ecosystemProjects.length > 0
         ) {
-          merged.ecosystemProjects = data.ecosystemProjects;
+          // Ecosystem showcases community projects; psmux's own repos stay out.
+          const community = (
+            data.ecosystemProjects as LiveEcosystemProject[]
+          ).filter((p) => p.author?.toLowerCase() !== "psmux");
+          if (community.length > 0) {
+            merged.ecosystemProjects = community;
+            merged.ecosystemRepos = community.length;
+          }
         }
         if (
           Array.isArray(data.crossRepoMentions) &&

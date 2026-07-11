@@ -918,36 +918,8 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 36,
+  "ecosystemRepos": 26,
   "ecosystemProjects": [
-    {
-      "name": "psmux-plugins",
-      "author": "psmux",
-      "stars": 31,
-      "description": "Official plugin ecosystem for psmux — the native Windows tmux built in Rust. Ports of popular tmux plugins reimplemented in PowerShell.",
-      "category": "official"
-    },
-    {
-      "name": "scoop-psmux",
-      "author": "psmux",
-      "stars": 7,
-      "description": "Scoop bucket for psmux - terminal multiplexer for Windows",
-      "category": "official"
-    },
-    {
-      "name": "portable-pty-patched",
-      "author": "psmux",
-      "stars": 3,
-      "description": "Fork of wez/portable-pty with psmux patches (ConPTY PASSTHROUGH_MODE, WIN32_INPUT_MODE, RESIZE_QUIRK flags)",
-      "category": "official"
-    },
-    {
-      "name": "psmux-website",
-      "author": "psmux",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "official"
-    },
     {
       "name": "LibGb28181PsMux",
       "author": "7956968",

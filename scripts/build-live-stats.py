@@ -275,8 +275,6 @@ def extract_university(company: str) -> tuple[str, str] | None:
     return (company.strip(), "")
 
 def categorize_repo(name: str, owner: str, description: str) -> str:
-    if owner.lower() == "psmux":
-        return "official"
     text = f"{name} {description or ''}".lower()
     if "claude" in text or "agent" in text:
         return "claude-code"
@@ -410,8 +408,8 @@ def main() -> int:
         if "/" not in full:
             continue
         owner, name = full.split("/", 1)
-        if owner.lower() == "psmux" and name.lower() == "psmux":
-            continue  # exclude main repo
+        if owner.lower() == "psmux":
+            continue  # ecosystem means community projects, not psmux's own
         if "psmux" not in (name.lower() + " " + (r.get("description") or "").lower()):
             continue
         eco.append({
@@ -421,7 +419,7 @@ def main() -> int:
             "description": (r.get("description") or "").strip() or "psmux-related project",
             "category": categorize_repo(name, owner, r.get("description") or ""),
         })
-    eco.sort(key=lambda e: (-(e["category"] == "official"), -e["stars"], e["name"].lower()))
+    eco.sort(key=lambda e: (-e["stars"], e["name"].lower()))
     out["ecosystemRepos"] = len(eco)
     out["ecosystemProjects"] = eco[:30]
 

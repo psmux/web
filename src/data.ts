@@ -72,7 +72,7 @@ export const stats = {
   packageManagers: 5,
   companiesRepresented: 247,
   universities: 33,
-  ecosystemRepos: 30,
+  ecosystemRepos: 27,
 };
 
 export const companies = [
@@ -281,27 +281,6 @@ export const ecosystemProjects = [
     stars: 0,
     description: "Neovim integration with psmux (lua/psmux/init.lua)",
     category: "tool",
-  },
-  {
-    name: "psmux-plugins",
-    author: "psmux",
-    stars: 7,
-    description: "Official plugin ecosystem — nord theme, sensible, etc.",
-    category: "official",
-  },
-  {
-    name: "Tmux-Plugin-Panel",
-    author: "psmux",
-    stars: 0,
-    description: "TUI plugin manager for tmux/psmux",
-    category: "official",
-  },
-  {
-    name: "pstop",
-    author: "psmux",
-    stars: 0,
-    description: "htop-style process viewer, psmux-aware",
-    category: "official",
   },
 ];
 

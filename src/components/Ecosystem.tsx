@@ -15,16 +15,10 @@ const item = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" as const } },
 };
 
-type Category = "official" | "claude-code" | "tool" | string;
+type Category = "claude-code" | "tool" | string;
 
 function categoryStyle(category: Category): React.CSSProperties {
   switch (category) {
-    case "official":
-      return {
-        background: "var(--green-glow)",
-        color: "var(--green)",
-        border: "1px solid rgba(52, 211, 153, 0.35)",
-      };
     case "claude-code":
       return {
         background: "rgba(96, 165, 250, 0.15)",
@@ -42,7 +36,6 @@ function categoryStyle(category: Category): React.CSSProperties {
 
 function categoryLabel(category: Category): string {
   switch (category) {
-    case "official": return "Official";
     case "claude-code": return "Claude Code";
     default: return "Tool";
   }
