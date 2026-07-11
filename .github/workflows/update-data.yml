@@ -54,12 +54,12 @@ jobs:
           while true; do
             PAGE=$((PAGE + 1))
             if [ -z "$CURSOR" ]; then
-              Q='query { repository(owner:"psmux",name:"psmux") { stargazers(first:100) { pageInfo { hasNextPage endCursor } nodes { login name company bio followers { totalCount } avatarUrl } } } }'
+              Q='query { repository(owner:"psmux",name:"psmux") { stargazers(first:100) { pageInfo { hasNextPage endCursor } nodes { login name company location bio followers { totalCount } avatarUrl } } } }'
             else
-              Q="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } nodes { login name company bio followers { totalCount } avatarUrl } } } }"
+              Q="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } nodes { login name company location bio followers { totalCount } avatarUrl } } } }"
             fi
             RESP=$(gh api graphql -f "query=$Q")
-            NODES=$(echo "$RESP" | jq -c '[.data.repository.stargazers.nodes[] | {login, name, company, bio, followers: (.followers.totalCount // 0), avatarUrl}]')
+            NODES=$(echo "$RESP" | jq -c '[.data.repository.stargazers.nodes[] | {login, name, company, location, bio, followers: (.followers.totalCount // 0), avatarUrl}]')
             COUNT=$(echo "$NODES" | jq 'length')
             if [ "$COUNT" -gt 0 ]; then
               ITEMS=$(echo "$NODES" | jq -c '.[]')
@@ -79,6 +79,9 @@ jobs:
           done
           echo "]" >> .data/stargazers.json
           echo "  total stargazers: $(jq 'length' .data/stargazers.json)"
+
+          echo "=== latest release ==="
+          gh api repos/psmux/psmux/releases/latest > .data/release.json || echo "{}" > .data/release.json
 
           echo "=== ecosystem repos ==="
           gh search repos "psmux" --limit 200 \
@@ -108,6 +111,7 @@ jobs:
             --code-mentions .data/code.json \
             --psmux-src psmux-src \
             --fork-count "${FORK_COUNT:-0}" \
+            --release-json .data/release.json \
             --out public/live-stats.json
 
           echo "=== output preview ==="
@@ -118,6 +122,8 @@ jobs:
                    ecosystemProjects: (.ecosystemProjects | length),
                    crossRepoMentions: (.crossRepoMentions | length),
                    dotfilesRepos: (.dotfilesRepos | length),
+                   mapPoints: ((.mapPoints // []) | length),
+                   cities, countries, continents, latestVersion,
                    lastUpdated}' public/live-stats.json
 
       - name: Commit changes

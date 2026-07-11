@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import {
   stats as staticStats,
+  latestVersion as staticLatestVersion,
   companies as staticCompanies,
   notableUsers as staticNotableUsers,
   universities as staticUniversities,
   ecosystemProjects as staticEcosystem,
   crossRepoMentions as staticCrossRepo,
   dotfilesRepos as staticDotfiles,
+  mapPoints as staticMapPoints,
+  type MapPoint,
 } from "../data";
 
 export type LiveCompany = { name: string; count: number; logo?: string; logoUrl?: string };
@@ -36,15 +39,20 @@ export type LiveDotfilesRepo = { repo: string; detail: string };
 
 export type LiveStats = typeof staticStats & {
   lastUpdated?: string;
+  latestVersion: string;
+  cities?: number;
+  countries?: number;
+  continents?: number;
   topCompanies: LiveCompany[];
   topUniversities: LiveUniversity[];
   notableUsers: LiveNotableUser[];
   ecosystemProjects: LiveEcosystemProject[];
   crossRepoMentions: LiveCrossRepoMention[];
   dotfilesRepos: LiveDotfilesRepo[];
+  mapPoints: MapPoint[];
 };
 
-const CACHE_KEY = "psmux-live-stats-v2";
+const CACHE_KEY = "psmux-live-stats-v3";
 const CACHE_TTL = 1000 * 60 * 15; // 15 min
 
 type LivePayload = Partial<Omit<LiveStats, keyof typeof staticStats>> &
@@ -70,6 +78,58 @@ function writeCache(data: LivePayload) {
   }
 }
 
+// Keep in sync with LEGAL_SUFFIXES in scripts/build-live-stats.py.
+const LEGAL_SUFFIXES = new Set([
+  "inc", "incorporated", "corp", "corporation", "co", "company",
+  "ltd", "limited", "llc", "llp", "plc", "gmbh", "ag", "sa", "srl",
+  "bv", "ab", "oy", "kk", "group", "holdings", "international", "intl",
+]);
+
+function canonicalCompanyKey(name: string): string {
+  const tokens = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  while (tokens.length > 1 && LEGAL_SUFFIXES.has(tokens[tokens.length - 1])) {
+    tokens.pop();
+    while (tokens.length > 1 && tokens[tokens.length - 1] === "and") {
+      tokens.pop();
+    }
+  }
+  return tokens.join(" ");
+}
+
+// Merge variants of the same company name ("Microsoft" / "microsoft" /
+// "Microsoft Corporation") so a noisy live payload never renders duplicates.
+function dedupeCompanies(list: LiveCompany[]): LiveCompany[] {
+  const byKey = new Map<string, LiveCompany>();
+  for (const c of list) {
+    if (!c || typeof c.name !== "string") continue;
+    const key = canonicalCompanyKey(c.name);
+    if (!key) continue;
+    const existing = byKey.get(key);
+    if (existing) {
+      existing.count += c.count || 0;
+      if (!existing.logoUrl && c.logoUrl) {
+        existing.logo = c.logo;
+        existing.logoUrl = c.logoUrl;
+      }
+      const trimmed = c.name.trim();
+      const better =
+        (existing.name === existing.name.toLowerCase() &&
+          trimmed !== trimmed.toLowerCase()) ||
+        (trimmed !== trimmed.toLowerCase() &&
+          trimmed.length < existing.name.length);
+      if (better) existing.name = trimmed;
+    } else {
+      byKey.set(key, { ...c, name: c.name.trim() });
+    }
+  }
+  return [...byKey.values()].sort((a, b) => b.count - a.count);
+}
+
 const SEED: Pick<
   LiveStats,
   | "topCompanies"
@@ -78,6 +138,7 @@ const SEED: Pick<
   | "ecosystemProjects"
   | "crossRepoMentions"
   | "dotfilesRepos"
+  | "mapPoints"
 > = {
   topCompanies: staticCompanies.map((c) => ({
     name: c.name,
@@ -110,17 +171,14 @@ const SEED: Pick<
     context: m.context,
   })),
   dotfilesRepos: staticDotfiles.map((d) => ({ repo: d.repo, detail: d.detail })),
+  mapPoints: staticMapPoints.map((p) => ({ ...p })),
 };
 
 export function useLiveStats(): LiveStats {
-  const [live, setLive] = useState<LivePayload>({});
+  const [live, setLive] = useState<LivePayload>(() => readCache()?.data ?? {});
 
   useEffect(() => {
-    const cached = readCache();
-    if (cached) {
-      setLive(cached.data);
-      return;
-    }
+    if (readCache()) return;
 
     const controller = new AbortController();
     const merged: LivePayload = {};
@@ -135,6 +193,26 @@ export function useLiveStats(): LiveStats {
         if (repo) {
           merged.stars = repo.stargazers_count;
           merged.forks = repo.forks_count;
+        }
+      })
+      .catch(() => {});
+
+    // 1b. Latest release version (drives the hero pill and install cards).
+    const releaseFetch = fetch(
+      "https://api.github.com/repos/psmux/psmux/releases/latest",
+      {
+        signal: controller.signal,
+        headers: { Accept: "application/vnd.github.v3+json" },
+      }
+    )
+      .then((r) => (r.ok ? r.json() : null))
+      .then((rel) => {
+        const tag =
+          typeof rel?.tag_name === "string"
+            ? rel.tag_name.replace(/^v/i, "")
+            : "";
+        if (/^\d+\.\d+/.test(tag)) {
+          merged.latestVersion = tag;
         }
       })
       .catch(() => {});
@@ -160,15 +238,25 @@ export function useLiveStats(): LiveStats {
           "formatVariables",
           "vimKeys",
           "packageManagers",
+          "cities",
+          "countries",
+          "continents",
         ] as const;
         for (const k of numKeys) {
           if (typeof data[k] === "number") {
             (merged as Record<string, unknown>)[k] = data[k];
           }
         }
+        if (
+          typeof data.latestVersion === "string" &&
+          /^\d+\.\d+/.test(data.latestVersion) &&
+          !merged.latestVersion
+        ) {
+          merged.latestVersion = data.latestVersion;
+        }
         // Arrays
         if (Array.isArray(data.topCompanies) && data.topCompanies.length > 0) {
-          merged.topCompanies = data.topCompanies;
+          merged.topCompanies = dedupeCompanies(data.topCompanies);
         }
         if (
           Array.isArray(data.topUniversities) &&
@@ -197,13 +285,16 @@ export function useLiveStats(): LiveStats {
         ) {
           merged.dotfilesRepos = data.dotfilesRepos;
         }
+        if (Array.isArray(data.mapPoints) && data.mapPoints.length > 0) {
+          merged.mapPoints = data.mapPoints;
+        }
         if (typeof data.lastUpdated === "string") {
           merged.lastUpdated = data.lastUpdated;
         }
       })
       .catch(() => {});
 
-    Promise.all([ghFetch, actionsFetch]).then(() => {
+    Promise.all([ghFetch, releaseFetch, actionsFetch]).then(() => {
       if (Object.keys(merged).length > 0) {
         setLive(merged);
         writeCache(merged);
@@ -213,5 +304,5 @@ export function useLiveStats(): LiveStats {
     return () => controller.abort();
   }, []);
 
-  return { ...staticStats, ...SEED, ...live };
+  return { ...staticStats, latestVersion: staticLatestVersion, ...SEED, ...live };
 }

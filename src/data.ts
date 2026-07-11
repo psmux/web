@@ -1,3 +1,5 @@
+export const latestVersion = "3.3.2";
+
 export const stats = {
   stars: 1259,
   forks: 89,
@@ -227,17 +229,18 @@ export const ecosystemProjects = [
   },
 ];
 
+// "{v}" is replaced at render time with the live latest release version.
 export const packageManagers = [
   {
     name: "PowerShell",
     command: "irm https://raw.githubusercontent.com/psmux/psmux/master/scripts/install.ps1 | iex",
-    versions: "One-liner install",
+    versions: "One-liner install · v{v}",
     icon: "terminal",
   },
   {
     name: "winget",
     command: "winget install psmux",
-    versions: "0.3.9 — 3.3.2",
+    versions: "up to v{v}",
     icon: "terminal",
   },
   {
@@ -249,13 +252,13 @@ export const packageManagers = [
   {
     name: "Cargo",
     command: "cargo install psmux",
-    versions: "crates.io",
+    versions: "crates.io · v{v}",
     icon: "box",
   },
   {
     name: "Chocolatey",
     command: "choco install psmux",
-    versions: "0.1.0 — 3.2.0",
+    versions: "up to v{v}",
     icon: "candy",
   },
 ];
@@ -267,6 +270,52 @@ export const features = [
   { label: "Zero WSL", value: "Native", detail: "No WSL, Cygwin, or MSYS2" },
   { label: "Built in", value: "Rust", detail: "Safe, fast, native Windows" },
   { label: "Reads", value: ".tmux.conf", detail: "Your existing config works" },
+];
+
+export type MapPoint = {
+  lat: number;
+  lng: number;
+  label: string;
+  detail: string;
+  size?: "lg" | "md" | "sm";
+  color?: string;
+  country?: string;
+  continent?: string;
+};
+
+export const mapPoints: MapPoint[] = [
+  { lat: 47.6, lng: -122.3, label: "Redmond / Seattle", detail: "Microsoft (11 engineers)", size: "lg", color: "#60a5fa", country: "United States", continent: "North America" },
+  { lat: 37.4, lng: -122.1, label: "Mountain View", detail: "Google (tobiowo)", size: "md", color: "#34d399", country: "United States", continent: "North America" },
+  { lat: 34.0, lng: -118.2, label: "Los Angeles", detail: "Tim Kersey (@thisisartium)", size: "sm", country: "United States", continent: "North America" },
+  { lat: 40.7, lng: -74.0, label: "New York", detail: "Microsoft (j7nw4r)", size: "sm", color: "#60a5fa", country: "United States", continent: "North America" },
+  { lat: 39.7, lng: -105.0, label: "Denver", detail: "Visa (RitwikAwasthi)", size: "sm", country: "United States", continent: "North America" },
+  { lat: 40.0, lng: -83.0, label: "Ohio", detail: "Ohio State University", size: "sm", color: "#fbbf24", country: "United States", continent: "North America" },
+  { lat: 30.6, lng: -96.3, label: "Texas", detail: "Texas A&M Transportation Institute", size: "sm", color: "#fbbf24", country: "United States", continent: "North America" },
+  { lat: -23.5, lng: -46.6, label: "Sao Paulo, Brazil", detail: "jeffersongoncalves (5.3k followers) + Serpro", size: "md", color: "#34d399", country: "Brazil", continent: "South America" },
+  { lat: -27.8, lng: -64.3, label: "Argentina", detail: "Leandro Torrez (contributor)", size: "sm", country: "Argentina", continent: "South America" },
+  { lat: 55.7, lng: 12.6, label: "Copenhagen", detail: "Microsoft (giulioungaretti)", size: "sm", color: "#60a5fa", country: "Denmark", continent: "Europe" },
+  { lat: 55.5, lng: 9.5, label: "Denmark", detail: "Unity (hknielsen)", size: "sm", country: "Denmark", continent: "Europe" },
+  { lat: 41.4, lng: 2.2, label: "Barcelona", detail: "IBM (lordrip)", size: "sm", country: "Spain", continent: "Europe" },
+  { lat: 53.3, lng: -6.3, label: "Ireland", detail: "IBM (gridhawk)", size: "sm", country: "Ireland", continent: "Europe" },
+  { lat: 49.0, lng: 12.1, label: "Regensburg", detail: "Broadcom (c-berger)", size: "sm", country: "Germany", continent: "Europe" },
+  { lat: 48.8, lng: 11.0, label: "Munich area", detail: "Siemens + Fraunhofer + Bosch", size: "md", country: "Germany", continent: "Europe" },
+  { lat: 47.1, lng: 15.4, label: "Graz, Austria", detail: "TU Graz", size: "sm", color: "#fbbf24", country: "Austria", continent: "Europe" },
+  { lat: 52.2, lng: 21.0, label: "Warsaw", detail: "Warsaw University of Technology", size: "sm", color: "#fbbf24", country: "Poland", continent: "Europe" },
+  { lat: 37.9, lng: 23.7, label: "Athens", detail: "National University of Athens", size: "sm", color: "#fbbf24", country: "Greece", continent: "Europe" },
+  { lat: 48.9, lng: 2.3, label: "Paris", detail: "Worldline (andfanilo) + Guerbet", size: "sm", country: "France", continent: "Europe" },
+  { lat: 30.0, lng: 31.2, label: "Cairo, Egypt", detail: "amrbashir (Tauri contributor, 508 followers)", size: "sm", country: "Egypt", continent: "Africa" },
+  { lat: 31.2, lng: 121.5, label: "Shanghai", detail: "Google + Tongji University + multiple devs", size: "lg", color: "#f97316", country: "China", continent: "Asia" },
+  { lat: 39.9, lng: 116.4, label: "Beijing", detail: "Peking University + Beijing Jiaotong", size: "md", color: "#fbbf24", country: "China", continent: "Asia" },
+  { lat: 30.3, lng: 120.2, label: "Hangzhou", detail: "Alibaba (Sovea) + Zhejiang University", size: "md", color: "#f97316", country: "China", continent: "Asia" },
+  { lat: 22.5, lng: 114.1, label: "Shenzhen", detail: "Foxconn + Tencent + Bilibili", size: "md", color: "#f97316", country: "China", continent: "Asia" },
+  { lat: 23.1, lng: 113.3, label: "Guangzhou", detail: "Sun Yat-sen University", size: "sm", color: "#fbbf24", country: "China", continent: "Asia" },
+  { lat: 30.6, lng: 114.3, label: "Wuhan", detail: "Wuhan University", size: "sm", color: "#fbbf24", country: "China", continent: "Asia" },
+  { lat: 30.7, lng: 104.1, label: "Chengdu", detail: "Sichuan University", size: "sm", color: "#fbbf24", country: "China", continent: "Asia" },
+  { lat: 45.8, lng: 126.5, label: "Harbin", detail: "Harbin Engineering University", size: "sm", color: "#fbbf24", country: "China", continent: "Asia" },
+  { lat: 36.4, lng: 127.0, label: "South Korea", detail: "KAIST + Kyung Hee + Yonsei + Bellman (3.7k)", size: "lg", color: "#f472b6", country: "South Korea", continent: "Asia" },
+  { lat: 35.7, lng: 139.7, label: "Tokyo", detail: "Sony Semiconductor + backspacetokyo", size: "md", color: "#a5b4fc", country: "Japan", continent: "Asia" },
+  { lat: 22.3, lng: 114.2, label: "Hong Kong", detail: "Hong Kong Polytechnic University", size: "sm", color: "#fbbf24", country: "Hong Kong", continent: "Asia" },
+  { lat: -6.2, lng: 106.8, label: "Indonesia", detail: "Universitas Indonesia + UNESA", size: "sm", color: "#fbbf24", country: "Indonesia", continent: "Asia" },
 ];
 
 export const crossRepoMentions = [

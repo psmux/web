@@ -7,13 +7,7 @@
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 22,
-      "logo": "microsoft",
-      "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
-    },
-    {
-      "name": "microsoft",
-      "count": 4,
+      "count": 27,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -29,15 +23,18 @@
     },
     {
       "name": "Sun Yat-sen University",
-      "count": 2
+      "count": 2,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sysu.edu.cn&sz=128"
     },
     {
       "name": "Beijing Jiaotong University",
-      "count": 2
+      "count": 2,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=bjtu.edu.cn&sz=128"
     },
     {
       "name": "Uptime Development",
-      "count": 2
+      "count": 2,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=uptimedevelopment.com&sz=128"
     },
     {
       "name": "Beijing Normal University",
@@ -53,7 +50,8 @@
     },
     {
       "name": "Samsung Electronics",
-      "count": 2
+      "count": 2,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=samsungelectronics.com&sz=128"
     },
     {
       "name": "Huawei",
@@ -81,7 +79,8 @@
     },
     {
       "name": "IRSI",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=irsi.com&sz=128"
     },
     {
       "name": "Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.",
@@ -89,7 +88,8 @@
     },
     {
       "name": "ACME",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=acme.com&sz=128"
     },
     {
       "name": "backspacetokyo",
@@ -97,15 +97,18 @@
     },
     {
       "name": "roxlu",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=roxlu.com&sz=128"
     },
     {
       "name": "Ke",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=ke.com&sz=128"
     },
     {
       "name": "Blue Shark Friends",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=bluesharkfriends.com&sz=128"
     },
     {
       "name": "Ubiquitous Computing Laboratory",
@@ -133,7 +136,8 @@
     },
     {
       "name": "Six Degrees Consulting",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=sixdegreesconsulting.com&sz=128"
     },
     {
       "name": "IBM",
@@ -147,7 +151,8 @@
     },
     {
       "name": "thisisartium",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=thisisartium.com&sz=128"
     },
     {
       "name": "Linkboosting.com",
@@ -159,11 +164,13 @@
     },
     {
       "name": "Averin",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=averin.com&sz=128"
     },
     {
       "name": "Matrixworks",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=matrixworks.com&sz=128"
     },
     {
       "name": "BatchLabs",
@@ -179,11 +186,8 @@
     },
     {
       "name": "Pixel Inspiration",
-      "count": 1
-    },
-    {
-      "name": "Microsoft Corporation",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=pixelinspiration.com&sz=128"
     },
     {
       "name": "elvezjp",
@@ -213,11 +217,13 @@
     },
     {
       "name": "Peking University",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=pku.edu.cn&sz=128"
     },
     {
       "name": "Korea Advanced Institute of Science & Technology (KAIST)",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=kaist.ac.kr&sz=128"
     },
     {
       "name": "Malone University",
@@ -237,7 +243,8 @@
     },
     {
       "name": "Pixel Directive",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=pixeldirective.com&sz=128"
     },
     {
       "name": "HSD FMDAuto Institute",
@@ -245,18 +252,16 @@
     },
     {
       "name": "Gentrace",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gentrace.com&sz=128"
     },
     {
       "name": "The Ohio State University",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=osu.edu&sz=128"
     },
     {
       "name": "NomosArtificial",
-      "count": 1
-    },
-    {
-      "name": "中国科学院数字生命研究所",
       "count": 1
     }
   ],

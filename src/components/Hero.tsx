@@ -28,7 +28,7 @@ export default function Hero() {
           variants={fadeUp}
         >
           <span className={styles.pillDot} />
-          v3.3.2 · Native Windows · No WSL Required
+          v{liveStats.latestVersion} · Native Windows · No WSL Required
         </motion.div>
 
         <motion.h1

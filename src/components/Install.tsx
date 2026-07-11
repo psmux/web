@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Terminal, Package, Box, Candy, Copy, Check } from 'lucide-react';
 import { packageManagers } from '../data';
+import { useLiveStats } from '../hooks/useLiveStats';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string }>> = {
   terminal: Terminal,
@@ -19,6 +20,7 @@ const accentFor = (name: string): string => {
 
 const Install = () => {
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
+  const { latestVersion } = useLiveStats();
 
   const handleCopy = async (command: string, idx: number) => {
     try {
@@ -98,7 +100,7 @@ const Install = () => {
                       fontFamily: 'var(--font-mono)',
                     }}
                   >
-                    {pm.versions}
+                    {pm.versions.replace('{v}', latestVersion)}
                   </div>
                 </div>
               </div>

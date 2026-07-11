@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import urllib.request
 from collections import Counter
 from pathlib import Path
 from datetime import datetime, timezone
@@ -73,9 +74,179 @@ COMPANY_LOGO_SLUGS = {
     "paypal", "ebay", "etsy", "twitter", "linkedin",
 }
 
+# Freeform profile location strings mapped to (city label, lat, lng, country, continent).
+# City patterns first, then country level fallbacks.
+GAZETTEER = [
+    (re.compile(r"seattle|redmond|bellevue", re.I), ("Seattle", 47.6, -122.3, "United States", "North America")),
+    (re.compile(r"san francisco|bay area|mountain view|palo alto|sunnyvale|cupertino|san jose", re.I), ("San Francisco Bay Area", 37.4, -122.1, "United States", "North America")),
+    (re.compile(r"los angeles|\bla\b.*california|santa monica", re.I), ("Los Angeles", 34.0, -118.2, "United States", "North America")),
+    (re.compile(r"new york|nyc|brooklyn", re.I), ("New York", 40.7, -74.0, "United States", "North America")),
+    (re.compile(r"denver|boulder", re.I), ("Denver", 39.7, -105.0, "United States", "North America")),
+    (re.compile(r"austin|dallas|houston|texas", re.I), ("Texas", 30.6, -96.3, "United States", "North America")),
+    (re.compile(r"columbus|ohio", re.I), ("Ohio", 40.0, -83.0, "United States", "North America")),
+    (re.compile(r"chicago", re.I), ("Chicago", 41.9, -87.6, "United States", "North America")),
+    (re.compile(r"boston|cambridge, ?ma", re.I), ("Boston", 42.4, -71.1, "United States", "North America")),
+    (re.compile(r"toronto|ontario", re.I), ("Toronto", 43.7, -79.4, "Canada", "North America")),
+    (re.compile(r"vancouver", re.I), ("Vancouver", 49.3, -123.1, "Canada", "North America")),
+    (re.compile(r"canada", re.I), ("Canada", 56.1, -106.3, "Canada", "North America")),
+    (re.compile(r"usa|united states|\bus\b", re.I), ("United States", 39.8, -98.6, "United States", "North America")),
+    (re.compile(r"s[aã]o paulo", re.I), ("Sao Paulo", -23.5, -46.6, "Brazil", "South America")),
+    (re.compile(r"rio de janeiro", re.I), ("Rio de Janeiro", -22.9, -43.2, "Brazil", "South America")),
+    (re.compile(r"brazil|brasil", re.I), ("Brazil", -14.2, -51.9, "Brazil", "South America")),
+    (re.compile(r"argentina|buenos aires", re.I), ("Argentina", -34.6, -58.4, "Argentina", "South America")),
+    (re.compile(r"chile|santiago", re.I), ("Chile", -33.4, -70.7, "Chile", "South America")),
+    (re.compile(r"colombia|bogot", re.I), ("Colombia", 4.7, -74.1, "Colombia", "South America")),
+    (re.compile(r"mexico", re.I), ("Mexico", 19.4, -99.1, "Mexico", "North America")),
+    (re.compile(r"london", re.I), ("London", 51.5, -0.1, "United Kingdom", "Europe")),
+    (re.compile(r"united kingdom|\buk\b|england|scotland", re.I), ("United Kingdom", 52.4, -1.5, "United Kingdom", "Europe")),
+    (re.compile(r"paris", re.I), ("Paris", 48.9, 2.3, "France", "Europe")),
+    (re.compile(r"france", re.I), ("France", 46.6, 2.2, "France", "Europe")),
+    (re.compile(r"berlin", re.I), ("Berlin", 52.5, 13.4, "Germany", "Europe")),
+    (re.compile(r"munich|m[uü]nchen|bavaria|regensburg", re.I), ("Munich area", 48.8, 11.0, "Germany", "Europe")),
+    (re.compile(r"hamburg", re.I), ("Hamburg", 53.6, 10.0, "Germany", "Europe")),
+    (re.compile(r"germany|deutschland", re.I), ("Germany", 51.2, 10.4, "Germany", "Europe")),
+    (re.compile(r"amsterdam|netherlands|holland", re.I), ("Netherlands", 52.4, 4.9, "Netherlands", "Europe")),
+    (re.compile(r"copenhagen|denmark", re.I), ("Copenhagen", 55.7, 12.6, "Denmark", "Europe")),
+    (re.compile(r"stockholm|sweden", re.I), ("Stockholm", 59.3, 18.1, "Sweden", "Europe")),
+    (re.compile(r"oslo|norway", re.I), ("Oslo", 59.9, 10.8, "Norway", "Europe")),
+    (re.compile(r"helsinki|finland", re.I), ("Helsinki", 60.2, 24.9, "Finland", "Europe")),
+    (re.compile(r"barcelona", re.I), ("Barcelona", 41.4, 2.2, "Spain", "Europe")),
+    (re.compile(r"madrid|spain", re.I), ("Madrid", 40.4, -3.7, "Spain", "Europe")),
+    (re.compile(r"dublin|ireland", re.I), ("Ireland", 53.3, -6.3, "Ireland", "Europe")),
+    (re.compile(r"graz|vienna|austria", re.I), ("Austria", 47.1, 15.4, "Austria", "Europe")),
+    (re.compile(r"warsaw|warszawa|poland|krak[oó]w", re.I), ("Warsaw", 52.2, 21.0, "Poland", "Europe")),
+    (re.compile(r"athens|greece", re.I), ("Athens", 37.9, 23.7, "Greece", "Europe")),
+    (re.compile(r"z[uü]rich|switzerland", re.I), ("Zurich", 47.4, 8.5, "Switzerland", "Europe")),
+    (re.compile(r"milan|rome|italy", re.I), ("Italy", 41.9, 12.5, "Italy", "Europe")),
+    (re.compile(r"lisbon|portugal", re.I), ("Lisbon", 38.7, -9.1, "Portugal", "Europe")),
+    (re.compile(r"prague|czech", re.I), ("Prague", 50.1, 14.4, "Czechia", "Europe")),
+    (re.compile(r"kyiv|kiev|ukraine", re.I), ("Kyiv", 50.5, 30.5, "Ukraine", "Europe")),
+    (re.compile(r"moscow|russia", re.I), ("Moscow", 55.8, 37.6, "Russia", "Europe")),
+    (re.compile(r"istanbul|turkey|t[uü]rkiye", re.I), ("Istanbul", 41.0, 29.0, "Turkey", "Europe")),
+    (re.compile(r"cairo|egypt", re.I), ("Cairo", 30.0, 31.2, "Egypt", "Africa")),
+    (re.compile(r"lagos|nigeria", re.I), ("Lagos", 6.5, 3.4, "Nigeria", "Africa")),
+    (re.compile(r"nairobi|kenya", re.I), ("Nairobi", -1.3, 36.8, "Kenya", "Africa")),
+    (re.compile(r"cape town|johannesburg|south africa", re.I), ("South Africa", -26.2, 28.0, "South Africa", "Africa")),
+    (re.compile(r"tel aviv|israel", re.I), ("Tel Aviv", 32.1, 34.8, "Israel", "Asia")),
+    (re.compile(r"dubai|uae|united arab emirates", re.I), ("Dubai", 25.2, 55.3, "UAE", "Asia")),
+    (re.compile(r"bangalore|bengaluru", re.I), ("Bangalore", 13.0, 77.6, "India", "Asia")),
+    (re.compile(r"mumbai|delhi|hyderabad|chennai|pune|india", re.I), ("India", 20.6, 79.0, "India", "Asia")),
+    (re.compile(r"shanghai", re.I), ("Shanghai", 31.2, 121.5, "China", "Asia")),
+    (re.compile(r"beijing", re.I), ("Beijing", 39.9, 116.4, "China", "Asia")),
+    (re.compile(r"hangzhou", re.I), ("Hangzhou", 30.3, 120.2, "China", "Asia")),
+    (re.compile(r"shenzhen", re.I), ("Shenzhen", 22.5, 114.1, "China", "Asia")),
+    (re.compile(r"guangzhou", re.I), ("Guangzhou", 23.1, 113.3, "China", "Asia")),
+    (re.compile(r"wuhan", re.I), ("Wuhan", 30.6, 114.3, "China", "Asia")),
+    (re.compile(r"chengdu", re.I), ("Chengdu", 30.7, 104.1, "China", "Asia")),
+    (re.compile(r"harbin", re.I), ("Harbin", 45.8, 126.5, "China", "Asia")),
+    (re.compile(r"china|\bcn\b|\bprc\b", re.I), ("China", 35.9, 104.2, "China", "Asia")),
+    (re.compile(r"hong ?kong", re.I), ("Hong Kong", 22.3, 114.2, "Hong Kong", "Asia")),
+    (re.compile(r"taipei|taiwan", re.I), ("Taipei", 25.0, 121.6, "Taiwan", "Asia")),
+    (re.compile(r"seoul|korea", re.I), ("South Korea", 36.4, 127.0, "South Korea", "Asia")),
+    (re.compile(r"tokyo|japan|osaka|kyoto", re.I), ("Tokyo", 35.7, 139.7, "Japan", "Asia")),
+    (re.compile(r"singapore", re.I), ("Singapore", 1.4, 103.8, "Singapore", "Asia")),
+    (re.compile(r"jakarta|indonesia|surabaya", re.I), ("Indonesia", -6.2, 106.8, "Indonesia", "Asia")),
+    (re.compile(r"bangkok|thailand", re.I), ("Bangkok", 13.8, 100.5, "Thailand", "Asia")),
+    (re.compile(r"hanoi|ho chi minh|vietnam", re.I), ("Vietnam", 21.0, 105.9, "Vietnam", "Asia")),
+    (re.compile(r"manila|philippines", re.I), ("Manila", 14.6, 121.0, "Philippines", "Asia")),
+    (re.compile(r"kuala lumpur|malaysia", re.I), ("Kuala Lumpur", 3.1, 101.7, "Malaysia", "Asia")),
+    (re.compile(r"sydney|melbourne|australia", re.I), ("Australia", -33.9, 151.2, "Australia", "Oceania")),
+    (re.compile(r"auckland|wellington|new zealand", re.I), ("New Zealand", -36.8, 174.8, "New Zealand", "Oceania")),
+]
+
+BIG_TECH = {
+    "microsoft", "google", "meta", "amazon", "apple", "ibm", "netflix",
+    "nvidia", "intel", "amd", "oracle", "samsung", "sony", "tencent",
+    "alibaba", "bytedance", "baidu", "adobe", "salesforce",
+}
+
+def locate(location: str):
+    if not location:
+        return None
+    for pattern, entry in GAZETTEER:
+        if pattern.search(location):
+            return entry
+    return None
+
 def slugify_company(name: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "", name.lower())
     return s
+
+# Trailing legal or corporate suffixes stripped when merging name variants,
+# e.g. "Microsoft Corporation", "JPMorgan Chase & Co." and "Visa Inc." fold
+# into the same canonical key as "Microsoft", "JPMorgan Chase" and "Visa".
+# Keep in sync with LEGAL_SUFFIXES in src/hooks/useLiveStats.ts.
+LEGAL_SUFFIXES = {
+    "inc", "incorporated", "corp", "corporation", "co", "company",
+    "ltd", "limited", "llc", "llp", "plc", "gmbh", "ag", "sa", "srl",
+    "bv", "ab", "oy", "kk", "group", "holdings", "international", "intl",
+}
+
+# Profile "company" strings that are not real organizations; they stay in
+# the list but never get a logo lookup.
+GENERIC_COMPANIES = {
+    "freelance", "freelancer", "freelancing", "self", "self employed",
+    "selfemployed", "personal", "home", "student", "independent", "indie",
+    "none", "n a", "private", "remote", "earth", "internet", "world",
+    "open source", "opensource", "github", "unemployed", "retired",
+}
+
+def canonical_company_key(name: str) -> str:
+    s = re.sub(r"[^a-z0-9]+", " ", name.lower()).strip()
+    tokens = s.split()
+    while len(tokens) > 1 and tokens[-1] in LEGAL_SUFFIXES:
+        tokens.pop()
+        while len(tokens) > 1 and tokens[-1] == "and":
+            tokens.pop()
+    return " ".join(tokens)
+
+_logo_cache: dict[str, tuple[str | None, str | None]] = {}
+_default_favicon: bytes | None = None
+
+def _fetch(url: str) -> bytes | None:
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "psmux-website-stats"})
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            if resp.status == 200:
+                return resp.read()
+    except Exception:
+        return None
+    return None
+
+def resolve_logo(key: str, display: str = "") -> tuple[str | None, str | None]:
+    """Best-effort (slug, logoUrl) for a canonical company key.
+
+    Prefers Simple Icons (white tint matches the dark theme). Falls back to
+    the Google favicon service for <slug>.com, verified against the default
+    globe placeholder so unknown domains do not render a generic icon.
+    Every URL is checked at build time; entries without a real logo get none
+    and the frontend shows a placeholder icon instead.
+    """
+    global _default_favicon
+    if key in _logo_cache:
+        return _logo_cache[key]
+    slug = slugify_company(key)
+    result: tuple[str | None, str | None] = (None, None)
+    if slug and key not in GENERIC_COMPANIES:
+        simple_url = f"https://cdn.simpleicons.org/{slug}/ffffff"
+        if slug in COMPANY_LOGO_SLUGS or _fetch(simple_url):
+            result = (slug, simple_url)
+        else:
+            # Universities have known domains; everyone else gets a
+            # <slug>.com guess verified below. The display name keeps
+            # hyphens ("Sun Yat-sen") that the canonical key strips.
+            uni = extract_university(display or key)
+            domain = uni[1] if uni and uni[1] else f"{slug}.com"
+            favicon_url = f"https://www.google.com/s2/favicons?domain={domain}&sz=128"
+            if _default_favicon is None:
+                _default_favicon = _fetch(
+                    "https://www.google.com/s2/favicons?domain=nonexistent-psmux-probe-domain.com&sz=128"
+                ) or b""
+            data = _fetch(favicon_url)
+            if data and len(data) > 200 and data != _default_favicon:
+                result = (None, favicon_url)
+    _logo_cache[key] = result
+    return result
 
 def normalize_company(raw: str) -> str:
     s = raw.strip()
@@ -121,6 +292,7 @@ def main() -> int:
     p.add_argument("--code-mentions", required=True)
     p.add_argument("--psmux-src", default="")
     p.add_argument("--fork-count", default="")
+    p.add_argument("--release-json", default="")
     p.add_argument("--out", required=True)
     args = p.parse_args()
 
@@ -145,18 +317,36 @@ def main() -> int:
         if c:
             company_strings.append(c)
 
-    out["companiesRepresented"] = len({c.lower() for c in company_strings})
+    # Merge name variants ("Microsoft", "microsoft", "Microsoft Corporation")
+    # before ranking; the display name is the most frequent raw spelling,
+    # preferring capitalized then shorter forms.
+    variant_votes: dict[str, Counter] = {}
+    for c in company_strings:
+        key = canonical_company_key(c)
+        if key:
+            variant_votes.setdefault(key, Counter())[c] += 1
+    merged_counts: Counter = Counter()
+    display_names: dict[str, str] = {}
+    for key, votes in variant_votes.items():
+        merged_counts[key] = sum(votes.values())
+        best = max(
+            votes.items(),
+            key=lambda kv: (kv[1], kv[0] != kv[0].lower(), -len(kv[0])),
+        )
+        display_names[key] = best[0]
 
-    # Top companies by frequency, with optional logo slug
-    counts = Counter(company_strings).most_common(60)
+    out["companiesRepresented"] = len(merged_counts)
+
+    # Top companies by frequency; every entry gets a verified logo when one
+    # exists so new companies (Fortune 500 included) show up branded.
     top_companies = []
-    for name, count in counts:
-        slug = slugify_company(name)
-        entry = {"name": name, "count": count}
-        if slug in COMPANY_LOGO_SLUGS:
-            entry["logo"] = slug
-            # Simple Icons CDN: https://simpleicons.org/ — white-tinted SVG matches dark theme.
-            entry["logoUrl"] = f"https://cdn.simpleicons.org/{slug}/ffffff"
+    for key, count in merged_counts.most_common(100):
+        entry = {"name": display_names[key], "count": count}
+        logo_slug, logo_url = resolve_logo(key, display_names[key])
+        if logo_slug:
+            entry["logo"] = logo_slug
+        if logo_url:
+            entry["logoUrl"] = logo_url
         top_companies.append(entry)
     out["topCompanies"] = top_companies
 
@@ -273,6 +463,60 @@ def main() -> int:
     out["dotfilesRepos"] = dotfiles
     out["dotfilesReferences"] = len(dotfiles)
 
+    # ---- World map points from stargazer profile locations ----
+    city_agg: dict[str, dict] = {}
+    for sg in stargazers:
+        entry = locate(sg.get("location") or "")
+        if not entry:
+            continue
+        city, lat, lng, country, continent = entry
+        agg = city_agg.setdefault(city, {
+            "label": city, "lat": lat, "lng": lng,
+            "country": country, "continent": continent,
+            "count": 0, "orgs": Counter(),
+        })
+        agg["count"] += 1
+        comp = normalize_company(sg.get("company") or "")
+        if comp:
+            agg["orgs"][display_names.get(canonical_company_key(comp), comp)] += 1
+
+    map_points = []
+    for agg in sorted(city_agg.values(), key=lambda a: -a["count"]):
+        top_orgs = [name for name, _ in agg["orgs"].most_common(3)]
+        n = agg["count"]
+        detail = f"{n} developer" + ("s" if n != 1 else "")
+        if top_orgs:
+            detail += " · " + ", ".join(top_orgs)
+        size = "lg" if n >= 10 else "md" if n >= 4 else "sm"
+        color = None
+        if any(slugify_company(o) in BIG_TECH for o in top_orgs):
+            color = "#60a5fa"
+        elif any(EDU_PATTERN.search(o) for o in top_orgs):
+            color = "#fbbf24"
+        point = {
+            "lat": agg["lat"], "lng": agg["lng"],
+            "label": agg["label"], "detail": detail, "size": size,
+            "country": agg["country"], "continent": agg["continent"],
+        }
+        if color:
+            point["color"] = color
+        map_points.append(point)
+    if map_points:
+        out["mapPoints"] = map_points[:48]
+        out["cities"] = len(city_agg)
+        out["countries"] = len({a["country"] for a in city_agg.values()})
+        out["continents"] = len({a["continent"] for a in city_agg.values()})
+
+    # ---- Latest release version ----
+    if args.release_json:
+        try:
+            release = json.loads(Path(args.release_json).read_text())
+            tag = (release.get("tag_name") or "").lstrip("vV")
+            if re.match(r"^\d+\.\d+", tag):
+                out["latestVersion"] = tag
+        except Exception:
+            pass
+
     # ---- Source-derived counts (best effort) ----
     if args.psmux_src:
         src_root = Path(args.psmux_src)
@@ -297,7 +541,9 @@ def main() -> int:
 
     out["lastUpdated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    Path(args.out).write_text(json.dumps(out, indent=2, ensure_ascii=False))
+    Path(args.out).write_text(
+        json.dumps(out, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
     print(f"Wrote {args.out}")
     print(f"  stars={out['stars']} forks={out['forks']} contribs={out['contributors']}")
     print(f"  companies={out['companiesRepresented']} top={len(top_companies)}")

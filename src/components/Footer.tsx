@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink, BookOpen, Package, Candy } from 'lucide-react';
+import { useLiveStats } from '../hooks/useLiveStats';
 
 const Footer = () => {
+  const { stars } = useLiveStats();
   return (
     <footer
       style={{
@@ -82,7 +84,7 @@ const Footer = () => {
             margin: '0 auto 48px',
           }}
         >
-          Join 1,144+ developers who've made the switch to native tmux on Windows
+          Join {stars.toLocaleString('en-US')}+ developers who've made the switch to native tmux on Windows
         </motion.p>
 
         <motion.a
