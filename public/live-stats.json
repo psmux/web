@@ -918,7 +918,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 29,
+  "ecosystemRepos": 31,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1121,6 +1121,13 @@
       "author": "BobKerns",
       "stars": 0,
       "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
+      "category": "tool"
+    },
+    {
+      "name": "warp-stack-windows",
+      "author": "avielf04",
+      "stars": 0,
+      "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
       "category": "tool"
     }
   ],
@@ -1719,5 +1726,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-11T15:00:05Z"
+  "lastUpdated": "2026-07-11T15:04:12Z"
 }
