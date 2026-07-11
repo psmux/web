@@ -5,6 +5,7 @@ import Features from './components/Features'
 import TrustedBy from './components/TrustedBy'
 import WorldMap from './components/WorldMap'
 import NotableUsers from './components/NotableUsers'
+import Contributors from './components/Contributors'
 import Universities from './components/Universities'
 import Ecosystem from './components/Ecosystem'
 import Install from './components/Install'
@@ -25,6 +26,8 @@ function App() {
       <WorldMap />
       <div className="divider" />
       <NotableUsers />
+      <div className="divider" />
+      <Contributors />
       <div className="divider" />
       <Universities />
       <div className="divider" />

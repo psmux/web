@@ -60,13 +60,6 @@
   transform: translateY(-4px) scale(1.05);
 }
 
-.company:hover .count {
-  background: rgba(129, 140, 248, 0.18);
-  border-color: rgba(129, 140, 248, 0.45);
-  color: var(--accent-bright);
-  transform: scale(1.1);
-}
-
 .logo {
   height: 1.1em;
   width: auto;
@@ -91,25 +84,16 @@
   text-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
 }
 
-.count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 22px;
-  padding: 2px 8px;
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  transition: all 0.3s ease;
-}
-
-.xl .name { font-size: clamp(2rem, 3.5vw, 3rem); }
-.lg .name { font-size: clamp(1.6rem, 2.5vw, 2.2rem); }
+.xl .name { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 900; }
+.lg .name { font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 800; }
 .md .name { font-size: clamp(1.2rem, 2vw, 1.6rem); }
 .sm .name { font-size: clamp(1rem, 1.5vw, 1.3rem); }
+
+.xl { color: rgba(240, 240, 245, 0.55); }
+.lg { color: rgba(240, 240, 245, 0.45); }
+.md { color: rgba(240, 240, 245, 0.38); }
+
+.xl .logo, .lg .logo { opacity: 0.8; }
 
 .moreRow {
   display: flex;
@@ -223,15 +207,6 @@
   background: rgba(129, 140, 248, 0.07);
 }
 
-.rowRank {
-  width: 26px;
-  flex-shrink: 0;
-  text-align: right;
-  font-size: 0.75rem;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-}
-
 .rowLogo {
   width: 22px;
   height: 22px;
@@ -250,17 +225,6 @@
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
-}
-
-.rowCount {
-  flex-shrink: 0;
-  padding: 3px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--text-muted);
 }
 
 @media (max-width: 768px) {

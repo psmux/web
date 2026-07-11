@@ -1,4 +1,65 @@
-export const latestVersion = "3.3.2";
+export const latestVersion = "3.3.6";
+
+// Brand prominence tiers for the Trusted By cloud, roughly by global
+// revenue (Fortune 500 and equivalents). Keys are canonical company keys
+// (lowercase, legal suffixes stripped). Unlisted companies render "sm".
+export const companyTiers: Record<string, "xl" | "lg" | "md"> = {
+  walmart: "xl",
+  amazon: "xl",
+  apple: "xl",
+  microsoft: "xl",
+  google: "xl",
+  alphabet: "xl",
+  samsung: "xl",
+  "samsung electronics": "xl",
+  foxconn: "xl",
+  "berkshire hathaway": "xl",
+  exxonmobil: "xl",
+  unitedhealth: "xl",
+  "saudi aramco": "xl",
+  toyota: "xl",
+  volkswagen: "xl",
+  meta: "lg",
+  tencent: "lg",
+  alibaba: "lg",
+  sony: "lg",
+  siemens: "lg",
+  ibm: "lg",
+  intel: "lg",
+  nvidia: "lg",
+  huawei: "lg",
+  hitachi: "lg",
+  bosch: "lg",
+  jpmorgan: "lg",
+  "jpmorgan chase": "lg",
+  visa: "lg",
+  oracle: "lg",
+  accenture: "lg",
+  dell: "lg",
+  netflix: "lg",
+  bytedance: "lg",
+  baidu: "lg",
+  broadcom: "md",
+  sap: "md",
+  salesforce: "md",
+  adobe: "md",
+  qualcomm: "md",
+  amd: "md",
+  cisco: "md",
+  uber: "md",
+  paypal: "md",
+  unity: "md",
+  worldline: "md",
+  "ntt data": "md",
+  nexon: "md",
+  nhn: "md",
+  agoda: "md",
+  bilibili: "md",
+  fraunhofer: "md",
+  experian: "md",
+  "serasa experian": "md",
+  fiverr: "md",
+};
 
 export const stats = {
   stars: 1259,
@@ -134,6 +195,21 @@ export const notableUsers = [
     highlight: false,
     quote: "Building the future of web3 infrastructure at Sequence.",
   },
+];
+
+export const contributors = [
+  { login: "psmux", avatarUrl: "https://avatars.githubusercontent.com/u/52248669?v=4", url: "https://github.com/psmux", contributions: 309 },
+  { login: "computersrmyfriends", avatarUrl: "https://avatars.githubusercontent.com/u/323931?v=4", url: "https://github.com/computersrmyfriends", contributions: 165 },
+  { login: "tarikguney", avatarUrl: "https://avatars.githubusercontent.com/u/369188?v=4", url: "https://github.com/tarikguney", contributions: 26 },
+  { login: "souhaiebtar", avatarUrl: "https://avatars.githubusercontent.com/u/15350774?v=4", url: "https://github.com/souhaiebtar", contributions: 15 },
+  { login: "marhel", avatarUrl: "https://avatars.githubusercontent.com/u/2725205?v=4", url: "https://github.com/marhel", contributions: 13 },
+  { login: "MattKotsenas", avatarUrl: "https://avatars.githubusercontent.com/u/51421?v=4", url: "https://github.com/MattKotsenas", contributions: 8 },
+  { login: "ToxMox", avatarUrl: "https://avatars.githubusercontent.com/u/22566356?v=4", url: "https://github.com/ToxMox", contributions: 7 },
+  { login: "andrew-tawfeek", avatarUrl: "https://avatars.githubusercontent.com/u/81664969?v=4", url: "https://github.com/andrew-tawfeek", contributions: 7 },
+  { login: "LizardLiang", avatarUrl: "https://avatars.githubusercontent.com/u/12999887?v=4", url: "https://github.com/LizardLiang", contributions: 5 },
+  { login: "zer0ken", avatarUrl: "https://avatars.githubusercontent.com/u/31297454?v=4", url: "https://github.com/zer0ken", contributions: 3 },
+  { login: "quazardous", avatarUrl: "https://avatars.githubusercontent.com/u/1506211?v=4", url: "https://github.com/quazardous", contributions: 3 },
+  { login: "XingLingQAQ", avatarUrl: "https://avatars.githubusercontent.com/u/92240364?v=4", url: "https://github.com/XingLingQAQ", contributions: 2 },
 ];
 
 export const universities = [

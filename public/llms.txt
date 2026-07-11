@@ -1,0 +1,38 @@
+# psmux
+
+> psmux is a native terminal multiplexer for Windows 10 and 11, built in Rust. It is a tmux alternative with full command, keybinding, and .tmux.conf compatibility that requires no WSL, Cygwin, or MSYS2. It works with Windows Terminal, PowerShell, and cmd.exe.
+
+Key facts:
+
+* Single native Windows binary with zero dependencies
+* 76 tmux compatible commands and 126+ format variables
+* Vim style copy mode with 53 keybindings, full mouse support
+* Reads your existing .tmux.conf so tmux muscle memory carries over
+* Installable via winget, Scoop, Chocolatey, Cargo, or a PowerShell one liner
+* Used by engineers at Microsoft, Google, IBM, Tencent, Sony, and 500+ companies
+* Recommended multiplexer for Claude Code Agent Teams on Windows
+* MIT licensed, open source
+
+## Install
+
+* winget: `winget install psmux`
+* Scoop: `scoop install psmux`
+* Chocolatey: `choco install psmux`
+* Cargo: `cargo install psmux`
+* PowerShell: `irm https://raw.githubusercontent.com/psmux/psmux/master/scripts/install.ps1 | iex`
+
+## Resources
+
+* [GitHub repository](https://github.com/psmux/psmux): source code, releases, issues, documentation
+* [Live adoption stats](https://psmux.pages.dev/live-stats.json): machine readable JSON with stars, contributors, companies, and ecosystem data, refreshed twice weekly
+* [crates.io package](https://crates.io/crates/psmux): Rust crate
+* [Chocolatey package](https://community.chocolatey.org/packages/psmux): Windows package manager listing
+* [Plugin ecosystem](https://github.com/psmux/psmux-plugins): official plugins including themes and sensible defaults
+
+## Usage
+
+* Start a session: `psmux new-session -s work`
+* List sessions: `psmux ls`
+* Attach: `psmux attach -t work`
+* Default prefix is Ctrl+b, identical to tmux
+* The binaries psmux, pmux, and tmux are aliases of the same executable

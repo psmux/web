@@ -308,6 +308,21 @@ def main() -> int:
     out["stars"] = repo.get("stargazers_count", 0)
     out["forks"] = int(args.fork_count) if args.fork_count else repo.get("forks_count", 0)
     out["contributors"] = len(contributors)
+
+    # ---- Top contributors (bots excluded) ----
+    top_contribs = []
+    for c in contributors:
+        login = c.get("login") or ""
+        if not login or login.endswith("[bot]") or c.get("type") == "Bot":
+            continue
+        top_contribs.append({
+            "login": login,
+            "avatarUrl": c.get("avatar_url") or "",
+            "url": c.get("html_url") or f"https://github.com/{login}",
+            "contributions": c.get("contributions", 0),
+        })
+    top_contribs.sort(key=lambda c: -c["contributions"])
+    out["topContributors"] = top_contribs[:12]
     out["issues"] = repo.get("open_issues_count", 0)
 
     # ---- Companies ----

@@ -1652,5 +1652,79 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-11T14:30:55Z"
+  "lastUpdated": "2026-07-11T14:30:55Z",
+  "topContributors": [
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
+      "contributions": 309,
+      "login": "psmux",
+      "url": "https://github.com/psmux"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/323931?v=4",
+      "contributions": 165,
+      "login": "computersrmyfriends",
+      "url": "https://github.com/computersrmyfriends"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
+      "contributions": 26,
+      "login": "tarikguney",
+      "url": "https://github.com/tarikguney"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/15350774?v=4",
+      "contributions": 15,
+      "login": "souhaiebtar",
+      "url": "https://github.com/souhaiebtar"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
+      "contributions": 13,
+      "login": "marhel",
+      "url": "https://github.com/marhel"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
+      "contributions": 8,
+      "login": "MattKotsenas",
+      "url": "https://github.com/MattKotsenas"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
+      "contributions": 7,
+      "login": "ToxMox",
+      "url": "https://github.com/ToxMox"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
+      "contributions": 7,
+      "login": "andrew-tawfeek",
+      "url": "https://github.com/andrew-tawfeek"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
+      "contributions": 5,
+      "login": "LizardLiang",
+      "url": "https://github.com/LizardLiang"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/31297454?v=4",
+      "contributions": 3,
+      "login": "zer0ken",
+      "url": "https://github.com/zer0ken"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1506211?v=4",
+      "contributions": 3,
+      "login": "quazardous",
+      "url": "https://github.com/quazardous"
+    },
+    {
+      "avatarUrl": "https://avatars.githubusercontent.com/u/92240364?v=4",
+      "contributions": 2,
+      "login": "XingLingQAQ",
+      "url": "https://github.com/XingLingQAQ"
+    }
+  ]
 }

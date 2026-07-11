@@ -9,6 +9,7 @@ import {
   crossRepoMentions as staticCrossRepo,
   dotfilesRepos as staticDotfiles,
   mapPoints as staticMapPoints,
+  contributors as staticContributors,
   type MapPoint,
 } from "../data";
 
@@ -36,6 +37,12 @@ export type LiveCrossRepoMention = {
   context: string;
 };
 export type LiveDotfilesRepo = { repo: string; detail: string };
+export type LiveContributor = {
+  login: string;
+  avatarUrl: string;
+  url: string;
+  contributions: number;
+};
 
 export type LiveStats = typeof staticStats & {
   lastUpdated?: string;
@@ -50,6 +57,7 @@ export type LiveStats = typeof staticStats & {
   crossRepoMentions: LiveCrossRepoMention[];
   dotfilesRepos: LiveDotfilesRepo[];
   mapPoints: MapPoint[];
+  topContributors: LiveContributor[];
 };
 
 const CACHE_KEY = "psmux-live-stats-v3";
@@ -85,7 +93,7 @@ const LEGAL_SUFFIXES = new Set([
   "bv", "ab", "oy", "kk", "group", "holdings", "international", "intl",
 ]);
 
-function canonicalCompanyKey(name: string): string {
+export function canonicalCompanyKey(name: string): string {
   const tokens = name
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, " ")
@@ -139,6 +147,7 @@ const SEED: Pick<
   | "crossRepoMentions"
   | "dotfilesRepos"
   | "mapPoints"
+  | "topContributors"
 > = {
   topCompanies: staticCompanies.map((c) => ({
     name: c.name,
@@ -172,6 +181,7 @@ const SEED: Pick<
   })),
   dotfilesRepos: staticDotfiles.map((d) => ({ repo: d.repo, detail: d.detail })),
   mapPoints: staticMapPoints.map((p) => ({ ...p })),
+  topContributors: staticContributors.map((c) => ({ ...c })),
 };
 
 export function useLiveStats(): LiveStats {
@@ -287,6 +297,12 @@ export function useLiveStats(): LiveStats {
         }
         if (Array.isArray(data.mapPoints) && data.mapPoints.length > 0) {
           merged.mapPoints = data.mapPoints;
+        }
+        if (
+          Array.isArray(data.topContributors) &&
+          data.topContributors.length > 0
+        ) {
+          merged.topContributors = data.topContributors;
         }
         if (typeof data.lastUpdated === "string") {
           merged.lastUpdated = data.lastUpdated;

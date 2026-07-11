@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, Users, X } from 'lucide-react';
-import { useLiveStats } from '../hooks/useLiveStats';
+import { useLiveStats, canonicalCompanyKey } from '../hooks/useLiveStats';
+import { companyTiers } from '../data';
 import styles from './TrustedBy.module.css';
 
-const SIZE_BY_NAME: Record<string, 'xl' | 'lg' | 'md' | 'sm'> = {
-  Microsoft: 'xl',
-  Google: 'xl',
-  Meta: 'lg',
-  IBM: 'lg',
-  Sony: 'lg',
-  'NTT Data': 'lg',
-  Nexon: 'md',
-  Agoda: 'md',
-  'Serasa Experian': 'md',
-  Fiverr: 'md',
-  'CI&T': 'md',
-};
+const TIER_ORDER: Record<string, number> = { xl: 0, lg: 1, md: 2, sm: 3 };
 
-function sizeFor(name: string, count: number): 'xl' | 'lg' | 'md' | 'sm' {
-  if (SIZE_BY_NAME[name]) return SIZE_BY_NAME[name];
-  if (count >= 8) return 'xl';
-  if (count >= 4) return 'lg';
-  if (count >= 2) return 'md';
-  return 'sm';
+function tierFor(name: string): 'xl' | 'lg' | 'md' | 'sm' {
+  return companyTiers[canonicalCompanyKey(name)] ?? 'sm';
 }
 
 function CompanyLogo({
@@ -51,7 +36,21 @@ function CompanyLogo({
 
 export default function TrustedBy() {
   const { topCompanies, companiesRepresented } = useLiveStats();
-  const companies = topCompanies.slice(0, 36);
+  // Most prominent brands first; adoption count only breaks ties, never shows.
+  const ranked = useMemo(
+    () =>
+      [...topCompanies].sort((a, b) => {
+        const tierDiff = TIER_ORDER[tierFor(a.name)] - TIER_ORDER[tierFor(b.name)];
+        if (tierDiff !== 0) return tierDiff;
+        if ((b.logoUrl ? 1 : 0) !== (a.logoUrl ? 1 : 0)) {
+          return (b.logoUrl ? 1 : 0) - (a.logoUrl ? 1 : 0);
+        }
+        if (b.count !== a.count) return b.count - a.count;
+        return a.name.localeCompare(b.name);
+      }),
+    [topCompanies]
+  );
+  const companies = ranked.slice(0, 36);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
@@ -84,7 +83,7 @@ export default function TrustedBy() {
 
       <div className={styles.cloud}>
         {companies.map((c, i) => {
-          const size = sizeFor(c.name, c.count);
+          const size = tierFor(c.name);
           return (
             <motion.div
               key={c.name}
@@ -110,7 +109,6 @@ export default function TrustedBy() {
                 />
               )}
               <span className={styles.name}>{c.name}</span>
-              <span className={styles.count}>{c.count}</span>
             </motion.div>
           );
         })}
@@ -129,7 +127,7 @@ export default function TrustedBy() {
           onClick={() => setShowAll(true)}
         >
           <Users size={16} />
-          See all {topCompanies.length} companies
+          See all {ranked.length} companies
         </button>
       </motion.div>
 
@@ -161,8 +159,7 @@ export default function TrustedBy() {
                   </div>
                   <div className={styles.modalSub}>
                     {companiesRepresented.toLocaleString('en-US')} companies
-                    represented by stargazers · top {topCompanies.length} by
-                    engineer count
+                    represented by psmux stargazers worldwide
                   </div>
                 </div>
                 <button
@@ -175,14 +172,10 @@ export default function TrustedBy() {
                 </button>
               </div>
               <div className={styles.modalList}>
-                {topCompanies.map((c, i) => (
+                {ranked.map((c) => (
                   <div className={styles.row} key={c.name}>
-                    <span className={styles.rowRank}>{i + 1}</span>
                     <CompanyLogo logoUrl={c.logoUrl} className={styles.rowLogo} />
                     <span className={styles.rowName}>{c.name}</span>
-                    <span className={styles.rowCount}>
-                      {c.count} {c.count === 1 ? 'engineer' : 'engineers'}
-                    </span>
                   </div>
                 ))}
               </div>

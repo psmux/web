@@ -3,24 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>psmux — Native Terminal Multiplexer for Windows | tmux Alternative</title>
-    <meta name="description" content="psmux is a native Windows terminal multiplexer built in Rust. The perfect tmux alternative for Windows Terminal, PowerShell, and cmd.exe. No WSL, no Cygwin, just works." />
-    <meta name="keywords" content="psmux, tmux windows, terminal multiplexer windows, tmux alternative, windows terminal multiplexer, powershell tmux, cmd tmux, windows tmux replacement, rust terminal" />
+    <title>psmux: Native tmux for Windows | Terminal Multiplexer Built in Rust</title>
+    <meta name="description" content="psmux is a native Windows terminal multiplexer built in Rust. Full tmux compatibility with zero WSL. Works with Windows Terminal, PowerShell, and cmd.exe. Trusted by engineers at Microsoft, Google, IBM, and 500+ companies worldwide." />
+    <meta name="keywords" content="psmux, tmux windows, tmux for windows, terminal multiplexer windows, tmux alternative, windows terminal multiplexer, powershell tmux, cmd tmux, windows tmux replacement, rust terminal, tmux without wsl" />
     <meta name="author" content="psmux" />
-    <link rel="canonical" href="https://psmux.pages.dev" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="theme-color" content="#0a0a0f" />
+    <link rel="canonical" href="https://psmux.pages.dev/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://psmux.pages.dev" />
-    <meta property="og:title" content="psmux — Native Terminal Multiplexer for Windows" />
-    <meta property="og:description" content="Built in Rust. Zero WSL. Full tmux compatibility. The native tmux for Windows." />
+    <meta property="og:site_name" content="psmux" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://psmux.pages.dev/" />
+    <meta property="og:title" content="psmux: Native tmux for Windows" />
+    <meta property="og:description" content="Built in Rust. Zero WSL. Full tmux compatibility. The native terminal multiplexer for Windows." />
     <meta property="og:image" content="https://psmux.pages.dev/og-image.png" />
+    <meta property="og:image:alt" content="psmux, the native terminal multiplexer for Windows" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://psmux.pages.dev" />
-    <meta name="twitter:title" content="psmux — Native Terminal Multiplexer for Windows" />
-    <meta name="twitter:description" content="Built in Rust. Zero WSL. Full tmux compatibility. The native tmux for Windows." />
+    <meta name="twitter:url" content="https://psmux.pages.dev/" />
+    <meta name="twitter:title" content="psmux: Native tmux for Windows" />
+    <meta name="twitter:description" content="Built in Rust. Zero WSL. Full tmux compatibility. The native terminal multiplexer for Windows." />
     <meta name="twitter:image" content="https://psmux.pages.dev/og-image.png" />
 
     <!-- Favicon -->
@@ -30,26 +36,85 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "psmux",
-      "description": "Native Windows terminal multiplexer built in Rust. tmux alternative with full compatibility.",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Windows",
-      "programmingLanguage": "Rust",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "author": {
-        "@type": "Organization",
-        "name": "psmux",
-        "url": "https://github.com/psmux"
-      },
-      "url": "https://psmux.pages.dev",
-      "downloadUrl": "https://github.com/psmux/psmux/releases",
-      "softwareVersion": "3.3.2",
-      "license": "https://opensource.org/licenses/MIT"
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://psmux.pages.dev/#software",
+          "name": "psmux",
+          "alternateName": "tmux for Windows",
+          "description": "Native Windows terminal multiplexer built in Rust. A tmux alternative with full command, keybinding, and .tmux.conf compatibility. No WSL, Cygwin, or MSYS2 required.",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Windows 10, Windows 11",
+          "programmingLanguage": "Rust",
+          "featureList": "76 tmux compatible commands, 126+ format variables, vim copy mode, mouse support, session persistence, reads existing .tmux.conf",
+          "screenshot": "https://psmux.pages.dev/og-image.png",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "author": {
+            "@type": "Organization",
+            "name": "psmux",
+            "url": "https://github.com/psmux"
+          },
+          "url": "https://psmux.pages.dev/",
+          "downloadUrl": "https://github.com/psmux/psmux/releases",
+          "installUrl": "https://github.com/psmux/psmux#installation",
+          "softwareVersion": "3.3.6",
+          "license": "https://opensource.org/licenses/MIT",
+          "sameAs": [
+            "https://github.com/psmux/psmux",
+            "https://crates.io/crates/psmux",
+            "https://community.chocolatey.org/packages/psmux"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://psmux.pages.dev/#website",
+          "url": "https://psmux.pages.dev/",
+          "name": "psmux",
+          "description": "The native tmux for Windows",
+          "publisher": { "@id": "https://psmux.pages.dev/#software" }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Is there a native tmux for Windows?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. psmux is a terminal multiplexer built in Rust specifically for Windows 10 and 11. It provides tmux compatible commands, keybindings, and configuration without WSL, Cygwin, or MSYS2."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does psmux require WSL?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. psmux is a single native Windows binary. It works directly with Windows Terminal, PowerShell, and cmd.exe with zero dependencies."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I install psmux?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Install with winget install psmux, scoop install psmux, choco install psmux, cargo install psmux, or a PowerShell one liner from the GitHub repository."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will my existing .tmux.conf work with psmux?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. psmux reads your existing .tmux.conf, so your keybindings, status line, and muscle memory carry over to Windows."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>
