@@ -2,6 +2,80 @@
   "stars": 2907,
   "forks": 176,
   "contributors": 22,
+  "topContributors": [
+    {
+      "login": "psmux",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
+      "url": "https://github.com/psmux",
+      "contributions": 309
+    },
+    {
+      "login": "computersrmyfriends",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/323931?v=4",
+      "url": "https://github.com/computersrmyfriends",
+      "contributions": 165
+    },
+    {
+      "login": "tarikguney",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
+      "url": "https://github.com/tarikguney",
+      "contributions": 26
+    },
+    {
+      "login": "souhaiebtar",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/15350774?v=4",
+      "url": "https://github.com/souhaiebtar",
+      "contributions": 15
+    },
+    {
+      "login": "marhel",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
+      "url": "https://github.com/marhel",
+      "contributions": 13
+    },
+    {
+      "login": "MattKotsenas",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
+      "url": "https://github.com/MattKotsenas",
+      "contributions": 8
+    },
+    {
+      "login": "ToxMox",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
+      "url": "https://github.com/ToxMox",
+      "contributions": 7
+    },
+    {
+      "login": "andrew-tawfeek",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
+      "url": "https://github.com/andrew-tawfeek",
+      "contributions": 7
+    },
+    {
+      "login": "LizardLiang",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
+      "url": "https://github.com/LizardLiang",
+      "contributions": 5
+    },
+    {
+      "login": "zer0ken",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/31297454?v=4",
+      "url": "https://github.com/zer0ken",
+      "contributions": 3
+    },
+    {
+      "login": "quazardous",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1506211?v=4",
+      "url": "https://github.com/quazardous",
+      "contributions": 3
+    },
+    {
+      "login": "XingLingQAQ",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/92240364?v=4",
+      "url": "https://github.com/XingLingQAQ",
+      "contributions": 2
+    }
+  ],
   "issues": 38,
   "companiesRepresented": 549,
   "topCompanies": [
@@ -718,7 +792,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4614,
+      "followers": 4615,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -1199,8 +1273,101 @@
       "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     }
   ],
-  "dotfilesRepos": [],
-  "dotfilesReferences": 0,
+  "dotfilesRepos": [
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "maxrzaw/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "DS-argus/window-dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "JoshuaAnderson0/Windows-Dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "detail": "AGENTS.md"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "victor-basurto/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "baked-potatoes/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "FallenDeity/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "gen4438/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "sgruendel/dotfiles",
+      "detail": "install_tools.ps1"
+    },
+    {
+      "repo": "jeffersonjaily/iptv_app",
+      "detail": "profiles.ui"
+    },
+    {
+      "repo": "shaobin0604/faplayer",
+      "detail": "profiles.ui"
+    },
+    {
+      "repo": "BladeWDR/dotfiles",
+      "detail": "run_onchange_install-ppm.ps1.tmpl"
+    },
+    {
+      "repo": "ghostjvrmaster/vlc",
+      "detail": "profile_selector.cpp"
+    },
+    {
+      "repo": "ZeroPointSix/psmuxplus",
+      "detail": "install.ps1"
+    }
+  ],
+  "dotfilesReferences": 23,
   "mapPoints": [
     {
       "lat": 36.4,
@@ -1652,79 +1819,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-11T14:30:55Z",
-  "topContributors": [
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
-      "contributions": 309,
-      "login": "psmux",
-      "url": "https://github.com/psmux"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/323931?v=4",
-      "contributions": 165,
-      "login": "computersrmyfriends",
-      "url": "https://github.com/computersrmyfriends"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
-      "contributions": 26,
-      "login": "tarikguney",
-      "url": "https://github.com/tarikguney"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/15350774?v=4",
-      "contributions": 15,
-      "login": "souhaiebtar",
-      "url": "https://github.com/souhaiebtar"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
-      "contributions": 13,
-      "login": "marhel",
-      "url": "https://github.com/marhel"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
-      "contributions": 8,
-      "login": "MattKotsenas",
-      "url": "https://github.com/MattKotsenas"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
-      "contributions": 7,
-      "login": "ToxMox",
-      "url": "https://github.com/ToxMox"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
-      "contributions": 7,
-      "login": "andrew-tawfeek",
-      "url": "https://github.com/andrew-tawfeek"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
-      "contributions": 5,
-      "login": "LizardLiang",
-      "url": "https://github.com/LizardLiang"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/31297454?v=4",
-      "contributions": 3,
-      "login": "zer0ken",
-      "url": "https://github.com/zer0ken"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/1506211?v=4",
-      "contributions": 3,
-      "login": "quazardous",
-      "url": "https://github.com/quazardous"
-    },
-    {
-      "avatarUrl": "https://avatars.githubusercontent.com/u/92240364?v=4",
-      "contributions": 2,
-      "login": "XingLingQAQ",
-      "url": "https://github.com/XingLingQAQ"
-    }
-  ]
+  "lastUpdated": "2026-07-11T14:46:58Z"
 }
