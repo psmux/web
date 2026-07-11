@@ -21,13 +21,36 @@ Key facts:
 * Cargo: `cargo install psmux`
 * PowerShell: `irm https://raw.githubusercontent.com/psmux/psmux/master/scripts/install.ps1 | iex`
 
+## Documentation
+
+* [FAQ](https://psmux.pages.dev/docs/faq): psmux FAQ guide
+* [Features](https://psmux.pages.dev/docs/features): See keybindings.md for the full copy mode key reference.
+* [Windows Use Cases](https://psmux.pages.dev/docs/use-cases): Native tmux on Windows is not just "splits and tabs." Because psmux runs a real background server that keeps your shells, panes, and running processes alive ...
+* [Configuration](https://psmux.pages.dev/docs/configuration): psmux reads its config on startup from the first file found (in order):
+* [Key Bindings](https://psmux.pages.dev/docs/keybindings): Default prefix: Ctrl+b (same as tmux). Change with set -g prefix C-a.
+* [Plugins & Themes](https://psmux.pages.dev/docs/plugins): psmux has a full plugin ecosystem — ports of the most popular tmux plugins, reimplemented in PowerShell for Windows.
+* [Pane Titles and OSC Escape Sequences](https://psmux.pages.dev/docs/pane-titles): Every pane in psmux has a title. By default this is the system hostname, matching tmux convention. You can see it in the status bar, pane border labels, and ...
+* [tmux Compatibility](https://psmux.pages.dev/docs/compatibility): psmux is the most tmux-compatible terminal multiplexer on Windows.
+* [Tmux Args Reference](https://psmux.pages.dev/docs/tmux_args_reference): psmux Tmux Args Reference guide
+* [Multi-Shell Workflows](https://psmux.pages.dev/docs/multi-shell): psmux lets you run any combination of shells side by side in the same session. PowerShell, Git Bash, cmd.exe, WSL, Nushell, or any other shell or program, ea...
+* [Mouse Over SSH](https://psmux.pages.dev/docs/mouse-ssh): psmux has first-class mouse support over SSH when the server runs Windows 11 build 22523+ (22H2+). Click panes, drag-resize borders, scroll, click tabs — eve...
+* [Scripting & Automation](https://psmux.pages.dev/docs/scripting): psmux supports tmux-compatible commands for scripting and automation.
+* [Control Mode](https://psmux.pages.dev/docs/control-mode): Control mode lets external programs drive psmux programmatically over a structured text protocol. Instead of rendering a TUI, psmux sends machine-readable no...
+* [Using psmux with iTerm2 (`tmux -CC` integration)](https://psmux.pages.dev/docs/iterm2-control-mode): iTerm2's tmux integration treats tmux -CC as a wire protocol. Each tmux window becomes a native iTerm2 tab, panes become native iTerm2 split panes, scrollbac...
+* [Live Preview in Choosers](https://psmux.pages.dev/docs/preview): The choose-session and choose-tree pickers in psmux include a live preview pane that shows the actual content of the highlighted session, window, or pane. Th...
+* [Warm Sessions](https://psmux.pages.dev/docs/warm-sessions): psmux uses a background warm session (warm) to make new session creation nearly instant. This page explains how it works and how to interact with it if needed.
+* [Performance](https://psmux.pages.dev/docs/performance): psmux is built for speed. The Rust release binary is compiled with opt-level 3, full LTO, and single codegen unit. Every cycle counts.
+* [Claude Code Agent Teams](https://psmux.pages.dev/docs/claude-code): psmux has first-class support for Claude Code agent teams. When Claude Code runs inside a psmux session, it automatically spawns teammate agents in separate ...
+* [Developer Integration Guide](https://psmux.pages.dev/docs/integration): This guide is for developers who want to build tools, scripts, IDE extensions, or automation pipelines that use psmux on Windows, especially if you already h...
+
+* [Full documentation in one file](https://psmux.pages.dev/llms-full.txt): every guide inlined as markdown
+
 ## Resources
 
-* [GitHub repository](https://github.com/psmux/psmux): source code, releases, issues, documentation
+* [GitHub repository](https://github.com/psmux/psmux): source code, releases, issues
 * [Live adoption stats](https://psmux.pages.dev/live-stats.json): machine readable JSON with stars, contributors, companies, and ecosystem data, refreshed twice weekly
 * [crates.io package](https://crates.io/crates/psmux): Rust crate
 * [Chocolatey package](https://community.chocolatey.org/packages/psmux): Windows package manager listing
-* [Plugin ecosystem](https://github.com/psmux/psmux-plugins): official plugins including themes and sensible defaults
 
 ## Usage
 

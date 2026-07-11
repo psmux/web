@@ -32,6 +32,13 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- Speculation Rules: prerender the docs for instant navigation -->
+    <script type="speculationrules">
+    {
+      "prerender": [{ "urls": ["/docs"], "eagerness": "moderate" }]
+    }
+    </script>
+
     <!-- Schema.org -->
     <script type="application/ld+json">
     {

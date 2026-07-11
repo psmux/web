@@ -126,12 +126,16 @@ jobs:
                    cities, countries, continents, latestVersion,
                    lastUpdated}' public/live-stats.json
 
+      - name: Build docs bundle
+        run: |
+          python3 scripts/build-docs.py --docs psmux-src/docs --public public
+
       - name: Commit changes
         id: commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/live-stats.json
+          git add public/live-stats.json public/docs.json public/sitemap.xml public/llms.txt public/llms-full.txt
           if git diff --staged --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"

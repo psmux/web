@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, Terminal, ExternalLink } from 'lucide-react';
+import { ArrowRight, Star, Terminal, ExternalLink, BookOpen } from 'lucide-react';
 import { useLiveStats } from '../hooks/useLiveStats';
 import styles from './Hero.module.css';
 
@@ -82,6 +82,10 @@ export default function Hero() {
               <Star size={12} fill="currentColor" />
               {liveStats.stars.toLocaleString()}
             </span>
+          </a>
+          <a href="/docs" className={styles.ctaSecondary}>
+            <BookOpen size={18} />
+            Docs
           </a>
         </motion.div>
 

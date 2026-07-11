@@ -138,7 +138,7 @@ const Footer = () => {
           />
           <Sep />
           <FooterLink
-            href="https://psmux.pages.dev"
+            href="/docs"
             icon={<BookOpen size={16} />}
             label="Documentation"
           />

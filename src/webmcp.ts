@@ -32,6 +32,47 @@ const tools: WebMcpTool[] = [
     },
   },
   {
+    name: "list_psmux_docs",
+    description:
+      "List all psmux documentation pages with slug, title, and description. Use get_psmux_doc to read one.",
+    inputSchema: { type: "object", properties: {} },
+    execute: async () => {
+      const res = await fetch("/docs.json");
+      const bundle = await res.json();
+      return text(
+        (bundle.docs ?? []).map(
+          (d: { slug: string; title: string; description: string }) => ({
+            slug: d.slug,
+            title: d.title,
+            description: d.description,
+            url: `https://psmux.pages.dev/docs/${d.slug}`,
+          })
+        )
+      );
+    },
+  },
+  {
+    name: "get_psmux_doc",
+    description:
+      "Return the full markdown of one psmux documentation page by slug (e.g. keybindings, configuration, faq, claude-code).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        slug: { type: "string", description: "Doc slug from list_psmux_docs" },
+      },
+      required: ["slug"],
+    },
+    execute: async (args?: unknown) => {
+      const slug = (args as { slug?: string } | undefined)?.slug ?? "";
+      const res = await fetch("/docs.json");
+      const bundle = await res.json();
+      const doc = (bundle.docs ?? []).find(
+        (d: { slug: string }) => d.slug === slug
+      );
+      return text(doc ? doc.markdown : `No doc found for slug "${slug}"`);
+    },
+  },
+  {
     name: "get_psmux_install_commands",
     description:
       "Installation commands for psmux on Windows via winget, Scoop, Chocolatey, Cargo, and PowerShell.",
