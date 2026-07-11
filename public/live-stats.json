@@ -918,15 +918,8 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 32,
+  "ecosystemRepos": 29,
   "ecosystemProjects": [
-    {
-      "name": "LibGb28181PsMux",
-      "author": "7956968",
-      "stars": 74,
-      "description": "PsMux for China GB28181",
-      "category": "tool"
-    },
     {
       "name": "claude-psmux-team",
       "author": "gonnector",

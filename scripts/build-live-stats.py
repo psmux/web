@@ -274,6 +274,10 @@ def extract_university(company: str) -> tuple[str, str] | None:
     # Last resort: keep the whole string as the name, no logo domain
     return (company.strip(), "")
 
+# Repos that merely contain "psmux" in a video/streaming sense (PS mux =
+# MPEG program stream muxer) are not part of this ecosystem.
+UNRELATED_REPO = re.compile(r"gb\s?28181|mpeg|\brtp\b|rtsp|h\.?26[45]|\bts\s?mux", re.I)
+
 def categorize_repo(name: str, owner: str, description: str) -> str:
     text = f"{name} {description or ''}".lower()
     if "claude" in text or "agent" in text:
@@ -410,7 +414,10 @@ def main() -> int:
         owner, name = full.split("/", 1)
         if owner.lower() == "psmux":
             continue  # ecosystem means community projects, not psmux's own
-        if "psmux" not in (name.lower() + " " + (r.get("description") or "").lower()):
+        text = name.lower() + " " + (r.get("description") or "").lower()
+        if "psmux" not in text:
+            continue
+        if UNRELATED_REPO.search(text):
             continue
         eco.append({
             "name": name,

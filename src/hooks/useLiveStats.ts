@@ -281,10 +281,18 @@ export function useLiveStats(): LiveStats {
           Array.isArray(data.ecosystemProjects) &&
           data.ecosystemProjects.length > 0
         ) {
-          // Ecosystem showcases community projects; psmux's own repos stay out.
+          // Ecosystem showcases community projects; psmux's own repos stay
+          // out, as do video muxers that merely contain "psmux" in the
+          // MPEG program stream sense. Keep in sync with UNRELATED_REPO in
+          // scripts/build-live-stats.py.
+          const unrelated = /gb\s?28181|mpeg|\brtp\b|rtsp|h\.?26[45]|\bts\s?mux/i;
           const community = (
             data.ecosystemProjects as LiveEcosystemProject[]
-          ).filter((p) => p.author?.toLowerCase() !== "psmux");
+          ).filter(
+            (p) =>
+              p.author?.toLowerCase() !== "psmux" &&
+              !unrelated.test(`${p.name} ${p.description ?? ""}`)
+          );
           if (community.length > 0) {
             merged.ecosystemProjects = community;
             merged.ecosystemRepos = community.length;
