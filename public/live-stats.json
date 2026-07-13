@@ -1,13 +1,13 @@
 {
-  "stars": 2907,
-  "forks": 177,
-  "contributors": 22,
+  "stars": 2919,
+  "forks": 179,
+  "contributors": 23,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 309
+      "contributions": 319
     },
     {
       "login": "computersrmyfriends",
@@ -22,22 +22,22 @@
       "contributions": 26
     },
     {
+      "login": "marhel",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
+      "url": "https://github.com/marhel",
+      "contributions": 16
+    },
+    {
       "login": "souhaiebtar",
       "avatarUrl": "https://avatars.githubusercontent.com/u/15350774?v=4",
       "url": "https://github.com/souhaiebtar",
       "contributions": 15
     },
     {
-      "login": "marhel",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
-      "url": "https://github.com/marhel",
-      "contributions": 13
-    },
-    {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 8
+      "contributions": 9
     },
     {
       "login": "ToxMox",
@@ -76,8 +76,8 @@
       "contributions": 2
     }
   ],
-  "issues": 39,
-  "companiesRepresented": 549,
+  "issues": 37,
+  "companiesRepresented": 550,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -708,9 +708,6 @@
       "name": "Anhui university"
     },
     {
-      "name": "sungkyunkwan university"
-    },
-    {
       "name": "University of Information Technology VNU-HCM"
     },
     {
@@ -770,13 +767,16 @@
     },
     {
       "name": "National Taiwan University of Science and Technology"
+    },
+    {
+      "name": "Utsunomiya University"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9798,
+      "followers": 9797,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -784,7 +784,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5385,
+      "followers": 5383,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -792,7 +792,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4615,
+      "followers": 4626,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -840,7 +840,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 905,
+      "followers": 907,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -848,7 +848,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 877,
+      "followers": 878,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -864,7 +864,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 727,
+      "followers": 729,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
@@ -880,7 +880,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 708,
+      "followers": 709,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -894,9 +894,17 @@
       "highlight": false
     },
     {
+      "login": "fraxken",
+      "name": "Thomas.G",
+      "followers": 694,
+      "title": "French Node.js Expert freelancer with 10+ exp\r",
+      "company": "OpenAlly",
+      "highlight": false
+    },
+    {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 640,
+      "followers": 642,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -907,14 +915,6 @@
       "followers": 616,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
-      "highlight": false
-    },
-    {
-      "login": "bwya77",
-      "name": "Bradley Wyatt",
-      "followers": 616,
-      "title": "Former 6x Dual-Microsoft MVP | The Lazy Administrator | Sr Solution Engineer @ Microsoft",
-      "company": "Microsoft",
       "highlight": false
     }
   ],
@@ -1156,6 +1156,8 @@
     {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
+        "#2086",
+        "#2145",
         "#1849",
         "#1391",
         "#1275",
@@ -1167,7 +1169,20 @@
         "#1459",
         "#1240"
       ],
-      "context": "[Bug] Windows + psmux: gjc team launch still fails on default worker worktree path with Filename too long"
+      "context": "Windows PowerShell 7: make `gjc --tmux` and `/pet` work through psmux aliases"
+    },
+    {
+      "repo": "Yeachan-Heo/oh-my-codex",
+      "issues": [
+        "#3124",
+        "#3122",
+        "#3121",
+        "#3123",
+        "#3131",
+        "#3013",
+        "#3016"
+      ],
+      "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
       "repo": "Knatte18/millhouse",
@@ -1178,8 +1193,7 @@
         "#415",
         "#429",
         "#410",
-        "#424",
-        "#416"
+        "#424"
       ],
       "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
     },
@@ -1200,21 +1214,9 @@
         "#70219",
         "#24384",
         "#57203",
-        "#43840",
-        "#35148"
+        "#43840"
       ],
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
-    },
-    {
-      "repo": "sudoprivacy/hydra",
-      "issues": [
-        "#225",
-        "#154",
-        "#111",
-        "#195",
-        "#213"
-      ],
-      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "Yeachan-Heo/oh-my-claudecode",
@@ -1222,8 +1224,7 @@
         "#3311",
         "#3265",
         "#3285",
-        "#3075",
-        "#3151"
+        "#3075"
       ],
       "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     },
@@ -1235,6 +1236,15 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
+    },
+    {
+      "repo": "sudoprivacy/hydra",
+      "issues": [
+        "#225",
+        "#154",
+        "#111"
+      ],
+      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "savoy9/tackle",
@@ -1253,15 +1263,6 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
-    },
-    {
-      "repo": "inmanuscript/claude-squad-pwsh",
-      "issues": [
-        "#7",
-        "#9",
-        "#3"
-      ],
-      "context": "Step 7: psmux コマンド互換性の手動確認"
     },
     {
       "repo": "j4rviscmd/Coderm",
@@ -1290,7 +1291,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "58 developers · Ke, erasin.wang, Home",
+      "detail": "59 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1299,7 +1300,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "50 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "51 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1420,7 +1421,7 @@
       "lat": 52.4,
       "lng": -1.5,
       "label": "United Kingdom",
-      "detail": "13 developers · Pixel Inspiration, everstack, newscred",
+      "detail": "14 developers · Pixel Inspiration, everstack, newscred",
       "size": "lg",
       "country": "United Kingdom",
       "continent": "Europe"
@@ -1565,6 +1566,15 @@
       "continent": "South America"
     },
     {
+      "lat": 48.9,
+      "lng": 2.3,
+      "label": "Paris",
+      "detail": "9 developers · Guerbet, Cellenza, School",
+      "size": "md",
+      "country": "France",
+      "continent": "Europe"
+    },
+    {
       "lat": 56.1,
       "lng": -106.3,
       "label": "Canada",
@@ -1598,15 +1608,6 @@
       "detail": "8 developers · NorskRegnesentral, Jonsson Folkestad Software AS, SmartDok",
       "size": "md",
       "country": "Norway",
-      "continent": "Europe"
-    },
-    {
-      "lat": 48.9,
-      "lng": 2.3,
-      "label": "Paris",
-      "detail": "8 developers · Guerbet, Cellenza, School",
-      "size": "md",
-      "country": "France",
       "continent": "Europe"
     },
     {
@@ -1726,5 +1727,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-11T15:29:47Z"
+  "lastUpdated": "2026-07-13T09:31:54Z"
 }
