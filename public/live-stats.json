@@ -1,13 +1,13 @@
 {
-  "stars": 2919,
-  "forks": 179,
+  "stars": 2953,
+  "forks": 182,
   "contributors": 23,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 319
+      "contributions": 322
     },
     {
       "login": "computersrmyfriends",
@@ -76,8 +76,8 @@
       "contributions": 2
     }
   ],
-  "issues": 37,
-  "companiesRepresented": 550,
+  "issues": 38,
+  "companiesRepresented": 555,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -532,7 +532,7 @@
       "count": 1
     }
   ],
-  "universities": 74,
+  "universities": 73,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -736,9 +736,6 @@
       "name": "Georgia Tech Research Institute"
     },
     {
-      "name": "Saxion University of Applied Sciences"
-    },
-    {
       "name": "China University of Geosciences, Wuhan"
     },
     {
@@ -776,7 +773,7 @@
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9797,
+      "followers": 9794,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -784,7 +781,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5383,
+      "followers": 5377,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -792,7 +789,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4626,
+      "followers": 4644,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -800,7 +797,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2146,
+      "followers": 2148,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -816,8 +813,8 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1552,
-      "title": "Microsoft MVP | Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
+      "followers": 1553,
+      "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
     },
@@ -848,7 +845,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 878,
+      "followers": 880,
       "title": "OBLITERATE THE GALAXY",
       "company": "0xSequence",
       "highlight": false
@@ -856,7 +853,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 741,
+      "followers": 742,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -864,7 +861,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 729,
+      "followers": 728,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
@@ -872,7 +869,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 724,
+      "followers": 725,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -896,7 +893,7 @@
     {
       "login": "fraxken",
       "name": "Thomas.G",
-      "followers": 694,
+      "followers": 696,
       "title": "French Node.js Expert freelancer with 10+ exp\r",
       "company": "OpenAlly",
       "highlight": false
@@ -918,7 +915,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 31,
+  "ecosystemRepos": 33,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -935,18 +932,18 @@
       "category": "tool"
     },
     {
+      "name": "psmux-agent-orchestrator",
+      "author": "kingkillery",
+      "stars": 3,
+      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux",
       "author": "nileshfating",
       "stars": 2,
       "description": "🖥️ Experience native terminal multiplexing on Windows with psmux, the straightforward alternative to tmux, built for PowerShell and cmd.exe.",
       "category": "tool"
-    },
-    {
-      "name": "psmux-agent-orchestrator",
-      "author": "kingkillery",
-      "stars": 2,
-      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
-      "category": "claude-code"
     },
     {
       "name": "psmux-claude-skill",
@@ -961,6 +958,13 @@
       "stars": 2,
       "description": "Standalone Go CLI to save and restore psmux sessions across restarts",
       "category": "tool"
+    },
+    {
+      "name": "ccg_app_rust_psmuxPlus",
+      "author": "KennethJefferson",
+      "stars": 1,
+      "description": "Rust-based terminal-multiplexer workspace: psmux fork with an agent-events bus and event-driven agent done-signal hooks, plus PowerShell multi-agent grid orchestration skills",
+      "category": "claude-code"
     },
     {
       "name": "claude-auto-retry-windows",
@@ -1033,6 +1037,13 @@
       "category": "tool"
     },
     {
+      "name": "dotfiles",
+      "author": "luisgui1757",
+      "stars": 0,
+      "description": "Cross-platform Rose Pine terminal/editor setup for Apple Silicon macOS, Linux, WSL2, and Windows: Neovim, Herdr, tmux/psmux, Starship, Ghostty, WezTerm, Windows Terminal, AeroSpace, zsh/PowerShell, lazygit, and CLI tooling. Nix on POSIX; chezmoi configs everywhere.",
+      "category": "tool"
+    },
+    {
       "name": "dotfiles-Windows",
       "author": "dotgibson",
       "stars": 0,
@@ -1055,16 +1066,16 @@
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
@@ -1115,23 +1126,30 @@
       "stars": 0,
       "description": "minhas configs para tmux / psmux",
       "category": "tool"
-    },
-    {
-      "name": "tmux-demo",
-      "author": "BobKerns",
-      "stars": 0,
-      "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
-      "category": "tool"
-    },
-    {
-      "name": "warp-stack-windows",
-      "author": "avielf04",
-      "stars": 0,
-      "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
+    {
+      "repo": "vybestack/llxprt-jefe",
+      "issues": [
+        "#253",
+        "#264",
+        "#296",
+        "#307",
+        "#254",
+        "#256",
+        "#257",
+        "#255",
+        "#262",
+        "#260",
+        "#302",
+        "#263",
+        "#259",
+        "#258",
+        "#241"
+      ],
+      "context": "Support native Windows with psmux and feature parity"
+    },
     {
       "repo": "smota/omnigent",
       "issues": [
@@ -1166,10 +1184,23 @@
         "#1130",
         "#1268",
         "#916",
-        "#1459",
-        "#1240"
+        "#1459"
       ],
       "context": "Windows PowerShell 7: make `gjc --tmux` and `/pet` work through psmux aliases"
+    },
+    {
+      "repo": "Knatte18/millhouse",
+      "issues": [
+        "#657",
+        "#655",
+        "#661",
+        "#647",
+        "#628",
+        "#414",
+        "#428",
+        "#415"
+      ],
+      "context": "_llm_claude.cleanup_session: unguarded psmux ls dumps FileNotFoundError traceback in agent-dispatch mode"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -1185,48 +1216,16 @@
       "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
-      "repo": "Knatte18/millhouse",
-      "issues": [
-        "#628",
-        "#414",
-        "#428",
-        "#415",
-        "#429",
-        "#410",
-        "#424"
-      ],
-      "context": "config: unknown key warning for llm.claude.psmux.shell_path added in replace-claude-p-with-psmux"
-    },
-    {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#58",
         "#87",
         "#59",
+        "#140",
         "#92",
         "#40"
       ],
       "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#70219",
-        "#24384",
-        "#57203",
-        "#43840"
-      ],
-      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
-    },
-    {
-      "repo": "Yeachan-Heo/oh-my-claudecode",
-      "issues": [
-        "#3311",
-        "#3265",
-        "#3285",
-        "#3075"
-      ],
-      "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1236,15 +1235,6 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
-    },
-    {
-      "repo": "sudoprivacy/hydra",
-      "issues": [
-        "#225",
-        "#154",
-        "#111"
-      ],
-      "context": "feat: Windows support via PowerShell + psmux"
     },
     {
       "repo": "savoy9/tackle",
@@ -1265,6 +1255,15 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
+      "repo": "Yeachan-Heo/oh-my-claudecode",
+      "issues": [
+        "#3311",
+        "#3265",
+        "#3285"
+      ],
+      "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
+    },
+    {
       "repo": "j4rviscmd/Coderm",
       "issues": [
         "#200",
@@ -1272,6 +1271,14 @@
         "#199"
       ],
       "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
+    },
+    {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#466",
+        "#437"
+      ],
+      "context": "Reconcile conflicting Codex and psmux policy docs"
     }
   ],
   "dotfilesRepos": [],
@@ -1310,7 +1317,7 @@
       "lat": 51.2,
       "lng": 10.4,
       "label": "Germany",
-      "detail": "33 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
+      "detail": "35 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
       "size": "lg",
       "country": "Germany",
       "continent": "Europe"
@@ -1353,23 +1360,23 @@
       "continent": "Asia"
     },
     {
+      "lat": 20.6,
+      "lng": 79.0,
+      "label": "India",
+      "detail": "25 developers · midtown-technology-group, Visionary, intel-private",
+      "size": "lg",
+      "country": "India",
+      "continent": "Asia"
+    },
+    {
       "lat": 39.9,
       "lng": 116.4,
       "label": "Beijing",
-      "detail": "22 developers · Beijing Jiaotong University, weibo.com, DA Studio",
+      "detail": "23 developers · Beijing Jiaotong University, weibo.com, DA Studio",
       "size": "lg",
       "country": "China",
       "continent": "Asia",
       "color": "#fbbf24"
-    },
-    {
-      "lat": 20.6,
-      "lng": 79.0,
-      "label": "India",
-      "detail": "22 developers · midtown-technology-group, Visionary, intel-private",
-      "size": "lg",
-      "country": "India",
-      "continent": "Asia"
     },
     {
       "lat": -33.9,
@@ -1384,10 +1391,19 @@
       "lat": -14.2,
       "lng": -51.9,
       "label": "Brazil",
-      "detail": "19 developers · Averin, Software Engineer, Personal",
+      "detail": "20 developers · Averin, Software Engineer, Personal",
       "size": "lg",
       "country": "Brazil",
       "continent": "South America"
+    },
+    {
+      "lat": -6.2,
+      "lng": 106.8,
+      "label": "Indonesia",
+      "detail": "16 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
+      "size": "lg",
+      "country": "Indonesia",
+      "continent": "Asia"
     },
     {
       "lat": 47.6,
@@ -1398,15 +1414,6 @@
       "country": "United States",
       "continent": "North America",
       "color": "#60a5fa"
-    },
-    {
-      "lat": -6.2,
-      "lng": 106.8,
-      "label": "Indonesia",
-      "detail": "15 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
-      "size": "lg",
-      "country": "Indonesia",
-      "continent": "Asia"
     },
     {
       "lat": 52.2,
@@ -1430,7 +1437,7 @@
       "lat": 50.1,
       "lng": 14.4,
       "label": "Prague",
-      "detail": "12 developers · Wexia Digital | NaucimeAI | Delegating | SoulUp, Fine, Altap, Jaroslav Urbánek",
+      "detail": "12 developers · Fine, Altap, Jaroslav Urbánek",
       "size": "lg",
       "country": "Czechia",
       "continent": "Europe"
@@ -1461,6 +1468,16 @@
       "size": "lg",
       "country": "United Kingdom",
       "continent": "Europe"
+    },
+    {
+      "lat": 43.7,
+      "lng": -79.4,
+      "label": "Toronto",
+      "detail": "11 developers · Freelance, Microsoft, JC IT",
+      "size": "lg",
+      "country": "Canada",
+      "continent": "North America",
+      "color": "#60a5fa"
     },
     {
       "lat": 21.0,
@@ -1508,16 +1525,6 @@
       "size": "lg",
       "country": "United States",
       "continent": "North America"
-    },
-    {
-      "lat": 43.7,
-      "lng": -79.4,
-      "label": "Toronto",
-      "detail": "10 developers · Freelance, Microsoft, JC IT",
-      "size": "lg",
-      "country": "Canada",
-      "continent": "North America",
-      "color": "#60a5fa"
     },
     {
       "lat": -23.5,
@@ -1602,6 +1609,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 40.4,
+      "lng": -3.7,
+      "label": "Madrid",
+      "detail": "8 developers · Marfeel, Protur Hotels, Atomatiq",
+      "size": "md",
+      "country": "Spain",
+      "continent": "Europe"
+    },
+    {
       "lat": 59.9,
       "lng": 10.8,
       "label": "Oslo",
@@ -1631,6 +1647,15 @@
       "color": "#60a5fa"
     },
     {
+      "lat": 53.3,
+      "lng": -6.3,
+      "label": "Ireland",
+      "detail": "7 developers · http://ibm.github.io/, Personal Account, Dev @Teicsoft",
+      "size": "md",
+      "country": "Ireland",
+      "continent": "Europe"
+    },
+    {
       "lat": 55.8,
       "lng": 37.6,
       "label": "Moscow",
@@ -1647,15 +1672,6 @@
       "size": "md",
       "country": "China",
       "continent": "Asia"
-    },
-    {
-      "lat": 40.4,
-      "lng": -3.7,
-      "label": "Madrid",
-      "detail": "7 developers · Marfeel, Protur Hotels",
-      "size": "md",
-      "country": "Spain",
-      "continent": "Europe"
     },
     {
       "lat": 23.1,
@@ -1678,15 +1694,6 @@
       "color": "#60a5fa"
     },
     {
-      "lat": 53.3,
-      "lng": -6.3,
-      "label": "Ireland",
-      "detail": "6 developers · http://ibm.github.io/, Personal Account, Dev @Teicsoft",
-      "size": "md",
-      "country": "Ireland",
-      "continent": "Europe"
-    },
-    {
       "lat": 13.8,
       "lng": 100.5,
       "label": "Bangkok",
@@ -1705,6 +1712,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 4.7,
+      "lng": -74.1,
+      "label": "Colombia",
+      "detail": "5 developers · JCC",
+      "size": "md",
+      "country": "Colombia",
+      "continent": "South America"
+    },
+    {
       "lat": 1.4,
       "lng": 103.8,
       "label": "Singapore",
@@ -1712,20 +1728,11 @@
       "size": "md",
       "country": "Singapore",
       "continent": "Asia"
-    },
-    {
-      "lat": -33.4,
-      "lng": -70.7,
-      "label": "Chile",
-      "detail": "5 developers · youtouchcl, Pinflag",
-      "size": "md",
-      "country": "Chile",
-      "continent": "South America"
     }
   ],
   "cities": 74,
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-13T09:31:54Z"
+  "lastUpdated": "2026-07-16T08:18:14Z"
 }
