@@ -3,16 +3,15 @@ import { GraduationCap } from "lucide-react";
 import { useLiveStats } from "../hooks/useLiveStats";
 
 function logoUrl(domain?: string) {
-  return domain ? `https://logo.clearbit.com/${domain}` : "";
-}
-
-function fallbackUrl(domain?: string) {
   return domain ? `https://www.google.com/s2/favicons?domain=${domain}&sz=64` : "";
 }
 
 export default function Universities() {
   const { topUniversities, universities: uniCount } = useLiveStats();
   const loop = [...topUniversities, ...topUniversities];
+  // ~6s per university, 60s minimum, so scroll speed stays comfortable
+  // regardless of list size.
+  const marqueeDuration = Math.max(60, topUniversities.length * 6);
 
   return (
     <section className="section" id="universities">
@@ -115,7 +114,10 @@ export default function Universities() {
         transition={{ duration: 0.8 }}
         className="uni-marquee-viewport"
       >
-        <div className="uni-marquee-track">
+        <div
+          className="uni-marquee-track"
+          style={{ animationDuration: `${marqueeDuration}s` }}
+        >
           {loop.map((uni, i) => (
             <div key={`${uni.name}-${i}`} className="uni-pill">
               {uni.domain ? (
@@ -127,14 +129,9 @@ export default function Universities() {
                     loading="lazy"
                     onError={(e) => {
                       const img = e.currentTarget;
-                      if (!img.dataset.fallback) {
-                        img.dataset.fallback = "1";
-                        img.src = fallbackUrl(uni.domain);
-                      } else {
-                        img.style.display = "none";
-                        const svg = img.nextElementSibling as HTMLElement | null;
-                        if (svg) svg.style.display = "block";
-                      }
+                      img.style.display = "none";
+                      const svg = img.nextElementSibling as HTMLElement | null;
+                      if (svg) svg.style.display = "block";
                     }}
                   />
                   <GraduationCap size={20} style={{ display: "none" }} />

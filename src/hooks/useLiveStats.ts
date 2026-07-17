@@ -266,7 +266,16 @@ export function useLiveStats(): LiveStats {
         }
         // Arrays
         if (Array.isArray(data.topCompanies) && data.topCompanies.length > 0) {
-          merged.topCompanies = dedupeCompanies(data.topCompanies);
+          // Universities/institutes are shown separately in topUniversities;
+          // the live payload sometimes lists them in topCompanies too, so
+          // filter them out here defensively. Keep in sync with EDU_PATTERN
+          // in scripts/build-live-stats.py.
+          const eduPattern =
+            /\.edu(\b|\/)|\.ac\.[a-z]{2}|university|universit[ae]|institut|college|polytechnic|kaist|\bETH\b|\bMIT\b/i;
+          const nonEdu = (data.topCompanies as LiveCompany[]).filter(
+            (c) => !eduPattern.test(c?.name ?? "")
+          );
+          merged.topCompanies = dedupeCompanies(nonEdu);
         }
         if (
           Array.isArray(data.topUniversities) &&

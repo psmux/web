@@ -25,7 +25,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 EDU_PATTERN = re.compile(
-    r"\.edu(\b|/)|\.ac\.[a-z]{2}|university|universit[ae]|institut|college|polytechnic|kaist|ETH(\b|\s|$)|MIT(\b|\s|$)",
+    r"\.edu(\b|/)|\.ac\.[a-z]{2}|university|universit[ae]|institut|college|polytechnic|kaist|\bETH\b|\bMIT\b",
     re.IGNORECASE,
 )
 
@@ -56,6 +56,57 @@ UNI_DOMAIN_HINTS = [
     (re.compile(r"carnegie mellon|cmu", re.I), ("Carnegie Mellon", "cmu.edu")),
     (re.compile(r"oxford", re.I), ("University of Oxford", "ox.ac.uk")),
     (re.compile(r"cambridge", re.I), ("University of Cambridge", "cam.ac.uk")),
+    (re.compile(r"malone university", re.I), ("Malone University", "malone.edu")),
+    (re.compile(r"kapodistrian|university of athens", re.I), ("National and Kapodistrian University of Athens", "uoa.gr")),
+    (re.compile(r"universitas indonesia", re.I), ("Universitas Indonesia", "ui.ac.id")),
+    (re.compile(r"xi.?an\s+university of technology|\bxaut\b", re.I), ("Xi'an University of Technology", "xaut.edu.cn")),
+    (re.compile(r"soongsil", re.I), ("Soongsil University", "soongsil.ac.kr")),
+    (re.compile(r"st\.?\s*petersburg college", re.I), ("St. Petersburg College", "spcollege.edu")),
+    (re.compile(r"sanno university", re.I), ("Sanno University", "sanno.ac.jp")),
+    (re.compile(r"beijing normal|\bbnu\b", re.I), ("Beijing Normal University", "bnu.edu.cn")),
+    (re.compile(r"central south university", re.I), ("Central South University", "csu.edu.cn")),
+    (re.compile(r"nanchang hangkong|\bnchu\b", re.I), ("Nanchang Hangkong University", "nchu.edu.cn")),
+    (re.compile(r"wuhan polytechnic|\bwpu\b", re.I), ("Wuhan Polytechnic University", "wpu.edu.cn")),
+    (re.compile(r"huazhong university|\bhust\b", re.I), ("Huazhong University of Science and Technology", "hust.edu.cn")),
+    (re.compile(r"western university", re.I), ("Western University", "uwo.ca")),
+    (re.compile(r"kangwon", re.I), ("Kangwon National University", "kangwon.ac.kr")),
+    (re.compile(r"university of toronto", re.I), ("University of Toronto", "utoronto.ca")),
+    (re.compile(r"beihang|\bbuaa\b", re.I), ("Beihang University", "buaa.edu.cn")),
+    (re.compile(r"changwon", re.I), ("Changwon National University", "changwon.ac.kr")),
+    (re.compile(r"hudson county community college", re.I), ("Hudson County Community College", "hccc.edu")),
+    (re.compile(r"xi.?an\s+jiaotong|xian\s+jiaotong|\bxjtu\b", re.I), ("Xi'an Jiaotong University", "xjtu.edu.cn")),
+    (re.compile(r"hanyang", re.I), ("Hanyang University", "hanyang.ac.kr")),
+    (re.compile(r"university of science and technology of china|\bustc\b", re.I), ("University of Science and Technology of China", "ustc.edu.cn")),
+    (re.compile(r"rwth aachen|\brwth\b", re.I), ("RWTH Aachen University", "rwth-aachen.de")),
+    (re.compile(r"shanghai jiao\s?tong|\bsjtu\b", re.I), ("Shanghai Jiao Tong University", "sjtu.edu.cn")),
+    (re.compile(r"george mason university|\bgmu\b", re.I), ("George Mason University", "gmu.edu")),
+    (re.compile(r"regent university", re.I), ("Regent University", "regent.edu")),
+    (re.compile(r"jiangsu university|\bujs\b", re.I), ("Jiangsu University", "ujs.edu.cn")),
+    (re.compile(r"university of washington", re.I), ("University of Washington", "washington.edu")),
+    (re.compile(r"university of illinois", re.I), ("University of Illinois Urbana-Champaign", "illinois.edu")),
+    (re.compile(r"northwestern polytechnical|\bnwpu\b", re.I), ("Northwestern Polytechnical University", "nwpu.edu.cn")),
+    (re.compile(r"inha university", re.I), ("Inha University", "inha.ac.kr")),
+    (re.compile(r"korea aerospace research institute|\bkari\b", re.I), ("Korea Aerospace Research Institute", "kari.re.kr")),
+    (re.compile(r"sejong university", re.I), ("Sejong University", "sejong.ac.kr")),
+    (re.compile(r"anhui university|\bahu\b", re.I), ("Anhui University", "ahu.edu.cn")),
+    (re.compile(r"sungkyunkwan", re.I), ("Sungkyunkwan University", "skku.edu")),
+    (re.compile(r"university of information technology.*vnu", re.I), ("University of Information Technology VNU-HCM", "uit.edu.vn")),
+    (re.compile(r"university of texas at arlington", re.I), ("University of Texas at Arlington", "uta.edu")),
+    (re.compile(r"university of science and technology beijing|\bustb\b", re.I), ("University of Science and Technology Beijing", "ustb.edu.cn")),
+    (re.compile(r"harbin institute of technology", re.I), ("Harbin Institute of Technology", "hit.edu.cn")),
+    (re.compile(r"jagiellonian", re.I), ("Jagiellonian University", "uj.edu.pl")),
+    (re.compile(r"national university of singapore|\bnus\b", re.I), ("National University of Singapore", "nus.edu.sg")),
+    (re.compile(r"east china jiaotong|\becjtu\b", re.I), ("East China Jiaotong University", "ecjtu.edu.cn")),
+    (re.compile(r"georgia tech research institute|\bgtri\b", re.I), ("Georgia Tech Research Institute", "gtri.gatech.edu")),
+    (re.compile(r"saxion", re.I), ("Saxion University of Applied Sciences", "saxion.nl")),
+    (re.compile(r"china university of geosciences|\bcug\b", re.I), ("China University of Geosciences", "cug.edu.cn")),
+    (re.compile(r"cheng shiu university", re.I), ("Cheng Shiu University", "csu.edu.tw")),
+    (re.compile(r"stellenbosch", re.I), ("Stellenbosch University", "sun.ac.za")),
+    (re.compile(r"university of warsaw", re.I), ("University of Warsaw", "uw.edu.pl")),
+    (re.compile(r"south china university of technology|\bscut\b", re.I), ("South China University of Technology", "scut.edu.cn")),
+    (re.compile(r"eastern kentucky university|\beku\b", re.I), ("Eastern Kentucky University", "eku.edu")),
+    (re.compile(r"washington university.*louis|\bwustl\b", re.I), ("Washington University in St. Louis", "wustl.edu")),
+    (re.compile(r"national taiwan university of science and technology|\bntust\b", re.I), ("National Taiwan University of Science and Technology", "ntust.edu.tw")),
 ]
 
 # Logo hints for common companies (used as visual size weight, optional)
@@ -252,6 +303,13 @@ def normalize_company(raw: str) -> str:
     s = raw.strip()
     if s.startswith("@"):
         s = s[1:].strip()
+    # Curly quotes and common mojibake renderings of an apostrophe (e.g.
+    # "Xi’an" vs "Xi'an", or a UTF-8 apostrophe mis-decoded as Latin-1
+    # "â€™") collapse to a plain apostrophe so name variants
+    # merge into a single entry instead of appearing as separate duplicates.
+    s = s.replace("’", "'").replace("‘", "'")
+    s = s.replace("â€™", "'")
+    s = re.sub(r"(?<=[A-Za-z])�(?=[A-Za-z])", "'", s)
     # Drop obvious junk
     if not s or s.lower() in {"none", "n/a", "null", "-", "--"}:
         return ""
@@ -352,12 +410,19 @@ def main() -> int:
         )
         display_names[key] = best[0]
 
-    out["companiesRepresented"] = len(merged_counts)
+    # Universities/institutes are surfaced separately via topUniversities;
+    # keep them out of the companies list and count so the two sections
+    # don't duplicate the same entries.
+    non_edu_counts = Counter({
+        key: count for key, count in merged_counts.items()
+        if not EDU_PATTERN.search(display_names[key])
+    })
+    out["companiesRepresented"] = len(non_edu_counts)
 
     # Top companies by frequency; every entry gets a verified logo when one
     # exists so new companies (Fortune 500 included) show up branded.
     top_companies = []
-    for key, count in merged_counts.most_common(100):
+    for key, count in non_edu_counts.most_common(100):
         entry = {"name": display_names[key], "count": count}
         logo_slug, logo_url = resolve_logo(key, display_names[key])
         if logo_slug:

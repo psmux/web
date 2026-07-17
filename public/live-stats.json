@@ -77,7 +77,7 @@
     }
   ],
   "issues": 38,
-  "companiesRepresented": 555,
+  "companiesRepresented": 541,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -106,24 +106,10 @@
       "count": 2
     },
     {
-      "name": "Xi'an University of Technology",
-      "count": 2
-    },
-    {
       "name": "Broadcom",
       "count": 2,
       "logo": "broadcom",
       "logoUrl": "https://cdn.simpleicons.org/broadcom/ffffff"
-    },
-    {
-      "name": "Sun Yat-sen University",
-      "count": 2,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=sysu.edu.cn&sz=128"
-    },
-    {
-      "name": "Beijing Jiaotong University",
-      "count": 2,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=bjtu.edu.cn&sz=128"
     },
     {
       "name": "Uptime Development",
@@ -132,18 +118,6 @@
     },
     {
       "name": "Piebald-AI",
-      "count": 2
-    },
-    {
-      "name": "Beijing Normal University",
-      "count": 2
-    },
-    {
-      "name": "Zhejiang University",
-      "count": 2
-    },
-    {
-      "name": "Xi’an Jiaotong University",
       "count": 2
     },
     {
@@ -233,10 +207,6 @@
       "count": 1
     },
     {
-      "name": "Tongji University",
-      "count": 1
-    },
-    {
       "name": "Six Degrees Consulting",
       "count": 1,
       "logoUrl": "https://www.google.com/s2/favicons?domain=sixdegreesconsulting.com&sz=128"
@@ -318,20 +288,6 @@
       "count": 1
     },
     {
-      "name": "Peking University",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=pku.edu.cn&sz=128"
-    },
-    {
-      "name": "Korea Advanced Institute of Science & Technology (KAIST)",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=kaist.ac.kr&sz=128"
-    },
-    {
-      "name": "Malone University",
-      "count": 1
-    },
-    {
       "name": "DA Studio",
       "count": 1
     },
@@ -350,18 +306,9 @@
       "logoUrl": "https://www.google.com/s2/favicons?domain=pixeldirective.com&sz=128"
     },
     {
-      "name": "HSD FMDAuto Institute",
-      "count": 1
-    },
-    {
       "name": "Gentrace",
       "count": 1,
       "logoUrl": "https://www.google.com/s2/favicons?domain=gentrace.com&sz=128"
-    },
-    {
-      "name": "The Ohio State University",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=osu.edu&sz=128"
     },
     {
       "name": "NomosArtificial",
@@ -385,10 +332,6 @@
       "name": "UNESA",
       "count": 1,
       "logoUrl": "https://www.google.com/s2/favicons?domain=unesa.com&sz=128"
-    },
-    {
-      "name": "National and Kapodistrian University of Athens",
-      "count": 1
     },
     {
       "name": "STBU",
@@ -523,16 +466,11 @@
       "count": 1
     },
     {
-      "name": "Kyung Hee University",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=khu.ac.kr&sz=128"
-    },
-    {
       "name": "AIMLWare Systems Private Limited",
       "count": 1
     }
   ],
-  "universities": 73,
+  "universities": 68,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -547,7 +485,8 @@
       "domain": "kaist.ac.kr"
     },
     {
-      "name": "Malone University"
+      "name": "Malone University",
+      "domain": "malone.edu"
     },
     {
       "name": "HSD FMDAuto Institute"
@@ -557,21 +496,24 @@
       "domain": "osu.edu"
     },
     {
-      "name": "National and Kapodistrian University of Athens"
+      "name": "National and Kapodistrian University of Athens",
+      "domain": "uoa.gr"
     },
     {
       "name": "Kyung Hee University",
       "domain": "khu.ac.kr"
     },
     {
-      "name": "Universitas Indonesia"
+      "name": "Universitas Indonesia",
+      "domain": "ui.ac.id"
     },
     {
       "name": "Hong Kong Polytechnic",
       "domain": "polyu.edu.hk"
     },
     {
-      "name": "Xi'an University of Technology"
+      "name": "Xi'an University of Technology",
+      "domain": "xaut.edu.cn"
     },
     {
       "name": "Sun Yat-sen University",
@@ -582,20 +524,24 @@
       "domain": "bjtu.edu.cn"
     },
     {
-      "name": "33Lab, Soongsil University"
+      "name": "Soongsil University",
+      "domain": "soongsil.ac.kr"
     },
     {
       "name": "Wuhan University",
       "domain": "whu.edu.cn"
     },
     {
-      "name": "St. Petersburg College"
+      "name": "St. Petersburg College",
+      "domain": "spcollege.edu"
     },
     {
-      "name": "Sanno University"
+      "name": "Sanno University",
+      "domain": "sanno.ac.jp"
     },
     {
-      "name": "Beijing Normal University"
+      "name": "Beijing Normal University",
+      "domain": "bnu.edu.cn"
     },
     {
       "name": "Sichuan University",
@@ -606,10 +552,12 @@
       "domain": "tamu.edu"
     },
     {
-      "name": "Central South University"
+      "name": "Central South University",
+      "domain": "csu.edu.cn"
     },
     {
-      "name": "Nanchang Hangkong University"
+      "name": "Nanchang Hangkong University",
+      "domain": "nchu.edu.cn"
     },
     {
       "name": "Zhejiang University",
@@ -619,151 +567,175 @@
       "name": "Mentougou College"
     },
     {
-      "name": "Wuhan Polytechnic University"
+      "name": "Wuhan Polytechnic University",
+      "domain": "wpu.edu.cn"
     },
     {
       "name": "Warsaw University of Technology",
       "domain": "pw.edu.pl"
     },
     {
-      "name": "Xi’an University of Technology"
+      "name": "Huazhong University of Science and Technology",
+      "domain": "hust.edu.cn"
     },
     {
-      "name": "HUST | Huazhong University of Science and Technology"
+      "name": "Western University",
+      "domain": "uwo.ca"
     },
     {
-      "name": "Western University"
+      "name": "Kangwon National University",
+      "domain": "kangwon.ac.kr"
     },
     {
-      "name": "kangwon national university"
-    },
-    {
-      "name": "University of Toronto"
+      "name": "University of Toronto",
+      "domain": "utoronto.ca"
     },
     {
       "name": "Tsinghua University",
       "domain": "tsinghua.edu.cn"
     },
     {
-      "name": "Beihang University"
+      "name": "Beihang University",
+      "domain": "buaa.edu.cn"
     },
     {
-      "name": "Changwon National University"
+      "name": "Changwon National University",
+      "domain": "changwon.ac.kr"
     },
     {
-      "name": "Hudson County Community College"
+      "name": "Hudson County Community College",
+      "domain": "hccc.edu"
     },
     {
-      "name": "Xi’an Jiaotong University"
+      "name": "Xi'an Jiaotong University",
+      "domain": "xjtu.edu.cn"
     },
     {
-      "name": "Hanyang University"
+      "name": "Hanyang University",
+      "domain": "hanyang.ac.kr"
     },
     {
-      "name": "University of Science and Technology of China"
+      "name": "University of Science and Technology of China",
+      "domain": "ustc.edu.cn"
     },
     {
-      "name": "RWTH Aachen University, @Pulsar-Photonics-GmbH"
+      "name": "RWTH Aachen University",
+      "domain": "rwth-aachen.de"
     },
     {
-      "name": "Shanghai Jiao Tong University"
+      "name": "Shanghai Jiao Tong University",
+      "domain": "sjtu.edu.cn"
     },
     {
-      "name": "George Mason University"
+      "name": "George Mason University",
+      "domain": "gmu.edu"
     },
     {
-      "name": "Regent University"
+      "name": "Regent University",
+      "domain": "regent.edu"
     },
     {
-      "name": "Jiangsu University"
+      "name": "Jiangsu University",
+      "domain": "ujs.edu.cn"
     },
     {
-      "name": "University of Washington"
+      "name": "University of Washington",
+      "domain": "washington.edu"
     },
     {
-      "name": "Xian Jiaotong university"
+      "name": "University of Illinois Urbana-Champaign",
+      "domain": "illinois.edu"
     },
     {
-      "name": "Huazhong University of Science & Technology"
+      "name": "Northwestern Polytechnical University",
+      "domain": "nwpu.edu.cn"
     },
     {
-      "name": "Office of Medicaid Innovation @ University of Illinois"
+      "name": "Inha University",
+      "domain": "inha.ac.kr"
     },
     {
-      "name": "Northwestern Polytechnical University"
+      "name": "Korea Aerospace Research Institute",
+      "domain": "kari.re.kr"
     },
     {
-      "name": "Inha University"
-    },
-    {
-      "name": "Korea Aerospace Research Institute (KARI)"
-    },
-    {
-      "name": "CVPR LAB, Sejong University"
+      "name": "Sejong University",
+      "domain": "sejong.ac.kr"
     },
     {
       "name": "University of Emergency Management"
     },
     {
-      "name": "Anhui university"
+      "name": "Anhui University",
+      "domain": "ahu.edu.cn"
     },
     {
-      "name": "University of Information Technology VNU-HCM"
+      "name": "University of Information Technology VNU-HCM",
+      "domain": "uit.edu.vn"
     },
     {
-      "name": "University of Texas at Arlington"
+      "name": "University of Texas at Arlington",
+      "domain": "uta.edu"
     },
     {
-      "name": "University of Science and Technology Beijing"
+      "name": "University of Science and Technology Beijing",
+      "domain": "ustb.edu.cn"
     },
     {
       "name": "Chinese Academy of Sciences",
       "domain": "cas.cn"
     },
     {
-      "name": "Harbin Institute of Technology"
+      "name": "Harbin Institute of Technology",
+      "domain": "hit.edu.cn"
     },
     {
-      "name": "Jagiellonian University"
+      "name": "Jagiellonian University",
+      "domain": "uj.edu.pl"
     },
     {
-      "name": "National University of Singapore"
+      "name": "National University of Singapore",
+      "domain": "nus.edu.sg"
     },
     {
-      "name": "East China Jiaotong University"
+      "name": "East China Jiaotong University",
+      "domain": "ecjtu.edu.cn"
     },
     {
-      "name": "Georgia Tech Research Institute"
+      "name": "Georgia Tech Research Institute",
+      "domain": "gtri.gatech.edu"
     },
     {
-      "name": "China University of Geosciences, Wuhan"
+      "name": "China University of Geosciences",
+      "domain": "cug.edu.cn"
     },
     {
-      "name": "Department of CSIE, Cheng Shiu University"
+      "name": "Cheng Shiu University",
+      "domain": "csu.edu.tw"
     },
     {
-      "name": "Stellenbosch University"
+      "name": "Stellenbosch University",
+      "domain": "sun.ac.za"
     },
     {
-      "name": "University of Warsaw"
+      "name": "University of Warsaw",
+      "domain": "uw.edu.pl"
     },
     {
-      "name": "South China University of Technology"
+      "name": "South China University of Technology",
+      "domain": "scut.edu.cn"
     },
     {
-      "name": "University of Illinois Urbana-Champaign"
+      "name": "Eastern Kentucky University",
+      "domain": "eku.edu"
     },
     {
-      "name": "Eastern Kentucky University"
+      "name": "Washington University in St. Louis",
+      "domain": "wustl.edu"
     },
     {
-      "name": "Xi'an Jiaotong University"
-    },
-    {
-      "name": "Washington University in St. Louis"
-    },
-    {
-      "name": "National Taiwan University of Science and Technology"
+      "name": "National Taiwan University of Science and Technology",
+      "domain": "ntust.edu.tw"
     },
     {
       "name": "Utsunomiya University"
