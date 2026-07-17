@@ -1,13 +1,13 @@
 {
-  "stars": 2953,
-  "forks": 182,
+  "stars": 2966,
+  "forks": 183,
   "contributors": 23,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 322
+      "contributions": 324
     },
     {
       "login": "computersrmyfriends",
@@ -76,12 +76,12 @@
       "contributions": 2
     }
   ],
-  "issues": 38,
-  "companiesRepresented": 541,
+  "issues": 37,
+  "companiesRepresented": 481,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 27,
+      "count": 28,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -468,9 +468,71 @@
     {
       "name": "AIMLWare Systems Private Limited",
       "count": 1
+    },
+    {
+      "name": "Grupo Planning",
+      "count": 1
+    },
+    {
+      "name": "JSB \"Almazergienbank\"",
+      "count": 1
+    },
+    {
+      "name": "DUOS",
+      "count": 1
+    },
+    {
+      "name": "digital-ai",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=digitalai.com&sz=128"
+    },
+    {
+      "name": "MikePfunk",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=mikepfunk.com&sz=128"
+    },
+    {
+      "name": "WWPP",
+      "count": 1
+    },
+    {
+      "name": "Matholic",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=matholic.com&sz=128"
+    },
+    {
+      "name": "GRAN",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=gran.com&sz=128"
+    },
+    {
+      "name": "Liltra.com & consulting",
+      "count": 1
+    },
+    {
+      "name": "NorskRegnesentral",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=norskregnesentral.com&sz=128"
+    },
+    {
+      "name": "Rs1Soft",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=rs1soft.com&sz=128"
+    },
+    {
+      "name": "Phili-Tech",
+      "count": 1
+    },
+    {
+      "name": "Nexon Korea",
+      "count": 1
+    },
+    {
+      "name": "cventech",
+      "count": 1
     }
   ],
-  "universities": 68,
+  "universities": 69,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -739,13 +801,16 @@
     },
     {
       "name": "Utsunomiya University"
+    },
+    {
+      "name": "Dalian University Of Technology"
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9794,
+      "followers": 9797,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -761,7 +826,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4644,
+      "followers": 4650,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -777,7 +842,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2108,
+      "followers": 2107,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -785,7 +850,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1553,
+      "followers": 1554,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -809,7 +874,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 907,
+      "followers": 911,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -819,13 +884,13 @@
       "name": "Shun Kakinoki",
       "followers": 880,
       "title": "OBLITERATE THE GALAXY",
-      "company": "0xSequence",
+      "company": "",
       "highlight": false
     },
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 742,
+      "followers": 743,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -833,7 +898,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 728,
+      "followers": 729,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
@@ -857,7 +922,7 @@
     {
       "login": "adamdriscoll",
       "name": "Adam Driscoll",
-      "followers": 700,
+      "followers": 701,
       "title": "Software Developer and Open Source Developer",
       "company": "Devolutions",
       "highlight": false
@@ -865,7 +930,7 @@
     {
       "login": "fraxken",
       "name": "Thomas.G",
-      "followers": 696,
+      "followers": 697,
       "title": "French Node.js Expert freelancer with 10+ exp\r",
       "company": "OpenAlly",
       "highlight": false
@@ -873,7 +938,7 @@
     {
       "login": "elbruno",
       "name": "El Bruno",
-      "followers": 642,
+      "followers": 643,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
       "highlight": false
@@ -881,7 +946,7 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 616,
+      "followers": 617,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
@@ -1104,9 +1169,11 @@
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
+        "#332",
         "#253",
         "#264",
         "#296",
+        "#333",
         "#307",
         "#254",
         "#256",
@@ -1116,11 +1183,9 @@
         "#260",
         "#302",
         "#263",
-        "#259",
-        "#258",
-        "#241"
+        "#259"
       ],
-      "context": "Support native Windows with psmux and feature parity"
+      "context": "Windows rebuild leaves dead psmux pane and orphaned LLxprt process"
     },
     {
       "repo": "smota/omnigent",
@@ -1138,10 +1203,26 @@
         "#5",
         "#9",
         "#10",
-        "#8",
-        "#2"
+        "#8"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
+    },
+    {
+      "repo": "Knatte18/millhouse",
+      "issues": [
+        "#690",
+        "#669",
+        "#667",
+        "#681",
+        "#672",
+        "#665",
+        "#657",
+        "#655",
+        "#661",
+        "#647",
+        "#414"
+      ],
+      "context": "cleanup_session: uncaught psmux FileNotFoundError traceback in agent-dispatch mode"
     },
     {
       "repo": "Yeachan-Heo/gajae-code",
@@ -1155,32 +1236,17 @@
         "#531",
         "#1130",
         "#1268",
-        "#916",
-        "#1459"
+        "#916"
       ],
       "context": "Windows PowerShell 7: make `gjc --tmux` and `/pet` work through psmux aliases"
-    },
-    {
-      "repo": "Knatte18/millhouse",
-      "issues": [
-        "#657",
-        "#655",
-        "#661",
-        "#647",
-        "#628",
-        "#414",
-        "#428",
-        "#415"
-      ],
-      "context": "_llm_claude.cleanup_session: unguarded psmux ls dumps FileNotFoundError traceback in agent-dispatch mode"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
         "#3124",
         "#3122",
-        "#3121",
         "#3123",
+        "#3121",
         "#3131",
         "#3013",
         "#3016"
@@ -1198,6 +1264,16 @@
         "#40"
       ],
       "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
+    },
+    {
+      "repo": "dotgibson/dotfiles-Windows",
+      "issues": [
+        "#123",
+        "#122",
+        "#96",
+        "#116"
+      ],
+      "context": "release-notes: draft for the next dotfiles-Windows release"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1243,14 +1319,6 @@
         "#199"
       ],
       "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#466",
-        "#437"
-      ],
-      "context": "Reconcile conflicting Codex and psmux policy docs"
     }
   ],
   "dotfilesRepos": [],
@@ -1289,7 +1357,7 @@
       "lat": 51.2,
       "lng": 10.4,
       "label": "Germany",
-      "detail": "35 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
+      "detail": "36 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
       "size": "lg",
       "country": "Germany",
       "continent": "Europe"
@@ -1372,7 +1440,7 @@
       "lat": -6.2,
       "lng": 106.8,
       "label": "Indonesia",
-      "detail": "16 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
+      "detail": "17 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
       "size": "lg",
       "country": "Indonesia",
       "continent": "Asia"
@@ -1517,6 +1585,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 41.9,
+      "lng": 12.5,
+      "label": "Italy",
+      "detail": "9 developers · Six Degrees Consulting, Vaimoo, DotSp",
+      "size": "md",
+      "country": "Italy",
+      "continent": "Europe"
+    },
+    {
       "lat": 47.4,
       "lng": 8.5,
       "label": "Zurich",
@@ -1569,15 +1646,6 @@
       "detail": "8 developers · roxlu, Senior Software Architect, WeAreInSpark",
       "size": "md",
       "country": "Netherlands",
-      "continent": "Europe"
-    },
-    {
-      "lat": 41.9,
-      "lng": 12.5,
-      "label": "Italy",
-      "detail": "8 developers · Six Degrees Consulting, Vaimoo, DotSp",
-      "size": "md",
-      "country": "Italy",
       "continent": "Europe"
     },
     {
@@ -1706,5 +1774,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-16T08:18:14Z"
+  "lastUpdated": "2026-07-17T20:25:32Z"
 }

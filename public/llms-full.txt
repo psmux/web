@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-07-16 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-07-17 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- faq -->
 # FAQ
