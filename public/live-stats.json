@@ -1,13 +1,13 @@
 {
-  "stars": 2966,
-  "forks": 183,
+  "stars": 2971,
+  "forks": 184,
   "contributors": 23,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 324
+      "contributions": 325
     },
     {
       "login": "computersrmyfriends",
@@ -76,7 +76,7 @@
       "contributions": 2
     }
   ],
-  "issues": 37,
+  "issues": 38,
   "companiesRepresented": 471,
   "topCompanies": [
     {
@@ -489,9 +489,53 @@
     {
       "name": "cventech",
       "count": 1
+    },
+    {
+      "name": "PLC PRODUCE INC",
+      "count": 1
+    },
+    {
+      "name": "Visa",
+      "count": 1,
+      "logo": "visa",
+      "logoUrl": "https://cdn.simpleicons.org/visa/ffffff"
+    },
+    {
+      "name": "Wiener lab.",
+      "count": 1
+    },
+    {
+      "name": "AIlater",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=ailater.com&sz=128"
+    },
+    {
+      "name": "N Tech Service",
+      "count": 1
+    },
+    {
+      "name": "Guerbet",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=guerbet.com&sz=128"
+    },
+    {
+      "name": "OrAnGeS",
+      "count": 1
+    },
+    {
+      "name": "Trading & Commodities",
+      "count": 1
+    },
+    {
+      "name": "U-Man",
+      "count": 1
+    },
+    {
+      "name": "Verhaert-Masters-in-Innovation",
+      "count": 1
     }
   ],
-  "universities": 69,
+  "universities": 70,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -763,6 +807,9 @@
     },
     {
       "name": "Dalian University Of Technology"
+    },
+    {
+      "name": "Naebo Craft Institute"
     }
   ],
   "notableUsers": [
@@ -785,7 +832,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4650,
+      "followers": 4652,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -801,7 +848,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2107,
+      "followers": 2109,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -809,7 +856,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1554,
+      "followers": 1555,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -865,7 +912,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 725,
+      "followers": 726,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -905,7 +952,7 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 617,
+      "followers": 618,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
@@ -1141,8 +1188,7 @@
         "#262",
         "#260",
         "#302",
-        "#263",
-        "#259"
+        "#263"
       ],
       "context": "Windows rebuild leaves dead psmux pane and orphaned LLxprt process"
     },
@@ -1161,8 +1207,7 @@
         "#3",
         "#5",
         "#9",
-        "#10",
-        "#8"
+        "#10"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
     },
@@ -1228,6 +1273,7 @@
       "repo": "dotgibson/dotfiles-Windows",
       "issues": [
         "#123",
+        "#129",
         "#122",
         "#96",
         "#116"
@@ -1297,7 +1343,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "59 developers · Ke, erasin.wang, Home",
+      "detail": "60 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1306,7 +1352,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "51 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "52 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1325,7 +1371,7 @@
       "lat": 31.2,
       "lng": 121.5,
       "label": "Shanghai",
-      "detail": "28 developers · Tongji University, 中国科学院数字生命研究所, Google  / @SurprisingStudio",
+      "detail": "29 developers · Tongji University, 中国科学院数字生命研究所, Google  / @SurprisingStudio",
       "size": "lg",
       "country": "China",
       "continent": "Asia",
@@ -1733,5 +1779,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-17T20:25:32Z"
+  "lastUpdated": "2026-07-18T07:43:58Z"
 }
