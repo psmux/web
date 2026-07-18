@@ -233,13 +233,18 @@ LEGAL_SUFFIXES = {
     "bv", "ab", "oy", "kk", "group", "holdings", "international", "intl",
 }
 
-# Profile "company" strings that are not real organizations; they stay in
-# the list but never get a logo lookup.
+# Profile "company" strings that are not real organizations (placeholders,
+# job titles, self references). Keys are canonical_company_key() output.
+# They are excluded from topCompanies/companiesRepresented entirely.
+# Keep in sync with GENERIC_COMPANY_KEYS in src/hooks/useLiveStats.ts.
 GENERIC_COMPANIES = {
     "freelance", "freelancer", "freelancing", "self", "self employed",
     "selfemployed", "personal", "home", "student", "independent", "indie",
     "none", "n a", "private", "remote", "earth", "internet", "world",
     "open source", "opensource", "github", "unemployed", "retired",
+    "psmux", "personal account", "personal use", "my", "my company", "x company",
+    "acme", "software engineer", "software developer", "senior software architect",
+    "developer", "engineer", "test", "example", "no company", "nope",
 }
 
 def canonical_company_key(name: str) -> str:
@@ -412,10 +417,12 @@ def main() -> int:
 
     # Universities/institutes are surfaced separately via topUniversities;
     # keep them out of the companies list and count so the two sections
-    # don't duplicate the same entries.
+    # don't duplicate the same entries. Placeholder strings that are not
+    # real organizations (GENERIC_COMPANIES) are dropped for the same reason.
     non_edu_counts = Counter({
         key: count for key, count in merged_counts.items()
         if not EDU_PATTERN.search(display_names[key])
+        and key not in GENERIC_COMPANIES
     })
     out["companiesRepresented"] = len(non_edu_counts)
 

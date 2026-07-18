@@ -77,7 +77,7 @@
     }
   ],
   "issues": 37,
-  "companiesRepresented": 481,
+  "companiesRepresented": 471,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -92,18 +92,10 @@
       "logoUrl": "https://cdn.simpleicons.org/tencent/ffffff"
     },
     {
-      "name": "Freelance",
-      "count": 2
-    },
-    {
       "name": "Google",
       "count": 2,
       "logo": "google",
       "logoUrl": "https://cdn.simpleicons.org/google/ffffff"
-    },
-    {
-      "name": "Home",
-      "count": 2
     },
     {
       "name": "Broadcom",
@@ -118,10 +110,6 @@
     },
     {
       "name": "Piebald-AI",
-      "count": 2
-    },
-    {
-      "name": "Freelancer",
       "count": 2
     },
     {
@@ -146,10 +134,6 @@
       "count": 2
     },
     {
-      "name": "Psmux",
-      "count": 1
-    },
-    {
       "name": "serasaexperian",
       "count": 1
     },
@@ -161,11 +145,6 @@
     {
       "name": "Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.",
       "count": 1
-    },
-    {
-      "name": "ACME",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=acme.com&sz=128"
     },
     {
       "name": "backspacetokyo",
@@ -246,14 +225,6 @@
     },
     {
       "name": "BatchLabs",
-      "count": 1
-    },
-    {
-      "name": "Software Engineer",
-      "count": 1
-    },
-    {
-      "name": "Personal Account",
       "count": 1
     },
     {
@@ -342,10 +313,6 @@
       "count": 1
     },
     {
-      "name": "Senior Software Architect",
-      "count": 1
-    },
-    {
       "name": "X company",
       "count": 1,
       "logo": "x",
@@ -428,10 +395,6 @@
       "count": 1
     },
     {
-      "name": "Personal",
-      "count": 1
-    },
-    {
       "name": "energyworldnet",
       "count": 1,
       "logoUrl": "https://www.google.com/s2/favicons?domain=energyworldnet.com&sz=128"
@@ -447,10 +410,6 @@
     },
     {
       "name": "designovel-labs",
-      "count": 1
-    },
-    {
-      "name": "Private",
       "count": 1
     },
     {

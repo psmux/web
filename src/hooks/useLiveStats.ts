@@ -272,10 +272,26 @@ export function useLiveStats(): LiveStats {
           // in scripts/build-live-stats.py.
           const eduPattern =
             /\.edu(\b|\/)|\.ac\.[a-z]{2}|university|universit[ae]|institut|college|polytechnic|kaist|\bETH\b|\bMIT\b/i;
-          const nonEdu = (data.topCompanies as LiveCompany[]).filter(
-            (c) => !eduPattern.test(c?.name ?? "")
+          // Placeholder profile strings that are not real organizations
+          // (job titles, "Freelance", the project itself). Keys are
+          // canonicalCompanyKey() output. Keep in sync with
+          // GENERIC_COMPANIES in scripts/build-live-stats.py.
+          const genericCompanyKeys = new Set([
+            "freelance", "freelancer", "freelancing", "self", "self employed",
+            "selfemployed", "personal", "home", "student", "independent",
+            "indie", "none", "n a", "private", "remote", "earth", "internet",
+            "world", "open source", "opensource", "github", "unemployed",
+            "retired", "psmux", "personal account", "personal use", "my",
+            "my company", "x company", "acme", "software engineer",
+            "software developer", "senior software architect", "developer",
+            "engineer", "test", "example", "no company", "nope",
+          ]);
+          const realCompanies = (data.topCompanies as LiveCompany[]).filter(
+            (c) =>
+              !eduPattern.test(c?.name ?? "") &&
+              !genericCompanyKeys.has(canonicalCompanyKey(c?.name ?? ""))
           );
-          merged.topCompanies = dedupeCompanies(nonEdu);
+          merged.topCompanies = dedupeCompanies(realCompanies);
         }
         if (
           Array.isArray(data.topUniversities) &&
