@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, ExternalLink, BookOpen, Package, Candy } from 'lucide-react';
+import { ArrowRight, ExternalLink, BookOpen, Package, Candy, Heart } from 'lucide-react';
 import { useLiveStats } from '../hooks/useLiveStats';
 
 const Footer = () => {
@@ -41,6 +41,22 @@ const Footer = () => {
           background: rgba(129, 140, 248, 0.08);
           color: var(--accent-bright) !important;
           transform: translateY(-1px);
+        }
+        .psmux-footer-link--pink:hover {
+          background: rgba(244, 114, 182, 0.1) !important;
+          color: var(--pink) !important;
+        }
+        .psmux-sponsor-pill {
+          transition: all 0.25s ease;
+        }
+        .psmux-sponsor-pill:hover {
+          background: rgba(244, 114, 182, 0.1) !important;
+          border-color: var(--pink) !important;
+          color: var(--pink) !important;
+          transform: translateY(-2px);
+        }
+        .psmux-sponsor-pill:active {
+          transform: translateY(0) scale(0.98);
         }
       `}</style>
 
@@ -116,6 +132,37 @@ const Footer = () => {
         </motion.a>
 
         <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          style={{ marginTop: 22 }}
+        >
+          <a
+            href="https://github.com/sponsors/psmux"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="psmux-sponsor-pill"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '11px 26px',
+              borderRadius: 999,
+              background: 'transparent',
+              color: 'var(--text-secondary)',
+              fontWeight: 600,
+              fontSize: '0.9rem',
+              textDecoration: 'none',
+              border: '1px solid var(--border)',
+            }}
+          >
+            <Heart size={15} style={{ color: 'var(--pink)' }} />
+            Sponsor psmux
+          </a>
+        </motion.div>
+
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -154,6 +201,13 @@ const Footer = () => {
             icon={<Candy size={16} />}
             label="Chocolatey"
           />
+          <Sep />
+          <FooterLink
+            href="https://github.com/sponsors/psmux"
+            icon={<Heart size={16} style={{ color: 'var(--pink)' }} />}
+            label="Sponsor"
+            pink
+          />
         </motion.div>
 
         <div
@@ -188,16 +242,18 @@ const FooterLink = ({
   href,
   icon,
   label,
+  pink,
 }: {
   href: string;
   icon: React.ReactNode;
   label: string;
+  pink?: boolean;
 }) => (
   <a
     href={href}
     target="_blank"
     rel="noopener noreferrer"
-    className="psmux-footer-link"
+    className={pink ? 'psmux-footer-link psmux-footer-link--pink' : 'psmux-footer-link'}
     style={{
       display: 'inline-flex',
       alignItems: 'center',
