@@ -126,6 +126,10 @@ jobs:
                    cities, countries, continents, latestVersion,
                    lastUpdated}' public/live-stats.json
 
+      - name: Build stats card
+        run: |
+          python scripts/build-stats-card.py
+
       - name: Build docs bundle
         run: |
           python3 scripts/build-docs.py --docs psmux-src/docs --public public
