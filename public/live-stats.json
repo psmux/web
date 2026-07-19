@@ -1,13 +1,13 @@
 {
-  "stars": 2971,
+  "stars": 2984,
   "forks": 184,
-  "contributors": 23,
+  "contributors": 24,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 325
+      "contributions": 342
     },
     {
       "login": "computersrmyfriends",
@@ -37,7 +37,7 @@
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 9
+      "contributions": 10
     },
     {
       "login": "ToxMox",
@@ -76,8 +76,8 @@
       "contributions": 2
     }
   ],
-  "issues": 38,
-  "companiesRepresented": 471,
+  "issues": 35,
+  "companiesRepresented": 476,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -816,7 +816,7 @@
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9797,
+      "followers": 9799,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -824,7 +824,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5377,
+      "followers": 5376,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -840,7 +840,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2148,
+      "followers": 2149,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -848,7 +848,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2109,
+      "followers": 2110,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -856,7 +856,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1555,
+      "followers": 1554,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -864,7 +864,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1425,
+      "followers": 1424,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -880,7 +880,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 911,
+      "followers": 909,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -920,7 +920,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 709,
+      "followers": 712,
       "title": "Product manager & Software engineer",
       "company": "Yuiseki Inc.",
       "highlight": false
@@ -952,7 +952,7 @@
     {
       "login": "Caldis",
       "name": "Caldis_Chen",
-      "followers": 618,
+      "followers": 619,
       "title": "Creating, Designing and Coding",
       "company": "Shopee",
       "highlight": false
@@ -1045,6 +1045,13 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-skill",
+      "author": "zzj-Mark",
+      "stars": 1,
+      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
+      "category": "claude-code"
+    },
+    {
       "name": "tebis",
       "author": "johnkozaris",
       "stars": 1,
@@ -1134,13 +1141,6 @@
       "stars": 0,
       "description": "My PSMUX (TMUX for windows) configuration",
       "category": "tool"
-    },
-    {
-      "name": "psmux-skill",
-      "author": "zzj-Mark",
-      "stars": 0,
-      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
-      "category": "claude-code"
     },
     {
       "name": "psmux-win-build",
@@ -1245,29 +1245,29 @@
       "context": "Windows PowerShell 7: make `gjc --tmux` and `/pet` work through psmux aliases"
     },
     {
-      "repo": "Yeachan-Heo/oh-my-codex",
-      "issues": [
-        "#3124",
-        "#3122",
-        "#3123",
-        "#3121",
-        "#3131",
-        "#3013",
-        "#3016"
-      ],
-      "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
-    },
-    {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
-        "#58",
+        "#185",
         "#87",
+        "#58",
         "#59",
         "#140",
         "#92",
         "#40"
       ],
-      "context": "Native-Windows psmux multiplexer backend: re-land as a thin leaf over the dialect seams"
+      "context": "psmux backend: live smoke on the first post-3.3.6 release"
+    },
+    {
+      "repo": "Yeachan-Heo/oh-my-codex",
+      "issues": [
+        "#3123",
+        "#3124",
+        "#3122",
+        "#3121",
+        "#3013",
+        "#3016"
+      ],
+      "context": "[Bug] Windows + PowerShell-default psmux Team commands need PowerShell-safe invocation"
     },
     {
       "repo": "dotgibson/dotfiles-Windows",
@@ -1371,7 +1371,7 @@
       "lat": 31.2,
       "lng": 121.5,
       "label": "Shanghai",
-      "detail": "29 developers · Tongji University, 中国科学院数字生命研究所, Google  / @SurprisingStudio",
+      "detail": "30 developers · Tongji University, 中国科学院数字生命研究所, Google  / @SurprisingStudio",
       "size": "lg",
       "country": "China",
       "continent": "Asia",
@@ -1515,6 +1515,16 @@
       "continent": "Europe"
     },
     {
+      "lat": 40.7,
+      "lng": -74.0,
+      "label": "New York",
+      "detail": "11 developers · Gentrace, NomosArtificial, Microsoft",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
       "lat": 43.7,
       "lng": -79.4,
       "label": "Toronto",
@@ -1550,16 +1560,6 @@
       "size": "lg",
       "country": "China",
       "continent": "Asia",
-      "color": "#60a5fa"
-    },
-    {
-      "lat": 40.7,
-      "lng": -74.0,
-      "label": "New York",
-      "detail": "10 developers · Gentrace, NomosArtificial, Microsoft",
-      "size": "lg",
-      "country": "United States",
-      "continent": "North America",
       "color": "#60a5fa"
     },
     {
@@ -1766,18 +1766,18 @@
       "continent": "South America"
     },
     {
-      "lat": 1.4,
-      "lng": 103.8,
-      "label": "Singapore",
-      "detail": "5 developers",
+      "lat": -1.3,
+      "lng": 36.8,
+      "label": "Nairobi",
+      "detail": "5 developers · aKatSuki",
       "size": "md",
-      "country": "Singapore",
-      "continent": "Asia"
+      "country": "Kenya",
+      "continent": "Africa"
     }
   ],
   "cities": 74,
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-18T08:00:57Z"
+  "lastUpdated": "2026-07-19T18:32:50Z"
 }
