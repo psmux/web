@@ -1,13 +1,13 @@
 {
-  "stars": 2984,
-  "forks": 184,
+  "stars": 2990,
+  "forks": 185,
   "contributors": 24,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 342
+      "contributions": 345
     },
     {
       "login": "computersrmyfriends",
@@ -76,8 +76,8 @@
       "contributions": 2
     }
   ],
-  "issues": 35,
-  "companiesRepresented": 476,
+  "issues": 36,
+  "companiesRepresented": 478,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -268,8 +268,7 @@
     },
     {
       "name": "Kama INC.",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=kama.com&sz=128"
+      "count": 1
     },
     {
       "name": "Pixel Directive",
@@ -816,7 +815,7 @@
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9799,
+      "followers": 9800,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -832,7 +831,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4652,
+      "followers": 4650,
       "title": "Dedicated Algorithmic Trader\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -840,7 +839,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2149,
+      "followers": 2150,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -880,7 +879,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 909,
+      "followers": 911,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -891,6 +890,14 @@
       "followers": 880,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
+      "highlight": false
+    },
+    {
+      "login": "sigma7863",
+      "name": "Sigma",
+      "followers": 825,
+      "title": "HighScool Student・Vibe Coder\r",
+      "company": "N-HighScool",
       "highlight": false
     },
     {
@@ -947,14 +954,6 @@
       "followers": 643,
       "title": "AI and NET Advocate @Microsoft, former Microsoft AI MVP (14 years!), lazy runner, lazy podcaster, avg coder",
       "company": "Microsoft",
-      "highlight": false
-    },
-    {
-      "login": "Caldis",
-      "name": "Caldis_Chen",
-      "followers": 619,
-      "title": "Creating, Designing and Coding",
-      "company": "Shopee",
       "highlight": false
     }
   ],
@@ -1223,8 +1222,7 @@
         "#657",
         "#655",
         "#661",
-        "#647",
-        "#414"
+        "#647"
       ],
       "context": "cleanup_session: uncaught psmux FileNotFoundError traceback in agent-dispatch mode"
     },
@@ -1248,6 +1246,7 @@
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#185",
+        "#210",
         "#87",
         "#58",
         "#59",
@@ -1260,14 +1259,14 @@
     {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
-        "#3123",
         "#3124",
         "#3122",
+        "#3123",
         "#3121",
         "#3013",
         "#3016"
       ],
-      "context": "[Bug] Windows + PowerShell-default psmux Team commands need PowerShell-safe invocation"
+      "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
       "repo": "dotgibson/dotfiles-Windows",
@@ -1308,6 +1307,15 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
+      "repo": "omnigent-ai/omnigent",
+      "issues": [
+        "#2904",
+        "#2189",
+        "#2186"
+      ],
+      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
+    },
+    {
       "repo": "Yeachan-Heo/oh-my-claudecode",
       "issues": [
         "#3311",
@@ -1315,19 +1323,107 @@
         "#3285"
       ],
       "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
-    },
-    {
-      "repo": "j4rviscmd/Coderm",
-      "issues": [
-        "#200",
-        "#201",
-        "#199"
-      ],
-      "context": "ターミナルに修飾キー付きのraw key eventを送信するAPIを追加する"
     }
   ],
-  "dotfilesRepos": [],
-  "dotfilesReferences": 0,
+  "dotfilesRepos": [
+    {
+      "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "gen4438/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "JoshuaAnderson0/Windows-Dotfiles",
+      "detail": "psmux.ps1"
+    },
+    {
+      "repo": "victor-basurto/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "jack-work/neovim-configuration-windows",
+      "detail": "init.lua"
+    },
+    {
+      "repo": "maxrzaw/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "baked-potatoes/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Edemilorhea/dotfile",
+      "detail": "SUMMARY.md"
+    },
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "rewgs/dotfiles",
+      "detail": "setup.ps1"
+    },
+    {
+      "repo": "Thurbeen/thurbox",
+      "detail": "install.ps1"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "kuan-er/sjtu-agent",
+      "detail": "CLAUDE.md"
+    },
+    {
+      "repo": "FallenDeity/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "gonnector/claude-psmux-team",
+      "detail": "install.ps1"
+    },
+    {
+      "repo": "claydugo/dotfiles",
+      "detail": ".tmux.conf"
+    },
+    {
+      "repo": "OneStepAt4time/aegis",
+      "detail": "windows-setup.md"
+    }
+  ],
+  "dotfilesReferences": 24,
   "mapPoints": [
     {
       "lat": 36.4,
@@ -1352,7 +1448,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "52 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "54 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1461,15 +1557,6 @@
       "color": "#60a5fa"
     },
     {
-      "lat": 52.2,
-      "lng": 21.0,
-      "label": "Warsaw",
-      "detail": "15 developers · IdeaThenGo, Ceneo.pl, Evotec",
-      "size": "lg",
-      "country": "Poland",
-      "continent": "Europe"
-    },
-    {
       "lat": 52.4,
       "lng": -1.5,
       "label": "United Kingdom",
@@ -1477,6 +1564,25 @@
       "size": "lg",
       "country": "United Kingdom",
       "continent": "Europe"
+    },
+    {
+      "lat": 52.2,
+      "lng": 21.0,
+      "label": "Warsaw",
+      "detail": "14 developers · Ceneo.pl, Evotec, Jagiellonian University",
+      "size": "lg",
+      "country": "Poland",
+      "continent": "Europe",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 25.0,
+      "lng": 121.6,
+      "label": "Taipei",
+      "detail": "13 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "size": "lg",
+      "country": "Taiwan",
+      "continent": "Asia"
     },
     {
       "lat": 50.1,
@@ -1497,13 +1603,14 @@
       "continent": "North America"
     },
     {
-      "lat": 25.0,
-      "lng": 121.6,
-      "label": "Taipei",
-      "detail": "12 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "lat": 43.7,
+      "lng": -79.4,
+      "label": "Toronto",
+      "detail": "12 developers · Freelance, Microsoft, JC IT",
       "size": "lg",
-      "country": "Taiwan",
-      "continent": "Asia"
+      "country": "Canada",
+      "continent": "North America",
+      "color": "#60a5fa"
     },
     {
       "lat": 51.5,
@@ -1521,16 +1628,6 @@
       "detail": "11 developers · Gentrace, NomosArtificial, Microsoft",
       "size": "lg",
       "country": "United States",
-      "continent": "North America",
-      "color": "#60a5fa"
-    },
-    {
-      "lat": 43.7,
-      "lng": -79.4,
-      "label": "Toronto",
-      "detail": "11 developers · Freelance, Microsoft, JC IT",
-      "size": "lg",
-      "country": "Canada",
       "continent": "North America",
       "color": "#60a5fa"
     },
@@ -1778,6 +1875,6 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "latestVersion": "3.3.6",
-  "lastUpdated": "2026-07-19T18:32:50Z"
+  "latestVersion": "3.3.7",
+  "lastUpdated": "2026-07-20T09:19:22Z"
 }
