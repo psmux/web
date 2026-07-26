@@ -455,6 +455,34 @@ def main() -> int:
     out["universities"] = len(seen_unis)
     out["topUniversities"] = list(seen_unis.values())
 
+    # ---- Star history (monthly cumulative totals) ----
+    # Tolerates stargazer entries with or without starredAt (older dumps predate
+    # the field). Gap months with zero new stars carry the previous total
+    # forward so the series has no holes. Capped to the 48 most recent months.
+    month_counts: Counter = Counter()
+    for sg in stargazers:
+        starred_at = sg.get("starredAt")
+        if not starred_at:
+            continue
+        month = str(starred_at)[:7]
+        if re.match(r"^\d{4}-\d{2}$", month):
+            month_counts[month] += 1
+
+    if month_counts:
+        months_sorted = sorted(month_counts)
+        cur = datetime.strptime(months_sorted[0], "%Y-%m")
+        end = datetime.strptime(months_sorted[-1], "%Y-%m")
+        all_months = []
+        while cur <= end:
+            all_months.append(cur.strftime("%Y-%m"))
+            cur = datetime(cur.year + 1, 1, 1) if cur.month == 12 else datetime(cur.year, cur.month + 1, 1)
+        star_history = []
+        running = 0
+        for m in all_months:
+            running += month_counts.get(m, 0)
+            star_history.append({"month": m, "total": running})
+        out["starHistory"] = star_history[-48:]
+
     # ---- Notable users (top stargazers by followers) ----
     notable_pool = [
         sg for sg in stargazers

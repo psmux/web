@@ -46,7 +46,7 @@ jobs:
             | paste -sd+ | bc)
           echo "FORK_COUNT=${FORK_COUNT:-0}" >> "$GITHUB_ENV"
 
-          echo "=== stargazers (login + company + name + bio + followers) ==="
+          echo "=== stargazers (login + company + name + bio + followers + starredAt) ==="
           echo "[" > .data/stargazers.json
           CURSOR=""
           PAGE=0
@@ -54,12 +54,12 @@ jobs:
           while true; do
             PAGE=$((PAGE + 1))
             if [ -z "$CURSOR" ]; then
-              Q='query { repository(owner:"psmux",name:"psmux") { stargazers(first:100) { pageInfo { hasNextPage endCursor } nodes { login name company location bio followers { totalCount } avatarUrl } } } }'
+              Q='query { repository(owner:"psmux",name:"psmux") { stargazers(first:100) { pageInfo { hasNextPage endCursor } edges { starredAt node { login name company location bio followers { totalCount } avatarUrl } } } } }'
             else
-              Q="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } nodes { login name company location bio followers { totalCount } avatarUrl } } } }"
+              Q="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } edges { starredAt node { login name company location bio followers { totalCount } avatarUrl } } } } }"
             fi
             RESP=$(gh api graphql -f "query=$Q")
-            NODES=$(echo "$RESP" | jq -c '[.data.repository.stargazers.nodes[] | {login, name, company, location, bio, followers: (.followers.totalCount // 0), avatarUrl}]')
+            NODES=$(echo "$RESP" | jq -c '[.data.repository.stargazers.edges[] | {login: .node.login, name: .node.name, company: .node.company, location: .node.location, bio: .node.bio, followers: (.node.followers.totalCount // 0), avatarUrl: .node.avatarUrl, starredAt: .starredAt}]')
             COUNT=$(echo "$NODES" | jq 'length')
             if [ "$COUNT" -gt 0 ]; then
               ITEMS=$(echo "$NODES" | jq -c '.[]')
