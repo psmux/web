@@ -1,13 +1,13 @@
 {
-  "stars": 2990,
-  "forks": 185,
-  "contributors": 24,
+  "stars": 3058,
+  "forks": 189,
+  "contributors": 25,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 345
+      "contributions": 369
     },
     {
       "login": "computersrmyfriends",
@@ -40,15 +40,15 @@
       "contributions": 10
     },
     {
-      "login": "ToxMox",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
-      "url": "https://github.com/ToxMox",
-      "contributions": 7
-    },
-    {
       "login": "andrew-tawfeek",
       "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
       "url": "https://github.com/andrew-tawfeek",
+      "contributions": 8
+    },
+    {
+      "login": "ToxMox",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
+      "url": "https://github.com/ToxMox",
       "contributions": 7
     },
     {
@@ -76,7 +76,7 @@
       "contributions": 2
     }
   ],
-  "issues": 36,
+  "issues": 37,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -811,6 +811,40 @@
       "name": "Naebo Craft Institute"
     }
   ],
+  "starHistory": [
+    {
+      "month": "2025-12",
+      "total": 28
+    },
+    {
+      "month": "2026-01",
+      "total": 77
+    },
+    {
+      "month": "2026-02",
+      "total": 247
+    },
+    {
+      "month": "2026-03",
+      "total": 841
+    },
+    {
+      "month": "2026-04",
+      "total": 1603
+    },
+    {
+      "month": "2026-05",
+      "total": 2295
+    },
+    {
+      "month": "2026-06",
+      "total": 2743
+    },
+    {
+      "month": "2026-07",
+      "total": 3057
+    }
+  ],
   "notableUsers": [
     {
       "login": "ardalis",
@@ -957,12 +991,12 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 33,
+  "ecosystemRepos": 34,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 13,
+      "stars": 14,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -1037,6 +1071,13 @@
       "category": "claude-code"
     },
     {
+      "name": "dotfiles-Windows",
+      "author": "dotgibson",
+      "stars": 1,
+      "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
+      "category": "tool"
+    },
+    {
       "name": "mkcrew",
       "author": "rayngnpc",
       "stars": 1,
@@ -1093,13 +1134,6 @@
       "category": "tool"
     },
     {
-      "name": "dotfiles-Windows",
-      "author": "dotgibson",
-      "stars": 0,
-      "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
-      "category": "tool"
-    },
-    {
       "name": "flux",
       "author": "reddley",
       "stars": 0,
@@ -1115,16 +1149,16 @@
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
@@ -1163,10 +1197,10 @@
       "category": "claude-code"
     },
     {
-      "name": "tmux",
-      "author": "omiritz",
+      "name": "psx",
+      "author": "Fre0Grella",
       "stars": 0,
-      "description": "minhas configs para tmux / psmux",
+      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
       "category": "tool"
     }
   ],
@@ -1174,22 +1208,85 @@
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
-        "#332",
+        "#433",
+        "#438",
         "#253",
         "#264",
-        "#296",
-        "#333",
-        "#307",
+        "#432",
+        "#439",
+        "#397",
+        "#396",
+        "#332",
         "#254",
         "#256",
+        "#296",
         "#257",
         "#255",
         "#262",
+        "#361",
         "#260",
-        "#302",
-        "#263"
+        "#302"
       ],
-      "context": "Windows rebuild leaves dead psmux pane and orphaned LLxprt process"
+      "context": "Windows: sending medium-sized issues to LLxprt fails with psmux 'line too long'"
+    },
+    {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#288",
+        "#222",
+        "#228",
+        "#310",
+        "#313",
+        "#227",
+        "#311",
+        "#254",
+        "#221",
+        "#217",
+        "#185",
+        "#291",
+        "#87",
+        "#58",
+        "#59",
+        "#140"
+      ],
+      "context": "psmux backend: per-server bare-id targets and the pre-#483 rc-0 no-op ceiling"
+    },
+    {
+      "repo": "Knatte18/millhouse",
+      "issues": [
+        "#701",
+        "#699",
+        "#694",
+        "#696",
+        "#700",
+        "#690",
+        "#692",
+        "#669",
+        "#667",
+        "#657",
+        "#655",
+        "#681",
+        "#661",
+        "#647",
+        "#709"
+      ],
+      "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
+    },
+    {
+      "repo": "Yeachan-Heo/gajae-code",
+      "issues": [
+        "#2914",
+        "#2907",
+        "#2086",
+        "#2145",
+        "#1849",
+        "#1391",
+        "#1275",
+        "#1118",
+        "#531",
+        "#1130"
+      ],
+      "context": "perf(tui): adaptive welcome cadence for psmux to prevent ConPTY input/render backpressure"
     },
     {
       "repo": "smota/omnigent",
@@ -1201,60 +1298,9 @@
         "#15",
         "#4",
         "#7",
-        "#12",
-        "#6",
-        "#3",
-        "#5",
-        "#9",
-        "#10"
+        "#12"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
-    },
-    {
-      "repo": "Knatte18/millhouse",
-      "issues": [
-        "#690",
-        "#669",
-        "#667",
-        "#681",
-        "#672",
-        "#665",
-        "#657",
-        "#655",
-        "#661",
-        "#647"
-      ],
-      "context": "cleanup_session: uncaught psmux FileNotFoundError traceback in agent-dispatch mode"
-    },
-    {
-      "repo": "Yeachan-Heo/gajae-code",
-      "issues": [
-        "#2086",
-        "#2145",
-        "#1849",
-        "#1391",
-        "#1275",
-        "#1118",
-        "#531",
-        "#1130",
-        "#1268",
-        "#916"
-      ],
-      "context": "Windows PowerShell 7: make `gjc --tmux` and `/pet` work through psmux aliases"
-    },
-    {
-      "repo": "bmad-code-org/bmad-loop",
-      "issues": [
-        "#185",
-        "#210",
-        "#87",
-        "#58",
-        "#59",
-        "#140",
-        "#92",
-        "#40"
-      ],
-      "context": "psmux backend: live smoke on the first post-3.3.6 release"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -1263,21 +1309,19 @@
         "#3122",
         "#3123",
         "#3121",
-        "#3013",
-        "#3016"
+        "#3013"
       ],
       "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
       "repo": "dotgibson/dotfiles-Windows",
       "issues": [
+        "#122",
         "#123",
         "#129",
-        "#122",
-        "#96",
-        "#116"
+        "#96"
       ],
-      "context": "release-notes: draft for the next dotfiles-Windows release"
+      "context": "release-readiness: go/no-go for the next dotfiles-Windows release"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1307,6 +1351,15 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
+      "repo": "JonathanRosado/duet-agents",
+      "issues": [
+        "#7",
+        "#1",
+        "#3"
+      ],
+      "context": "Delivery daemon wedges on first leader-bound message; all later leader messages starve in inbox/leader"
+    },
+    {
       "repo": "omnigent-ai/omnigent",
       "issues": [
         "#2904",
@@ -1314,15 +1367,6 @@
         "#2186"
       ],
       "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
-    },
-    {
-      "repo": "Yeachan-Heo/oh-my-claudecode",
-      "issues": [
-        "#3311",
-        "#3265",
-        "#3285"
-      ],
-      "context": "Evaluate psmux recommendation for Windows Claude Code team workflows"
     }
   ],
   "dotfilesRepos": [
@@ -1347,36 +1391,28 @@
       "detail": "start-psmux.ps1"
     },
     {
-      "repo": "JoshuaAnderson0/Windows-Dotfiles",
-      "detail": "psmux.ps1"
-    },
-    {
       "repo": "victor-basurto/dotfiles",
       "detail": ".psmux.conf"
-    },
-    {
-      "repo": "jack-work/neovim-configuration-windows",
-      "detail": "init.lua"
-    },
-    {
-      "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
     },
     {
       "repo": "F4NT0/psmux-config",
       "detail": "psmux.conf"
     },
     {
+      "repo": "anhdngo/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
       "repo": "daisukekobayashi/dotfiles",
       "detail": "psmux.conf"
     },
     {
-      "repo": "baked-potatoes/dotfiles",
+      "repo": "sebastianstudniczek/.dotfiles",
       "detail": ".psmux.conf"
     },
     {
-      "repo": "sebastianstudniczek/.dotfiles",
-      "detail": ".psmux.conf"
+      "repo": "Thurbeen/thurbox",
+      "detail": "install.ps1"
     },
     {
       "repo": "mikecubed/dotfiles",
@@ -1395,35 +1431,44 @@
       "detail": "setup.ps1"
     },
     {
-      "repo": "Thurbeen/thurbox",
-      "detail": "install.ps1"
+      "repo": "FallenDeity/.config",
+      "detail": "plugins.list"
     },
     {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
+      "repo": "Ikkjo/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "quazardous/aiball",
+      "detail": "WIN-INSTALL.md"
+    },
+    {
+      "repo": "lamngockhuong/termote",
+      "detail": "CLAUDE.md"
     },
     {
       "repo": "kuan-er/sjtu-agent",
       "detail": "CLAUDE.md"
     },
     {
-      "repo": "FallenDeity/.config",
+      "repo": "LizardLiang/configs",
       "detail": "psmux.conf"
-    },
-    {
-      "repo": "gonnector/claude-psmux-team",
-      "detail": "install.ps1"
     },
     {
       "repo": "claydugo/dotfiles",
       "detail": ".tmux.conf"
     },
     {
-      "repo": "OneStepAt4time/aegis",
-      "detail": "windows-setup.md"
+      "repo": "jamierpond/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "kaida-palooza/ccpoke",
+      "detail": "setup-tmux.ts"
     }
   ],
   "dotfilesReferences": 24,
+  "latestVersion": "3.3.7",
   "mapPoints": [
     {
       "lat": 36.4,
@@ -1875,40 +1920,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "latestVersion": "3.3.7",
-  "lastUpdated": "2026-07-20T09:19:22Z",
-  "starHistory": [
-    {
-      "month": "2025-12",
-      "total": 28
-    },
-    {
-      "month": "2026-01",
-      "total": 77
-    },
-    {
-      "month": "2026-02",
-      "total": 247
-    },
-    {
-      "month": "2026-03",
-      "total": 841
-    },
-    {
-      "month": "2026-04",
-      "total": 1603
-    },
-    {
-      "month": "2026-05",
-      "total": 2295
-    },
-    {
-      "month": "2026-06",
-      "total": 2743
-    },
-    {
-      "month": "2026-07",
-      "total": 3057
-    }
-  ]
+  "lastUpdated": "2026-07-26T18:27:24Z"
 }
