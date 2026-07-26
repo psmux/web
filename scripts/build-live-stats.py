@@ -352,6 +352,7 @@ def main() -> int:
     p.add_argument("--repo-json", required=True)
     p.add_argument("--contributors", required=True)
     p.add_argument("--stargazers", required=True)
+    p.add_argument("--star-times", default="")
     p.add_argument("--ecosystem", required=True)
     p.add_argument("--issue-mentions", required=True)
     p.add_argument("--code-mentions", required=True)
@@ -456,17 +457,39 @@ def main() -> int:
     out["topUniversities"] = list(seen_unis.values())
 
     # ---- Star history (monthly cumulative totals) ----
-    # Tolerates stargazer entries with or without starredAt (older dumps predate
-    # the field). Gap months with zero new stars carry the previous total
-    # forward so the series has no holes. Capped to the 48 most recent months.
+    # Timestamps come from the REST star+json dump (--star-times); the GraphQL
+    # starredAt field is not readable by the Actions GITHUB_TOKEN ("Resource
+    # not accessible by integration"), so it must never be on the critical
+    # fetch path. Entries in --stargazers with a starredAt field still count
+    # (local/back-compat dumps). Gap months with zero new stars carry the
+    # previous total forward so the series has no holes. Capped to the 48
+    # most recent months. If no timestamps are available at all, the previous
+    # starHistory in the existing output file is preserved so the chart on
+    # the stats card never disappears.
     month_counts: Counter = Counter()
-    for sg in stargazers:
-        starred_at = sg.get("starredAt")
+    star_time_sources: list = []
+    if args.star_times and Path(args.star_times).exists():
+        try:
+            star_time_sources = json.loads(Path(args.star_times).read_text())
+        except Exception:
+            star_time_sources = []
+    # Exclusive sources: a stargazers dump that also carries starredAt would
+    # otherwise double-count every month.
+    for sg in (star_time_sources if star_time_sources else stargazers):
+        starred_at = sg.get("starredAt") if isinstance(sg, dict) else None
         if not starred_at:
             continue
         month = str(starred_at)[:7]
         if re.match(r"^\d{4}-\d{2}$", month):
             month_counts[month] += 1
+
+    if not month_counts and Path(args.out).exists():
+        try:
+            prev = json.loads(Path(args.out).read_text(encoding="utf-8"))
+            if isinstance(prev.get("starHistory"), list) and prev["starHistory"]:
+                out["starHistory"] = prev["starHistory"]
+        except Exception:
+            pass
 
     if month_counts:
         months_sorted = sorted(month_counts)
