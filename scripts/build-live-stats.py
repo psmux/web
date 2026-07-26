@@ -682,6 +682,25 @@ def main() -> int:
             except Exception:
                 pass
 
+    # ---- Fail-soft: preserve stargazer-derived data when the fetch failed ----
+    # Since 2026-07 the Actions GITHUB_TOKEN can no longer run the stargazers
+    # GraphQL query ("Resource not accessible by integration"). When the
+    # workflow falls back to an empty stargazers dump, carry the previously
+    # published values forward so the site never loses adoption data.
+    if not stargazers and Path(args.out).exists():
+        try:
+            prev = json.loads(Path(args.out).read_text(encoding="utf-8"))
+        except Exception:
+            prev = {}
+        for k in (
+            "companiesRepresented", "topCompanies", "universities",
+            "topUniversities", "notableUsers", "mapPoints", "cities",
+            "countries", "continents",
+        ):
+            v = prev.get(k)
+            if v and not out.get(k):
+                out[k] = v
+
     out["lastUpdated"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     Path(args.out).write_text(

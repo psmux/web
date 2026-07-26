@@ -29,7 +29,10 @@ jobs:
 
       - name: Fetch raw GitHub data
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # STATS_TOKEN (optional): a fine-grained PAT so the stargazers
+          # GraphQL query keeps working; the default Actions token lost
+          # access to it in July 2026. Falls back to GITHUB_TOKEN.
+          GH_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           mkdir -p .data
@@ -47,6 +50,7 @@ jobs:
           echo "FORK_COUNT=${FORK_COUNT:-0}" >> "$GITHUB_ENV"
 
           echo "=== stargazers (login + company + name + bio + followers) ==="
+          STARGAZERS_OK=1
           echo "[" > .data/stargazers.json
           CURSOR=""
           PAGE=0
@@ -58,7 +62,12 @@ jobs:
             else
               Q="query { repository(owner:\"psmux\",name:\"psmux\") { stargazers(first:100,after:\"$CURSOR\") { pageInfo { hasNextPage endCursor } nodes { login name company location bio followers { totalCount } avatarUrl } } } }"
             fi
-            RESP=$(gh api graphql -f "query=$Q")
+            RESP=$(gh api graphql -f "query=$Q") || {
+              echo "::warning::stargazers GraphQL fetch failed (token lacks access); builder will preserve previously published adoption data"
+              echo "[]" > .data/stargazers.json
+              STARGAZERS_OK=0
+              break
+            }
             NODES=$(echo "$RESP" | jq -c '[.data.repository.stargazers.nodes[] | {login, name, company, location, bio, followers: (.followers.totalCount // 0), avatarUrl}]')
             COUNT=$(echo "$NODES" | jq 'length')
             if [ "$COUNT" -gt 0 ]; then
@@ -77,7 +86,9 @@ jobs:
             echo "  page $PAGE, +$COUNT (hasNext=$HAS)"
             [ "$HAS" = "true" ] || break
           done
-          echo "]" >> .data/stargazers.json
+          if [ "$STARGAZERS_OK" = "1" ]; then
+            echo "]" >> .data/stargazers.json
+          fi
           echo "  total stargazers: $(jq 'length' .data/stargazers.json)"
 
           echo "=== star timestamps (REST star+json; best effort) ==="
