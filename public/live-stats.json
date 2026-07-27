@@ -1,13 +1,13 @@
 {
-  "stars": 3058,
-  "forks": 189,
-  "contributors": 25,
+  "stars": 3070,
+  "forks": 190,
+  "contributors": 26,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 369
+      "contributions": 374
     },
     {
       "login": "computersrmyfriends",
@@ -70,13 +70,13 @@
       "contributions": 3
     },
     {
-      "login": "XingLingQAQ",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/92240364?v=4",
-      "url": "https://github.com/XingLingQAQ",
-      "contributions": 2
+      "login": "Gerrrt",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
+      "url": "https://github.com/Gerrrt",
+      "contributions": 3
     }
   ],
-  "issues": 37,
+  "issues": 36,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -1015,6 +1015,13 @@
       "category": "claude-code"
     },
     {
+      "name": "mkcrew",
+      "author": "rayngnpc",
+      "stars": 2,
+      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux",
       "author": "nileshfating",
       "stars": 2,
@@ -1034,6 +1041,13 @@
       "stars": 2,
       "description": "Standalone Go CLI to save and restore psmux sessions across restarts",
       "category": "tool"
+    },
+    {
+      "name": "psmux-skill",
+      "author": "zzj-Mark",
+      "stars": 2,
+      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
+      "category": "claude-code"
     },
     {
       "name": "ccg_app_rust_psmuxPlus",
@@ -1078,25 +1092,18 @@
       "category": "tool"
     },
     {
-      "name": "mkcrew",
-      "author": "rayngnpc",
-      "stars": 1,
-      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
-      "category": "claude-code"
-    },
-    {
-      "name": "psmux-skill",
-      "author": "zzj-Mark",
-      "stars": 1,
-      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
-      "category": "claude-code"
-    },
-    {
       "name": "tebis",
       "author": "johnkozaris",
       "stars": 1,
       "description": "Cross platform Telegram bridge. Drive AI coding agents running in tmux/psmux, like claude code, from Telegram. Rust, single binary, local-only.",
       "category": "claude-code"
+    },
+    {
+      "name": "warp-stack-windows",
+      "author": "avielf04",
+      "stars": 1,
+      "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
+      "category": "tool"
     },
     {
       "name": "wt-psmux",
@@ -1149,16 +1156,16 @@
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
@@ -1195,26 +1202,25 @@
       "stars": 0,
       "description": "psmux fork with AI agent detection and optional status sidebar",
       "category": "claude-code"
-    },
-    {
-      "name": "psx",
-      "author": "Fre0Grella",
-      "stars": 0,
-      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
-        "#433",
+        "#465",
+        "#456",
         "#438",
         "#253",
+        "#467",
         "#264",
+        "#445",
+        "#461",
         "#432",
-        "#439",
+        "#459",
+        "#448",
         "#397",
+        "#433",
         "#396",
         "#332",
         "#254",
@@ -1224,10 +1230,9 @@
         "#255",
         "#262",
         "#361",
-        "#260",
-        "#302"
+        "#260"
       ],
-      "context": "Windows: sending medium-sized issues to LLxprt fails with psmux 'line too long'"
+      "context": "psmux smoke tests fail non-deterministically on Native Windows CI — bare PageUp root binding swallows Page keys"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
@@ -1235,17 +1240,20 @@
         "#288",
         "#222",
         "#228",
-        "#310",
+        "#321",
+        "#320",
+        "#317",
         "#313",
-        "#227",
         "#311",
         "#254",
+        "#310",
         "#221",
         "#217",
         "#185",
         "#291",
         "#87",
         "#58",
+        "#227",
         "#59",
         "#140"
       ],
@@ -1275,9 +1283,9 @@
     {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
-        "#2914",
         "#2907",
         "#2086",
+        "#2914",
         "#2145",
         "#1849",
         "#1391",
@@ -1297,8 +1305,7 @@
         "#16",
         "#15",
         "#4",
-        "#7",
-        "#12"
+        "#7"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
     },
@@ -1333,6 +1340,15 @@
       "context": "Research and bundle psmux for Windows agent team support"
     },
     {
+      "repo": "takushio2525/tako",
+      "issues": [
+        "#519",
+        "#518",
+        "#591"
+      ],
+      "context": "[Windows] プレ版 v1b: バックグラウンド永続の実装（persist）"
+    },
+    {
       "repo": "savoy9/tackle",
       "issues": [
         "#88",
@@ -1358,15 +1374,6 @@
         "#3"
       ],
       "context": "Delivery daemon wedges on first leader-bound message; all later leader messages starve in inbox/leader"
-    },
-    {
-      "repo": "omnigent-ai/omnigent",
-      "issues": [
-        "#2904",
-        "#2189",
-        "#2186"
-      ],
-      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
     }
   ],
   "dotfilesRepos": [
@@ -1920,5 +1927,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-07-26T18:27:24Z"
+  "lastUpdated": "2026-07-27T09:55:02Z"
 }
