@@ -1,5 +1,5 @@
 {
-  "stars": 3070,
+  "stars": 3109,
   "forks": 190,
   "contributors": 26,
   "topContributors": [
@@ -7,7 +7,7 @@
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 374
+      "contributions": 377
     },
     {
       "login": "computersrmyfriends",
@@ -76,7 +76,7 @@
       "contributions": 3
     }
   ],
-  "issues": 36,
+  "issues": 41,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -1015,6 +1015,13 @@
       "category": "claude-code"
     },
     {
+      "name": "clavity",
+      "author": "ckir",
+      "stars": 2,
+      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
+      "category": "claude-code"
+    },
+    {
       "name": "mkcrew",
       "author": "rayngnpc",
       "stars": 2,
@@ -1075,13 +1082,6 @@
       "author": "nappa0326",
       "stars": 1,
       "description": "Windows 向け Claude Code 通知 + click-to-focus (psmux / WSL tmux)",
-      "category": "claude-code"
-    },
-    {
-      "name": "clavity",
-      "author": "ckir",
-      "stars": 1,
-      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
       "category": "claude-code"
     },
     {
@@ -1156,16 +1156,16 @@
     },
     {
       "name": "psmux",
-      "author": "fangbaolei",
+      "author": "getlantern",
       "stars": 0,
-      "description": "psmux-related project",
+      "description": "experimental fork of smux with packet coalescing and padding",
       "category": "tool"
     },
     {
       "name": "psmux",
-      "author": "getlantern",
+      "author": "fangbaolei",
       "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
+      "description": "psmux-related project",
       "category": "tool"
     },
     {
@@ -1208,23 +1208,23 @@
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
-        "#465",
-        "#456",
+        "#515",
         "#438",
         "#253",
-        "#467",
-        "#264",
         "#445",
-        "#461",
-        "#432",
-        "#459",
-        "#448",
+        "#525",
+        "#465",
+        "#527",
+        "#456",
         "#397",
         "#433",
         "#396",
+        "#467",
         "#332",
         "#254",
+        "#264",
         "#256",
+        "#493",
         "#296",
         "#257",
         "#255",
@@ -1232,7 +1232,7 @@
         "#361",
         "#260"
       ],
-      "context": "psmux smoke tests fail non-deterministically on Native Windows CI — bare PageUp root binding swallows Page keys"
+      "context": "Windows: session-host trees survive after their owning psmux process exits"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
@@ -1242,6 +1242,7 @@
         "#228",
         "#321",
         "#320",
+        "#332",
         "#317",
         "#313",
         "#311",
@@ -1250,12 +1251,12 @@
         "#221",
         "#217",
         "#185",
+        "#380",
         "#291",
         "#87",
         "#58",
         "#227",
-        "#59",
-        "#140"
+        "#59"
       ],
       "context": "psmux backend: per-server bare-id targets and the pre-#483 rc-0 no-op ceiling"
     },
@@ -1281,6 +1282,26 @@
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
     {
+      "repo": "takushio2525/tako",
+      "issues": [
+        "#659",
+        "#687",
+        "#641",
+        "#686",
+        "#525",
+        "#654",
+        "#647",
+        "#628",
+        "#519",
+        "#518",
+        "#642",
+        "#591",
+        "#603",
+        "#640"
+      ],
+      "context": "[バグ][Windows] psmux バックエンドのペインはコードページが CP932 のまま（#655 の対処が届かない）"
+    },
+    {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
         "#2907",
@@ -1290,9 +1311,7 @@
         "#1849",
         "#1391",
         "#1275",
-        "#1118",
-        "#531",
-        "#1130"
+        "#1118"
       ],
       "context": "perf(tui): adaptive welcome cadence for psmux to prevent ConPTY input/render backpressure"
     },
@@ -1303,9 +1322,7 @@
         "#1",
         "#14",
         "#16",
-        "#15",
-        "#4",
-        "#7"
+        "#15"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
     },
@@ -1315,20 +1332,18 @@
         "#3124",
         "#3122",
         "#3123",
-        "#3121",
-        "#3013"
+        "#3121"
       ],
       "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
-      "repo": "dotgibson/dotfiles-Windows",
+      "repo": "anthropics/claude-code",
       "issues": [
-        "#122",
-        "#123",
-        "#129",
-        "#96"
+        "#81880",
+        "#70219",
+        "#24384"
       ],
-      "context": "release-readiness: go/no-go for the next dotfiles-Windows release"
+      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1338,15 +1353,6 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
-    },
-    {
-      "repo": "takushio2525/tako",
-      "issues": [
-        "#519",
-        "#518",
-        "#591"
-      ],
-      "context": "[Windows] プレ版 v1b: バックグラウンド永続の実装（persist）"
     },
     {
       "repo": "savoy9/tackle",
@@ -1367,18 +1373,22 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "JonathanRosado/duet-agents",
+      "repo": "omnigent-ai/omnigent",
       "issues": [
-        "#7",
-        "#1",
-        "#3"
+        "#2904",
+        "#2189",
+        "#2186"
       ],
-      "context": "Delivery daemon wedges on first leader-bound message; all later leader messages starve in inbox/leader"
+      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
     }
   ],
   "dotfilesRepos": [
     {
       "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "victor-basurto/dotfiles",
       "detail": ".psmux.conf"
     },
     {
@@ -1388,18 +1398,6 @@
     {
       "repo": "luisgui1757/dotfiles",
       "detail": "psmux.conf"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "victor-basurto/dotfiles",
-      "detail": ".psmux.conf"
     },
     {
       "repo": "F4NT0/psmux-config",
@@ -1414,40 +1412,48 @@
       "detail": "psmux.conf"
     },
     {
-      "repo": "sebastianstudniczek/.dotfiles",
-      "detail": ".psmux.conf"
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
     },
     {
-      "repo": "Thurbeen/thurbox",
-      "detail": "install.ps1"
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
     },
     {
       "repo": "mikecubed/dotfiles",
       "detail": "psmux.conf"
     },
     {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "SUMMARY.md"
-    },
-    {
       "repo": "david-risney/PwshProfile",
       "detail": "psmux.conf"
-    },
-    {
-      "repo": "rewgs/dotfiles",
-      "detail": "setup.ps1"
-    },
-    {
-      "repo": "FallenDeity/.config",
-      "detail": "plugins.list"
     },
     {
       "repo": "Ikkjo/dotfiles",
       "detail": ".psmux.conf"
     },
     {
-      "repo": "quazardous/aiball",
-      "detail": "WIN-INSTALL.md"
+      "repo": "zer0ken/xmux",
+      "detail": "AGENTS.md"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "FallenDeity/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "Edemilorhea/dotfile",
+      "detail": "SUMMARY.md"
     },
     {
       "repo": "lamngockhuong/termote",
@@ -1458,12 +1464,8 @@
       "detail": "CLAUDE.md"
     },
     {
-      "repo": "LizardLiang/configs",
+      "repo": "maxrzaw/dotfiles",
       "detail": "psmux.conf"
-    },
-    {
-      "repo": "claydugo/dotfiles",
-      "detail": ".tmux.conf"
     },
     {
       "repo": "jamierpond/.config",
@@ -1472,6 +1474,10 @@
     {
       "repo": "kaida-palooza/ccpoke",
       "detail": "setup-tmux.ts"
+    },
+    {
+      "repo": "mejares-jamesmichael/windows-dotfiles",
+      "detail": "README.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1927,5 +1933,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-07-27T09:55:02Z"
+  "lastUpdated": "2026-07-30T08:29:10Z"
 }
