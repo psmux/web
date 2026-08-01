@@ -1,13 +1,13 @@
 {
-  "stars": 3109,
-  "forks": 190,
-  "contributors": 26,
+  "stars": 3133,
+  "forks": 191,
+  "contributors": 27,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 377
+      "contributions": 402
     },
     {
       "login": "computersrmyfriends",
@@ -19,7 +19,7 @@
       "login": "tarikguney",
       "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
       "url": "https://github.com/tarikguney",
-      "contributions": 26
+      "contributions": 27
     },
     {
       "login": "marhel",
@@ -52,6 +52,18 @@
       "contributions": 7
     },
     {
+      "login": "acoliver",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
+      "url": "https://github.com/acoliver",
+      "contributions": 5
+    },
+    {
+      "login": "Gerrrt",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
+      "url": "https://github.com/Gerrrt",
+      "contributions": 5
+    },
+    {
       "login": "LizardLiang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
       "url": "https://github.com/LizardLiang",
@@ -62,21 +74,9 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/31297454?v=4",
       "url": "https://github.com/zer0ken",
       "contributions": 3
-    },
-    {
-      "login": "quazardous",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/1506211?v=4",
-      "url": "https://github.com/quazardous",
-      "contributions": 3
-    },
-    {
-      "login": "Gerrrt",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
-      "url": "https://github.com/Gerrrt",
-      "contributions": 3
     }
   ],
-  "issues": 41,
+  "issues": 40,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 30,
+  "ecosystemRepos": 31,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1141,6 +1141,13 @@
       "category": "claude-code"
     },
     {
+      "name": "mw_terminal_worknav",
+      "author": "blueclover22",
+      "stars": 0,
+      "description": "Shell shortcuts to jump to project folders and launch Claude Code or Codex CLI in tmux (macOS) / psmux (Windows) sessions.",
+      "category": "claude-code"
+    },
+    {
       "name": "my-shell-suite",
       "author": "Torahime3",
       "stars": 0,
@@ -1174,6 +1181,27 @@
       "stars": 0,
       "description": "psmux fork with AI agent detection and optional status sidebar",
       "category": "claude-code"
+    },
+    {
+      "name": "psx",
+      "author": "Fre0Grella",
+      "stars": 0,
+      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
+      "category": "tool"
+    },
+    {
+      "name": "tmux",
+      "author": "omiritz",
+      "stars": 0,
+      "description": "minhas configs para tmux / psmux",
+      "category": "tool"
+    },
+    {
+      "name": "tmux-demo",
+      "author": "BobKerns",
+      "stars": 0,
+      "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
+      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -1181,28 +1209,33 @@
       "repo": "vybestack/llxprt-jefe",
       "issues": [
         "#515",
+        "#540",
+        "#546",
+        "#537",
         "#438",
         "#253",
+        "#539",
+        "#542",
+        "#547",
+        "#544",
+        "#541",
+        "#306",
         "#445",
-        "#525",
+        "#557",
+        "#529",
+        "#574",
+        "#555",
         "#465",
-        "#527",
-        "#456",
         "#397",
+        "#456",
         "#433",
+        "#530",
         "#396",
         "#467",
         "#332",
         "#254",
         "#264",
-        "#256",
-        "#493",
-        "#296",
-        "#257",
-        "#255",
-        "#262",
-        "#361",
-        "#260"
+        "#256"
       ],
       "context": "Windows: session-host trees survive after their owning psmux process exits"
     },
@@ -1215,22 +1248,44 @@
         "#321",
         "#320",
         "#332",
-        "#317",
+        "#419",
         "#313",
         "#311",
+        "#380",
         "#254",
         "#310",
         "#221",
         "#217",
         "#185",
-        "#380",
         "#291",
+        "#317",
         "#87",
-        "#58",
-        "#227",
-        "#59"
+        "#58"
       ],
       "context": "psmux backend: per-server bare-id targets and the pre-#483 rc-0 no-op ceiling"
+    },
+    {
+      "repo": "takushio2525/tako",
+      "issues": [
+        "#724",
+        "#729",
+        "#728",
+        "#641",
+        "#525",
+        "#647",
+        "#730",
+        "#628",
+        "#519",
+        "#659",
+        "#518",
+        "#642",
+        "#591",
+        "#603",
+        "#687",
+        "#640",
+        "#686"
+      ],
+      "context": "[修正][Windows] psmux の内部ポートを全ペインで listen 検知 + 「ブラウザで開く」でアプリがクラッシュ"
     },
     {
       "repo": "Knatte18/millhouse",
@@ -1248,55 +1303,21 @@
         "#655",
         "#681",
         "#661",
-        "#647",
-        "#709"
+        "#647"
       ],
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
     {
-      "repo": "takushio2525/tako",
-      "issues": [
-        "#659",
-        "#687",
-        "#641",
-        "#686",
-        "#525",
-        "#654",
-        "#647",
-        "#628",
-        "#519",
-        "#518",
-        "#642",
-        "#591",
-        "#603",
-        "#640"
-      ],
-      "context": "[バグ][Windows] psmux バックエンドのペインはコードページが CP932 のまま（#655 の対処が届かない）"
-    },
-    {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
+        "#3688",
         "#2907",
         "#2086",
         "#2914",
         "#2145",
-        "#1849",
-        "#1391",
-        "#1275",
-        "#1118"
+        "#1849"
       ],
-      "context": "perf(tui): adaptive welcome cadence for psmux to prevent ConPTY input/render backpressure"
-    },
-    {
-      "repo": "smota/omnigent",
-      "issues": [
-        "#11",
-        "#1",
-        "#14",
-        "#16",
-        "#15"
-      ],
-      "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
+      "context": "Windows: gjc session/gc still leak raw tmux missing-executable errors instead of psmux-aware provider diagnostics"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -1311,11 +1332,11 @@
     {
       "repo": "anthropics/claude-code",
       "issues": [
-        "#81880",
         "#70219",
+        "#81880",
         "#24384"
       ],
-      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
+      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1345,13 +1366,21 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "omnigent-ai/omnigent",
+      "repo": "smota/omnigent",
       "issues": [
-        "#2904",
-        "#2189",
-        "#2186"
+        "#11",
+        "#1",
+        "#14"
       ],
-      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
+      "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
+    },
+    {
+      "repo": "MikesterFH/dotfiles",
+      "issues": [
+        "#13",
+        "#11"
+      ],
+      "context": "chezmoi: psmux/tmux parity on Windows"
     }
   ],
   "dotfilesRepos": [
@@ -1392,6 +1421,10 @@
       "detail": "setup-psmux.ps1"
     },
     {
+      "repo": "baked-potatoes/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
       "repo": "sebastianstudniczek/.dotfiles",
       "detail": ".psmux.conf"
     },
@@ -1420,12 +1453,12 @@
       "detail": "psmux.conf"
     },
     {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
+      "repo": "Edemilorhea/dotfile",
+      "detail": "symlink_dot_psmux.conf"
     },
     {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "SUMMARY.md"
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
     },
     {
       "repo": "lamngockhuong/termote",
@@ -1446,10 +1479,6 @@
     {
       "repo": "kaida-palooza/ccpoke",
       "detail": "setup-tmux.ts"
-    },
-    {
-      "repo": "mejares-jamesmichael/windows-dotfiles",
-      "detail": "README.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1905,5 +1934,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-07-30T08:29:10Z"
+  "lastUpdated": "2026-08-01T17:13:17Z"
 }
