@@ -341,6 +341,13 @@ def extract_university(company: str) -> tuple[str, str] | None:
 # MPEG program stream muxer) are not part of this ecosystem.
 UNRELATED_REPO = re.compile(r"gb\s?28181|mpeg|\brtp\b|rtsp|h\.?26[45]|\bts\s?mux", re.I)
 
+# Impersonators are never listed anywhere on the site: explicit blocklist
+# plus a structural rule (a community repo named exactly "psmux" is a clone
+# posing as this project, not an ecosystem project). Keep in sync with the
+# ecosystem filter in src/hooks/useLiveStats.ts.
+BLOCKED_OWNERS = {"nileshfating"}
+BLOCKED_REPOS = {"nileshfating/psmux"}
+
 def categorize_repo(name: str, owner: str, description: str) -> str:
     text = f"{name} {description or ''}".lower()
     if "claude" in text or "agent" in text:
@@ -537,6 +544,12 @@ def main() -> int:
         owner, name = full.split("/", 1)
         if owner.lower() == "psmux":
             continue  # ecosystem means community projects, not psmux's own
+        if (
+            owner.lower() in BLOCKED_OWNERS
+            or full.lower() in BLOCKED_REPOS
+            or name.lower() == "psmux"
+        ):
+            continue  # impersonators never get listed
         text = name.lower() + " " + (r.get("description") or "").lower()
         if "psmux" not in text:
             continue
@@ -564,8 +577,10 @@ def main() -> int:
         repo_full = repo_full or it.get("html_url", "")
         if not repo_full or "/" not in repo_full:
             continue
-        # Filter: repo must not be psmux's own
+        # Filter: repo must not be psmux's own, nor a blocked impersonator
         if repo_full.lower().startswith("psmux/"):
+            continue
+        if repo_full.lower().split("/")[0] in BLOCKED_OWNERS or repo_full.lower() in BLOCKED_REPOS:
             continue
         number = it.get("number")
         if not number:

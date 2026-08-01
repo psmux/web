@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 34,
+  "ecosystemRepos": 30,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1027,13 +1027,6 @@
       "stars": 2,
       "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
-    },
-    {
-      "name": "psmux",
-      "author": "nileshfating",
-      "stars": 2,
-      "description": "🖥️ Experience native terminal multiplexing on Windows with psmux, the straightforward alternative to tmux, built for PowerShell and cmd.exe.",
-      "category": "tool"
     },
     {
       "name": "psmux-claude-skill",
@@ -1152,27 +1145,6 @@
       "author": "Torahime3",
       "stars": 0,
       "description": "My personal shell configuration suite. Automates the deployment of Windows Terminal, Psmux, and Clink with my custom shortcuts and themes.",
-      "category": "tool"
-    },
-    {
-      "name": "psmux",
-      "author": "getlantern",
-      "stars": 0,
-      "description": "experimental fork of smux with packet coalescing and padding",
-      "category": "tool"
-    },
-    {
-      "name": "psmux",
-      "author": "fangbaolei",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "tool"
-    },
-    {
-      "name": "psmux",
-      "author": "texane",
-      "stars": 0,
-      "description": "power supply multiplexer",
       "category": "tool"
     },
     {

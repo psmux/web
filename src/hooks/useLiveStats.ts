@@ -311,11 +311,18 @@ export function useLiveStats(): LiveStats {
           // MPEG program stream sense. Keep in sync with UNRELATED_REPO in
           // scripts/build-live-stats.py.
           const unrelated = /gb\s?28181|mpeg|\brtp\b|rtsp|h\.?26[45]|\bts\s?mux/i;
+          // Impersonators never get listed: explicit blocklist plus the
+          // structural rule that a community repo named exactly "psmux" is
+          // a clone posing as this project. Keep in sync with
+          // BLOCKED_OWNERS/BLOCKED_REPOS in scripts/build-live-stats.py.
+          const blockedOwners = new Set(["nileshfating"]);
           const community = (
             data.ecosystemProjects as LiveEcosystemProject[]
           ).filter(
             (p) =>
               p.author?.toLowerCase() !== "psmux" &&
+              !blockedOwners.has(p.author?.toLowerCase() ?? "") &&
+              p.name?.toLowerCase() !== "psmux" &&
               !unrelated.test(`${p.name} ${p.description ?? ""}`)
           );
           if (community.length > 0) {
