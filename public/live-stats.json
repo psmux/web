@@ -1,13 +1,13 @@
 {
-  "stars": 3133,
-  "forks": 191,
-  "contributors": 27,
+  "stars": 3150,
+  "forks": 192,
+  "contributors": 28,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 402
+      "contributions": 410
     },
     {
       "login": "computersrmyfriends",
@@ -52,15 +52,15 @@
       "contributions": 7
     },
     {
-      "login": "acoliver",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
-      "url": "https://github.com/acoliver",
-      "contributions": 5
-    },
-    {
       "login": "Gerrrt",
       "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
       "url": "https://github.com/Gerrrt",
+      "contributions": 7
+    },
+    {
+      "login": "acoliver",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
+      "url": "https://github.com/acoliver",
       "contributions": 5
     },
     {
@@ -76,7 +76,7 @@
       "contributions": 3
     }
   ],
-  "issues": 40,
+  "issues": 46,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 31,
+  "ecosystemRepos": 32,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1082,6 +1082,13 @@
       "author": "dotgibson",
       "stars": 1,
       "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
+      "category": "tool"
+    },
+    {
+      "name": "opencode-psmux-rename",
+      "author": "sterraMind",
+      "stars": 1,
+      "description": "Auto-rename psmux/tmux sessions to opencode conversation titles",
       "category": "tool"
     },
     {
@@ -1195,49 +1202,43 @@
       "stars": 0,
       "description": "minhas configs para tmux / psmux",
       "category": "tool"
-    },
-    {
-      "name": "tmux-demo",
-      "author": "BobKerns",
-      "stars": 0,
-      "description": "Ubuntu + tmux + emacs development environment setup with Docker local testing and AWS EC2 deployment. Includes VS Code Remote-SSH and Windows PSMUX client guides. Full English and Japanese documentation.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
+        "#598",
+        "#617",
         "#515",
-        "#540",
+        "#592",
         "#546",
         "#537",
         "#438",
         "#253",
         "#539",
+        "#613",
         "#542",
         "#547",
+        "#591",
         "#544",
-        "#541",
-        "#306",
         "#445",
         "#557",
         "#529",
-        "#574",
-        "#555",
         "#465",
-        "#397",
+        "#555",
         "#456",
+        "#397",
+        "#540",
         "#433",
         "#530",
         "#396",
         "#467",
         "#332",
         "#254",
-        "#264",
-        "#256"
+        "#593"
       ],
-      "context": "Windows: session-host trees survive after their owning psmux process exits"
+      "context": "psmux new-session fails but leaves a zombie session that has-session reports as present"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
@@ -1250,7 +1251,9 @@
         "#332",
         "#419",
         "#313",
+        "#435",
         "#311",
+        "#428",
         "#380",
         "#254",
         "#310",
@@ -1258,9 +1261,7 @@
         "#217",
         "#185",
         "#291",
-        "#317",
-        "#87",
-        "#58"
+        "#317"
       ],
       "context": "psmux backend: per-server bare-id targets and the pre-#483 rc-0 no-op ceiling"
     },
@@ -1276,8 +1277,8 @@
         "#730",
         "#628",
         "#519",
-        "#659",
         "#518",
+        "#659",
         "#642",
         "#591",
         "#603",
@@ -1310,14 +1311,22 @@
     {
       "repo": "Yeachan-Heo/gajae-code",
       "issues": [
+        "#3725",
         "#3688",
         "#2907",
-        "#2086",
-        "#2914",
-        "#2145",
-        "#1849"
+        "#2086"
       ],
-      "context": "Windows: gjc session/gc still leak raw tmux missing-executable errors instead of psmux-aware provider diagnostics"
+      "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#70219",
+        "#81880",
+        "#83153",
+        "#24384"
+      ],
+      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
     },
     {
       "repo": "Yeachan-Heo/oh-my-codex",
@@ -1330,13 +1339,13 @@
       "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
     },
     {
-      "repo": "anthropics/claude-code",
+      "repo": "JonathanRosado/duet-agents",
       "issues": [
-        "#70219",
-        "#81880",
-        "#24384"
+        "#8",
+        "#9",
+        "#7"
       ],
-      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
+      "context": "v0.6.0: healthy idle recipient becomes permanently blocked after ambiguous post-paste verification"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1373,115 +1382,10 @@
         "#14"
       ],
       "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
-    },
-    {
-      "repo": "MikesterFH/dotfiles",
-      "issues": [
-        "#13",
-        "#11"
-      ],
-      "context": "chezmoi: psmux/tmux parity on Windows"
     }
   ],
-  "dotfilesRepos": [
-    {
-      "repo": "MattKotsenas/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "victor-basurto/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "gen4438/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "luisgui1757/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "anhdngo/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "baked-potatoes/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "sebastianstudniczek/.dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "mikecubed/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "david-risney/PwshProfile",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Ikkjo/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "FallenDeity/.config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "symlink_dot_psmux.conf"
-    },
-    {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
-    },
-    {
-      "repo": "lamngockhuong/termote",
-      "detail": "CLAUDE.md"
-    },
-    {
-      "repo": "kuan-er/sjtu-agent",
-      "detail": "CLAUDE.md"
-    },
-    {
-      "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "jamierpond/.config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "kaida-palooza/ccpoke",
-      "detail": "setup-tmux.ts"
-    }
-  ],
-  "dotfilesReferences": 24,
+  "dotfilesRepos": [],
+  "dotfilesReferences": 0,
   "latestVersion": "3.3.7",
   "mapPoints": [
     {
@@ -1934,5 +1838,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-01T17:13:17Z"
+  "lastUpdated": "2026-08-03T09:49:07Z"
 }
