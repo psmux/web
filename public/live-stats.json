@@ -1,13 +1,13 @@
 {
-  "stars": 3150,
-  "forks": 192,
+  "stars": 3179,
+  "forks": 195,
   "contributors": 28,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 410
+      "contributions": 431
     },
     {
       "login": "computersrmyfriends",
@@ -40,6 +40,18 @@
       "contributions": 10
     },
     {
+      "login": "acoliver",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
+      "url": "https://github.com/acoliver",
+      "contributions": 9
+    },
+    {
+      "login": "Gerrrt",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
+      "url": "https://github.com/Gerrrt",
+      "contributions": 8
+    },
+    {
       "login": "andrew-tawfeek",
       "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
       "url": "https://github.com/andrew-tawfeek",
@@ -52,27 +64,15 @@
       "contributions": 7
     },
     {
-      "login": "Gerrrt",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
-      "url": "https://github.com/Gerrrt",
-      "contributions": 7
-    },
-    {
-      "login": "acoliver",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
-      "url": "https://github.com/acoliver",
-      "contributions": 5
-    },
-    {
       "login": "LizardLiang",
       "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
       "url": "https://github.com/LizardLiang",
       "contributions": 5
     },
     {
-      "login": "zer0ken",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/31297454?v=4",
-      "url": "https://github.com/zer0ken",
+      "login": "krhougs",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
+      "url": "https://github.com/krhougs",
       "contributions": 3
     }
   ],
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 32,
+  "ecosystemRepos": 33,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1183,6 +1183,13 @@
       "category": "tool"
     },
     {
+      "name": "psmuxa",
+      "author": "urbannode94739",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "psmuxplus",
       "author": "ZeroPointSix",
       "stars": 0,
@@ -1195,57 +1202,45 @@
       "stars": 0,
       "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
       "category": "tool"
-    },
-    {
-      "name": "tmux",
-      "author": "omiritz",
-      "stars": 0,
-      "description": "minhas configs para tmux / psmux",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
-        "#598",
-        "#617",
-        "#515",
+        "#638",
         "#592",
         "#546",
-        "#537",
-        "#438",
         "#253",
         "#539",
-        "#613",
-        "#542",
-        "#547",
         "#591",
-        "#544",
-        "#445",
+        "#677",
+        "#670",
         "#557",
-        "#529",
+        "#598",
         "#465",
-        "#555",
-        "#456",
+        "#617",
+        "#515",
         "#397",
+        "#456",
+        "#537",
         "#540",
         "#433",
+        "#438",
         "#530",
         "#396",
+        "#593",
         "#467",
-        "#332",
-        "#254",
-        "#593"
+        "#332"
       ],
-      "context": "psmux new-session fails but leaves a zombie session that has-session reports as present"
+      "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#288",
-        "#222",
         "#228",
+        "#222",
         "#321",
         "#320",
         "#332",
@@ -1270,11 +1265,12 @@
       "issues": [
         "#724",
         "#729",
+        "#766",
         "#728",
         "#641",
         "#525",
-        "#647",
         "#730",
+        "#647",
         "#628",
         "#519",
         "#518",
@@ -1309,14 +1305,15 @@
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
     {
-      "repo": "Yeachan-Heo/gajae-code",
+      "repo": "JonathanRosado/duet-agents",
       "issues": [
-        "#3725",
-        "#3688",
-        "#2907",
-        "#2086"
+        "#8",
+        "#10",
+        "#9",
+        "#11",
+        "#7"
       ],
-      "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
+      "context": "v0.6.0: healthy idle recipient becomes permanently blocked after ambiguous post-paste verification"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1329,6 +1326,16 @@
       "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
     },
     {
+      "repo": "Yeachan-Heo/gajae-code",
+      "issues": [
+        "#3725",
+        "#3688",
+        "#2907",
+        "#2086"
+      ],
+      "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
+    },
+    {
       "repo": "Yeachan-Heo/oh-my-codex",
       "issues": [
         "#3124",
@@ -1337,15 +1344,6 @@
         "#3121"
       ],
       "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
-    },
-    {
-      "repo": "JonathanRosado/duet-agents",
-      "issues": [
-        "#8",
-        "#9",
-        "#7"
-      ],
-      "context": "v0.6.0: healthy idle recipient becomes permanently blocked after ambiguous post-paste verification"
     },
     {
       "repo": "FrancisVarga/zed",
@@ -1375,17 +1373,114 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     },
     {
-      "repo": "smota/omnigent",
+      "repo": "omnigent-ai/omnigent",
       "issues": [
-        "#11",
-        "#1",
-        "#14"
+        "#2904",
+        "#2189",
+        "#2186"
       ],
-      "context": "Windows deep parity: harden psmux terminal lifecycle and reconnect behavior"
+      "context": "Windows: add psmux-backed native terminal backend as tmux alternative"
     }
   ],
-  "dotfilesRepos": [],
-  "dotfilesReferences": 0,
+  "dotfilesRepos": [
+    {
+      "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "victor-basurto/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "gen4438/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "anhdngo/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "baked-potatoes/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Ikkjo/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "detail": "AGENTS.md"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "FallenDeity/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Edemilorhea/dotfile",
+      "detail": "symlink_dot_psmux.conf"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "lamngockhuong/termote",
+      "detail": "CLAUDE.md"
+    },
+    {
+      "repo": "sgruendel/dotfiles",
+      "detail": "install_tools.ps1"
+    },
+    {
+      "repo": "shaobin0604/faplayer",
+      "detail": "profiles.ui"
+    },
+    {
+      "repo": "liumeng1201/faplayerplus",
+      "detail": "profiles.ui"
+    },
+    {
+      "repo": "BladeWDR/dotfiles",
+      "detail": "run_onchange_install-ppm.ps1.tmpl"
+    }
+  ],
+  "dotfilesReferences": 24,
   "latestVersion": "3.3.7",
   "mapPoints": [
     {
@@ -1838,5 +1933,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-03T09:49:07Z"
+  "lastUpdated": "2026-08-06T08:38:29Z"
 }

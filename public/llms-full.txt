@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-08-03 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-08-06 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- faq -->
 # FAQ
@@ -767,6 +767,33 @@ psmux new-window -- cmd /K echo hello
 psmux new-session -s py -- python
 psmux split-window -- "C:/Program Files/Git/bin/bash.exe"
 ```
+
+## Quoting Option Values
+
+A quoted option value is stored exactly as written, including runs of spaces
+and any leading or trailing space. This is the same in a config file as it is
+on the command line:
+
+```bash
+# Both of these store the twelve spaces
+set -g status-right "left            right"
+```
+
+```bash
+psmux set -g status-right "left            right"
+```
+
+Details worth knowing:
+
+- Quotes are only stripped when they wrap the whole value. `a"b"c` stores
+  `a"b"c` literally.
+- Inside double quotes, `\"` and `\\` are unescaped. Inside single quotes
+  nothing is unescaped, so `'a\b'` stores `a\b`.
+- An unquoted value is taken as written but with trailing whitespace removed.
+- A trailing `# comment` is stripped, unless the `#` is inside quotes or
+  escaped, so `"#{session_name}"` and `"#[fg=red]"` are safe.
+- `#{p<n>:}` still pads at render time and remains useful for padding that
+  should follow the rendered width rather than a fixed number of spaces.
 
 ## All Set Options
 
@@ -2949,7 +2976,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `rename-session` | `rename` | none, takes the new name as a positional argument | CLI, SRV, CFG, CTL |
 | `rename-window` | `renamew` | none, takes the new name as a positional argument | CLI, SRV, CFG, CTL |
 | `resize-pane` | `resizep` | `UDLRZx:y:t:` | CLI, SRV, CFG, CTL |
-| `resize-window` | `resizew` | `ADUx:y:t:` | CLI, SRV, CFG, CTL |
+| `resize-window` | `resizew` | `aADLRUx:y:t:` | CLI, SRV, CFG, CTL |
 | `respawn-pane` | `respawnp`, `resp` | `kc:t:` plus `-- <command>` | CLI, SRV, CFG, CTL |
 | `respawn-window` | `respawnw` | none | CLI, SRV, CFG |
 | `rotate-window` | `rotatew` | `UDt:` | CLI, SRV, CFG, CTL |
@@ -3115,8 +3142,10 @@ Five mouse wire commands are an exception and are genuinely usable for scripting
 - Not accepted: `-Z`
 
 **resize-window** (`resizew`)
-- Boolean: `-A`, `-D`, `-U` (passed through to the server)
+- Boolean: `-A` (largest client), `-a` (smallest client), `-L`, `-R`, `-U`, `-D`
 - Value: `-x` (width), `-y` (height), `-t` (target window)
+- Positional: optional positive adjustment for `-L`, `-R`, `-U`, or `-D` (default `1`)
+- The target window enters manual sizing; later client viewport changes do not overwrite it.
 
 **find-window** (`findw`)
 - The first positional argument is the search pattern. That is the only thing that has an effect.
@@ -5590,7 +5619,7 @@ For a one-click experience:
 - ✅ Drag-resizing the native iTerm2 window resizes all panes
   inside it. iTerm2 sends `refresh-client -C w,h` (on attach) and
   `resize-window -x w -y h -t @N` (on every drag) and psmux
-  propagates the new geometry to every pane and emits
+  applies the viewport and target-window geometry separately, then emits
   `%layout-change` so the splits repaint.
 - ✅ Typing `exit` (or otherwise terminating the shell) in a pane
   removes that split natively in iTerm2. psmux diffs window state
@@ -5679,8 +5708,7 @@ These are the pieces of psmux that make iTerm2's `tmux -CC` happy:
   CONTROL_NOECHO handshake + raw-mode setup + stdin `\r→\n`
   translation + `cc_debug.log`.
 - **iTerm CC command surface** in `src/server/connection.rs`:
-  - `phony-command`, `copy-mode`, `resize-window` no-op handlers
-    (iTerm2 sends these during kickoff).
+  - `phony-command` and `copy-mode` compatibility handlers.
   - `send` alias for `send-keys` (iTerm uses the short form).
   - `0xNN` hex codepoint argument decoding (every iTerm keystroke).
   - Combined short-flag clusters where the **last** char takes a
@@ -5688,10 +5716,10 @@ These are the pieces of psmux that make iTerm2's `tmux -CC` happy:
     `capture-pane -peqJN -t %1 -S -1000`, `send -lt %1 X` etc.
     Parsed by `cli::has_short_flag` and the cluster-tail branch
     of `cli::extract_flag_value`.
-  - `refresh-client -C w,h` and `resize-window -x w -y h -t @N`
-    update `app.last_window_area`, run `resize_all_panes`, and
-    emit `%layout-change` so the gateway always stays in sync
-    with the iTerm2 window's actual cell dimensions.
+  - `refresh-client -C` tracks each control client's default and
+    per-window viewport. `resize-window -x w -y h -t @N` changes only
+    the target window, switches it to manual sizing, resizes its PTYs,
+    and emits `%layout-change`.
   - Top-level `;` command separation with a queue (one
     `%begin/%end` pair per sub-command).
   - **Send-coalescing**: consecutive `send`/`send-keys` sub-commands
