@@ -1,13 +1,13 @@
 {
-  "stars": 3222,
+  "stars": 3245,
   "forks": 198,
-  "contributors": 28,
+  "contributors": 29,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 454
+      "contributions": 466
     },
     {
       "login": "computersrmyfriends",
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 52,
+  "issues": 3,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 33,
+  "ecosystemRepos": 35,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1113,6 +1113,13 @@
       "category": "tool"
     },
     {
+      "name": ".psmux.conf",
+      "author": "MKoushikYadav",
+      "stars": 0,
+      "description": "My  personal psmux config for windows. Integrates with claude and nvim.",
+      "category": "claude-code"
+    },
+    {
       "name": "agent-team",
       "author": "stardino2lab",
       "stars": 0,
@@ -1151,7 +1158,7 @@
       "name": "mw_terminal_worknav",
       "author": "blueclover22",
       "stars": 0,
-      "description": "Shell shortcuts to jump to project folders and launch Claude Code or Codex CLI in tmux (macOS) / psmux (Windows) sessions.",
+      "description": "Shell(macOS + zsh / Windows + powershell) shortcuts to jump to project folders and launch Claude Code or Codex CLI in tmux / psmux sessions.",
       "category": "claude-code"
     },
     {
@@ -1176,6 +1183,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-todo",
+      "author": "pyjhoop",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "psmux-win-build",
       "author": "ghy020",
       "stars": 0,
@@ -1188,41 +1202,33 @@
       "stars": 0,
       "description": "psmux-related project",
       "category": "tool"
-    },
-    {
-      "name": "psmuxplus",
-      "author": "ZeroPointSix",
-      "stars": 0,
-      "description": "psmux fork with AI agent detection and optional status sidebar",
-      "category": "claude-code"
-    },
-    {
-      "name": "psx",
-      "author": "Fre0Grella",
-      "stars": 0,
-      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
-        "#488",
+        "#537",
         "#222",
-        "#489",
         "#504",
-        "#435",
-        "#482",
-        "#419",
+        "#531",
+        "#562",
         "#311",
+        "#549",
+        "#538",
+        "#530",
+        "#527",
+        "#525",
+        "#565",
+        "#542",
         "#513",
         "#511",
-        "#428",
+        "#488",
+        "#489",
         "#288",
+        "#380",
         "#321",
         "#228",
-        "#380",
         "#320",
         "#332",
         "#254",
@@ -1234,7 +1240,7 @@
         "#317",
         "#313"
       ],
-      "context": "psmux live gate pins no divergence PREMISE, only our reaction to it — CI cannot signal that a workaround became droppable"
+      "context": "psmux: adopt PSMUX_DATA_DIR as a per-project registry root — seam-wide, not a create-call env tweak"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1248,18 +1254,24 @@
         "#677",
         "#697",
         "#670",
-        "#696",
+        "#666",
         "#557",
+        "#696",
+        "#397",
         "#598",
         "#465",
         "#617",
-        "#397",
         "#515",
         "#456",
         "#537",
         "#540",
         "#433",
-        "#438"
+        "#593",
+        "#438",
+        "#530",
+        "#651",
+        "#396",
+        "#467"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
     },
@@ -1297,30 +1309,36 @@
         "#690",
         "#692",
         "#669",
-        "#667"
+        "#667",
+        "#657",
+        "#655",
+        "#681",
+        "#661",
+        "#647"
       ],
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
     {
       "repo": "JonathanRosado/duet-agents",
       "issues": [
+        "#13",
         "#8",
         "#10",
         "#9",
         "#11",
         "#7"
       ],
-      "context": "v0.6.0: healthy idle recipient becomes permanently blocked after ambiguous post-paste verification"
+      "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
     {
-      "repo": "anthropics/claude-code",
+      "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#70219",
-        "#81880",
-        "#83153",
-        "#24384"
+        "#102",
+        "#344",
+        "#70",
+        "#355"
       ],
-      "context": "tmux/psmux auto-detection disables session transcript persistence — .jsonl never written"
+      "context": "agent-worktrees (Windows): launcher is 7-deep vs intended ~4 (python never exits) + reap idle shells"
     },
     {
       "repo": "Yeachan-Heo/gajae-code",
@@ -1331,6 +1349,34 @@
         "#2086"
       ],
       "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
+    },
+    {
+      "repo": "Yeachan-Heo/oh-my-codex",
+      "issues": [
+        "#3124",
+        "#3122",
+        "#3123",
+        "#3121"
+      ],
+      "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#81880",
+        "#83153",
+        "#24384"
+      ],
+      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
+    },
+    {
+      "repo": "FrancisVarga/zed",
+      "issues": [
+        "#11",
+        "#4",
+        "#10"
+      ],
+      "context": "Research and bundle psmux for Windows agent team support"
     },
     {
       "repo": "savoy9/tackle",
@@ -1349,34 +1395,107 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
-    },
-    {
-      "repo": "MikesterFH/dotfiles",
-      "issues": [
-        "#11",
-        "#13"
-      ],
-      "context": "chezmoi: psmux/tmux parity on Windows"
-    },
-    {
-      "repo": "ThomasMichon/copilot-extensions",
-      "issues": [
-        "#102",
-        "#70"
-      ],
-      "context": "agent-worktrees (Windows): launcher is 7-deep vs intended ~4 (python never exits) + reap idle shells"
-    },
-    {
-      "repo": "smtg-ai/claude-squad",
-      "issues": [
-        "#291",
-        "#275"
-      ],
-      "context": "Error on Win11 with psmux or Msys2 tmux"
     }
   ],
-  "dotfilesRepos": [],
-  "dotfilesReferences": 0,
+  "dotfilesRepos": [
+    {
+      "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "victor-basurto/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "gen4438/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "anhdngo/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "baked-potatoes/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "triumph/oymywinclaude",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Ikkjo/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "detail": "AGENTS.md"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "FallenDeity/.config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Edemilorhea/dotfile",
+      "detail": "symlink_dot_psmux.conf"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "lamngockhuong/termote",
+      "detail": "CLAUDE.md"
+    },
+    {
+      "repo": "sgruendel/dotfiles",
+      "detail": "install_tools.ps1"
+    },
+    {
+      "repo": "steezkelly/maine-dispensary-guide",
+      "detail": "AGENTS.md"
+    },
+    {
+      "repo": "shaobin0604/faplayer",
+      "detail": "profiles.ui"
+    }
+  ],
+  "dotfilesReferences": 24,
   "latestVersion": "3.3.7",
   "mapPoints": [
     {
@@ -1829,5 +1948,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-10T07:44:36Z"
+  "lastUpdated": "2026-08-13T07:36:42Z"
 }
