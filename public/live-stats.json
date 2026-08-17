@@ -1,13 +1,13 @@
 {
-  "stars": 3245,
-  "forks": 198,
+  "stars": 3268,
+  "forks": 201,
   "contributors": 29,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 466
+      "contributions": 492
     },
     {
       "login": "computersrmyfriends",
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 3,
+  "issues": 11,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -1210,7 +1210,6 @@
       "issues": [
         "#537",
         "#222",
-        "#504",
         "#531",
         "#562",
         "#311",
@@ -1219,14 +1218,14 @@
         "#530",
         "#527",
         "#525",
-        "#565",
         "#542",
+        "#581",
         "#513",
         "#511",
         "#488",
+        "#504",
         "#489",
         "#288",
-        "#380",
         "#321",
         "#228",
         "#320",
@@ -1254,24 +1253,20 @@
         "#677",
         "#697",
         "#670",
-        "#666",
         "#557",
+        "#666",
         "#696",
-        "#397",
         "#598",
         "#465",
         "#617",
         "#515",
+        "#593",
         "#456",
         "#537",
         "#540",
         "#433",
-        "#593",
-        "#438",
-        "#530",
         "#651",
-        "#396",
-        "#467"
+        "#438"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
     },
@@ -1284,15 +1279,15 @@
         "#728",
         "#641",
         "#525",
-        "#730",
         "#647",
+        "#730",
         "#628",
         "#519",
         "#518",
         "#642",
-        "#659",
         "#591",
         "#603",
+        "#659",
         "#640",
         "#687"
       ],
@@ -1311,10 +1306,9 @@
         "#669",
         "#667",
         "#657",
-        "#655",
         "#681",
-        "#661",
-        "#647"
+        "#655",
+        "#661"
       ],
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
@@ -1334,9 +1328,9 @@
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
         "#102",
-        "#344",
+        "#618",
         "#70",
-        "#355"
+        "#344"
       ],
       "context": "agent-worktrees (Windows): launcher is 7-deep vs intended ~4 (python never exits) + reap idle shells"
     },
@@ -1351,21 +1345,20 @@
       "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
     },
     {
-      "repo": "Yeachan-Heo/oh-my-codex",
+      "repo": "Mi-Bee-Studio/MiBeeNvr",
       "issues": [
-        "#3124",
-        "#3122",
-        "#3123",
-        "#3121"
+        "#390",
+        "#378",
+        "#364"
       ],
-      "context": "[Draft][Compatibility] Git Bash as the psmux default shell needs an explicit Team Bash bridge"
+      "context": "investigate(gb28181): 追踪病态 PES 的产生源 — M5 OOM 事故中两路流 PES 重组永不完成"
     },
     {
       "repo": "anthropics/claude-code",
       "issues": [
         "#81880",
-        "#83153",
-        "#24384"
+        "#24384",
+        "#83153"
       ],
       "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
@@ -1397,105 +1390,8 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     }
   ],
-  "dotfilesRepos": [
-    {
-      "repo": "MattKotsenas/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "victor-basurto/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "gen4438/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "luisgui1757/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "anhdngo/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "baked-potatoes/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "sebastianstudniczek/.dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "triumph/oymywinclaude",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "mikecubed/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "david-risney/PwshProfile",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Ikkjo/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "FallenDeity/.config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "symlink_dot_psmux.conf"
-    },
-    {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
-    },
-    {
-      "repo": "lamngockhuong/termote",
-      "detail": "CLAUDE.md"
-    },
-    {
-      "repo": "sgruendel/dotfiles",
-      "detail": "install_tools.ps1"
-    },
-    {
-      "repo": "steezkelly/maine-dispensary-guide",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "shaobin0604/faplayer",
-      "detail": "profiles.ui"
-    }
-  ],
-  "dotfilesReferences": 24,
+  "dotfilesRepos": [],
+  "dotfilesReferences": 0,
   "latestVersion": "3.3.7",
   "mapPoints": [
     {
@@ -1948,5 +1844,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-13T07:36:42Z"
+  "lastUpdated": "2026-08-17T06:58:06Z"
 }
