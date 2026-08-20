@@ -1,13 +1,13 @@
 {
-  "stars": 3268,
-  "forks": 201,
-  "contributors": 29,
+  "stars": 3301,
+  "forks": 206,
+  "contributors": 30,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 492
+      "contributions": 505
     },
     {
       "login": "computersrmyfriends",
@@ -40,15 +40,15 @@
       "contributions": 13
     },
     {
-      "login": "MattKotsenas",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
-      "url": "https://github.com/MattKotsenas",
-      "contributions": 10
-    },
-    {
       "login": "Gerrrt",
       "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
       "url": "https://github.com/Gerrrt",
+      "contributions": 10
+    },
+    {
+      "login": "MattKotsenas",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
+      "url": "https://github.com/MattKotsenas",
       "contributions": 10
     },
     {
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 11,
+  "issues": 12,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 35,
+  "ecosystemRepos": 36,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
@@ -1127,6 +1127,13 @@
       "category": "claude-code"
     },
     {
+      "name": "ARH-Terminal",
+      "author": "arhsmoque2",
+      "stars": 0,
+      "description": "Native, psmux/tmux-native, agent-aware Android terminal & coding workspace for ARH-OS",
+      "category": "claude-code"
+    },
+    {
       "name": "devbox-cli",
       "author": "ww4yne",
       "stars": 0,
@@ -1195,21 +1202,16 @@
       "stars": 0,
       "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
       "category": "tool"
-    },
-    {
-      "name": "psmux-wt-sync",
-      "author": "tobiowo",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
+        "#662",
+        "#660",
         "#537",
-        "#222",
+        "#659",
         "#531",
         "#562",
         "#311",
@@ -1219,12 +1221,13 @@
         "#527",
         "#525",
         "#542",
-        "#581",
+        "#658",
         "#513",
         "#511",
         "#488",
         "#504",
         "#489",
+        "#222",
         "#288",
         "#321",
         "#228",
@@ -1234,12 +1237,9 @@
         "#310",
         "#221",
         "#217",
-        "#185",
-        "#291",
-        "#317",
-        "#313"
+        "#185"
       ],
-      "context": "psmux: adopt PSMUX_DATA_DIR as a per-project registry root — seam-wide, not a create-call env tweak"
+      "context": "ci: install psmux on Windows runner to enable live multiplexer gates in CI"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1253,8 +1253,8 @@
         "#677",
         "#697",
         "#670",
-        "#557",
         "#666",
+        "#557",
         "#696",
         "#598",
         "#465",
@@ -1263,10 +1263,9 @@
         "#593",
         "#456",
         "#537",
-        "#540",
-        "#433",
         "#651",
-        "#438"
+        "#540",
+        "#433"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
     },
@@ -1304,11 +1303,7 @@
         "#690",
         "#692",
         "#669",
-        "#667",
-        "#657",
-        "#681",
-        "#655",
-        "#661"
+        "#667"
       ],
       "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
     },
@@ -1316,11 +1311,13 @@
       "repo": "JonathanRosado/duet-agents",
       "issues": [
         "#13",
-        "#8",
-        "#10",
-        "#9",
-        "#11",
-        "#7"
+        "#21",
+        "#16",
+        "#23",
+        "#22",
+        "#14",
+        "#18",
+        "#20"
       ],
       "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
@@ -1328,37 +1325,19 @@
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
         "#102",
-        "#618",
         "#70",
+        "#618",
         "#344"
       ],
       "context": "agent-worktrees (Windows): launcher is 7-deep vs intended ~4 (python never exits) + reap idle shells"
-    },
-    {
-      "repo": "Yeachan-Heo/gajae-code",
-      "issues": [
-        "#3725",
-        "#3688",
-        "#2907",
-        "#2086"
-      ],
-      "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
-    },
-    {
-      "repo": "Mi-Bee-Studio/MiBeeNvr",
-      "issues": [
-        "#390",
-        "#378",
-        "#364"
-      ],
-      "context": "investigate(gb28181): 追踪病态 PES 的产生源 — M5 OOM 事故中两路流 PES 重组永不完成"
     },
     {
       "repo": "anthropics/claude-code",
       "issues": [
         "#81880",
         "#24384",
-        "#83153"
+        "#83153",
+        "#88127"
       ],
       "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
@@ -1388,11 +1367,28 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
+    },
+    {
+      "repo": "Yeachan-Heo/gajae-code",
+      "issues": [
+        "#3725",
+        "#3688",
+        "#2907"
+      ],
+      "context": "Windows native: standard psmux aliases trigger gjc_tmux_provider_ambiguous on startup"
+    },
+    {
+      "repo": "kunchenguid/wheelhouse",
+      "issues": [
+        "#2785",
+        "#1948"
+      ],
+      "context": "[firstmate#1340] feat: support native-Windows fleet lock and add psmux session backend"
     }
   ],
   "dotfilesRepos": [],
   "dotfilesReferences": 0,
-  "latestVersion": "3.3.7",
+  "latestVersion": "3.3.8",
   "mapPoints": [
     {
       "lat": 36.4,
@@ -1844,5 +1840,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-17T06:58:06Z"
+  "lastUpdated": "2026-08-20T06:48:49Z"
 }
