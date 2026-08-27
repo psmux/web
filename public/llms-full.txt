@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-08-24 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-08-27 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- faq -->
 # FAQ
@@ -28,6 +28,9 @@ A: Session creation takes < 100ms. New windows/panes add < 80ms overhead. The bo
 
 **Q: Does psmux support mouse?**
 A: Full mouse support: click to focus panes, drag to resize borders, scroll wheel, click status-bar tabs, drag-select text (including tmux-like copy-on-release with `pwsh-mouse-selection on`), and right-click copy/paste paths. Plus VT mouse forwarding for TUI apps like vim, htop, and midnight commander.
+
+**Q: The scroll wheel does nothing inside some full screen program. Why?**
+A: Because that program never asked for the mouse, and psmux follows tmux here. tmux only writes a mouse report to a pane whose application has enabled a mouse mode (`input_key_mouse` in `input-keys.c` returns immediately otherwise), and its default `WheelUpPane` binding treats the alternate screen only as a reason NOT to fall through to copy mode. So over a full screen program with no mouse support the wheel is a no-op in tmux, and now in psmux too. Before psmux 3.3.9 psmux forwarded the report anyway, and a program that does not parse mouse reports read the bytes as keystrokes: htop opened its `Search:` prompt and typed the report into it, and codex lost its transcript ([#598](https://github.com/psmux/psmux/issues/598)). Turn the program's own mouse support on (`:set mouse=a` in vim and neovim, `--mouse` for `less`, the mouse setting in htop) and the wheel starts working again. Over a plain shell prompt the wheel still enters copy mode and scrolls psmux's own scrollback, unchanged.
 
 **Q: What shells does psmux support?**
 A: PowerShell 7 (default), PowerShell 5, cmd.exe, Git Bash, WSL, nushell, and any Windows executable. Change with `set -g default-shell <shell>`.
@@ -199,6 +202,7 @@ A: See [integration.md](integration.md) for examples in Python, PowerShell, Node
 - **Click** status-bar tabs to switch windows
 - **Scroll wheel** in any pane, scrolls that pane's output (configurable via `scroll-enter-copy-mode`)
 - **Drag-select** text to copy to clipboard
+- **Drag auto-scroll** : dragging a selection past the top of a pane continues it into scrollback via copy mode, and holding the pointer on the pane's first or last row keeps scrolling one line every 50ms, like tmux; psmux additionally keeps scrolling, faster, when the pointer moves past the edge. Output taller than the window can be selected in one gesture. With `scroll-enter-copy-mode off`, a selection made over a direct-scrolled view also continues past the bottom edge, back toward the live output
 - **Right-click** to paste or copy selection
 - **tmux-like release copy selection** : pane-clipped drag copy on left-button release with word/line multi-click (`pwsh-mouse-selection on`)
 - **Disable client-side selection** : let in-pane TUI apps (opencode, lazygit, etc.) handle their own mouse selection (`mouse-selection off`)
@@ -212,6 +216,7 @@ A: See [integration.md](integration.md) for examples in Python, PowerShell, Node
 - **20+ customizable style options** : status bar, pane borders, messages, copy-mode highlights, popups, menus, window backgrounds. See [configuration.md](configuration.md) for the full table
 - **Full color spectrum** : 16 named colors, 256 indexed (`colour0` to `colour255`), 24-bit true color (`#RRGGBB`)
 - **Text attributes** : bold, dim, italic, underline, blink, reverse, strikethrough, and more
+- **Styled underscores** : double, curly (undercurl), dotted and dashed underlines from `ESC[4:2m` through `ESC[4:5m`, plus the SGR 58 underline colour, are parsed and passed on to the outer terminal
 - **Status bar** : fully customizable left/right content with format variables
 - **Window tab styling** : separate styles for active, inactive, activity, bell, and last-used tabs
 - **Pane border line styles** : `set -g pane-border-lines double` picks the glyph set (`single`, `double`, `heavy`, `simple`, `number`, `spaces`, `none`), and a post-pass upgrades straight runs to proper junction glyphs where borders meet. See [configuration.md](configuration.md)
@@ -224,7 +229,7 @@ A: See [integration.md](integration.md) for examples in Python, PowerShell, Node
 - `/` and `?` search with `n`/`N` navigation
 - `f`/`F`/`t`/`T` character find, `%` bracket matching, `{`/`}` paragraph jump
 - Named registers (`"a` through `"z`), count prefixes, word/WORD variants
-- Mouse drag-select copies to Windows clipboard on release
+- Mouse drag-select copies to Windows clipboard on release and returns to the live view (tmux parity); dragging at the pane's first/last row auto-scrolls through scrollback
 - **Line numbers** : `set -g copy-mode-line-numbers relative` adds a left gutter, with `off`, `default`, `absolute`, `relative`, and `hybrid` modes and independent styling through `copy-mode-line-number-style` and `copy-mode-current-line-number-style`. See [configuration.md](configuration.md)
 
 See [keybindings.md](keybindings.md) for the full copy mode key reference.
@@ -804,7 +809,7 @@ Details worth knowing:
 | `base-index` | Int | `0` | First window number |
 | `pane-base-index` | Int | `0` | First pane number |
 | `escape-time` | Int | `500` | Escape delay (ms) |
-| `repeat-time` | Int | `500` | Repeat key timeout (ms) |
+| `repeat-time` | Int | `500` | How long a key bound with `bind-key -r` keeps repeating without the prefix, in ms. Range `0` to `2000000`; `0` disables repeat |
 | `history-limit` | Int | `2000` | Scrollback lines per pane |
 | `display-time` | Int | `750` | Message display time (ms) |
 | `display-panes-time` | Int | `1000` | Pane overlay time (ms) |
@@ -911,10 +916,12 @@ set -g status 2
 
 # Configure each line (0-indexed)
 set -g status-format[0] "#[align=left]#S #[align=right]%H:%M"
-set -g status-format[1] "#[align=left]#{W:#I:#W }"
+set -g status-format[1] "#[align=left]#{W:#[range=window|#{window_index}]#I:#W #[norange],#[range=window|#{window_index}]#I:#W* #[norange]}"
 ```
 
 The first line (`status-format[0]`) replaces the default status bar content. Additional lines stack below (or above, depending on `status-position`).
+
+**Clickable window tabs.** In a custom `status-format[N]` line, tab click targets come from `#[range=window|N]`/`#[norange]` markers and nothing else: a window list written without them renders correctly but cannot be clicked, exactly as in tmux (tmux's shipped default `status-format[0]` carries these markers, which is why its window list is clickable out of the box). `N` is the window index itself, so `#[range=window|#{window_index}]` is the correct idiom at any `base-index`. Inside `#{W:inactive,current}` the comma separates the two loop arguments, so any other comma must be escaped as `#,` and combined styles are easier written as `#[fg=green]#[bold]` than `#[fg=green,bold]`. Ranges are honored on every status line, and clicks are hit-tested on every status row.
 
 ### Pane Border Labels
 
@@ -1066,7 +1073,7 @@ set -g pwsh-mouse-selection on
 
 When `pwsh-mouse-selection` is `on`, releasing a left-drag copies the selected text immediately and clears the transient highlight. Right-click copy and `Ctrl+Shift+C` still work as explicit copy actions.
 
-When `scroll-enter-copy-mode` is `off`, scrolling in a pane does not enter copy mode and instead passes scroll events directly to the running application.
+When `scroll-enter-copy-mode` is `off`, scrolling in a pane does not enter copy mode and instead passes scroll events directly to the running application. A drag selection made over such a scrolled-back view still converts to a copy-mode selection when it reaches the pane's top or bottom row, and keeps auto-scrolling in that direction, so text taller than the window can be selected in one gesture (see [features.md](features.md)).
 
 #### Disabling psmux's drag selection (`mouse-selection`)
 
@@ -1285,9 +1292,17 @@ set -g status-left "#[fg=green,bold]#S#[default] "
 
 **Colours.** `default` and `terminal` (both mean the terminal's own default), `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`, the bright variants (`brightblack` through `brightwhite`, also spelled `bright-black`), `colour0` to `colour255` (the American spelling `color0` works too), `#RRGGBB`, `idx:N`, and `rgb:R,G,B`.
 
-**Attributes.** `bold`, `dim`, `italics` (also `italic`), `underscore` (also `underline`), `blink`, `reverse`, `hidden`, `strikethrough`.
+**Attributes.** `bold`, `dim`, `italics` (also `italic`), `underscore` (also `underline`), `double-underscore`, `curly-underscore`, `dotted-underscore`, `dashed-underscore`, `blink`, `reverse`, `hidden`, `strikethrough`.
 
-**Negations.** Each attribute has a matching keyword that removes it again: `nobold`, `nodim`, `noitalics`, `nounderscore` (also `nounderline`), `noblink`, `noreverse`, `nohidden`, `nostrikethrough`. These matter inside a format string, where a later `#[...]` block builds on the style already in effect rather than starting from nothing:
+**Underscore colour.** `us=colour` sets the colour of the underline on its own, separate from `fg=`:
+
+```tmux
+set -g message-style "curly-underscore,us=red"
+```
+
+The styled underscores and `us=` need a terminal that understands the SGR 4 subparameter forms (`4:2` through `4:5`) and SGR 58. Windows Terminal, WezTerm and kitty all do; a terminal that does not falls back to a plain underline.
+
+**Negations.** Each attribute has a matching keyword that removes it again: `nobold`, `nodim`, `noitalics`, `nounderscore` (also `nounderline`, and it clears the styled underscores too), `noblink`, `noreverse`, `nohidden`, `nostrikethrough`. These matter inside a format string, where a later `#[...]` block builds on the style already in effect rather than starting from nothing:
 
 ```tmux
 # Bold for the session name, then drop bold only, keeping the colour
@@ -1762,8 +1777,8 @@ A key table is a named set of bindings. psmux consults these tables:
 |-----|--------|--------|
 | `root` | Every keystroke, before the prefix is armed. Bind with `bind-key -n <key>` or `bind-key -T root <key>` | **Empty.** psmux binds nothing here by default |
 | `prefix` | Keystrokes that follow the prefix key. Bind with plain `bind-key <key>` | The full default set listed below |
-| `copy-mode` | Keystrokes while copy mode is active and `mode-keys` is `emacs` | Empty. Bind with `bind-key -T copy-mode <key>` |
-| `copy-mode-vi` | Keystrokes while copy mode is active and `mode-keys` is `vi` (the default) | Empty. Bind with `bind-key -T copy-mode-vi <key>` |
+| `copy-mode` | Keystrokes while copy mode is active and `mode-keys` is `emacs` (the default) | Empty. Bind with `bind-key -T copy-mode <key>` |
+| `copy-mode-vi` | Keystrokes while copy mode is active and `mode-keys` is `vi` | Empty. Bind with `bind-key -T copy-mode-vi <key>` |
 | any custom table | Only after `switch-client -T <table>`, and only for the very next keystroke | Whatever you bind into it |
 
 The `copy-mode` and `copy-mode-vi` tables are empty by default because the built in copy mode keymap
@@ -2102,8 +2117,13 @@ The keys below are the built in copy mode map. Anything you bind with
 | `j` / `Down` | Move cursor down |
 | `k` / `Up` | Move cursor up |
 | `l` / `Right` | Move cursor right |
+| `Ctrl+p` / `Ctrl+n` | Move cursor up / down (same as `k` / `j`, emacs style, works in vi mode too) |
 | `Ctrl+a` | Start of line (emacs style, works in vi mode too) |
-| `Ctrl+e` | End of line (emacs style, works in vi mode too) |
+| `Ctrl+e` | End of line, **`mode-keys emacs` only** (in vi mode `Ctrl+e` scrolls, use `$`) |
+
+Cursor motions keep the viewport still until the cursor reaches the top or the bottom row of the
+pane. Only then does the view follow, one line at a time. To move the view itself while the cursor
+stays put, use the scrolling keys below.
 
 ### Word Motions
 
@@ -2128,7 +2148,9 @@ The keys below are the built in copy mode map. Anything you bind with
 | `Ctrl+u` / `Ctrl+d` | Half page up / down |
 | `Ctrl+b` / `PageUp` | Full page up |
 | `Ctrl+f` / `PageDown` | Full page down |
-| `Ctrl+p` / `Ctrl+n` | Scroll up / down one line |
+| `Ctrl+Up` / `Ctrl+Down` | Scroll up / down one line (cursor stays where it is) |
+| `Ctrl+y` / `Ctrl+e` | Scroll up / down one line, **`mode-keys vi` only** |
+| `K` / `J` | Scroll up / down one line, **`mode-keys vi` only** |
 | `g` | Top of scrollback |
 | `G` | Bottom (live output) |
 | `z` | Centre the cursor line in the pane (scroll-middle) |
@@ -2241,18 +2263,28 @@ Opened by `/`, `?`, `Ctrl+s` or `Ctrl+r`. While it is open the copy mode keys ar
 ### Emacs Copy Mode
 
 `set -g mode-keys emacs` does not add a separate keymap. Most emacs style keys listed above are
-always active, in vi mode too. What `mode-keys emacs` changes is the meaning of three keys that vi
-mode uses for scrolling:
+always active, in vi mode too. What `mode-keys emacs` changes is the meaning of the keys tmux binds
+differently in its `copy-mode` and `copy-mode-vi` tables:
 
-| Key | With `mode-keys vi` (default) | With `mode-keys emacs` |
+| Key | With `mode-keys vi` | With `mode-keys emacs` (default) |
 |-----|--------|--------|
 | `Ctrl+b` | Page up | Move cursor left |
 | `Ctrl+f` | Page down | Move cursor right |
 | `Ctrl+v` | Force rectangle selection | Page down |
+| `Ctrl+e` | Scroll down one line | End of line |
+| `Ctrl+y` | Scroll up one line | Nothing |
+| `J` / `K` | Scroll down / up one line | Nothing |
 
-These keys behave the same under both settings: `Ctrl+n` / `Ctrl+p` scroll one line, `Ctrl+a` /
-`Ctrl+e` go to line start / end, `Alt+f` / `Alt+b` move by word, `Alt+v` pages up, `Alt+w` copies
-and exits, `Ctrl+s` / `Ctrl+r` search forward / backward.
+In vi mode `Ctrl+e` scrolls, so use `$` (or `End`) to reach the end of the line there. This is
+tmux's split: `copy-mode` binds `Ctrl+e` to end-of-line and leaves `Ctrl+y`, `J` and `K` unbound,
+while `copy-mode-vi` binds `Ctrl+e` and `J` to scroll down and `Ctrl+y` and `K` to scroll up.
+
+These keys behave the same under both settings: `Ctrl+p` / `Ctrl+n` move the cursor up / down,
+`Ctrl+Up` / `Ctrl+Down` scroll one line, `Ctrl+a` goes to line start, `Alt+f` / `Alt+b` move by
+word, `Alt+v` pages up, `Alt+w` copies and exits, `Ctrl+s` / `Ctrl+r` search forward / backward.
+
+`Ctrl+p` / `Ctrl+n` are cursor motions, not scrolling, which is what tmux binds them to in its
+`copy-mode` table. psmux keeps them available in vi mode as well, where tmux leaves them unbound.
 
 When in copy mode:
 - The pane border turns **yellow**
@@ -3687,7 +3719,9 @@ server runs Windows 11 build 22523 or newer. On Windows 10 and earlier Windows
 
 ## Builds below 22523
 
-Below build 22523 psmux does not enable mouse reporting at all. That is
+Below build 22523 psmux does not enable mouse reporting on the VT input path at
+all (SSH, JediTerm, WezTerm; a local Windows Terminal session is covered
+separately below). That is
 deliberate: on Windows 10 era console hosts an incoming mouse report could fast
 fail conhost and take the pane process with it, and a dead mouse beats a dead
 session.
@@ -3707,6 +3741,38 @@ ones the gate exists for.
 
 This also covers local WezTerm and JetBrains terminals on a sub 22523 build,
 which take the same VT input path as SSH.
+
+### The gate does not apply to a local Windows Terminal session
+
+The gate covers the VT input path: SSH, JediTerm and WezTerm, where an incoming
+SGR report is fed to conhost as VT bytes on the ConPTY input pipe. That is the
+path the crash was measured on.
+
+A local Windows Terminal session never uses that path, and it does not register
+mouse by writing escape sequences either. Under ConPTY a client's own mouse
+DECSET bytes never reach the terminal at all: conhost absorbs
+`ESC [ ? 1000 h`, `1002h`, `1003h` and `1006h` written to stdout, by a raw
+`WriteFile` on the console handle exactly as much as by `WriteConsoleW`. What
+conhost does relay is the Win32 console flag: setting `ENABLE_MOUSE_INPUT` on
+the client's input handle makes it emit `ESC [ ? 1003 ; 1006 h` to the terminal,
+and clearing the flag emits `ESC [ ? 1003 ; 1006 l`. That console flag is the
+only mouse registration channel a local client has, and psmux sets it at startup
+on every build.
+
+Windows Terminal sometimes drops a long lived local client's registration on its
+own, so the client re-asserts the flag every 30 seconds and on every resize.
+That re-assert runs on every build, including builds below 22523: it is a
+console mode call, it feeds nothing to the VT input parser, and it only restores
+a registration the same session already had. Before psmux 3.3.9 it sat behind
+the build gate, so on Windows 10 a dropped registration was permanent. The
+terminal, having been told `ESC [ ? 1003 ; 1006 l`, then fell back to
+alternate scroll and turned every wheel notch into Up and Down arrow keys, which
+psmux forwarded into the pane. Applications that read the wheel themselves, such
+as Claude Code, reported that the scroll wheel was sending arrow keys
+(issue #597).
+
+`PSMUX_FORCE_MOUSE=0` still pins mouse off completely, on any build, including
+this re-assert.
 
 ## Windows 10 client wrapper
 

@@ -1,13 +1,13 @@
 {
-  "stars": 3328,
-  "forks": 208,
-  "contributors": 31,
+  "stars": 3363,
+  "forks": 211,
+  "contributors": 32,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 524
+      "contributions": 565
     },
     {
       "login": "computersrmyfriends",
@@ -28,6 +28,12 @@
       "contributions": 16
     },
     {
+      "login": "MattKotsenas",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
+      "url": "https://github.com/MattKotsenas",
+      "contributions": 16
+    },
+    {
       "login": "souhaiebtar",
       "avatarUrl": "https://avatars.githubusercontent.com/u/15350774?v=4",
       "url": "https://github.com/souhaiebtar",
@@ -38,12 +44,6 @@
       "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
       "url": "https://github.com/krhougs",
       "contributions": 13
-    },
-    {
-      "login": "MattKotsenas",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
-      "url": "https://github.com/MattKotsenas",
-      "contributions": 11
     },
     {
       "login": "Gerrrt",
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 17,
+  "issues": 21,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -1123,7 +1123,7 @@
       "name": ".psmux.conf",
       "author": "MKoushikYadav",
       "stars": 0,
-      "description": "My  personal psmux config for windows. Integrates with claude and nvim.",
+      "description": "My  personal psmux config for windows. Integrates with claude and nvim. With handwritten Nord status bar",
       "category": "claude-code"
     },
     {
@@ -1208,13 +1208,16 @@
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
+        "#730",
+        "#729",
+        "#733",
         "#660",
         "#537",
+        "#738",
         "#673",
+        "#732",
         "#531",
         "#562",
-        "#311",
-        "#671",
         "#530",
         "#549",
         "#538",
@@ -1222,6 +1225,7 @@
         "#525",
         "#542",
         "#662",
+        "#731",
         "#513",
         "#511",
         "#658",
@@ -1231,17 +1235,16 @@
         "#504",
         "#489",
         "#222",
-        "#288",
-        "#321",
-        "#228",
-        "#320"
+        "#288"
       ],
-      "context": "psmux 3.3.8 adoption: umbrella for the floor bump, workaround retirement, and the follow-on tracks"
+      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
     {
       "repo": "takushio2525/tako",
       "issues": [
+        "#974",
         "#724",
+        "#972",
         "#729",
         "#728",
         "#641",
@@ -1250,21 +1253,22 @@
         "#525",
         "#730",
         "#647",
-        "#937",
         "#628",
         "#519",
-        "#866",
         "#583",
+        "#937",
+        "#866",
         "#884",
+        "#651",
         "#881",
         "#467",
+        "#970",
         "#766",
         "#659",
         "#907",
-        "#896",
-        "#687"
+        "#896"
       ],
-      "context": "[修正][Windows] psmux の内部ポートを全ペインで listen 検知 + 「ブラウザで開く」でアプリがクラッシュ"
+      "context": "[改善][Windows] tako が書く tmux-backend.conf に psmux が持たないオプションが 4 つあり、psmux コマンドごとに警告が出る"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1281,15 +1285,29 @@
         "#666",
         "#557",
         "#696",
+        "#593",
         "#598",
         "#465",
-        "#617",
-        "#593",
-        "#515",
-        "#651",
-        "#456"
+        "#617"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "issues": [
+        "#158",
+        "#137",
+        "#152",
+        "#117",
+        "#60",
+        "#66",
+        "#139",
+        "#102",
+        "#141",
+        "#65",
+        "#101"
+      ],
+      "context": "psmux panes 읽기 중 Windows 소켓 바인드 충돌 (os error 10048)"
     },
     {
       "repo": "JonathanRosado/duet-agents",
@@ -1300,41 +1318,15 @@
         "#23",
         "#22",
         "#14",
-        "#18",
-        "#20"
+        "#18"
       ],
       "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
     {
-      "repo": "Knatte18/millhouse",
-      "issues": [
-        "#701",
-        "#699",
-        "#694",
-        "#696",
-        "#700",
-        "#690",
-        "#692",
-        "#669"
-      ],
-      "context": "mill-go: per-batch/holistic session cleanup block calls psmux unconditionally under dispatch: agent"
-    },
-    {
-      "repo": "ThomasMichon/copilot-extensions",
-      "issues": [
-        "#102",
-        "#903",
-        "#978",
-        "#990",
-        "#70",
-        "#618",
-        "#344"
-      ],
-      "context": "Make Windows package restore and PSMux PATH repair deterministic"
-    },
-    {
       "repo": "anthropics/claude-code",
       "issues": [
+        "#89202",
+        "#89203",
         "#81880",
         "#24384",
         "#83153",
@@ -1343,14 +1335,16 @@
       "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
     {
-      "repo": "zer0ken/xmux",
+      "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#60",
-        "#66",
-        "#65",
-        "#27"
+        "#1055",
+        "#102",
+        "#978",
+        "#990",
+        "#70",
+        "#618"
       ],
-      "context": "psmux: display_tty가 외부 클라이언트 tty로 오염되어 switch-client가 xmux가 아닌 다른 터미널로 새어 나감"
+      "context": "Make psmux PATH repair tests portable under PowerShell on Linux"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1387,6 +1381,14 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
+    },
+    {
+      "repo": "MikesterFH/dotfiles",
+      "issues": [
+        "#11",
+        "#13"
+      ],
+      "context": "chezmoi: psmux/tmux parity on Windows"
     }
   ],
   "dotfilesRepos": [
@@ -1463,6 +1465,10 @@
       "detail": "psmux.conf"
     },
     {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
       "repo": "david-risney/PwshProfile",
       "detail": "psmux.conf"
     },
@@ -1481,10 +1487,6 @@
     {
       "repo": "caolib/kira",
       "detail": "run.ps1"
-    },
-    {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "SUMMARY.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1940,5 +1942,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-24T07:00:58Z"
+  "lastUpdated": "2026-08-27T17:25:50Z"
 }
