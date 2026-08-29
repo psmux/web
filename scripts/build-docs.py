@@ -50,17 +50,61 @@ def group_for(slug: str) -> str:
             return title
     return "More Guides"
 
-def first_paragraph(md: str) -> str:
-    for block in re.split(r"\n\s*\n", md):
-        text = block.strip()
-        if not text or text.startswith(("#", "|", "```", ">", "<", "-", "*")):
+# Hand written summaries for pages whose opening is not prose (a list, a
+# table, a Q and A). Used only when the intro window below yields nothing.
+DESCRIPTIONS = {
+    "faq": "Answers to the questions people ask most about psmux, the native tmux for Windows: platforms, Windows Terminal, .tmux.conf, mouse and wheel behaviour, keys, colours and paths.",
+    "features": "The complete psmux feature list: sessions that outlive the window, panes and windows, mouse, vim style copy mode, themes and plugins, 90+ tmux compatible commands and 140+ format variables.",
+    "keybindings": "Every default psmux key binding, the copy mode key table, key tables and how to rebind keys with bind-key in your config.",
+    "configuration": "Where psmux reads its config, every option it accepts, and the PSMUX environment variables that change how the server and client behave.",
+    "scripting": "Driving psmux from scripts: commands, targets, hooks, paste buffers, pipe-pane, wait-for and the format variables.",
+}
+
+def _clean(block: str) -> str:
+    text = block.strip()
+    text = re.sub(r"<[^>]+>", "", text)
+    text = re.sub(r"`([^`]*)`", r"\1", text)
+    text = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", text)
+    text = re.sub(r"[*_]{1,2}([^*_]+)[*_]{1,2}", r"\1", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+def _is_prose(text: str, raw: str) -> bool:
+    if not text or len(text) < 60:
+        return False
+    if raw.lstrip().startswith(("#", "|", "```", ">", "<", "-", "*", "+", "!")):
+        return False
+    if re.match(r"^\d+\.\s", raw.lstrip()):
+        return False
+    # A line that introduces a list or a code block is not a summary.
+    if text.endswith(":"):
+        return False
+    return True
+
+def _trim(text: str) -> str:
+    return text[:157].rstrip() + "..." if len(text) > 160 else text
+
+def first_paragraph(md: str, slug: str = "") -> str:
+    """The page summary: the first real paragraph between the H1 and the first
+    H2 or H3. A page that opens with a list or a Q and A has no such paragraph;
+    then DESCRIPTIONS decides, and only as a last resort does the whole page get
+    scanned, which is how the FAQ once got summarised by an answer from its
+    middle."""
+    intro = re.split(r"\n#{2,3}\s", md, maxsplit=1)[0]
+    intro = re.sub(r"^#\s.*$", "", intro, count=1, flags=re.M)
+    blocks = [b for b in re.split(r"\n\s*\n", intro) if b.strip()]
+    for block in blocks:
+        # Skip fenced code entirely, whatever it contains.
+        if block.lstrip().startswith("```"):
             continue
-        text = re.sub(r"`([^`]*)`", r"\1", text)
-        text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
-        text = re.sub(r"[*_]{1,2}([^*_]+)[*_]{1,2}", r"\1", text)
-        text = re.sub(r"\s+", " ", text).strip()
-        if len(text) > 40:
-            return text[:157] + "..." if len(text) > 160 else text
+        text = _clean(block)
+        if _is_prose(text, block):
+            return _trim(text)
+    if slug in DESCRIPTIONS:
+        return DESCRIPTIONS[slug]
+    for block in re.split(r"\n\s*\n", md):
+        text = _clean(block)
+        if _is_prose(text, block):
+            return _trim(text)
     return ""
 
 def extract_headings(md: str) -> list[dict]:
@@ -179,7 +223,7 @@ def main() -> int:
         docs.append({
             "slug": slug,
             "title": doc_title(md, slug.rsplit("/", 1)[-1]),
-            "description": first_paragraph(md),
+            "description": first_paragraph(md, slug),
             "group": group_for(slug),
             "headings": extract_headings(md),
             "markdown": md,

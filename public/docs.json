@@ -1,11 +1,11 @@
 {
-  "generated": "2026-08-29T12:20:14Z",
+  "generated": "2026-08-29T12:21:35Z",
   "source": "https://github.com/psmux/psmux/tree/master/docs",
   "docs": [
     {
       "slug": "tutorials/getting-started-windows",
       "title": "Getting Started with psmux: tmux on Windows in 10 Minutes",
-      "description": "psmux is a native terminal multiplexer for Windows that speaks the tmux command language. This tutorial walks a Windows user from installation to a working, ...",
+      "description": "psmux is a native terminal multiplexer for Windows that speaks the tmux command language. This tutorial walks a Windows user from installation to a working,...",
       "group": "Getting Started",
       "headings": [
         {
@@ -167,7 +167,7 @@
     {
       "slug": "use-cases",
       "title": "Windows Use Cases",
-      "description": "Native tmux on Windows is not just \"splits and tabs.\" Because psmux runs a real background server that keeps your shells, panes, and running processes alive ...",
+      "description": "Native tmux on Windows is not just \"splits and tabs.\" Because psmux runs a real background server that keeps your shells, panes, and running processes alive...",
       "group": "Getting Started",
       "headings": [
         {
@@ -511,7 +511,7 @@
     {
       "slug": "configuration",
       "title": "Configuration",
-      "description": "psmux reads its config on startup from the first file found (in order):",
+      "description": "Config syntax is tmux-compatible. Most .tmux.conf lines work as-is.",
       "group": "Configuration",
       "headings": [
         {
@@ -965,7 +965,7 @@
     {
       "slug": "pane-titles",
       "title": "Pane Titles and OSC Escape Sequences",
-      "description": "Every pane in psmux has a title. By default this is the system hostname, matching tmux convention. You can see it in the status bar, pane border labels, and ...",
+      "description": "Every pane in psmux has a title. By default this is the system hostname, matching tmux convention. You can see it in the status bar, pane border labels, and...",
       "group": "Configuration",
       "headings": [
         {
@@ -1427,7 +1427,7 @@
     {
       "slug": "architecture",
       "title": "How psmux Multiplexes Natively on Windows",
-      "description": "psmux is a terminal multiplexer for Windows, a tmux for Windows written in Rust that drives real ConPTY pseudo consoles directly through the Win32 API. This ...",
+      "description": "psmux is a terminal multiplexer for Windows, a tmux for Windows written in Rust that drives real ConPTY pseudo consoles directly through the Win32 API. This...",
       "group": "How It Works",
       "headings": [
         {
@@ -1529,7 +1529,7 @@
     {
       "slug": "performance",
       "title": "psmux Performance: How Fast Is tmux for Windows?",
-      "description": "psmux is a native terminal multiplexer for Windows, and this page is its performance record: what a psmux command costs, how long a new pane takes to show a ...",
+      "description": "psmux is a native terminal multiplexer for Windows, and this page is its performance record: what a psmux command costs, how long a new pane takes to show a...",
       "group": "How It Works",
       "headings": [
         {
@@ -2199,7 +2199,7 @@
     {
       "slug": "claude-code",
       "title": "Claude Code Agent Teams",
-      "description": "psmux has first-class support for Claude Code agent teams. When Claude Code runs inside a psmux session, it automatically spawns teammate agents in separate ...",
+      "description": "psmux has first-class support for Claude Code agent teams. When Claude Code runs inside a psmux session, it automatically spawns teammate agents in separate...",
       "group": "Integrations",
       "headings": [
         {

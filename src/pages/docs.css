@@ -257,7 +257,78 @@
   word-break: break-word;
 }
 
-.docs-pre-wrap { position: relative; margin: 0 0 18px; }
+.docs-pre-wrap { position: relative; margin: 0 0 20px; }
+
+/* Language label in the top left corner of a code block. */
+.docs-pre-label {
+  position: absolute;
+  top: 0;
+  left: 14px;
+  transform: translateY(-50%);
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #0a0a12;
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  pointer-events: none;
+}
+.docs-pre-wrap.has-label { margin-top: 10px; }
+.docs-pre-wrap.has-label pre { padding-top: 20px; }
+
+/* Long blocks open folded: a short preview with a fade and a toggle. */
+.docs-pre-wrap.folded pre { overflow: hidden; }
+.docs-pre-wrap.folded::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  height: 72px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  background: linear-gradient(to bottom, rgba(10, 10, 18, 0), rgba(10, 10, 18, 0.96));
+  pointer-events: none;
+}
+.docs-fold-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(16, 16, 26, 0.95);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.docs-fold-btn:hover { color: var(--accent-bright); border-color: rgba(129, 140, 248, 0.45); }
+.docs-pre-wrap:not(.folded) .docs-fold-btn {
+  position: static;
+  transform: none;
+  margin-top: 8px;
+  display: inline-flex;
+}
+
+/* The opening paragraph reads as a lede. */
+.docs-article h1 + p {
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* A table whose header row is empty (the "Key facts" tables) shows no header. */
+.docs-article thead:has(th:empty):not(:has(th:not(:empty))) { display: none; }
 
 .docs-article pre {
   background: #0a0a12;

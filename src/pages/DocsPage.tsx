@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { isValidElement, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypeHighlight from "rehype-highlight";
 import {
-  ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, Copy,
+  ArrowLeft, ArrowRight, BookOpen, Check, ChevronDown, ChevronRight, ChevronUp, Copy,
   ExternalLink, Search, Terminal,
 } from "lucide-react";
 import "./docs.css";
@@ -102,13 +102,83 @@ function setMeta(doc: Doc | null) {
   document.head.appendChild(script);
 }
 
+// A block longer than this many lines opens folded, showing the first
+// COLLAPSED_LINES with a "show all" control, so a page that carries a full
+// script reads as prose with code you can open, not as a wall of code.
+const COLLAPSE_AFTER = 16;
+const COLLAPSED_LINES = 10;
+
+const LANGUAGE_LABELS: Record<string, string> = {
+  powershell: "PowerShell", ps1: "PowerShell", pwsh: "PowerShell",
+  bash: "Bash", sh: "Shell", shell: "Shell", zsh: "zsh",
+  console: "Terminal", text: "Text", plaintext: "Text", txt: "Text",
+  tmux: "tmux config", conf: "Config", ini: "Config",
+  json: "JSON", jsonc: "JSON", yaml: "YAML", yml: "YAML", toml: "TOML",
+  python: "Python", py: "Python", rust: "Rust", rs: "Rust",
+  typescript: "TypeScript", ts: "TypeScript", javascript: "JavaScript", js: "JavaScript",
+  go: "Go", c: "C", cpp: "C++", cs: "C#", vim: "Vim", lua: "Lua", batch: "Batch", cmd: "Batch", dos: "Batch",
+};
+
+// Plain text of a React subtree, so a block's line count is known at render
+// time without touching the DOM (rehype-highlight splits code into spans).
+function nodeText(node: React.ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(nodeText).join("");
+  if (isValidElement<{ children?: React.ReactNode }>(node)) return nodeText(node.props.children);
+  return "";
+}
+
+function languageOf(children: React.ReactNode): string {
+  if (!isValidElement<{ className?: string }>(children)) return "";
+  const m = /language-([\w+-]+)/.exec(children.props.className ?? "");
+  if (!m) return "";
+  const key = m[1].toLowerCase();
+  return LANGUAGE_LABELS[key] ?? key.toUpperCase();
+}
+
 function CodeBlock(props: React.HTMLAttributes<HTMLPreElement>) {
   const ref = useRef<HTMLPreElement>(null);
   const [copied, setCopied] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const { children, ...rest } = props;
+  const label = languageOf(children);
+  const lines = useMemo(
+    () => nodeText(children).replace(/\n$/, "").split("\n").length,
+    [children]
+  );
+
+  const foldable = lines > COLLAPSE_AFTER;
+  const folded = foldable && !expanded;
+
   return (
-    <div className="docs-pre-wrap">
-      <pre ref={ref} {...rest}>{children}</pre>
+    <div className={`docs-pre-wrap${label ? " has-label" : ""}${folded ? " folded" : ""}`}>
+      {label && <span className="docs-pre-label">{label}</span>}
+      <pre
+        ref={ref}
+        {...rest}
+        style={folded ? { maxHeight: `calc(${COLLAPSED_LINES} * 1.6em + 32px)` } : undefined}
+      >
+        {children}
+      </pre>
+      {foldable && (
+        <button
+          type="button"
+          className="docs-fold-btn"
+          aria-expanded={!folded}
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {folded ? (
+            <>
+              <ChevronDown size={14} /> Show all {lines} lines
+            </>
+          ) : (
+            <>
+              <ChevronUp size={14} /> Collapse
+            </>
+          )}
+        </button>
+      )}
       <button
         type="button"
         className="docs-copy-btn"
