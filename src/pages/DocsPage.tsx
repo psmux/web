@@ -130,10 +130,42 @@ function CodeBlock(props: React.HTMLAttributes<HTMLPreElement>) {
 }
 
 const RAW_DOCS = "https://raw.githubusercontent.com/psmux/psmux/master/docs/";
+const REPO_BLOB = "https://github.com/psmux/psmux/blob/master/";
+
+// Resolve a relative markdown link against the folder of the page it appears
+// on. Docs live in docs/ and docs/tutorials/, so a tutorial links to
+// "../scripting.md" and a top level page links to "tutorials/x.md"; both must
+// land on the site page when it exists, or on GitHub when it does not
+// (llms.txt, README.md, anything outside docs/). Returns a site path, an
+// absolute URL, or null when the href is not a relative path at all. A
+// relative link to something that is not a page (a script, llms.txt) goes to
+// the file on GitHub rather than dangling.
+function resolveDocLink(href: string, fromSlug: string, known: Set<string>): string | null {
+  const m = href.match(/^(?!https?:|mailto:|#|\/)([^#?]+)(#[\w-]*)?$/i);
+  if (!m) return null;
+  const parts = fromSlug.includes("/") ? fromSlug.split("/").slice(0, -1) : [];
+  let escaped = 0; // how far above docs/ the path climbed
+  for (const seg of m[1].split("/")) {
+    if (seg === "" || seg === ".") continue;
+    if (seg === "..") {
+      if (parts.length) parts.pop();
+      else escaped++;
+      continue;
+    }
+    parts.push(seg);
+  }
+  const joined = parts.join("/");
+  const slug = joined.replace(/\.md$/i, "");
+  if (escaped === 0 && /\.md$/i.test(joined) && known.has(slug)) return `/docs/${slug}${m[2] ?? ""}`;
+  const repoPath = escaped > 0 ? joined : `docs/${joined}`;
+  return `${REPO_BLOB}${repoPath}${m[2] ?? ""}`;
+}
 
 export default function DocsPage() {
   const bundle = useDocsBundle();
-  const { slug } = useParams();
+  // Nested slugs (tutorials/getting-started-windows) come in through the splat.
+  const params = useParams();
+  const slug = (params["*"] ?? "").replace(/\/+$/, "") || undefined;
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [toc, setToc] = useState<{ id: string; text: string; depth: number }[]>([]);
@@ -226,17 +258,26 @@ export default function DocsPage() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const knownSlugs = useMemo(() => new Set(docs.map((d) => d.slug)), [docs]);
+  const currentSlug = doc?.slug ?? "";
   const markdownComponents = useMemo(
     () => ({
       pre: CodeBlock,
       a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
         const { href = "", children, ...rest } = props;
-        const internal = href.match(/^\.?\/?([\w-]+)\.md(#[\w-]*)?$/);
-        if (internal) {
+        const resolved = resolveDocLink(href, currentSlug, knownSlugs);
+        if (resolved && resolved.startsWith("/docs/")) {
           return (
-            <Link to={`/docs/${internal[1]}${internal[2] ?? ""}`} {...rest}>
+            <Link to={resolved} {...rest}>
               {children}
             </Link>
+          );
+        }
+        if (resolved) {
+          return (
+            <a href={resolved} {...rest} target="_blank" rel="noopener noreferrer">
+              {children}
+            </a>
           );
         }
         const external = /^https?:/i.test(href);
@@ -261,7 +302,7 @@ export default function DocsPage() {
         </div>
       ),
     }),
-    []
+    [currentSlug, knownSlugs]
   );
 
   return (

@@ -9,7 +9,7 @@ export default function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/docs/:slug?"
+          path="/docs/*"
           element={
             <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
               <DocsPage />

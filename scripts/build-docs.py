@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Bundle the psmux/psmux docs folder into site assets.
 
-Reads docs/*.md from a psmux source checkout and generates:
+Reads docs/**/*.md from a psmux source checkout (the docs/README.md index is
+skipped, the site has its own) and generates:
   public/docs.json      one JSON bundle the /docs page renders from
   public/sitemap.xml    homepage plus every doc URL
   public/llms.txt       llmstxt.org index with a generated docs section
@@ -22,14 +23,26 @@ from pathlib import Path
 SITE = "https://psmux.pages.dev"
 REPO_DOCS = "https://github.com/psmux/psmux/blob/master/docs"
 
-# Sidebar grouping; docs not listed here land in "More Guides".
+# Sidebar grouping; docs not listed here land in "More Guides". A slug is the
+# path under docs/ without the .md suffix, so a page in a subfolder is
+# "tutorials/getting-started-windows" and its URL is /docs/tutorials/... .
 GROUPS = [
-    ("Getting Started", ["faq", "features", "use-cases"]),
+    ("Getting Started", ["tutorials/getting-started-windows", "faq", "features", "use-cases"]),
+    ("Tutorials", [
+        "tutorials/cross-platform-tmux-scripts",
+        "tutorials/terminal-agents-and-tuis",
+        "tutorials/dev-environment-layouts",
+    ]),
     ("Configuration", ["configuration", "keybindings", "plugins", "pane-titles"]),
     ("Compatibility", ["compatibility", "tmux_args_reference", "multi-shell", "mouse-ssh"]),
-    ("Advanced", ["scripting", "control-mode", "iterm2-control-mode", "preview", "warm-sessions", "performance"]),
+    ("How It Works", ["architecture", "performance", "warm-sessions"]),
+    ("Advanced", ["scripting", "control-mode", "iterm2-control-mode", "preview", "diagnostics"]),
     ("Integrations", ["claude-code", "integration"]),
 ]
+
+# Files under docs/ that are not pages: the repo's own index duplicates the
+# sidebar and its links point at GitHub paths.
+SKIP = {"README.md"}
 
 def group_for(slug: str) -> str:
     for title, slugs in GROUPS:
@@ -77,7 +90,7 @@ def build_llms_txt(docs: list[dict]) -> str:
         "Key facts:",
         "",
         "* Single native Windows binary with zero dependencies",
-        "* 76 tmux compatible commands and 126+ format variables",
+        "* 90+ tmux compatible commands and 140+ format variables (run `psmux list-commands` for the live list)",
         "* Vim style copy mode with 53 keybindings, full mouse support",
         "* Reads your existing .tmux.conf so tmux muscle memory carries over",
         "* Installable via winget, Scoop, Chocolatey, Cargo, or a PowerShell one liner",
@@ -96,7 +109,11 @@ def build_llms_txt(docs: list[dict]) -> str:
         "## Documentation",
         "",
     ]
+    current_group = None
     for d in docs:
+        if d["group"] != current_group:
+            current_group = d["group"]
+            lines += ([] if lines[-1] == "" else [""]) + [f"### {current_group}", ""]
         desc = d["description"] or f"psmux {d['title']} guide"
         lines.append(f"* [{d['title']}]({SITE}/docs/{d['slug']}): {desc}")
     lines += [
@@ -146,7 +163,10 @@ def main() -> int:
         print(f"docs folder {docs_dir} not found; keeping existing bundle")
         return 0
 
-    md_files = sorted(docs_dir.glob("*.md"))
+    md_files = sorted(
+        f for f in docs_dir.rglob("*.md")
+        if f.name not in SKIP and not any(part.startswith(".") for part in f.relative_to(docs_dir).parts)
+    )
     if not md_files:
         print("no markdown files found; keeping existing bundle")
         return 0
@@ -154,15 +174,16 @@ def main() -> int:
     docs = []
     for f in md_files:
         md = f.read_text(encoding="utf-8", errors="replace")
-        slug = f.stem
+        rel = f.relative_to(docs_dir).as_posix()
+        slug = rel[:-3]
         docs.append({
             "slug": slug,
-            "title": doc_title(md, slug),
+            "title": doc_title(md, slug.rsplit("/", 1)[-1]),
             "description": first_paragraph(md),
             "group": group_for(slug),
             "headings": extract_headings(md),
             "markdown": md,
-            "sourceUrl": f"{REPO_DOCS}/{f.name}",
+            "sourceUrl": f"{REPO_DOCS}/{rel}",
         })
 
     # Keep sidebar order stable: grouped docs in GROUPS order, then the rest.

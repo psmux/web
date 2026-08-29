@@ -2,6 +2,310 @@
 
 Generated 2026-08-29 from https://github.com/psmux/psmux/tree/master/docs
 
+<!-- tutorials/getting-started-windows -->
+# Getting Started with psmux: tmux on Windows in 10 Minutes
+
+psmux is a native terminal multiplexer for Windows that speaks the tmux command language. This tutorial walks a Windows user from installation to a working, persistent multi-pane session in PowerShell or Windows Terminal, with no WSL, Cygwin or MSYS2 involved. If you have used tmux on Linux or macOS, everything you already know applies; if you have never used a multiplexer, this page is the place to start.
+
+**What you will learn**
+
+- How to install psmux with winget, Scoop, Chocolatey, Cargo or a release zip
+- How to start a session, split panes and open windows with the `Ctrl+b` prefix
+- How to detach, close the terminal window, and reattach later with everything still running
+- How copy mode, the Windows clipboard and the mouse work
+- How to write a first `~/.psmux.conf` (your existing `.tmux.conf` also works)
+- How to pick pwsh, cmd, Git Bash, WSL or nushell as the shell inside panes
+
+**Key facts**
+
+| | |
+|---|---|
+| Binary names | `psmux`, plus `pmux` and `tmux` aliases (type `tmux` and it just works) |
+| Default prefix | `Ctrl+b`, same as tmux |
+| Default shell in panes | PowerShell 7 (`pwsh`), configurable per session, window or pane |
+| Config file | first of `~/.psmux.conf`, `~/.psmuxrc`, `~/.tmux.conf`, `~/.config/psmux/psmux.conf` |
+| Requirements | Windows 10 or 11; PowerShell 7 recommended |
+| Terminal | Windows Terminal, plain conhost, VS Code terminal, or any ConPTY host |
+
+## How do I install psmux on Windows?
+
+Pick one channel. All of them put `psmux.exe`, `pmux.exe` and `tmux.exe` on your PATH.
+
+```powershell
+# WinGet (Windows 10/11 built in package manager)
+winget install psmux
+
+# Scoop
+scoop bucket add psmux https://github.com/psmux/scoop-psmux
+scoop install psmux
+
+# Chocolatey
+choco install psmux
+
+# Cargo (builds from crates.io, needs a Rust toolchain)
+cargo install psmux
+```
+
+You can also download the `.zip` from [GitHub Releases](https://github.com/psmux/psmux/releases) and add the folder to your PATH. Verify the install from any shell:
+
+```powershell
+psmux -V
+# psmux 3.3.8 (cbb9c10 2026-08-28)
+
+tmux -V
+# tmux 3.3.8
+```
+
+The `tmux -V` output is deliberately tmux shaped so scripts and tools that check the version string keep working. See the [cross platform scripting tutorial](cross-platform-tmux-scripts.md) for why that matters.
+
+psmux launches PowerShell 7 by default. If `pwsh` is not installed it falls back to Windows PowerShell 5, then `cmd.exe`, but the experience is much better with pwsh:
+
+```powershell
+winget install --id Microsoft.PowerShell
+```
+
+## How do I start my first session?
+
+Open Windows Terminal (or any console) and type:
+
+```powershell
+psmux
+```
+
+You get a full screen view with a status bar at the bottom and a PowerShell prompt inside a pane. That prompt is running inside a psmux **server**, a background process that owns your shells. The window you are looking at is a **client** attached to that server. Keeping the two apart is what makes sessions survive later on.
+
+Give sessions names from the start; it makes everything else easier:
+
+```powershell
+psmux new-session -s main
+```
+
+`new`, `new-session` and `new -s main` are all the same command. To attach to an existing session, or create it if it does not exist yet:
+
+```powershell
+psmux new -A -s main
+```
+
+## How do I split a pane in PowerShell?
+
+Inside the session, press the prefix (`Ctrl+b`), release it, then press the next key:
+
+| Keys | What happens |
+|------|--------------|
+| `Ctrl+b` then `%` | Split the current pane left and right |
+| `Ctrl+b` then `"` | Split the current pane top and bottom |
+| `Ctrl+b` then arrow key | Move focus to the pane in that direction |
+| `Ctrl+b` then `o` | Cycle focus to the next pane |
+| `Ctrl+b` then `z` | Zoom the current pane to full size (press again to restore) |
+| `Ctrl+b` then `x` | Kill the current pane |
+| `Ctrl+b` then `Space` | Cycle through the built in layouts |
+| `Ctrl+b` then `q` | Flash pane numbers, press one to jump there |
+
+The same actions are commands, so you can run them from a prompt in another terminal or from a script:
+
+```powershell
+psmux split-window -h -t main          # left/right split in session "main"
+psmux split-window -v -p 30 -t main    # bottom pane takes 30 percent
+psmux split-window -h -c "#{pane_current_path}"   # new pane starts in the same folder
+psmux select-layout -t main main-vertical
+```
+
+Every pane is its own ConPTY with its own shell process. Resizing the terminal window resizes the layout; dragging a pane border with the mouse resizes a split.
+
+## How do I open more windows?
+
+A window is a full screen tab with its own set of panes. The status bar lists them.
+
+| Keys | What happens |
+|------|--------------|
+| `Ctrl+b` then `c` | Create a new window |
+| `Ctrl+b` then `n` / `p` | Next / previous window |
+| `Ctrl+b` then `0` to `9` | Jump to window by number |
+| `Ctrl+b` then `,` | Rename the current window |
+| `Ctrl+b` then `w` | Interactive window and pane chooser (`choose-tree`) |
+| `Ctrl+b` then `&` | Kill the current window |
+
+From the command line:
+
+```powershell
+psmux new-window -t main -n logs                     # named window
+psmux new-window -t main -n build -- cargo watch     # window that runs a command
+psmux new-window -t main -c C:\Projects\api          # window that starts in a folder
+```
+
+Clicking a window name in the status bar switches to it.
+
+## How do I detach and reattach a session?
+
+This is the feature that makes a multiplexer worth using. Press `Ctrl+b` then `d` to **detach**. Your terminal returns to the plain prompt, but the session, its panes and every process inside them keep running in the psmux server.
+
+Close the terminal window entirely. Open a new one. Then:
+
+```powershell
+psmux ls
+# main: 3 windows (created Sat Aug 29 15:40:16 2026)
+
+psmux attach -t main
+```
+
+Everything is exactly where you left it, including a `cargo watch`, an SSH connection or an AI coding agent that was mid task. `psmux ls` (or `list-sessions`) shows what the server is holding, and `psmux kill-session -t main` ends a session for good.
+
+Because the server is a separate process, this also works for things started without any window at all:
+
+```powershell
+# Start a session in the background, no window opens
+psmux new-session -d -s worker -- python .\long_job.py
+
+# Come back later from any terminal
+psmux attach -t worker
+```
+
+The [Windows use cases](../use-cases.md) page builds on this idea for boot time services, remote administration and long running agents.
+
+## How does copy mode and the Windows clipboard work?
+
+Press `Ctrl+b` then `[` to enter **copy mode**. The pane border turns yellow, `[copy mode]` appears in the title, and you can move around the scrollback with the arrow keys or `h j k l`, page with `PageUp`/`PageDown`, and search with `/` (forward) and `?` (backward). Press `Space` to start a selection, move the cursor, then `Enter` or `y` to copy it to the Windows clipboard and leave copy mode. `q` or `Escape` leaves without copying.
+
+Prefer vi keys? One line of config switches the keymap:
+
+```tmux
+set -g mode-keys vi
+```
+
+One thing to know if you come from vim: as in tmux, `v` toggles rectangle selection and does not start one. `Space` starts a selection and `V` starts a line selection. If you want `v` to begin a selection the way vim does, bind it:
+
+```tmux
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+```
+
+Paste inside a pane with `Ctrl+b` then `]`, or use the terminal's normal paste (`Ctrl+Shift+V` or right click in Windows Terminal); both reach the shell in the active pane. The full copy mode keymap, for emacs and vi, is in [Key Bindings](../keybindings.md).
+
+## Does the mouse work?
+
+Yes, and it is on by default. With the mouse you can:
+
+- Click a pane to focus it
+- Click a window name in the status bar to switch to it
+- Drag a pane border to resize the split
+- Scroll the wheel to move through scrollback (this enters copy mode at a shell prompt, and passes the wheel through to full screen apps such as `nvim`, `htop` or `less` that ask for it)
+- Left drag to select text; the selection is copied to the Windows clipboard on release
+- Right click to paste
+
+Applications that draw their own columns (lazygit, opencode, a split nvim) may prefer to handle selection themselves; `set -g mouse-selection off` hands drag selection to the app while keeping clicks, scrolling and border resizing. Details, including how mouse events reach programs over SSH, are in [Mouse and SSH](../mouse-ssh.md) and [Configuration](../configuration.md).
+
+## How do I write my first config file?
+
+psmux reads the first file it finds from this list: `~/.psmux.conf`, `~/.psmuxrc`, `~/.tmux.conf`, `~/.config/psmux/psmux.conf`. `~` is your Windows user profile (`C:\Users\<you>`). If you already have a `.tmux.conf` from Linux, copy it over as is; the syntax is tmux syntax.
+
+A useful first `~/.psmux.conf`:
+
+```tmux
+# Use Ctrl+a as the prefix (Ctrl+b is the default)
+set -g prefix C-a
+
+# Windows and panes count from 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# vi keys in copy mode
+set -g mode-keys vi
+
+# Bigger scrollback
+set -g history-limit 10000
+
+# Easier splits that keep the current folder
+bind-key | split-window -h -c "#{pane_current_path}"
+bind-key - split-window -v -c "#{pane_current_path}"
+
+# Reload the config with Prefix + r
+bind-key r source-file ~/.psmux.conf \; display-message "config reloaded"
+
+# Status bar
+set -g status-style "bg=#1e1e2e,fg=#cdd6f4"
+set -g status-left "[#S] "
+set -g status-right "%H:%M %d-%b-%y"
+```
+
+Save the file, then either restart psmux or run `psmux source-file ~/.psmux.conf`. To try a config without touching your default one, use `psmux -f C:\path\to\other.conf`, and `psmux -f NUL` starts with no config at all.
+
+Themes and plugins (Catppuccin, Dracula, Nord, session save and restore, and more) install through the plugin manager described in [Plugins and Themes](../plugins.md).
+
+## Which shell runs inside the panes: pwsh, cmd, Git Bash, WSL or nushell?
+
+The default is PowerShell 7. Change it globally in the config:
+
+```tmux
+set -g default-shell cmd          # cmd.exe
+set -g default-shell powershell   # Windows PowerShell 5
+set -g default-shell nu           # nushell
+set -g default-shell wsl          # your default WSL distro
+set -g default-shell "C:/Program Files/Git/bin/bash.exe"   # Git Bash
+```
+
+Or mix shells in one session, per window or per pane:
+
+```powershell
+psmux new-window -n linux wsl
+psmux split-window -h -- "C:/Program Files/Git/bin/bash.exe"
+psmux new-session -s admin -- cmd
+```
+
+A session with pwsh on the left, WSL Ubuntu on the right and a cmd window for legacy tools is a normal psmux setup. [Multi-Shell](../multi-shell.md) covers the bindings, the per shell quirks and how `#{pane_current_path}` behaves in each.
+
+## How do I make Windows Terminal open straight into psmux?
+
+Add a profile whose command line attaches to (or creates) a named session. In Windows Terminal open Settings, add a new profile, and set:
+
+```text
+Command line: psmux new -A -s main
+Starting directory: %USERPROFILE%
+```
+
+Or in `settings.json`:
+
+```json
+{
+  "name": "psmux",
+  "commandline": "psmux new -A -s main",
+  "startingDirectory": "%USERPROFILE%"
+}
+```
+
+`new -A -s main` attaches if `main` exists and creates it otherwise, so every new tab of that profile lands in the same session, and closing the tab only detaches. Set it as the default profile if you want psmux in every tab.
+
+Session creation is fast because psmux keeps a **warm** server pre spawned in the background and claims it on `new-session`; see [Warm Sessions](../warm-sessions.md).
+
+## Where do I go next?
+
+- [Windows Use Cases](../use-cases.md): boot time services, remote admin, AI agents, dashboards
+- [Terminal agents and TUIs](terminal-agents-and-tuis.md): running Claude Code, Codex, lazygit, nvim and friends in panes
+- [Dev environment layouts](dev-environment-layouts.md): repeatable project layouts and sessionizer scripts
+- [Cross platform tmux scripts](cross-platform-tmux-scripts.md): automation that runs on Windows, Linux and macOS unchanged
+- [Key Bindings](../keybindings.md), [Configuration](../configuration.md), [Scripting](../scripting.md), [Command Reference](../tmux_args_reference.md)
+- [FAQ](../faq.md) and [Compatibility](../compatibility.md)
+
+## FAQ
+
+**Q: Do I need WSL, Cygwin or MSYS2 to run psmux?**
+A: No. psmux is a native Windows executable built on ConPTY. It runs PowerShell, cmd and Windows programs directly. WSL and Git Bash are optional shells you can put inside panes.
+
+**Q: Can I type `tmux` instead of `psmux`?**
+A: Yes. `tmux.exe` and `pmux.exe` ship alongside `psmux.exe` and behave identically, so muscle memory and existing scripts keep working.
+
+**Q: My `.tmux.conf` from Linux has lines psmux does not understand. Will it break?**
+A: No. An unknown option produces a one line warning at startup and is otherwise skipped, so the rest of the file still loads. The [Compatibility](../compatibility.md) matrix lists every supported command and option, and `psmux list-commands` prints the live list for your build.
+
+**Q: Where did my session go after I closed Windows Terminal?**
+A: Nowhere. Closing the window detaches the client. Run `psmux ls` from a new terminal and `psmux attach -t <name>` to get back in. Only `kill-session`, `kill-server` or a reboot ends a session.
+
+**Q: Does psmux work over SSH into a Windows machine?**
+A: Yes. Install psmux on the Windows host, SSH in with OpenSSH, and run `psmux` there. Mouse support over SSH depends on the Windows build; [Mouse and SSH](../mouse-ssh.md) has the table.
+
+**Q: How do I see every key binding currently active?**
+A: Press `Ctrl+b` then `?`, or run `psmux list-keys`.
+
+---
+
 <!-- faq -->
 # FAQ
 
@@ -721,6 +1025,1159 @@ Windows Terminal draws windows. psmux runs a **server**. That difference is the 
 | [Warm Sessions](warm-sessions.md) | How psmux makes session and pane creation near instant |
 | [Mouse Over SSH](mouse-ssh.md) | Full mouse support on remote Windows servers |
 | [Plugins & Themes](plugins.md) | psmux-resurrect and psmux-continuum for save/restore across reboots |
+
+---
+
+<!-- tutorials/cross-platform-tmux-scripts -->
+# Write One tmux Script That Runs on Windows, Linux and macOS with psmux
+
+psmux is a tmux compatible terminal multiplexer for Windows, and it ships a `tmux.exe` alias. That means automation written against tmux, whether a session bootstrap script, a project sessionizer, a CI harness that drives a TUI, or an agent orchestrator built on `send-keys` and `capture-pane`, runs on Windows unchanged. This tutorial shows the same script running under Git Bash on Windows through psmux, the PowerShell equivalent for pure Windows shops, the quoting and `--` rules psmux applies, the exit codes and error strings you can script against, and the short list of platform differences a cross platform script needs to know about.
+
+Every command and every output block on this page was run against psmux 3.3.8 on Windows 11.
+
+**What you will learn**
+
+- Why `tmux` on a Windows PATH can be psmux, and what `tmux -V` reports
+- A session bootstrap script in bash that runs on all three operating systems, and its PowerShell twin
+- The idempotent `has-session` pattern and what exit codes to expect
+- How psmux parses `--`, dash leading operands, quotes, backslashes and newlines
+- `display-message -p`, `-F` formats, `wait-for`, `pipe-pane` and `run-shell` from scripts
+- A portability checklist and a headless CI style test that asserts on `capture-pane` output
+
+## Why does a tmux script run on Windows at all?
+
+psmux installs three binaries: `psmux.exe`, `pmux.exe` and `tmux.exe`. They are the same program. The command names, flags, target syntax (`session:window.pane`, `%pane_id`, `@window_id`), format variables and config syntax are tmux's, and the version string is tmux shaped so version checks keep passing:
+
+```console
+$ tmux -V
+tmux 3.3.8
+$ psmux -V
+psmux 3.3.8 (cbb9c10 2026-08-28)
+```
+
+So a script that calls `tmux` finds psmux on Windows and real tmux on Linux and macOS. You write it once. The [Compatibility](../compatibility.md) page lists every command and option; `psmux list-commands` prints the live list for the build you have.
+
+## A session bootstrap script in bash (Git Bash on Windows, sh on Linux and macOS)
+
+`dev.sh` creates a project session with an editor window in the `main-vertical` layout and a background logs window, sends a command into two panes, and prints what it built. Run it twice and it is a no op the second time.
+
+```bash
+#!/usr/bin/env bash
+# dev.sh: bootstrap a project session. Runs unchanged on Linux/macOS (tmux) and Windows (psmux).
+set -e
+SESSION="${1:-dev}"
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+  echo "session $SESSION already exists"
+else
+  tmux new-session -d -s "$SESSION" -n editor
+  tmux split-window -h -t "$SESSION:editor"
+  tmux split-window -v -t "$SESSION:editor.1"
+  tmux select-layout -t "$SESSION:editor" main-vertical
+  tmux new-window -d -t "$SESSION" -n logs
+  tmux send-keys -t "$SESSION:editor.0" 'echo hello from pane 0' Enter
+  tmux send-keys -t "$SESSION:logs" 'echo log window ready' Enter
+fi
+
+tmux list-windows -t "$SESSION" -F '#{window_index}:#{window_name} panes=#{window_panes}'
+tmux display-message -p -t "$SESSION:editor.0" 'active pane #{pane_id} in #{session_name}:#{window_name} (#{pane_width}x#{pane_height})'
+```
+
+Run from Git Bash on Windows (`C:\Program Files\Git\bin\bash.exe`), with psmux answering as `tmux`:
+
+```console
+$ bash ./dev.sh tutaDev
+0:editor panes=3
+1:logs panes=1
+active pane %1 in tutaDev:editor (71x30)
+
+$ bash ./dev.sh tutaDev
+session tutaDev already exists
+0:editor panes=3
+1:logs panes=1
+active pane %1 in tutaDev:editor (71x30)
+```
+
+The panes are running PowerShell 7 (the psmux default shell), and `capture-pane` shows the command landed:
+
+```console
+$ tmux capture-pane -p -t tutaDev:editor.0
+PS C:\Users\godwin\projects\api> echo hello from pane 0
+hello
+from
+pane
+0
+```
+
+(`echo` in PowerShell is `Write-Output` and prints each argument on its own line. That is the shell, not psmux; quote the string or use `Write-Host` if you want one line.)
+
+Attach with `tmux attach -t tutaDev` from any terminal, and `tmux kill-session -t tutaDev` when done.
+
+## The same bootstrap in PowerShell
+
+If your team is Windows only, write the script in PowerShell. The psmux commands are identical; only the surrounding shell changes. Note `$LASTEXITCODE` for the `has-session` check, and `${Session}:editor` so PowerShell does not read `$Session:` as a scoped variable.
+
+```powershell
+# dev.ps1: the same session bootstrap, written for PowerShell.
+param([string]$Session = "dev")
+
+psmux has-session -t $Session 2>$null
+if ($LASTEXITCODE -ne 0) {
+    psmux new-session -d -s $Session -n editor
+    psmux split-window -h -t "${Session}:editor"
+    psmux split-window -v -t "${Session}:editor.1"
+    psmux select-layout -t "${Session}:editor" main-vertical
+    psmux new-window -d -t $Session -n logs
+    psmux send-keys -t "${Session}:editor.0" 'Write-Host "hello from pane 0"' Enter
+    psmux send-keys -t "${Session}:logs" 'Write-Host "log window ready"' Enter
+} else {
+    Write-Host "session $Session already exists"
+}
+
+psmux list-windows -t $Session -F '#{window_index}:#{window_name} panes=#{window_panes}'
+psmux display-message -p -t "${Session}:editor.0" 'active pane #{pane_id} in #{session_name}:#{window_name} (#{pane_width}x#{pane_height})'
+```
+
+```console
+PS> pwsh -NoProfile -File .\dev.ps1 tutaDevPs
+0:editor panes=3
+1:logs panes=1
+active pane %1 in tutaDevPs:editor (71x30)
+PS> pwsh -NoProfile -File .\dev.ps1 tutaDevPs
+session tutaDevPs already exists
+0:editor panes=3
+1:logs panes=1
+active pane %1 in tutaDevPs:editor (71x30)
+```
+
+## How do I make a script idempotent with has-session?
+
+`has-session -t NAME` exits 0 when the session exists and 1 when it does not, in tmux and in psmux. Always redirect stderr, because tmux prints `can't find session` on the failure path.
+
+```bash
+if ! tmux has-session -t "$S" 2>/dev/null; then
+  tmux new-session -d -s "$S"
+fi
+```
+
+`new-session -A -s NAME` is the one line version for the interactive case (attach if it exists, create otherwise), and `new-session -A -d -s NAME` does the same without attaching. Both work in psmux.
+
+## What exit codes and error strings can I script against?
+
+An unresolvable target is an error with a non zero exit, never a silent fallback to the active window (this was tightened in psmux 3.3.8, issue #545):
+
+```console
+$ tmux send-keys -t tutaProbe:nope 'x' Enter; echo rc=$?
+psmux: can't find window: nope
+rc=1
+$ tmux capture-pane -p -t %999; echo rc=$?
+psmux: can't find pane: %999
+rc=1
+$ tmux has-session -t tutaMissing; echo rc=$?
+rc=1
+```
+
+The message prefix is `psmux:` rather than `tmux:`. If you match on the text, match on the part after the colon (`can't find window`, `can't find pane`, `can't find session`), which is tmux's wording.
+
+`kill-session -t NAME` on a name that is not a session exits 1 with `can't find session: NAME`, as in tmux, so a typo in a teardown script is not a silent success.
+
+`list-sessions` with nothing running prints `no server running on <data dir>` and exits 1, as tmux does, which keeps the `tmux ls 2>/dev/null || tmux new -d -s work` idiom portable. A `-f` filter that matches nothing on a live server is still an empty listing at exit 0.
+
+## How does psmux parse `--`, dashes, quotes and backslashes?
+
+This is where scripts most often differ between shells, so here are the exact rules psmux applies. All of them match tmux unless noted.
+
+**`--` ends option parsing.** A dash leading operand after `--` is data. `send-keys -- -la Enter` types `-la` into the pane, and `set-option -- @k -u` stores the string `-u` in `@k` instead of unsetting it:
+
+```console
+$ tmux send-keys -t tutaProbe -- -la Enter
+$ tmux set-option -t tutaProbe -- @marker -dash-value
+$ tmux show-options -t tutaProbe | grep marker
+@marker "-dash-value"
+```
+
+Put the `--` before the option name for `set-option` and `set-hook`, exactly as you would with tmux.
+
+**`send-keys -l` is literal.** Nothing after `-l` is parsed as a key name, so `Enter`, `C-c` and friends are typed as text. Send the key on a separate call:
+
+```bash
+tmux send-keys -t "$S" -l 'literal $env:TEMP "quoted" a\b'
+tmux send-keys -t "$S" Enter
+```
+
+Both the `$`, the double quotes and the backslash arrive intact (psmux escapes `"` and `\` on the wire and unescapes them in the server, issue #547).
+
+**Newlines in a payload are safe.** A `send-keys` argument that contains a newline is delivered as one argument and cannot split into a second psmux command (issue #560). It is typed as text rather than as a key press, so send multi line input as separate `send-keys` calls with `Enter` between them.
+
+**Multiple tokens after `--` are executed directly; a single string goes through the shell.** `new-window -- ping -n 30 127.0.0.1` starts `ping` as the pane's process, with no shell in between, the way tmux calls `execvp`. A single quoted string is handed to the pane's shell so pipes and redirects work:
+
+```console
+$ tmux new-window -d -t tutaR -n direct -- ping -n 30 127.0.0.1
+$ tmux display-message -p -t tutaR:direct '#{window_name} runs #{pane_current_command}'
+direct runs PING
+$ tmux new-window -d -t tutaR -n shstr "ping -n 30 127.0.0.1 | findstr Reply"
+$ tmux display-message -p -t tutaR:shstr '#{window_name} runs #{pane_current_command}'
+shstr runs findstr
+```
+
+**Shell quoting is the caller's job, and it differs by shell.** In bash and in PowerShell, single quotes pass the text to psmux untouched, so `'echo "pid=$PID"'` reaches the pane with the `$` intact and the pane's shell expands it. In PowerShell double quotes, `$env:TEMP` and `$PID` are expanded by the calling shell before psmux ever sees them. In bash, the same is true of `"$HOME"`. Use single quotes around anything the pane should expand.
+
+```console
+$ tmux send-keys -t tutaQ 'echo "pid=$PID home=$HOME"' Enter
+$ tmux capture-pane -p -t tutaQ | grep pid=
+pid=27140 home=C:\Users\godwin
+```
+
+Chaining several commands in one invocation uses `\;` in bash and `` `; `` in PowerShell, because each shell treats a bare `;` as its own separator. See [Scripting](../scripting.md) for more.
+
+## How do I read state back: display-message -p and -F formats
+
+`display-message -p` prints a format string and exits, which is the standard way to pull one value into a script. `-F` on the `list-*` commands does the same for lists. psmux supports 140+ tmux format variables and the `#{==:a,b}`, `#{?cond,yes,no}` and modifier forms.
+
+```bash
+pane=$(tmux display-message -p -t "$S:editor.0" '#{pane_id}')
+tmux list-panes -s -t "$S" -F '#{window_index}.#{pane_index} #{pane_current_command} #{pane_width}x#{pane_height}'
+tmux if-shell -F '#{==:#{session_name},tutaR}' 'display-message -p format-yes' 'display-message -p format-no'
+```
+
+`#{pane_current_path}` returns a Windows path on Windows (`C:\Users\godwin\projects\api`). In Git Bash, convert it when you need a POSIX path:
+
+```console
+$ cygpath -u "$(tmux display-message -p -t tutaR '#{pane_current_path}')"
+/c/Users/godwin/Documents/workspace/psmux
+```
+
+## wait-for, pipe-pane and run-shell from a script
+
+**`wait-for`** blocks until another process signals the same channel. It is the tmux way to sequence steps across panes, and it works the same in psmux:
+
+```console
+$ ( sleep 2; tmux wait-for -S tutaGo ) &
+$ tmux wait-for tutaGo; echo "released rc=$?"
+released rc=0
+```
+
+**`pipe-pane`** streams a pane's raw output to a sink. The sink runs on the Windows side, so give it a Windows path. In Git Bash `$TEMP` and `$TMP` are mapped to `/tmp`, which the psmux server cannot open; use `cygpath -w` or a literal `C:/...` path:
+
+```bash
+LOG="$(cygpath -w "$TEMP")\\pane.log"
+tmux pipe-pane -t "$S" "cat >> '$LOG'"
+tmux send-keys -t "$S" 'echo piped-line-1' Enter
+tmux pipe-pane -t "$S"       # no argument turns the pipe off
+```
+
+```console
+$ grep -c piped-line-1 "C:/Users/godwin/AppData/Local/Temp/pane.log"
+2
+```
+
+(Two hits: the echoed command line and its output.) `cat >> file` sinks are serviced by the psmux server itself so they need no `cat.exe` on PATH; other sinks run through the shell. psmux does not expand `#{...}` in the sink command, where tmux does; expand it in the caller if you need `#{pane_id}` in the file name.
+
+**`run-shell` and `if-shell` use the platform's shell.** On Linux and macOS tmux runs them with `sh -c`. On Windows psmux runs them with `pwsh -NoProfile -Command` (falling back to Windows PowerShell, then `cmd /c`). This is the one place where a tmux script is not automatically portable: `run-shell 'test -f ~/.x && ...'` is sh syntax and will not run under pwsh. Keep those commands to things both shells accept, or branch. A cheap branch that works in both places, because `Get-Command` does not exist in sh and so fails there:
+
+```console
+$ tmux if-shell 'Get-Command pwsh' 'display-message -p yes-pwsh' 'display-message -p no-pwsh'
+yes-pwsh
+```
+
+In a config file:
+
+```tmux
+if-shell 'Get-Command pwsh' 'source-file ~/.tmux.windows.conf' 'source-file ~/.tmux.unix.conf'
+```
+
+Format variables are expanded in `run-shell` arguments before the command runs, on both sides:
+
+```console
+$ tmux run-shell -t tutaProbe 'echo run-shell says #{session_name}:#{pane_id}'
+run-shell
+says
+tutaProbe:%1
+```
+
+(One word per line is PowerShell's `echo` again. Both the format variables were expanded before the command ran, which is the point.)
+
+## What is set inside a pane: TMUX and TMUX_PANE
+
+Processes inside a psmux pane see `TMUX` and `TMUX_PANE`, so the common guard `[ -n "$TMUX" ]` and tools that read `$TMUX_PANE` work:
+
+```console
+$ tmux send-keys -t tutaProbe 'echo "TMUX=$env:TMUX PANE=$env:TMUX_PANE"' Enter
+$ tmux capture-pane -p -t tutaProbe | grep TMUX=
+TMUX=/tmp/psmux-53400/default,61721,0 PANE=%1
+```
+
+The `TMUX` value has tmux's `socket,pid,index` shape, but the first field is not a Unix socket path on Windows; psmux clients and servers talk over a loopback TCP port. Do not parse it for a socket to connect to. Use the CLI, or [control mode](../control-mode.md) (`psmux -C`) for a machine readable stream.
+
+Inside the pane, `$TMUX_PANE` is the current pane id (`%1`), which is what `tmux send-keys -t "$TMUX_PANE"` style self targeting scripts expect.
+
+## Portability checklist
+
+| Concern | tmux on Linux/macOS | psmux on Windows | What to do in the script |
+|---------|--------------------|------------------|--------------------------|
+| Binary name | `tmux` | `tmux`, `psmux` or `pmux` | Call `tmux` |
+| Version check | `tmux 3.x` | `tmux 3.3.8` | Parse `tmux -V` as usual |
+| Default shell in panes | `$SHELL` | `pwsh` (then `powershell`, then `cmd`) | Set `default-shell` or send shell neutral commands |
+| `run-shell` / `if-shell` interpreter | `sh -c` | `pwsh -NoProfile -Command` | Keep commands shell neutral, or branch with `if-shell 'Get-Command pwsh'` |
+| Paths from `#{pane_current_path}` | POSIX | Windows (`C:\...`) | `cygpath -u` in Git Bash when needed |
+| `pipe-pane` sink path | POSIX | Windows path | `cygpath -w "$TEMP"` in Git Bash |
+| `#{pane_current_path}` inside WSL | n/a | Frozen unless the Linux shell emits OSC 7 | Add the one line from the [FAQ](../faq.md) to `~/.bashrc` in the distro |
+| Unresolvable `-t` target | error, rc 1 | error, rc 1 (`psmux: can't find ...`) | Match the text after `psmux:`/`tmux:` |
+| `kill-session` on a missing name | `can't find session`, rc 1 | `can't find session`, rc 1 | Same code |
+| `list-sessions` with no server | `no server running on <socket>`, rc 1 | `no server running on <data dir>`, rc 1 | `tmux ls 2>/dev/null \|\| tmux new -d` works on both |
+| `$TMUX` inside a pane | socket path | not a socket | Use only as a "running inside tmux" flag |
+| `--` end of options | supported | supported | Use it before any dash leading operand |
+| `send-keys -l`, newline payloads | supported | supported | Same code |
+| `wait-for`, `capture-pane -p`, `display-message -p`, `-F` | supported | supported | Same code |
+| Control mode `-C` / `-CC` | supported | supported | Same protocol, see [Control Mode](../control-mode.md) |
+| Quoting | bash rules | bash rules under Git Bash, PowerShell rules under pwsh | Single quote anything the pane should expand |
+
+## Worked example: a project sessionizer
+
+A sessionizer takes a folder, derives a session name from it, builds the layout if needed and attaches. This one runs under bash on all three platforms; it uses `cygpath` only when it exists, so the same file works on Linux.
+
+```bash
+#!/usr/bin/env bash
+# sessionize.sh <project-dir>
+set -e
+dir="${1:-.}"
+if command -v cygpath >/dev/null 2>&1; then dir="$(cygpath -w "$dir")"; fi
+name="$(basename "$dir" | tr '. ' '__')"
+
+if ! tmux has-session -t "$name" 2>/dev/null; then
+  tmux new-session -d -s "$name" -c "$dir" -n code
+  tmux split-window -h -t "$name:code" -c "$dir"
+  tmux split-window -v -t "$name:code.1" -c "$dir"
+  tmux select-layout -t "$name:code" main-vertical
+  tmux new-window -d -t "$name" -n git -c "$dir"
+  tmux send-keys -t "$name:git" 'git status' Enter
+  tmux select-window -t "$name:code"
+fi
+
+if [ -n "$TMUX" ]; then
+  tmux switch-client -t "$name"
+else
+  tmux attach -t "$name"
+fi
+```
+
+Bind it to a key so `Prefix + f` builds and switches to a project, the same binding on every machine:
+
+```tmux
+bind-key f run-shell -b "bash ~/bin/sessionize.sh ~/projects/api"
+```
+
+The PowerShell version differs only in syntax; the psmux calls are the same. Layout recipes for other kinds of projects are in [Dev environment layouts](dev-environment-layouts.md).
+
+## Worked example: a CI style headless TUI test
+
+Multiplexers make full screen programs testable without a display. Start the program in a detached session of a known size, type into it, and assert on `capture-pane`. This script launches Neovim, inserts a line, turns on line numbers, and checks the rendered screen. It passed on Windows through psmux and needs no change for Linux:
+
+```bash
+#!/usr/bin/env bash
+# ci-check.sh: drive a full screen TUI headlessly and assert on what it drew.
+set -e
+S=ci-nvim
+tmux kill-session -t $S 2>/dev/null || true
+
+tmux new-session -d -s $S -x 100 -y 30 -n tui
+tmux send-keys -t $S:tui 'nvim --clean' Enter
+
+# wait until the editor has painted its welcome screen
+for i in $(seq 1 30); do
+  if tmux capture-pane -p -t $S:tui | grep -q 'NVIM'; then break; fi
+  sleep 0.5
+done
+
+tmux send-keys -t $S:tui 'i' 'hello from a headless tui' Escape
+tmux send-keys -t $S:tui ':set nu' Enter
+sleep 1
+
+if tmux capture-pane -p -t $S:tui | grep -Eq '1 +hello from a headless tui'; then
+  echo "PASS: the editor shows the typed line with a line number"
+  rc=0
+else
+  echo "FAIL: unexpected screen"
+  tmux capture-pane -p -t $S:tui
+  rc=1
+fi
+
+tmux send-keys -t $S:tui ':q!' Enter
+tmux kill-session -t $S
+exit $rc
+```
+
+```console
+$ bash ./ci-check.sh
+PASS: the editor shows the typed line with a line number
+```
+
+Two habits make these tests reliable on any platform: poll `capture-pane` for a marker instead of sleeping a fixed time, and fix the pane size with `-x`/`-y` so line wrapping is the same everywhere.
+
+In GitHub Actions the same script runs on both runners with `shell: bash`; install tmux with `apt` on Ubuntu and psmux with `choco install psmux` (or `winget`, `scoop`, `cargo install psmux`) on Windows, and the job body does not change.
+
+## Where to go next
+
+- [Scripting and Automation](../scripting.md): every command with examples, hooks, targets, popups, pipe-pane
+- [Command Reference](../tmux_args_reference.md): per command flag tables
+- [Compatibility](../compatibility.md): the tmux command and option matrix
+- [Configuration](../configuration.md): config files, options, environment variables
+- [Control Mode](../control-mode.md): the `-C` protocol for IDEs and tools
+- [Multi-Shell](../multi-shell.md): pwsh, cmd, Git Bash, WSL and nushell in panes
+- [Terminal agents and TUIs](terminal-agents-and-tuis.md) and [Windows use cases](../use-cases.md)
+
+## FAQ
+
+**Q: Does psmux understand tmux's target syntax (`session:window.pane`, `%id`, `@id`)?**
+A: Yes. `dev:editor.0`, `dev:1`, `%3` and `@1` style targets resolve the way tmux resolves them, and an invalid one errors with a non zero exit code.
+
+**Q: Can I use my tmux sessionizer script from Linux on Windows?**
+A: If it is bash, run it under Git Bash and it will call psmux's `tmux.exe`. Convert paths with `cygpath -w` before passing them to `-c`, and check any `run-shell` or `if-shell` bodies, which run under PowerShell on Windows.
+
+**Q: Why does `echo hello world` in a pane print one word per line?**
+A: The pane is running PowerShell, whose `echo` is `Write-Output` and prints each argument separately. Quote the string, use `Write-Host`, or set `default-shell` to the shell you expect.
+
+**Q: Do format variables like `#{pane_current_command}` and `#{pane_current_path}` work on Windows?**
+A: Yes. `pane_current_command` reports the foreground process (`findstr`, `PING`, `nvim`), and `pane_current_path` follows `cd` in PowerShell, cmd, Git Bash and Cygwin. Inside WSL it needs the shell to announce its directory with OSC 7; the [FAQ](../faq.md) has the line.
+
+**Q: Is there a machine readable interface instead of parsing text?**
+A: Yes, control mode. `psmux -C` gives the same `%begin`/`%end`/`%output` stream as `tmux -C`, so tools built on it work unchanged. See [Control Mode](../control-mode.md).
+
+**Q: Will `send-keys` deliver Ctrl keys and special keys the same way?**
+A: Yes: `Enter`, `Tab`, `Escape`, `C-c`, `M-x`, `F1` to `F12`, arrows, `PageUp`, `Home`, `End` and the rest of tmux's key names are accepted, and `-l` types the text literally.
+
+---
+
+<!-- tutorials/terminal-agents-and-tuis -->
+# Running Terminal AI Agents and Multi Pane TUIs on Windows with psmux
+
+This tutorial shows how to run terminal AI coding agents (Claude Code, Codex CLI, Gemini CLI, aider, opencode and similar) and full screen TUI programs (neovim, lazygit, yazi, btop, k9s, gitui, htop inside WSL) inside psmux, the native tmux for Windows. It is written for Windows developers who want several agents or tools running side by side in one terminal, driven and observed from PowerShell scripts, with sessions that keep running after the window is closed.
+
+Every command below was run against psmux 3.3.8 on Windows 11 with PowerShell 7 and Windows Terminal. `psmux`, `pmux` and `tmux` are the same binary, so any example works with `tmux` in front of it too.
+
+## What you will learn
+
+- Why a native terminal multiplexer matters for agents and TUIs on Windows (each pane is a real ConPTY, each agent is a real Windows process)
+- A "watch an agent work" layout: agent in a large pane, its log in a side pane, a shell underneath
+- A multi agent grid: several agents in parallel windows, driven with `send-keys`, read with `capture-pane`, logged with `pipe-pane`
+- Detecting when an agent finishes, restarting a crashed agent with `respawn-pane`, and keeping dead panes visible with `remain-on-exit`
+- Naming panes per agent with `select-pane -T` and showing the active agent in the status line
+- Running neovim, yazi and lazygit in a pane on PowerShell and inside WSL, and what the mouse wheel does in each
+
+Related pages: [Claude Code agent teams](../claude-code.md) for the Claude Code specific setup, [Scripting and Automation](../scripting.md) for the full command reference, [Windows Use Cases](../use-cases.md) for more scenarios, and [Multi Window and Multi Pane Development Layouts](dev-environment-layouts.md) for layout design.
+
+## Why run terminal agents inside a multiplexer on Windows?
+
+A terminal agent is just a long running console program that reads a prompt, prints a lot, and sometimes waits for you. Windows Terminal tabs can hold several of them, but tabs are not scriptable, do not survive the window closing, and cannot be read back by a script. psmux gives you, on Windows, the same properties tmux gives on Linux and macOS:
+
+| Property | What it means for agents and TUIs |
+|---|---|
+| **Each pane is a real ConPTY** | The agent sees a genuine console with a size, colours, cursor and key input. TUIs render exactly as they would in a plain Windows Terminal tab. |
+| **Each agent is a real Windows process** | `#{pane_pid}` and `#{pane_current_command}` tell you what is running. Task Manager sees it. Nothing is emulated. |
+| **Sessions live in a background server** | Close Windows Terminal, sign out of RDP, reconnect tomorrow: `psmux attach` shows the agent exactly where it was. |
+| **Everything is a tmux command** | `send-keys`, `capture-pane`, `pipe-pane`, `respawn-pane`, `list-panes -F` all work from PowerShell, cmd, bash or another agent. The same script drives tmux on Linux. |
+| **Native multiplexing** | psmux is a single Rust binary talking to ConPTY directly. No WSL, no Cygwin, no MSYS layer between the agent and the console. |
+
+If you have used tmux to babysit agents on a Linux box, everything on this page will look familiar. If you have not, the patterns are simple: put each agent in its own pane or window, give it a name, log it, and poll it.
+
+## Layout 1: watch one agent work
+
+The most common setup. The agent gets most of the screen, a narrow pane on the right tails its log, and a small shell underneath is where you run git or tests without interrupting the agent.
+
+```
++-------------------------------------------+---------------+
+|                                           |               |
+|  agent: claude            (pane 0, 70%)   |  logs (pane 2)|
+|                                           |               |
+|                                           |               |
++-------------------------------------------+               |
+|  shell                    (pane 1, 25%)   |               |
++-------------------------------------------+---------------+
+```
+
+```powershell
+$s = 'work'
+psmux new-session -d -s $s -n agent -x 160 -y 45
+
+# Right column for logs, then a bottom strip under the agent for a shell
+psmux split-window -t "${s}:agent" -h -l 30% -d
+psmux split-window -t "${s}:agent.0" -v -l 25% -d
+
+# Name the panes. -T only sets the title, it never changes which pane is active.
+psmux select-pane -t "${s}:agent.0" -T 'agent: claude'
+psmux select-pane -t "${s}:agent.1" -T 'shell'
+psmux select-pane -t "${s}:agent.2" -T 'logs'
+
+# Log the agent pane to a file, then tail it in the logs pane
+psmux pipe-pane -t "${s}:agent.0" -o "cat > $env:TEMP\claude.log"
+psmux send-keys -t "${s}:agent.2" "Get-Content -Wait $env:TEMP\claude.log" Enter
+
+# Start the agent (replace with codex, gemini, aider, opencode ...)
+psmux send-keys -t "${s}:agent.0" 'claude' Enter
+
+psmux attach -t $s
+```
+
+What the server reports after the splits and titles:
+
+```
+PS> psmux list-panes -t work:agent -F '#{pane_index} #{pane_id} #{pane_width}x#{pane_height} title=#{pane_title} active=#{pane_active}'
+0 %1 111x33 title=agent: claude active=1
+1 %3 111x11 title=shell active=0
+2 %2 48x45 title=logs active=0
+```
+
+Pane 0 stayed active while panes 1 and 2 were titled. That is the tmux behaviour restored in [#592](https://github.com/psmux/psmux/issues/592): `select-pane -T` and `-P` are title and style only.
+
+To show the titles on the pane borders, add this to `~/.psmux.conf` (or run it with `psmux set -g ...`):
+
+```tmux
+set -g pane-border-status top
+set -g pane-border-format " #{pane_index}: #{pane_title} [#{pane_current_command}] "
+```
+
+### Why `pipe-pane` with `cat >` works on Windows
+
+`cat` is an alias for `Get-Content` in PowerShell and never reads stdin, so the tmux logging idiom could not work as a shell command on Windows. Since [#576](https://github.com/psmux/psmux/issues/576) the psmux server recognises `cat > <path>` and `cat >> <path>` and writes the pane's raw ConPTY bytes to that file itself, no shell involved. Use an absolute path. The file contains escape sequences (colours, cursor moves) exactly as the agent emitted them, which is what you want for a faithful transcript. Details and the PowerShell sink alternative are in [Piping Pane Output](../scripting.md#piping-pane-output-pipe-pane).
+
+Checked live: after `Write-Host "logged line two"` in the piped pane, the file held 127 bytes including the prompt redraw and the text, and `pipe-pane` with no `-o` stopped the pipe with exit code 0.
+
+## Layout 2: a grid of agents driven from a script
+
+When you want several agents working on different parts of a project at the same time, give each one a window. Windows are cheap, every one has a name, and a script can address them by name.
+
+```
+ status line:  [work] 0:hub  1:api*  2:web  3:tests
++------------------------------------------------------------+
+|                                                            |
+|   window "api": agent working on the API                   |
+|   (switch with prefix + 2, or psmux select-window -t api)  |
+|                                                            |
++------------------------------------------------------------+
+```
+
+The full script. It uses a stand in for the agent so you can run it without any agent installed: `fake-agent.ps1` prints four lines and then `DONE`. Replace `$agent` with `claude`, `codex`, `aider --message "..."` or whatever you run.
+
+```powershell
+# fake-agent.ps1 (stand in for a real agent)
+1..4 | ForEach-Object { Write-Host "step $_"; Start-Sleep 1 }
+Write-Host DONE
+```
+
+```powershell
+$ErrorActionPreference = 'Stop'
+$s = 'work'
+$logDir = Join-Path $env:TEMP 'agent-logs'
+New-Item -ItemType Directory -Force $logDir | Out-Null
+
+$agent = "pwsh -NoProfile -File $env:TEMP/fake-agent.ps1"   # real life: 'claude' or 'codex'
+
+psmux new-session -d -s $s -n hub -x 160 -y 45
+psmux set-option -t $s remain-on-exit on          # keep a finished or crashed pane visible
+
+$names = 'api', 'web', 'tests'
+foreach ($n in $names) {
+    psmux new-window -t $s -n $n -d
+    psmux select-pane -t "${s}:${n}.0" -T "agent: $n"
+    psmux pipe-pane   -t "${s}:${n}.0" -o "cat > $logDir\$n.log"
+    psmux send-keys   -t "${s}:${n}.0" $agent Enter
+}
+
+# Poll every agent window until its pane prints DONE
+$pending  = @($names)
+$deadline = (Get-Date).AddSeconds(600)
+while ($pending.Count -gt 0 -and (Get-Date) -lt $deadline) {
+    foreach ($n in @($pending)) {
+        $out = psmux capture-pane -t "${s}:${n}.0" -p
+        if ($out -match '^DONE') {
+            Write-Host "$n finished"
+            $pending = @($pending | Where-Object { $_ -ne $n })
+        }
+    }
+    Start-Sleep -Milliseconds 500
+}
+
+psmux list-windows -t $s -F '#{window_index}:#{window_name} #{pane_title} cmd=#{pane_current_command}'
+foreach ($n in $names) { psmux pipe-pane -t "${s}:${n}.0" }   # stop logging
+Get-ChildItem $logDir | Select-Object Name, Length
+```
+
+Output of a real run (6.6 seconds end to end, including three new windows and three shells):
+
+```
+api finished
+web finished
+tests finished
+0:hub SUPERFLOW cmd=pwsh
+1:api agent: api cmd=pwsh
+2:web agent: web cmd=pwsh
+3:tests agent: tests cmd=pwsh
+Name      Length
+----      ------
+api.log     1322
+tests.log   1316
+web.log     1322
+```
+
+The `hub` window's title is whatever the shell last set with an OSC title sequence (here the machine name). See [Pane Titles](../pane-titles.md) if you want to stop PowerShell from doing that.
+
+### Sending a prompt to a running agent
+
+`send-keys` types into the pane exactly as you would. A prompt for an interactive agent is one string and an `Enter`:
+
+```powershell
+psmux send-keys -t work:api 'Add input validation to the /users endpoint and run the tests' Enter
+```
+
+Two things to know:
+
+- Quotes and backslashes in the string reach the pane as typed, but a command that nests quotes inside `pwsh -Command "..."` inside a PowerShell string is hard to read and easy to get wrong. Put such a command in a `.ps1` file and send `pwsh -File ...` instead. That is what the script above does.
+- `send-keys -l` sends the string literally with no key name parsing, useful when a prompt contains a word like `Enter` or `Space`.
+
+### Reading what an agent printed
+
+`capture-pane -p` returns the visible screen. Add `-S -200` to include the last 200 lines of scrollback, or `-S -` for all of it. `-J` joins lines that wrapped.
+
+```powershell
+psmux capture-pane -t work:api -p -S -200 | Select-String -Pattern 'error|failed'
+```
+
+If you need the complete transcript with colours, read the `pipe-pane` log file instead. If you only need to know whether the agent is still running, ask the server:
+
+```powershell
+psmux list-panes -t work:api -F 'dead=#{pane_dead} cmd=#{pane_current_command} pid=#{pane_pid}'
+```
+
+`#{pane_dead}` is `1` once the process has exited and `remain-on-exit` kept the pane. `#{pane_current_command}` is the foreground process, so it reads `claude`, `node`, `nvim` or `pwsh` depending on what is in front.
+
+## Restarting a crashed agent
+
+With `remain-on-exit on` a pane whose process died stays on screen showing its last output. Restart it in place, with a different command if you like:
+
+```powershell
+# Kill whatever is left and start the agent again in the same pane
+psmux respawn-pane -k -t work:api -- claude
+
+# Or bring back the default shell
+psmux respawn-pane -k -t work:api
+```
+
+Checked live with a pane whose command had exited:
+
+```
+PS> psmux list-panes -t work:worker -F '#{pane_index} dead=#{pane_dead}'
+0 dead=1
+PS> psmux respawn-pane -k -t work:worker -- pwsh -NoProfile -Command Start-Sleep 60
+PS> psmux list-panes -t work:worker -F '#{pane_index} dead=#{pane_dead} cmd=#{pane_current_command}'
+0 dead=0 cmd=pwsh
+```
+
+A supervisor loop is a few lines of PowerShell: poll `#{pane_dead}` every few seconds and `respawn-pane -k` when it turns to `1`. The layout, the pane id and the log pipe are all preserved across the respawn.
+
+## Showing the active agent in the status line
+
+Because every pane can carry a title, the status line can name the agent that has focus:
+
+```tmux
+set -g status-right '#{pane_title} [#{pane_current_command}]'
+```
+
+```
+PS> psmux display-message -t work:agent.0 -p '#{pane_title} [#{pane_current_command}]'
+agent: claude [pwsh]
+```
+
+Window names do the same job for the tab list. `new-window -n api` names the tab and turns `automatic-rename` off for that window, so the name stays put when the agent starts a child process. If you rename a window later with `rename-window`, the same lock applies.
+
+## A quick shell without leaving the agent
+
+`display-popup` opens a floating pane over the current window and closes it when the command exits:
+
+```powershell
+psmux display-popup -w 60% -h 50% -E 'pwsh -NoProfile'
+```
+
+Bind it if you use it often:
+
+```tmux
+bind-key g display-popup -w 80% -h 80% -E 'lazygit'
+```
+
+Zoom is the other way to focus: `prefix + z` (or `resize-pane -Z`) makes the agent pane fill the window and again to go back.
+
+## Claude Code teams in psmux panes
+
+Claude Code has a teammate mode that spawns each teammate agent in its own tmux pane via `split-window` and `send-keys`. psmux sets the environment Claude Code needs (`TMUX`, `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`) and injects `--teammate-mode tmux` when you have not configured it yourself, so a plain `claude` in a psmux pane produces visible teammates. That page also explains the second, in process worktree agent system that never opens panes and why Opus tends to choose it. Read [Claude Code agent teams](../claude-code.md) before relying on it.
+
+Two open issues are worth knowing about: [#578](https://github.com/psmux/psmux/issues/578) (the `TMUX` variable is lost when Claude Code enters Agent View) and [#580](https://github.com/psmux/psmux/issues/580) (pane id targets and silent respawn failures in the teammate backend). Check their current state on GitHub if teammates do not appear.
+
+## Running TUIs: neovim, yazi, lazygit, btop, k9s
+
+A TUI in a psmux pane is a normal console program in a normal ConPTY. Launch it from the shell in the pane, or make it the pane's command:
+
+```powershell
+psmux new-window -t work -n edit -- nvim .
+psmux new-window -t work -n files -- yazi
+psmux new-window -t work -n git -- lazygit
+```
+
+`#{pane_current_command}` reports the TUI while it runs, which makes `automatic-rename` and the status line useful:
+
+```
+PS> psmux new-window -t work -n edit -d -- nvim -u NONE
+PS> psmux list-panes -t work:edit -F 'cmd=#{pane_current_command}'
+cmd=nvim
+```
+
+### The same TUIs inside WSL
+
+Start a WSL shell in a pane and run Linux builds of the same tools. Everything renders through the same ConPTY, colours and box drawing included:
+
+```powershell
+psmux new-window -t work -n linux -- wsl -d Ubuntu
+psmux send-keys -t work:linux 'htop' Enter
+```
+
+```
+PS> psmux send-keys -t work:linux 'echo from-wsl $(uname -r)' Enter
+PS> psmux capture-pane -t work:linux -p | Select-Object -Last 2
+from-wsl 6.6.114.1-microsoft-standard-WSL2
+user@host:/mnt/c/Users/you/project$
+PS> psmux list-panes -t work:linux -F 'cmd=#{pane_current_command}'
+cmd=wslhost
+```
+
+Note the last line: Windows cannot see inside the WSL VM, so `#{pane_current_command}` reads `wslhost` regardless of what Linux program is running, and `#{pane_current_path}` cannot follow a Linux `cd` on its own. Since [#615](https://github.com/psmux/psmux/issues/615) a Linux shell can announce its working directory with an OSC 7 sequence; see [Multi Shell](../multi-shell.md) for the setup. To make WSL the default shell for every new pane, see [Setting Your Default Shell](../multi-shell.md#setting-your-default-shell).
+
+### What the mouse wheel does in a TUI
+
+The rule is tmux's rule: a program that turned mouse reporting on gets the wheel (and clicks and drags); a program that did not gets nothing, and psmux scrolls its own scrollback instead. So `:set mouse=a` in neovim, `--mouse` for `less`, and the mouse setting in htop are what make the wheel work inside those programs. The reasons, the Windows 10 caveat for programs that read the mouse as VT bytes on stdin (Claude Code among them), and the SSH cases are in the [FAQ](../faq.md) and [Mouse Over SSH](../mouse-ssh.md).
+
+If you want psmux's own drag to copy selection even inside a mouse aware TUI, `set -g mouse-selection-force on` keeps it; see [Configuration](../configuration.md).
+
+## Putting it together: an agent supervisor session
+
+A combined example: one window per agent, each logged, a `hub` window whose shell runs the supervisor loop, and a status line that shows what is in front.
+
+```powershell
+$s = 'agents'
+psmux new-session -d -s $s -n hub -x 200 -y 50
+psmux set-option -t $s remain-on-exit on
+psmux set-option -t $s status-right '#{pane_title} [#{pane_current_command}] %H:%M'
+
+foreach ($n in 'backend', 'frontend', 'docs') {
+    psmux new-window -t $s -n $n -d -c "C:\src\project\$n"
+    psmux select-pane -t "${s}:${n}.0" -T "agent: $n"
+    psmux pipe-pane   -t "${s}:${n}.0" -o "cat >> C:\logs\$n.log"
+    psmux send-keys   -t "${s}:${n}.0" 'claude' Enter
+}
+
+psmux attach -t $s
+```
+
+From another terminal, or from a scheduled task, the same session is fully inspectable: `psmux list-windows -t agents`, `psmux capture-pane -t agents:backend -p`, `psmux respawn-pane -k -t agents:docs -- claude`. Detach with `prefix + d`; the agents keep running.
+
+## FAQ
+
+### Do I need WSL or Cygwin to run agents this way on Windows?
+
+No. psmux is a native Windows program. The agents run as Windows processes in ConPTY panes. WSL is optional and only needed for Linux only tools, and a WSL shell fits in a pane like any other shell.
+
+### Can one agent drive other agents through psmux?
+
+Yes. Everything on this page is a CLI command, so an agent with shell access can run `psmux new-window`, `send-keys` and `capture-pane` itself. Claude Code's teammate mode is exactly this, built in; see [Claude Code agent teams](../claude-code.md).
+
+### Will my tmux scripts for agents work unchanged?
+
+Mostly. The command names, flags, targets and format variables are tmux's. Use `tmux` as the command name (psmux installs a `tmux.exe` alias) and keep paths and shell syntax portable. The one Windows specific idiom above is the `cat > file` sink for `pipe-pane`, which works on both platforms. See [Cross Platform tmux Scripts](cross-platform-tmux-scripts.md) and [Compatibility](../compatibility.md).
+
+### How do I know an agent has finished?
+
+Poll `capture-pane -p` for a marker the agent prints, or poll `#{pane_dead}` if the agent exits when done. Both are shown above. For a running agent that goes idle rather than exiting, `#{pane_current_command}` returning to the shell name is another signal.
+
+### What happens to running agents when I close Windows Terminal?
+
+Nothing. They live in the psmux server process, not in the window. `psmux attach -t <session>` from any new terminal brings them back. See [Windows Use Cases](../use-cases.md) for boot time services and remote reattach.
+
+### Does the mouse work in Claude Code, Codex and other node based TUIs?
+
+On Windows 11 build 22523 and newer, yes, once the program enables mouse reporting. On Windows 10 the VT mouse bytes are lost inside conhost for programs that read stdin; the [FAQ](../faq.md) has the measured details and the list of frameworks that are unaffected.
+
+---
+
+<!-- tutorials/dev-environment-layouts -->
+# Multi Window and Multi Pane Development Layouts on Windows with psmux
+
+This tutorial shows how to design a project session in psmux, the native tmux for Windows: one window per concern (editor, server, tests, git), panes sized and arranged with tmux layout commands, a bootstrap script that rebuilds the whole thing in a second, and a Windows Terminal profile that opens straight into it. It is written for developers on Windows who want the multi pane, multi window workflow tmux users have on Linux and macOS, using PowerShell, cmd, Git Bash or WSL inside the panes.
+
+Every command was run against psmux 3.3.8 on Windows 11 with PowerShell 7 and Windows Terminal. `psmux`, `pmux` and `tmux` are the same binary.
+
+## What you will learn
+
+- How to structure a project session into windows and panes that map to what you actually do
+- `split-window` sizing with `-l 30%` and `-p 25`, and the five `select-layout` presets
+- Rearranging on the fly: `swap-pane`, `rotate-window`, `resize-pane`, `break-pane`, zoom, `move-window`
+- `synchronize-panes` for running one command in several panes at once
+- Window naming, `automatic-rename`, `respawn-window`, and logging a pane with `pipe-pane`
+- A bootstrap script in PowerShell and the same one in bash, and a Windows Terminal profile that lands in the session
+- Four complete layouts to copy
+
+Related pages: [Scripting and Automation](../scripting.md) for every command and format variable, [Command Reference](../tmux_args_reference.md) for per command flags, [Cross Platform tmux Scripts](cross-platform-tmux-scripts.md) for making the bootstrap portable, [Running Terminal AI Agents and TUIs](terminal-agents-and-tuis.md) for agent focused layouts, and [Live Preview in Choosers](../preview.md) for navigating between sessions.
+
+## Designing a project session
+
+A session is a named workspace that lives in the psmux server. Windows are the tabs in its status line; panes are the splits inside a window. A layout that works for most projects:
+
+| Window | Contents | Why its own window |
+|---|---|---|
+| `edit` | editor pane plus a narrow shell for quick commands | the thing you look at most gets the most space |
+| `server` | dev server, watcher, or docker compose logs | long running, noisy, rarely typed into |
+| `tests` | a shell for running tests, a small pane tailing test output | you switch here, run, read, switch back |
+| `git` | lazygit, gitui, or a plain shell | commits and reviews without disturbing the editor |
+
+Naming the windows is the difference between `prefix + 2` meaning something and meaning nothing. `new-window -n server` names the tab and turns `automatic-rename` off for that window, so the name survives whatever process starts inside.
+
+## Splitting and sizing panes
+
+`split-window -h` puts the new pane to the right, `-v` puts it below. `-l` takes a size in cells or a percentage; `-p` takes a percentage. `-d` keeps focus where it was. `-c` sets the start directory.
+
+```powershell
+psmux new-session -d -s proj -n edit -x 160 -y 45
+psmux split-window -t proj:edit -h -l 30% -d        # 30% column on the right
+psmux split-window -t proj:edit.0 -v -l 25% -d      # 25% strip under the left pane
+psmux list-panes -t proj:edit -F '#{pane_index} #{pane_id} #{pane_width}x#{pane_height} at #{pane_left},#{pane_top}'
+```
+
+```
+0 %1 111x33 at 0,0
+1 %3 111x11 at 0,34
+2 %2 48x45 at 112,0
+```
+
+`-p 25` gives the same 25 percent strip as `-l 25%`. Both forms are accepted, so a script written for either tmux 2.x (`-p`) or 3.x (`-l N%`) works unchanged.
+
+Pane ids (`%1`, `%2`, ...) are allocated per server and never reused within a run, which makes them the safest target for scripts. Pane indexes (`0`, `1`, `2`) are positional and change when panes are swapped or closed.
+
+## The five layout presets
+
+`select-layout` arranges the panes of a window. With four panes in a 160x45 window:
+
+```
+PS> foreach ($l in 'even-horizontal','even-vertical','main-horizontal','main-vertical','tiled') {
+>>   psmux select-layout -t proj:grid $l
+>>   "$l -> " + (psmux display-message -t proj:grid -p '#{window_layout}')
+>> }
+even-horizontal -> 2b42,160x45,0,0{39x45,0,0,4,39x45,40,0,8,39x45,80,0,7,40x45,120,0,6}
+even-vertical   -> 9fb8,160x45,0,0[160x10,0,0,4,160x10,0,11,8,160x10,0,22,7,160x12,0,33,6]
+main-horizontal -> 0afc,160x45,0,0[160x26,0,0,4,160x18,0,27{52x18,0,27,8,52x18,53,27,7,54x18,106,27,6}]
+main-vertical   -> 5202,160x45,0,0{95x45,0,0,4,64x45,96,0[64x14,96,0,8,64x14,96,15,7,64x15,96,30,6]}
+tiled           -> e59f,160x45,0,0[160x22,0,0{79x22,0,0,4,80x22,80,0,8},160x22,0,23{79x22,0,23,7,80x22,80,23,6}]
+```
+
+```
+even-horizontal        even-vertical          main-horizontal        main-vertical          tiled
++---+---+---+---+      +---------------+      +---------------+      +---------+-----+      +-------+-------+
+|   |   |   |   |      +---------------+      |     main      |      |         |     |      |       |       |
+|   |   |   |   |      +---------------+      +----+----+-----+      |  main   +-----+      +-------+-------+
+|   |   |   |   |      +---------------+      |    |    |     |      |         |     |      |       |       |
++---+---+---+---+      +---------------+      +----+----+-----+      +---------+-----+      +-------+-------+
+```
+
+`next-layout` (`prefix + Space`) cycles through them. The strings printed above are tmux layout strings: capture `#{window_layout}` after arranging a window by hand and feed it back to `select-layout` later to restore that arrangement. The aliases `even-h`, `even-v`, `main-h` and `main-v` are accepted too.
+
+## Rearranging on the fly
+
+```powershell
+psmux swap-pane -s proj:grid.0 -t proj:grid.1     # exchange two panes
+psmux rotate-window -t proj:grid                   # every pane moves one slot
+psmux resize-pane -t proj:grid.0 -L 10             # 10 cells narrower on the left edge
+psmux resize-pane -t proj:grid.0 -D 5              # 5 cells taller downwards
+psmux resize-pane -t proj:grid.0 -Z                # zoom (again to unzoom), same as prefix + z
+psmux break-pane -d -t proj:grid.3                 # pane 3 becomes its own window, focus stays
+psmux move-window -s proj:git -t proj:9            # renumber a window
+```
+
+Checked live, the swap and the rotation do what the names say:
+
+```
+PS> psmux swap-pane -s proj:grid.0 -t proj:grid.1; psmux list-panes -t proj:grid -F '#{pane_index} #{pane_id}' | Select-Object -First 2
+0 %8
+1 %4
+PS> psmux rotate-window -t proj:grid; psmux list-panes -t proj:grid -F '#{pane_index} #{pane_id}'
+0 %4
+1 %7
+2 %6
+3 %8
+```
+
+Zoom survives a split. `split-window -Z` while a pane is zoomed keeps the window zoomed on the new pane ([PR 572](https://github.com/psmux/psmux/pull/572)):
+
+```
+PS> psmux resize-pane -t proj:grid.0 -Z; psmux display-message -t proj:grid -p 'zoomed=#{window_zoomed_flag}'
+zoomed=1
+PS> psmux split-window -t proj:grid -Z -d; psmux display-message -t proj:grid -p 'zoomed=#{window_zoomed_flag} panes=#{window_panes}'
+zoomed=1 panes=5
+```
+
+Moving a pane from one window into another is `join-pane -s <source>` (`move-pane` is the same command); its cross session form is described in [Scripting and Automation](../scripting.md).
+
+## One command in every pane: `synchronize-panes`
+
+Turn it on for a window and every keystroke goes to all of its panes. Handy for running the same build in several checkouts, or the same command on several SSH hosts.
+
+```powershell
+psmux set-option -t proj:grid -w synchronize-panes on
+psmux send-keys -t proj:grid.0 'git pull' Enter
+psmux set-option -t proj:grid -w synchronize-panes off
+```
+
+```
+PS> psmux send-keys -t proj:grid.0 'Write-Host "sync $PID"' Enter
+PS> 0..3 | ForEach-Object { "pane $_ : " + (psmux capture-pane -t proj:grid.$_ -p | Select-String '^sync').Count }
+pane 0 : 1
+pane 1 : 1
+pane 2 : 1
+pane 3 : 1
+PS> psmux display-message -t proj:grid -p 'synchronized=#{pane_synchronized}'
+synchronized=1
+```
+
+`toggle-sync` is a psmux shortcut for flipping it from a key binding: `bind-key S toggle-sync`.
+
+## Logging a pane and restarting a window
+
+`pipe-pane -o "cat > <absolute path>"` streams a pane's raw output to a file; the psmux server writes the file itself so the idiom works even though PowerShell's `cat` is `Get-Content`. Run it again with no `-o` to stop. Details in [Piping Pane Output](../scripting.md#piping-pane-output-pipe-pane).
+
+```powershell
+psmux pipe-pane -t proj:server -o "cat >> C:\logs\devserver.log"
+```
+
+When a window's process has exited (with `remain-on-exit on` the pane stays visible), `respawn-window` restarts it in place:
+
+```
+PS> psmux list-panes -t proj:server -F 'dead=#{pane_dead}'
+dead=1
+PS> psmux respawn-window -t proj:server
+PS> psmux list-panes -t proj:server -F 'dead=#{pane_dead} cmd=#{pane_current_command}'
+dead=0 cmd=pwsh
+```
+
+`respawn-pane -k -- <command>` does the same for one pane and lets you change the command; see [Dead Panes and Respawn](../configuration.md#dead-panes-and-respawn).
+
+## Window names and `automatic-rename`
+
+`new-window -n name` and `rename-window` both lock the name. `show-options -w automatic-rename` on that window reports `off` afterwards:
+
+```
+PS> psmux rename-window -t proj:grid workers
+PS> psmux show-options -t proj:workers -w automatic-rename
+automatic-rename off
+```
+
+Windows without a fixed name track the foreground process (`pwsh`, `nvim`, `node`) through `#{pane_current_command}`. To hand a renamed window back to automatic naming: `psmux set-option -t proj:workers -w automatic-rename on`.
+
+## The bootstrap script
+
+A session that has to be rebuilt by hand is a session you stop using. Put the layout in a script, guard it with `has-session`, and end with `attach`. This one creates the four window layout from the top of the page.
+
+PowerShell (`proj.ps1`):
+
+```powershell
+$s    = 'proj'
+$root = 'C:\src\proj'
+
+psmux has-session -t $s 2>$null
+if ($LASTEXITCODE -ne 0) {
+    psmux new-session -d -s $s -n edit -c $root -x 160 -y 45
+    psmux split-window -t "${s}:edit" -h -l 35% -c $root
+    psmux new-window  -t $s -n server -c $root -d
+    psmux new-window  -t $s -n tests  -c $root -d
+    psmux split-window -t "${s}:tests" -v -l 30% -c $root -d
+    psmux new-window  -t $s -n git    -c $root -d
+    psmux select-window -t "${s}:edit"
+    psmux select-pane   -t "${s}:edit.0"
+
+    psmux send-keys -t "${s}:edit.0"  'nvim .' Enter
+    psmux send-keys -t "${s}:server"  'npm run dev' Enter
+    psmux send-keys -t "${s}:git"     'lazygit' Enter
+}
+psmux attach -t $s
+```
+
+The same script in bash, which runs unchanged under tmux on Linux and macOS and under psmux on Windows (Git Bash or WSL) because psmux ships a `tmux.exe` alias:
+
+```bash
+#!/usr/bin/env bash
+s=proj
+root="$HOME/src/proj"
+
+tmux has-session -t "$s" 2>/dev/null || {
+  tmux new-session -d -s "$s" -n edit -c "$root" -x 160 -y 45
+  tmux split-window -t "$s:edit" -h -l 35% -c "$root"
+  tmux new-window  -t "$s" -n server -c "$root" -d
+  tmux new-window  -t "$s" -n tests  -c "$root" -d
+  tmux split-window -t "$s:tests" -v -l 30% -c "$root" -d
+  tmux new-window  -t "$s" -n git    -c "$root" -d
+  tmux select-window -t "$s:edit"
+}
+tmux attach -t "$s"
+```
+
+What both produce (the `send-keys` lines omitted for the check):
+
+```
+PS> psmux list-windows -t proj -F '#{window_index}:#{window_name} panes=#{window_panes} active=#{window_active}'
+0:edit panes=2 active=1
+1:server panes=1 active=0
+2:tests panes=2 active=0
+3:git panes=1 active=0
+PS> psmux list-panes -t proj:edit -F '#{pane_index} #{pane_width}x#{pane_height} #{pane_current_path}'
+0 103x45 C:\src\proj
+1 56x45 C:\src\proj
+```
+
+Portability rules (paths, quoting, which shell the panes run) are covered in [Cross Platform tmux Scripts](cross-platform-tmux-scripts.md).
+
+### Saving and restoring layouts automatically
+
+If you would rather not maintain a script, the psmux-resurrect plugin saves every session's windows, panes, layouts and directories, and psmux-continuum saves on a timer and restores on the next start. Both are listed with installation steps in [Plugins and Themes](../plugins.md).
+
+## A Windows Terminal profile that opens the session
+
+`new-session -A` attaches if the session exists and creates it otherwise, so one command is both "start" and "resume":
+
+```powershell
+psmux new-session -A -s proj -c C:\src\proj
+```
+
+Checked live: the first call created the session with `#{pane_current_path}` reporting `C:\src\proj`; a second call attached to it without creating a duplicate (`list-sessions` still showed one `proj`).
+
+Add it as a profile in Windows Terminal's `settings.json`:
+
+```json
+{
+  "name": "proj",
+  "commandline": "pwsh.exe -NoLogo -Command \"psmux new-session -A -s proj -c C:\\src\\proj\"",
+  "startingDirectory": "C:\\src\\proj"
+}
+```
+
+If you want the profile to run the full bootstrap script instead, point `commandline` at `pwsh.exe -File C:\src\proj\proj.ps1`; the script's `has-session` guard makes it safe to open the profile twice.
+
+## Switching between sessions
+
+`prefix + s` opens `choose-session`, `prefix + w` opens the window chooser, `psmux choose-tree` (from the CLI or the `prefix + :` prompt) shows every session, window and pane, and `p` toggles a live preview of the highlighted target so you can see a window before you jump. `set -g choose-tree-preview on` opens the preview by default. See [Live Preview in Choosers](../preview.md).
+
+## Four layouts to copy
+
+Each block creates a detached session; add `psmux attach -t <name>` at the end or open it from a profile as above.
+
+### 1. Editor with a side terminal
+
+```
++-----------------------------------+------------+
+|                                   |            |
+|  nvim / code                      |  shell     |
+|                                   |            |
+|                                   |            |
++-----------------------------------+------------+
+```
+
+```powershell
+psmux new-session -d -s edit -n main -c C:\src\proj -x 160 -y 45
+psmux split-window -t edit:main -h -l 30% -c C:\src\proj -d
+psmux send-keys -t edit:main.0 'nvim .' Enter
+```
+
+### 2. Full stack: server, client, tests, shell
+
+```
++-------------------------+-------------------------+
+|  api server             |  web dev server         |
+|                         |                         |
++-------------------------+-------------------------+
+|  tests (watch)          |  shell                  |
+|                         |                         |
++-------------------------+-------------------------+
+```
+
+```powershell
+psmux new-session -d -s stack -n dev -c C:\src\proj -x 160 -y 45
+psmux split-window -t stack:dev -v -c C:\src\proj -d          # tests, bottom left
+psmux split-window -t stack:dev.0 -h -c C:\src\proj\web -d    # web, top right
+psmux split-window -t stack:dev.2 -h -c C:\src\proj -d        # shell, bottom right
+psmux select-layout -t stack:dev tiled
+psmux select-pane -t stack:dev.0 -T 'api'
+psmux select-pane -t stack:dev.1 -T 'web'
+psmux select-pane -t stack:dev.2 -T 'tests'
+psmux select-pane -t stack:dev.3 -T 'shell'
+psmux set-option -t stack pane-border-status top
+psmux set-option -t stack pane-border-format ' #{pane_title} '
+```
+
+### 3. Ops dashboard: main log plus three monitors
+
+```
++---------------------------------------------------+
+|  main: application log (pipe-pane to a file)      |
+|                                                   |
++----------------+----------------+-----------------+
+|  btop          |  docker stats  |  k9s / shell    |
++----------------+----------------+-----------------+
+```
+
+```powershell
+psmux new-session -d -s ops -n dash -x 160 -y 45
+psmux split-window -t ops:dash -v -d
+psmux split-window -t ops:dash.1 -h -d
+psmux split-window -t ops:dash.1 -h -d
+psmux select-layout -t ops:dash main-horizontal
+psmux pipe-pane -t ops:dash.0 -o "cat >> C:\logs\app.log"
+psmux send-keys -t ops:dash.1 'btop' Enter
+psmux send-keys -t ops:dash.2 'docker stats' Enter
+```
+
+### 4. Multi checkout with synchronized panes
+
+```
++-------------------------+-------------------------+
+|  repo A                 |  repo B                 |
++-------------------------+-------------------------+
+|  repo C                 |  repo D                 |
++-------------------------+-------------------------+
+   synchronize-panes on: one "git pull && npm test" runs in all four
+```
+
+```powershell
+psmux new-session -d -s multi -n repos -c C:\src\a -x 160 -y 45
+psmux split-window -t multi:repos -v -c C:\src\c -d       # bottom left
+psmux split-window -t multi:repos.0 -h -c C:\src\b -d     # top right
+psmux split-window -t multi:repos.2 -h -c C:\src\d -d     # bottom right
+psmux select-layout -t multi:repos tiled
+psmux set-option -t multi:repos -w synchronize-panes on
+```
+
+## FAQ
+
+### Can I keep different shells in different panes of one layout?
+
+Yes. `split-window` and `new-window` take a command after `--`, so one pane can be `pwsh`, the next `cmd.exe`, the next `wsl -d Ubuntu`, and `default-shell` sets the fallback. See [Multi Shell](../multi-shell.md).
+
+### Will the layout survive closing Windows Terminal?
+
+Yes. The session, its windows, panes and running processes live in the psmux server. Reopen a terminal and `psmux attach -t proj` (or the `-A` profile above) puts you back. Sign out and the server is gone, which is where psmux-resurrect and psmux-continuum come in.
+
+### Do tmux layout strings from Linux work here?
+
+Yes, the format is the same. Capture `#{window_layout}` on either platform and pass it to `select-layout`. Pane counts must match; the string describes geometry, not contents.
+
+### How do I target a pane in a script without guessing its index?
+
+Use the pane id printed by `split-window -P -F '#{pane_id}'` or by `list-panes -F '#{pane_id}'`. Ids like `%7` are stable for the pane's lifetime; indexes change when you swap or close panes.
+
+### Why does my sized split come out a few cells different from what I asked?
+
+Borders take a cell, and percentages are rounded to whole cells. Asking for `-l 30%` of a 160 column window gives a 48 column pane plus a one cell border, as the `list-panes` output at the top of the page shows.
 
 ---
 
@@ -4400,6 +5857,567 @@ through old ConPTY versions is not a safe server-only workaround (issue #457).
 
 ---
 
+<!-- architecture -->
+# How psmux Multiplexes Natively on Windows
+
+psmux is a terminal multiplexer for Windows, a tmux for Windows written in Rust that drives real ConPTY pseudo consoles directly through the Win32 API. This page explains the architecture: the detached server process, the thin client that Windows Terminal or any console host attaches to, the per pane ConPTY and VT parser, and how bytes move between your shell and your screen. It is written so that a developer, a script author, or an AI agent can verify every claim against the source files named below.
+
+## Key facts
+
+- **One server per session, one client per attached window.** `psmux new-session` spawns `psmux.exe server -s <name>` as a detached background process. `psmux attach` starts a client that connects to it over loopback TCP. Closing the window kills only the client.
+- **Every pane is a native ConPTY.** Each pane is created with `CreatePseudoConsole` through the vendored `portable-pty-psmux` crate. There is no WSL, Cygwin, or MSYS layer between psmux and the shell.
+- **No POSIX emulation.** psmux does not need `fork()`, Unix sockets, or a pty device. The tmux socket is replaced by `127.0.0.1:<port>` plus a per session key file, both under `~\.psmux\`.
+- **The client is a renderer, not a shell host.** The client never owns the shell processes. It receives screen frames as JSON and pushes keystrokes back as `send-key` commands.
+- **Three names, one binary.** `psmux.exe`, `pmux.exe`, and `tmux.exe` are the same program (three `[[bin]]` entries in `Cargo.toml` pointing at `src/main.rs`), so scripts written for `tmux` run unchanged.
+- **Windows first process model.** psmux's own processes run at `above-normal` priority by default (issue #608), shells stay at normal priority, the Windows clipboard is used directly, and detached servers survive Task Scheduler and RDP disconnects.
+
+Related reading: [Performance](performance.md), [Warm Sessions](warm-sessions.md), [Multi-Shell](multi-shell.md), [Scripting and Automation](scripting.md), [Control Mode](control-mode.md), [Windows Use Cases](use-cases.md).
+
+## What does "native" mean for a Windows terminal multiplexer?
+
+There are three ways to get tmux style multiplexing on Windows:
+
+| Approach | Where the shells run | What you lose |
+|----------|----------------------|---------------|
+| tmux inside WSL | Linux processes inside the WSL VM | Native pwsh, cmd, and Windows tools become remote calls through `wsl.exe`; Windows paths, the Windows clipboard, and Windows job control are one hop away |
+| tmux under Cygwin or MSYS2 | Windows processes wrapped by a POSIX emulation layer and its pty shim | Console apps that need a real console (PSReadLine, Windows Terminal features, ConPTY aware TUIs) misbehave; performance is bounded by the emulation layer |
+| **psmux** | **Real Windows processes in real ConPTY consoles** | Nothing on the Windows side; tmux features that depend on Unix signals are emulated (see [Compatibility](compatibility.md)) |
+
+With psmux a pane running `pwsh`, a pane running `cmd`, a pane running `nu`, and a pane running `wsl` are four ordinary child processes of one server. Each has its own console, its own working directory (a Windows path, or a WSL path translated by `src/wsl_path.rs`), and its own environment. `#{pane_current_path}` is read from the child's process environment block, and for WSL panes from the OSC 7 sequence the shell emits (issue #615).
+
+## The client and server model
+
+```
+  Windows Terminal tab            ~\.psmux\                    background process
+ +----------------------+      +----------------+      +-----------------------------+
+ |  psmux.exe (client)  |      | work.port      |      | psmux.exe server -s work    |
+ |  attach -t work      |----->| work.key       |----->|  TcpListener 127.0.0.1:0    |
+ |                      |      | work.pid       |      |  AppState (windows, panes)  |
+ |  ratatui renderer    |<=====| work.sid       |=====>|  per pane ConPTY + parser   |
+ |  crossterm input     | TCP  +----------------+ TCP  |  hooks, options, buffers    |
+ +----------------------+                              +-----------------------------+
+                                                          |         |         |
+                                                       pwsh.exe  cmd.exe   wsl.exe
+```
+
+### How does a client find its server?
+
+There is no Unix socket on Windows, so `src/server/mod.rs` binds a `TcpListener` to `127.0.0.1` on an ephemeral port (`TcpListener::bind(("127.0.0.1", 0))`) and publishes it through four small files in the data directory (`src/paths.rs`):
+
+| File | Content | Purpose |
+|------|---------|---------|
+| `<session>.key` | random auth key | Every connection must send `AUTH <key>` first; the server rejects anything else in `src/server/connection.rs` |
+| `<session>.sid` | session id | Stable identity for `#{session_id}` |
+| `<session>.pid` | `pid:creation_time` | Liveness anchor: a recycled pid with a different creation time is never mistaken for a live server |
+| `<session>.port` | TCP port | Written **last**, so its existence is the readiness beacon a client waits on |
+
+The write order matters and is enforced in `ensure_session_registry_files`: key, sid, and pid go first, port goes last. A client such as `psmux attach` polls for the `.port` file every 10 ms (`src/main.rs`) and connects as soon as it appears, so a cold start attaches within one polling tick of the server being ready.
+
+The data directory is `~\.psmux\` by default and can be moved with `PSMUX_DATA_DIR`. The `-L <name>` socket namespace of tmux maps to a file prefix (`<ns>__<session>.port`), so `psmux -L work ls` and `psmux -L home ls` see different registries. A named Win32 mutex keyed on the data root and session name (`acquire_session_mutex` in `src/platform.rs`) guarantees that at most one server owns a given name, which is what makes `new-session -A` and the warm pool safe against races (issues #509 and #599).
+
+### What happens when you run a psmux command?
+
+Every CLI invocation, whether it is `psmux split-window -h` from a script or a keystroke from an attached client, is one line of text sent over the TCP connection:
+
+1. `src/main.rs` parses the command line, normalises tmux style attached flags (`-Lwork`, `-tname`), resolves the target session from `-t`, `PSMUX_SESSION_NAME`, or the most recently active session (issue #603), and reads that session's `.port` and `.key`.
+2. The client connects, sends `AUTH <key>`, then the command line (`src/client.rs`).
+3. The accept thread in `src/server/mod.rs` spawns a per connection thread. `handle_connection` in `src/server/connection.rs` parses the line, splits `;` separated command chains, and either answers directly (queries such as `list-panes` and `display-message -p`) or posts a `CtrlReq` enum value to the server's main loop through a channel.
+4. The main loop in `run_server` applies the request to `AppState` (the tree of windows and panes defined in `src/types.rs` and `src/tree.rs`), fires any hooks, marks the state dirty, and pushes a new frame to attached clients.
+
+Accepted sockets are explicitly made non inheritable with `SetHandleInformation` before any child is spawned, because the server starts children with inherited handles (ConPTY shells, `pipe-pane` sinks, `run-shell` commands) and an inherited socket would keep a one shot command's connection open after the reply.
+
+The same wire protocol is what [control mode](control-mode.md) (`psmux -C`) exposes to IDEs and plugin authors.
+
+## How a pane works: ConPTY, reader, parser, screen
+
+```
+   child process (pwsh.exe)
+        |  writes VT bytes to its console
+        v
+   ConPTY (conhost.exe / OpenConsole)         crates/portable-pty-psmux/src/win/
+        |  output pipe                        psuedocon.rs, conpty.rs
+        v
+   reader thread ---------> staging buffer ----> parser thread -----> vt100::Parser
+   (64 KB reads,             (Mutex + Condvar)    (adaptive 1 ms       (screen grid +
+    src/pane.rs)                                   coalescing)          scrollback)
+                                                                             |
+   write queue thread <---- server main loop <---- CtrlReq channel           |
+   (per pane, PR #543)          |                                            |
+        |                       +---- dump_layout_json_fast() snapshot <-----+
+        v                       |
+   ConPTY input pipe            +---- push frame over TCP to every attached client
+```
+
+### Spawning
+
+`src/pane.rs` asks the pty crate for a pseudo console of the pane's size (`native_pty_system().openpty(size)`), builds a `CommandBuilder` for the shell (resolved once and cached in an `OnceLock`, so PATH lookups are not repeated per pane), and calls `spawn_command`. On the Windows side that is `CreatePseudoConsole` plus `CreateProcessW` with a `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` attribute list (`crates/portable-pty-psmux/src/win/psuedocon.rs`). The child is a normal Windows process whose console happens to be owned by psmux.
+
+### Reading output
+
+Each pane owns three threads (`src/pane.rs`):
+
+- **Reader thread.** Pure I/O. It reads up to 64 KB at a time from the ConPTY output pipe into a staging buffer and never touches the parser lock, so a busy pane cannot stall its own reads. It also answers terminal colour queries (OSC 4, 10, 11) straight off the read, which is what stopped `yazi` from misreading a late reply as a keystroke (issue #556).
+- **Parser thread.** Waits on the staging buffer's condition variable, then keeps draining in 1 ms ticks while bytes are still arriving (adaptive coalescing), and feeds the bytes into a `vt100::Parser` from the vendored `vt100-psmux` crate. The parser owns the screen grid, the alternate screen, the scrollback (`history-limit` rows), cell attributes including the SGR 58 underline colours added for issue #589, and the OSC 8 hyperlink and OSC 7 working directory state.
+- **Write queue thread.** Keystrokes and pasted text are queued per pane and written to the ConPTY input pipe by a dedicated thread, so a slow or wedged child never blocks the server loop and a transient write error is retried rather than dropped (PR #543).
+
+### Building a frame
+
+The server does not re render on a timer. Whenever a pane's parser reports new output or the window tree changes, the main loop marks the state dirty and, if any client is attached, serialises the visible cells of every pane in the active window with `dump_layout_json_fast` (`src/layout.rs`). The snapshot holds each parser's mutex for about a millisecond, then the JSON frame is pushed to every attached client. Frames therefore arrive a few milliseconds after ConPTY output rather than on the next poll.
+
+### Rendering in the client
+
+`src/client.rs` (`run_remote`) drives a `ratatui` terminal on a `PsmuxBackend` (`src/platform.rs`). It reads frames from the socket, draws pane contents, borders, the status line, and any popup or floating pane, and forwards input. The poll cadence adapts: 10 ms while you are typing, 16 ms when idle and frames are being pushed, 1 ms while a bracketed paste is being assembled. Mouse and keyboard events arrive through the Win32 console input API (`src/ssh_input.rs`, `src/input.rs`), are translated to tmux key names (`C-a`, `M-Left`, `S-Enter`), and go back to the server as `send-key` lines. Copy mode (`src/copy_mode.rs`) runs inside the server against the pane's own scrollback, so `send-keys -X` works from scripts exactly as in tmux.
+
+### Resizing
+
+`resize_all_panes` in `src/tree.rs` resizes only the panes of the active window. Background windows are resized when you switch to them. That keeps a session with fifty windows from issuing fifty `ResizePseudoConsole` calls every time the Windows Terminal tab changes size.
+
+## ConPTY passthrough mode
+
+On Windows 11 22H2 and later (build 22621+), psmux creates each pseudo console with `PSEUDOCONSOLE_PASSTHROUGH_MODE` (`0x8`, defined in `crates/portable-pty-psmux/src/win/psuedocon.rs`, added in PR #538). In passthrough mode conhost stops re rendering the child's output into its own screen buffer and forwards the VT stream as the application wrote it, which preserves sequences that conhost would otherwise rewrite (cursor shape, some colour queries) and removes a copy from the output path.
+
+If `CreatePseudoConsole` rejects the flag, or a later `ResizePseudoConsole` fails on a build that advertises the flag but does not fully support it, the crate recreates the console without passthrough and logs the fallback (`conpty.rs`). You can disable it yourself with:
+
+```powershell
+$env:PSMUX_NO_PASSTHROUGH = "1"
+```
+
+Whether a pane got passthrough is recorded in the debug log (see [Diagnostics](diagnostics.md)).
+
+## Warm servers and warm panes
+
+Shell startup, not psmux, is the slow part of opening a pane (see [Performance](performance.md)). psmux hides it twice:
+
+- A hidden `__warm__` server is pre spawned with your config already loaded. `psmux new-session` claims it by renaming its registry files, which turns a cold start into a rename (measured at about 50 ms on the reference machine versus about 215 ms cold).
+- Inside every server a spare shell is kept booted. `split-window` and `new-window` hand you that shell and boot the next spare in the background, so the prompt is visible in roughly 100 ms instead of a full shell start.
+
+[Warm Sessions](warm-sessions.md) documents the lifecycle, the `warm` option, and `PSMUX_NO_WARM`.
+
+## Process priority: why typing stays responsive under load
+
+Issue #608 reported that a compile or a test sweep pegging every core made the interactive path (server loop, client renderer) starve at normal priority. psmux now sets its **own** processes, the server and the client, to `ABOVE_NORMAL_PRIORITY_CLASS` by default (`set_process_priority` in `src/platform.rs`). Pane shells and everything they run are created without an explicit class and stay at normal priority, so psmux never steals time from the work you are running, only from other background processes competing with the multiplexer itself.
+
+Three values are accepted, deliberately not `realtime` or the below normal classes:
+
+```tmux
+set -g priority above-normal   # default
+set -g priority high
+set -g priority normal
+```
+
+`PSMUX_PRIORITY` in the environment outranks the option, so you can recover from a bad configured value from the shell you launch psmux from. A claimed warm server inherits the claiming client's priority (the claim message carries it, see `src/types.rs` and `src/main.rs`), so the setting is effective from the first keystroke.
+
+## Windows integration points
+
+| Concern | How psmux does it | Source |
+|---------|-------------------|--------|
+| Clipboard (`copy-pipe`, `set-clipboard`, OSC 52) | `OpenClipboard` / `SetClipboardData(CF_UNICODETEXT)` on the client side, no `clip.exe` round trip | `src/clipboard.rs` |
+| Killing a pane's process tree | Walks the child tree by parent pid and creation time so a recycled pid is never killed | `src/platform.rs` (`process_kill`) |
+| Working directory of a pane | Read from the child's process environment block, or from OSC 7 for shells Win32 cannot see (WSL) | `src/platform.rs`, `src/wsl_path.rs` |
+| Foreground command (`#{pane_current_command}`) | The live foreground process of the pane's shell tree, not the shell itself (PR #577) | `src/platform.rs` |
+| Mouse | Win32 `MOUSE_EVENT` records translated to SGR mouse reports for panes that enabled them | `src/ssh_input.rs`, `src/input.rs` |
+| Detached operation | The server is spawned with no console window and null stdio, so it survives the parent window, an RDP disconnect, or a Task Scheduler launch at boot | `src/main.rs` |
+| Multiple shells | Any Windows executable can be a pane: `pwsh`, `powershell`, `cmd`, `nu`, `bash` (Git for Windows, MSYS2), `wsl` | [Multi-Shell](multi-shell.md) |
+
+## Source map
+
+| Path | What lives there |
+|------|------------------|
+| `src/main.rs` | CLI entry point, argument normalisation, session routing, server spawn, attach |
+| `src/cli.rs` | Attached flag normalisation and argv helpers |
+| `src/server/mod.rs` | `run_server`: listener, registry files, accept thread, main loop, frame push |
+| `src/server/connection.rs` | Wire protocol: auth, command parsing, per command handlers |
+| `src/server/options.rs`, `src/server/option_catalog.rs` | `set-option` / `show-options` |
+| `src/pane.rs` | ConPTY spawn, reader, parser, write queue threads |
+| `src/tree.rs`, `src/layout.rs` | Window and pane tree, layouts, frame serialisation |
+| `src/client.rs` | Attached client: render loop, input forwarding, mouse, copy drag |
+| `src/copy_mode.rs` | Copy mode, search, selection |
+| `src/format.rs` | The `#{...}` format engine |
+| `src/config.rs`, `src/commands.rs` | Config parsing, key bindings, hooks |
+| `src/control.rs` | Control mode (`-C`, `-CC`) |
+| `src/platform.rs` | Win32: console modes, process tree, priority, clipboard, mutexes |
+| `crates/portable-pty-psmux` | ConPTY wrapper (fork of `portable-pty` with passthrough mode and psmux fixes) |
+| `crates/vt100-psmux` | VT parser and screen model (fork of `vt100` with scrollback, OSC 7/8, SGR 58, mouse mode tracking) |
+
+## FAQ
+
+### Does psmux need WSL, Cygwin, or MSYS2?
+
+No. psmux is a single Rust binary that talks to ConPTY through the Win32 API. WSL is optional and only involved if you open a pane running `wsl.exe`.
+
+### Is the server a Windows service?
+
+No. It is an ordinary background process running as your user, started by the first `new-session`. That is what lets you attach to it later from any terminal, including after a Task Scheduler launch at boot (see [Windows Use Cases](use-cases.md)).
+
+### Why TCP instead of a named pipe?
+
+Loopback TCP gives the same stream semantics on every Windows version, works from inside WSL and over SSH port forwards, and lets control mode clients written in any language connect with a plain socket. The auth key file, readable only by your user profile, is the access control.
+
+### Can another user on the machine see my sessions?
+
+They would need read access to your `~\.psmux\<session>.key` file. Keep your profile directory private, or point `PSMUX_DATA_DIR` at a directory with the ACL you want.
+
+### Does each pane really get its own conhost?
+
+Yes. `CreatePseudoConsole` starts a conhost (or OpenConsole, depending on Windows Terminal's configuration) per pseudo console. That is a Windows design constraint and it is what gives each pane a fully independent console, including its own input mode and its own cursor state.
+
+### How is this different from Windows Terminal panes?
+
+Windows Terminal panes live inside the Windows Terminal process; close the window and the shells die. psmux panes live in a detached server, can be driven from scripts (`send-keys`, `capture-pane`, `pipe-pane`, `wait-for`), can be attached from SSH, and answer to your existing `.tmux.conf`. Many people use both: Windows Terminal as the window, psmux as the multiplexer inside it.
+
+---
+
+<!-- performance -->
+# psmux Performance: How Fast Is tmux for Windows?
+
+psmux is a native terminal multiplexer for Windows, and this page is its performance record: what a psmux command costs, how long a new pane takes to show a PowerShell prompt, what the server uses in memory per pane, and where the time actually goes. Every number below was measured on a real machine with the commands shown, so you can reproduce them on yours.
+
+## Key facts
+
+- **A psmux CLI command round trip is about 15 to 25 ms**, including starting the `psmux.exe` client process, reading the registry files, connecting over loopback TCP, and printing the reply.
+- **`new-session -d` takes about 50 ms** when the warm pool has a standby server ready, about 215 ms when it has to cold start one.
+- **A new window shows a pwsh prompt in about 100 ms** when the server's spare shell is ready, 400 to 550 ms when the shell has to boot from scratch. Bare `pwsh -NoProfile -c exit` takes about 210 ms on the same machine, so psmux is not the bottleneck; the shell is.
+- **The server process needs about 30 MB working set (15 MB private) for a session with 11 windows and 16 panes.** Each pane adds three lightweight threads and its scrollback buffer. The shells themselves (about 90 MB per pwsh) dominate memory, exactly as they would outside psmux.
+- **Output rendering is event driven.** The server pushes a frame within a few milliseconds of ConPTY output; the client never has to poll for it.
+- **Release builds use `opt-level = 3`, full LTO, one codegen unit, and stripped symbols** (`[profile.release]` in `Cargo.toml`).
+
+For how these numbers come about, read [How psmux Multiplexes Natively on Windows](architecture.md). For the warm pool, read [Warm Sessions](warm-sessions.md).
+
+## Reference machine
+
+All measurements on this page were taken on 2026-08-29 with psmux 3.3.8 (commit cbb9c10) installed from `cargo install --path .`:
+
+- Windows 11, build 26200
+- PowerShell 7.6.5 as the default shell
+- AMD Ryzen AI MAX+ 395, 96 GB RAM
+- Timed from a PowerShell script with `System.Diagnostics.Stopwatch` around each `& psmux ...` call, so every figure includes the client process start
+
+Your numbers will differ. Shell startup in particular depends on your profile, PSReadLine, oh-my-posh, and antivirus scanning of `pwsh.exe`.
+
+## How long does a psmux command take?
+
+Ten runs each against a session with one window (`psmux new-session -d -s perf -x 200 -y 50`):
+
+| Command | min | median | max |
+|---------|----:|-------:|----:|
+| `display-message -p '#{session_name}'` | 16 ms | 18 ms | 26 ms |
+| `list-panes` | 15 ms | 18 ms | 23 ms |
+| `send-keys 'echo hi' Enter` | 15 ms | 20 ms | 26 ms |
+| `capture-pane -p` | 18 ms | 24 ms | 38 ms |
+| `split-window -h` (command returns; shell keeps booting) | 25 ms | 36 ms | 70 ms |
+| `new-window` (command returns; shell keeps booting) | 31 ms | 58 ms | 74 ms |
+| `kill-session` (waits for the process tree to exit) | 250 ms | 255 ms | 283 ms |
+
+What that means for scripts: a loop that sends 100 `send-keys` commands finishes in about two seconds, and most of that is Windows creating 100 `psmux.exe` client processes, not the server. Chain commands with `\;` or use [control mode](control-mode.md) to send many commands over one connection when that matters.
+
+## How long until a new pane is usable?
+
+The command returning is not the same as the prompt being visible. This measures `new-window` until `capture-pane` shows a `PS C:\...>` prompt, polling every 5 ms:
+
+| Run | new-window to visible pwsh prompt |
+|-----|----------------------------------:|
+| 1 | 562 ms (spare shell not ready, cold pwsh start) |
+| 2 | 106 ms (spare shell claimed) |
+| 3 | 432 ms |
+| 4 | 94 ms |
+| 5 | 403 ms |
+
+The two clusters are the warm pane pool at work. Every server keeps one spare shell booted; the first `new-window` or `split-window` after a pause gets it in about 100 ms, and a burst of creates falls back to cold shell starts of 400 to 550 ms while the pool refills. Baseline for comparison, on the same machine:
+
+| Command | min | median | max |
+|---------|----:|-------:|----:|
+| `pwsh -NoProfile -c exit` (no psmux involved) | 206 ms | 211 ms | 246 ms |
+
+A cold pane costs the shell's own startup plus a couple of hundred milliseconds of PSReadLine and prompt rendering inside a fresh console. psmux's share of that is the ConPTY creation and the first frame, well under 50 ms.
+
+## How long does session creation take?
+
+| Scenario | min | median | max |
+|----------|----:|-------:|----:|
+| `new-session -d` with the warm pool enabled (default) | 45 ms | 50 ms | 51 ms |
+| `new-session -d` with `PSMUX_NO_WARM=1` (cold server) | 203 ms | 216 ms | 243 ms |
+
+The warm path is a rename of the standby `__warm__` server's registry files plus a claim message, which is why it is four times faster than spawning a server, binding the listener, loading the config, and booting the first shell. See [Warm Sessions](warm-sessions.md).
+
+## What does the server use in memory?
+
+After creating 11 windows and splitting the first window into 5 panes (16 panes in total, all pwsh):
+
+| Process | Working set | Private bytes | Threads |
+|---------|------------:|--------------:|--------:|
+| `psmux.exe server -s perf` | 29.5 MB | 14.4 MB | 55 |
+| each `pwsh.exe` pane (average) | about 94 MB | | |
+
+Per pane the server adds three threads (ConPTY reader, VT parser, write queue) and the scrollback grid, which is `history-limit` rows times the pane width. With the default history the server's private memory grows by well under a megabyte per pane. The shells dominate: 16 panes of pwsh is about 1.5 GB of working set, the same as 16 Windows Terminal tabs. Use `cmd`, `nu`, or `pwsh -NoProfile` for panes that only need to run one command (see [Multi-Shell](multi-shell.md)).
+
+## The extreme scale harness
+
+`tests/test_extreme_perf.ps1` is the repository's stress benchmark. It creates 100 sequential windows, 50 windows in a burst, splits one window until psmux refuses, builds a 20 windows by 5 splits mixed session, and then measures command round trips and `dump-state` serialisation with 100 panes alive. It writes a JSON summary with these fields:
+
+| Field | Meaning |
+|-------|---------|
+| `baseline_noprofile_ms`, `baseline_profile_ms` | Raw `pwsh` startup with and without the profile, no psmux involved |
+| `cold_start_ms` | `new-session -d` on a cold server until its first prompt is visible |
+| `seq_prompt_p50`, `seq_prompt_p90`, `seq_prompt_p99` | Prompt ready latency percentiles across 100 sequential `new-window` calls |
+| `seq_cmd_avg` | Average `new-window` command return time in that run |
+| `burst_total_ms` | Wall time to fire 50 `new-window` commands and see 50 prompts |
+| `max_splits` | Splits accepted in one window before "pane too small" (depends on the terminal size you give the session) |
+| `mixed_total_ms`, `mixed_mem_mb` | Wall time and server memory for the 100 pane mixed session |
+| `rtt_avg_ms`, `rtt_p90_ms` | Command round trip with 100 panes alive |
+| `dumpstate_avg_ms` | Server time to serialise a full frame with 100 panes alive |
+| `throughput_wps` | `new-window` commands per second over 200 calls |
+| `final_mem_mb`, `mem_after_kill_mb` | Server memory at the end and after `kill-session` |
+
+Run it yourself after a release build (it looks for `target\release\psmux.exe`):
+
+```powershell
+cargo build --release
+pwsh -NoProfile -File tests\test_extreme_perf.ps1
+# smaller and faster:
+pwsh -NoProfile -File tests\test_extreme_perf.ps1 -SequentialWindows 20 -BurstWindows 10 -SkipPromptCheck
+```
+
+A recorded run kept in the repository root (`test_extreme_perf_results.txt`, from an earlier build on a smaller terminal) shows `seq_prompt_p50` of 158 ms, `seq_prompt_p90` of 418 ms, `seq_prompt_p99` of 433 ms, `dumpstate_avg_ms` of 1 ms, and a server `final_mem_mb` of 73 MB with 100 panes alive. The p50 to p90 gap is the same warm versus cold shell split visible in the table above.
+
+## Where the time goes
+
+- **Shell startup dominates.** pwsh takes 200 to 1000 ms to a prompt depending on the profile; psmux spends tens of milliseconds per pane. The warm pool exists to overlap the two.
+- **Client process start is most of a CLI round trip.** The server answers a query in about a millisecond; the other 15 ms is Windows creating `psmux.exe`, loading it, and reading three small files. This is why control mode and `\;` chains are faster for automation.
+- **Frame serialisation is about 1 ms.** `dump_layout_json_fast` (`src/layout.rs`) snapshots each pane's cells under its parser mutex for about a millisecond and serialises outside the lock, so rendering never blocks a pane's reader thread.
+- **`kill-session` is slow on purpose.** It walks the process tree of every pane, verifies each pid's creation time so a recycled pid is never killed, and waits for the exits, which is where the 250 ms goes.
+
+## How psmux keeps latency low
+
+All of these are in the source today; the file is named so you can check.
+
+| Technique | Effect | Where |
+|-----------|--------|-------|
+| Server push rendering | A dirty state pushes a frame to attached clients within a few milliseconds instead of waiting for the next client poll | `src/server/mod.rs` |
+| Adaptive client polling | 10 ms while typing, 16 ms idle with pushed frames, 1 ms while assembling a paste | `src/client.rs` |
+| Reader and parser split | A 64 KB reader thread never takes the parser lock, and the parser coalesces bursts in 1 ms ticks | `src/pane.rs` |
+| Per pane write queue | Keystrokes are queued and written by a dedicated thread, so a wedged child cannot stall the server loop | `src/pane.rs` (PR #543) |
+| Lazy pane resize | Only the active window's panes are resized; background windows resize when shown, avoiding O(n) `ResizePseudoConsole` calls | `src/tree.rs` |
+| Cached shell resolution | The default shell's path is resolved once per server in an `OnceLock` | `src/pane.rs` |
+| Early port file write | The server binds its listener and writes `.port` before loading config or spawning shells, so an attaching client connects immediately | `src/server/mod.rs` |
+| 10 ms attach polling | The client watches for the `.port` beacon in 10 ms ticks | `src/main.rs` |
+| Warm servers and warm panes | Pre booted standby server and spare shell per server | [Warm Sessions](warm-sessions.md) |
+| ConPTY passthrough | On Windows 11 22H2+ conhost forwards VT output as written instead of re rendering it | `crates/portable-pty-psmux` |
+| Above normal priority | psmux's own server and client processes get `ABOVE_NORMAL_PRIORITY_CLASS` so a compile on every core cannot starve keystrokes (issue #608) | `src/platform.rs` |
+| Release profile | `opt-level = 3`, `lto = true`, `codegen-units = 1`, `strip = "symbols"` | `Cargo.toml` |
+
+## Why native multiplexing suits scripted TUIs and terminal agents
+
+Running a dozen terminal agents, a build watcher, a log tail, and a couple of editors from one script is the workload psmux is tuned for:
+
+- **Dozens of panes are cheap on the psmux side.** The server cost is a few threads and a screen buffer per pane; the harness routinely runs 100 panes in one server. What you pay for is the programs in the panes, which you would pay for anyway.
+- **Commands are local and cheap.** `send-keys`, `capture-pane`, `wait-for`, and `pipe-pane` are 15 to 25 ms loopback calls. There is no WSL boundary and no shell wrapper between your script and the pane.
+- **Detached servers keep running.** A supervisor script can create sessions at boot, hand agents their panes, and attach from any terminal later. See [Windows Use Cases](use-cases.md).
+- **Output arrives as it happens.** Push rendering means an attached client sees an agent's output within milliseconds, and `capture-pane` reads the same screen the parser holds.
+- **The interactive path is protected.** Above normal priority for psmux's own processes keeps the client responsive while agents saturate the CPU.
+
+The step by step guide is [Running Terminal Agents and TUIs in psmux](tutorials/terminal-agents-and-tuis.md), and the command reference is [Scripting and Automation](scripting.md).
+
+## Measure it yourself
+
+Command round trip and session creation, in PowerShell 7:
+
+```powershell
+function Time-Psmux([string[]]$cmd, [int]$n = 10) {
+    $t = 1..$n | ForEach-Object {
+        $sw = [Diagnostics.Stopwatch]::StartNew()
+        $null = & psmux @cmd
+        $sw.Stop(); $sw.ElapsedMilliseconds
+    }
+    $s = $t | Sort-Object
+    "{0,-40} min={1} med={2} max={3}" -f ($cmd -join ' '), $s[0], $s[[int]($s.Count / 2)], $s[-1]
+}
+
+psmux new-session -d -s perf -x 200 -y 50
+Time-Psmux @('display-message', '-p', '-t', 'perf', '#{session_name}')
+Time-Psmux @('send-keys', '-t', 'perf', 'echo hi', 'Enter')
+Time-Psmux @('capture-pane', '-p', '-t', 'perf')
+Time-Psmux @('new-window', '-t', 'perf') 5
+psmux kill-session -t perf
+
+# Session creation, warm versus cold
+Time-Psmux @('new-session', '-d', '-s', 'perf2') 1; psmux kill-session -t perf2
+$env:PSMUX_NO_WARM = '1'
+Time-Psmux @('new-session', '-d', '-s', 'perf3') 1; psmux kill-session -t perf3
+Remove-Item Env:PSMUX_NO_WARM
+```
+
+Prompt ready latency for a new window:
+
+```powershell
+$sw = [Diagnostics.Stopwatch]::StartNew()
+psmux new-window -t perf -n probe
+while ($sw.ElapsedMilliseconds -lt 20000) {
+    $screen = (psmux capture-pane -p -t perf:probe) -join "`n"
+    if ($screen -match 'PS [A-Z]:') { break }
+    Start-Sleep -Milliseconds 5
+}
+"new-window to prompt: $($sw.ElapsedMilliseconds) ms"
+```
+
+Server memory:
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name='psmux.exe'" |
+    Where-Object CommandLine -match 'server -s perf' |
+    ForEach-Object { Get-Process -Id $_.ProcessId } |
+    Select-Object Id, @{n='WS_MB';e={[math]::Round($_.WorkingSet64/1MB,1)}},
+                      @{n='Private_MB';e={[math]::Round($_.PrivateMemorySize64/1MB,1)}}, Threads
+```
+
+If a number looks wrong, the debug and crash logs described in [Diagnostics](diagnostics.md) show where the time went.
+
+## FAQ
+
+### Is psmux faster than tmux inside WSL?
+
+For Windows shells, yes by construction: a pwsh pane in psmux is a direct ConPTY child, while reaching pwsh from tmux in WSL means `wsl.exe` to `pwsh.exe` interop on every pane and every script call. For Linux shells inside WSL the two are comparable; psmux runs `wsl.exe` in a pane and the Linux side is unchanged.
+
+### Why does the first split after a pause feel instant and a burst of splits does not?
+
+The spare shell. Each server keeps one shell booted for the next `split-window` or `new-window`; a burst uses it up and the rest cold start while the pool refills. Windows created in a loop still return in about 50 ms each; only the prompt takes longer to appear.
+
+### Does psmux add input latency?
+
+A keystroke goes client to server over loopback (sub millisecond), into the pane's write queue, into ConPTY, and the echo comes back through the reader, parser, and a pushed frame. End to end this is a few milliseconds, below the 16 ms frame time of the terminal you are typing into.
+
+### How many panes can one server hold?
+
+The harness runs 100 panes in one session as a routine test. The practical limit is memory for the shells and your patience with `list-panes`, not psmux.
+
+### What should I change to make it faster?
+
+1. Trim your PowerShell profile or use `pwsh -NoProfile` for utility panes; the shell is the slow part.
+2. Leave the warm pool on (default).
+3. Prefer `\;` chains or control mode over hundreds of separate `psmux` invocations in tight loops.
+4. Keep `history-limit` reasonable if you run hundreds of panes; scrollback is the only per pane memory psmux itself allocates.
+
+---
+
+<!-- warm-sessions -->
+# Warm Sessions
+
+psmux uses a background **warm session** (`__warm__`) to make new session creation nearly instant. This page explains how it works and how to interact with it if needed.
+
+## What is a Warm Session?
+
+When you create a session, psmux pre-spawns a hidden standby server called `__warm__`. This server loads your config, initializes a shell, and waits. When you run `psmux new-session` next time, psmux **claims** this warm server (renames it to your requested session name) instead of cold-starting a new process. This skips the entire server startup + config load + shell spawn cycle.
+
+**Result:** New session creation drops from ~400-1000ms (shell startup) to near-instant.
+
+## Why You Don't See It
+
+The `__warm__` session is an internal implementation detail. It is hidden from:
+
+- `psmux ls` / `psmux list-sessions`
+- `prefix + s` (choose-session)
+- `prefix + w` (choose-tree)
+- `prefix + (` / `)` (session navigation)
+- The `last_session` tracking file
+
+Users should never need to interact with it directly.
+
+## When It's Not Spawned
+
+The warm server is **not** created when:
+
+- The current session has `destroy-unattached on`, and keeping a hidden warm server alive would break the expectation that sessions die when you detach
+- The current session **is** the warm session (no recursive warm spawning)
+- Warm panes are explicitly disabled (see below)
+
+## Disabling Warm Sessions
+
+If you prefer every session, window, and pane to start with a completely fresh shell invocation (no pre-spawned state), you can disable warm entirely.
+
+### Via config file
+
+Add this to your `.psmux.conf`, `.tmux.conf`, or `~/.config/psmux/psmux.conf`:
+
+```
+set -g warm off
+```
+
+### Via environment variable
+
+```powershell
+$env:PSMUX_NO_WARM = "1"
+```
+
+When warm is disabled:
+- No `__warm__` background server is spawned
+- No warm panes are pre-spawned inside sessions
+- Every `new-session`, `new-window`, and `split-window` cold-starts a fresh shell
+- Startup latency increases slightly (shell profile load is not parallelized)
+
+You can re-enable warm at runtime with `set -g warm on`.
+
+## What a Claim Carries Over
+
+A warm server and a warm pane are spawned ahead of time, so they know nothing about the client
+that later claims them. psmux carries the parts that matter across the claim:
+
+- **Start directory.** `new-session -c`, `new-window -c` and `split-window -c` cannot set the
+  working directory of a shell that is already running, so psmux types a `cd` line into the warm
+  shell and clears the screen. The line uses the syntax of the shell in the pane, chosen from the
+  effective `default-shell`: PowerShell, cmd.exe and the POSIX shells each get their own form.
+  Before [#600](https://github.com/psmux/psmux/issues/600) every Windows pane got the PowerShell
+  form, which Git Bash and cmd.exe rejected. See
+  [multi-shell.md](multi-shell.md#start-directories-and-warm-panes) for the exact lines.
+- **Process priority.** The claiming client's `PSMUX_PRIORITY` (or its config file `priority`
+  line) is applied to the claimed server, so `show-options -g priority` and the real scheduling
+  class agree whether the session was cold started or claimed
+  ([#608](https://github.com/psmux/psmux/issues/608)). See
+  [configuration.md](configuration.md#process-priority).
+- **Config.** The claimed server reloads your config file on the claim, so a `set -g` line you
+  added since the standby was spawned is honoured.
+
+What does not carry over: `-e VAR=value` on `new-session`, `new-window` or `split-window` cannot
+reach a shell that already has its environment, so a spawn with `-e` skips the warm pool and starts
+cold.
+
+## One Warm Server per Registry
+
+The warm server belongs to the registry that spawned it. Each `-L <name>` namespace keeps its own
+(`<name>____warm__`), and each `PSMUX_DATA_DIR` keeps its own as well: the single server guard that
+stops two servers from publishing the same session name is keyed by the resolved data root, so two
+registries can each hold a `__warm__` without refusing one another
+([#599](https://github.com/psmux/psmux/issues/599)).
+
+## Accessing the Warm Session (Advanced)
+
+If you need to inspect or manage the warm session directly (debugging, development):
+
+```powershell
+# Check if a warm session is running
+Test-Path "$HOME\.psmux\__warm__.port"
+
+# List all sessions including warm (raw port files)
+Get-ChildItem "$HOME\.psmux\*.port" | Select-Object Name
+
+# Send a command to the warm server
+psmux -t __warm__ list-windows
+
+# Kill just the warm session
+psmux -t __warm__ kill-session
+
+# With -L namespace: warm session is stored as "<namespace>____warm__"
+Test-Path "$HOME\.psmux\myns____warm__.port"
+```
+
+## File Layout
+
+| File | Purpose |
+|------|---------|
+| `~\.psmux\__warm__.port` | TCP port of the warm server |
+| `~\.psmux\__warm__.key` | Auth key for the warm server |
+| `~\.psmux\<ns>____warm__.port` | Warm server under `-L <ns>` namespace |
+
+---
+
 <!-- scripting -->
 # Scripting & Automation
 
@@ -6672,354 +8690,262 @@ The option is read when the chooser opens, not while it is open. Close the choos
 
 ---
 
-<!-- warm-sessions -->
-# Warm Sessions
+<!-- diagnostics -->
+# Diagnostics
 
-psmux uses a background **warm session** (`__warm__`) to make new session creation nearly instant. This page explains how it works and how to interact with it if needed.
+psmux runs its server detached, with no visible stderr. When something goes wrong there is
+nowhere for an error message to land on screen, so psmux writes what it knows to files instead.
+This page lists every diagnostic file psmux can produce, the environment variables that turn the
+optional ones on, and what to attach when you file a bug report.
 
-## What is a Warm Session?
+Everything on this page is read only observation, with one exception called out where it appears:
+`PSMUX_FAKE_WIN_BUILD` moves psmux onto a different branch on purpose, so that a platform specific
+path can be reproduced on a machine that is not that platform.
 
-When you create a session, psmux pre-spawns a hidden standby server called `__warm__`. This server loads your config, initializes a shell, and waits. When you run `psmux new-session` next time, psmux **claims** this warm server (renames it to your requested session name) instead of cold-starting a new process. This skips the entire server startup + config load + shell spawn cycle.
+## Debug Logging
 
-**Result:** New session creation drops from ~400-1000ms (shell startup) to near-instant.
+psmux has fourteen independent debug loggers. All of them are **off by default** and cost nothing
+when disabled (one atomic load per call site). Each writes a timestamped line per event, and the
+loggers under `~/.psmux/` are capped at a fixed number of entries so an enabled log can never fill
+your disk.
 
-## Why You Don't See It
+| Variable | Log file | What it records |
+|---|---|---|
+| `PSMUX_CLIENT_DEBUG=1` | `~/.psmux/client_debug.log` | Client frame receive, JSON parse, draw lifecycle, status bar rendering |
+| `PSMUX_STYLE_DEBUG=1` | `~/.psmux/style_debug.log` | Style and theme parsing, inline `#[...]` directives |
+| `PSMUX_INPUT_DEBUG=1` | `~/.psmux/input_debug.log` | Every input event plus the console mode in effect when it arrived |
+| `PSMUX_SERVER_DEBUG=1` | `~/.psmux/server_debug.log` | Server side request tracing and session switching |
+| `PSMUX_SESSION_DEBUG=1` | `~/.psmux/session_debug.log` | Session registry scans and stale port cleanup |
+| `PSMUX_MOUSE_DEBUG=1` | `~/.psmux/mouse_debug.log` | Mouse injection, screen to pane coordinate mapping, and the wheel gate's decision per notch (which mouse protocol the pane holds and who enabled it) |
+| `PSMUX_SSH_DEBUG=1` | `~/.psmux/ssh_input.log` | SSH escape sequence decoding into Win32 input records |
+| `PSMUX_LATENCY_LOG=1` | `~/.psmux/latency.log` | Keypress to render latency, measured client side |
+| `PSMUX_PANE_RAW=1` | `~/.psmux/pane_raw.bin` | The raw byte stream a pane's child wrote, before psmux's VT parser touched it. The file to read when a colour, a mode switch or a mouse DECSET seems to be missing: it shows what the program (and conhost, which echoes console mode changes into the same stream as `ESC [ ? 1003 ; 1006 h` / `l`) actually emitted |
+| `PSMUX_AUTORENAME_DEBUG=1` | `~/.psmux/autorename.log` | The process tree walk behind `automatic-rename` and `#{pane_current_command}` |
+| `PSMUX_ROUTE_DEBUG=1` | stderr of the CLI process | Which session a bare `psmux <command>` (no `-t`, no `$TMUX`) was routed to and why |
+| `PSMUX_POPUP_DEBUG=1` | `%TEMP%\psmux_popup_debug.log` | Popup creation, resize, and teardown |
+| `PSMUX_WARM_DEBUG=1` | `%TEMP%\psmux_warm_debug.log` | Warm server and warm pane lifecycle |
+| `PSMUX_AUTH_DEBUG=1` | `%TEMP%\psmux_auth_debug.log` | The `.port` and `.key` handshake between client and server |
 
-The `__warm__` session is an internal implementation detail. It is hidden from:
+Three of these deliberately live in `%TEMP%` rather than `~/.psmux/`. Popup, warm pool and auth
+diagnostics are all about races between concurrent psmux processes, so those three logs are
+append-only and per-machine rather than truncate-on-start, and no process can clobber another's
+evidence. `PSMUX_AUTH_DEBUG` additionally echoes the client side of the handshake to stderr, which
+is visible when you run the client in a normal console.
 
-- `psmux ls` / `psmux list-sessions`
-- `prefix + s` (choose-session)
-- `prefix + w` (choose-tree)
-- `prefix + (` / `)` (session navigation)
-- The `last_session` tracking file
+Two more details worth knowing:
 
-Users should never need to interact with it directly.
+- `PSMUX_SESSION_DEBUG` appends rather than truncates. Registry cleanup runs in every short-lived
+  `psmux` CLI process, so truncating on open would erase the log before you could read it.
+- `PSMUX_LATENCY_LOG=1` also enables a server side companion at
+  `%USERPROFILE%\psmux_server_latency.log` holding dump-state build times. Read the two together
+  to tell a slow server from a slow client.
 
-## When It's Not Spawned
+### Enabling a Log
 
-The warm server is **not** created when:
-
-- The current session has `destroy-unattached on`, and keeping a hidden warm server alive would break the expectation that sessions die when you detach
-- The current session **is** the warm session (no recursive warm spawning)
-- Warm panes are explicitly disabled (see below)
-
-## Disabling Warm Sessions
-
-If you prefer every session, window, and pane to start with a completely fresh shell invocation (no pre-spawned state), you can disable warm entirely.
-
-### Via config file
-
-Add this to your `.psmux.conf`, `.tmux.conf`, or `~/.config/psmux/psmux.conf`:
-
-```
-set -g warm off
-```
-
-### Via environment variable
-
-```powershell
-$env:PSMUX_NO_WARM = "1"
-```
-
-When warm is disabled:
-- No `__warm__` background server is spawned
-- No warm panes are pre-spawned inside sessions
-- Every `new-session`, `new-window`, and `split-window` cold-starts a fresh shell
-- Startup latency increases slightly (shell profile load is not parallelized)
-
-You can re-enable warm at runtime with `set -g warm on`.
-
-## What a Claim Carries Over
-
-A warm server and a warm pane are spawned ahead of time, so they know nothing about the client
-that later claims them. psmux carries the parts that matter across the claim:
-
-- **Start directory.** `new-session -c`, `new-window -c` and `split-window -c` cannot set the
-  working directory of a shell that is already running, so psmux types a `cd` line into the warm
-  shell and clears the screen. The line uses the syntax of the shell in the pane, chosen from the
-  effective `default-shell`: PowerShell, cmd.exe and the POSIX shells each get their own form.
-  Before [#600](https://github.com/psmux/psmux/issues/600) every Windows pane got the PowerShell
-  form, which Git Bash and cmd.exe rejected. See
-  [multi-shell.md](multi-shell.md#start-directories-and-warm-panes) for the exact lines.
-- **Process priority.** The claiming client's `PSMUX_PRIORITY` (or its config file `priority`
-  line) is applied to the claimed server, so `show-options -g priority` and the real scheduling
-  class agree whether the session was cold started or claimed
-  ([#608](https://github.com/psmux/psmux/issues/608)). See
-  [configuration.md](configuration.md#process-priority).
-- **Config.** The claimed server reloads your config file on the claim, so a `set -g` line you
-  added since the standby was spawned is honoured.
-
-What does not carry over: `-e VAR=value` on `new-session`, `new-window` or `split-window` cannot
-reach a shell that already has its environment, so a spawn with `-e` skips the warm pool and starts
-cold.
-
-## One Warm Server per Registry
-
-The warm server belongs to the registry that spawned it. Each `-L <name>` namespace keeps its own
-(`<name>____warm__`), and each `PSMUX_DATA_DIR` keeps its own as well: the single server guard that
-stops two servers from publishing the same session name is keyed by the resolved data root, so two
-registries can each hold a `__warm__` without refusing one another
-([#599](https://github.com/psmux/psmux/issues/599)).
-
-## Accessing the Warm Session (Advanced)
-
-If you need to inspect or manage the warm session directly (debugging, development):
+Set the variable in the shell you launch psmux from, then reproduce the problem:
 
 ```powershell
-# Check if a warm session is running
-Test-Path "$HOME\.psmux\__warm__.port"
-
-# List all sessions including warm (raw port files)
-Get-ChildItem "$HOME\.psmux\*.port" | Select-Object Name
-
-# Send a command to the warm server
-psmux -t __warm__ list-windows
-
-# Kill just the warm session
-psmux -t __warm__ kill-session
-
-# With -L namespace: warm session is stored as "<namespace>____warm__"
-Test-Path "$HOME\.psmux\myns____warm__.port"
+$env:PSMUX_INPUT_DEBUG = "1"     # turn the input logger on for this shell only
+psmux kill-server                # make sure the next launch is a fresh server
+psmux new-session -s repro       # reproduce the problem here
+Get-Content "$env:USERPROFILE\.psmux\input_debug.log" -Tail 40
 ```
 
-## File Layout
+The variable must be set before the process you want to trace starts. A logger that traces the
+server (`PSMUX_SERVER_DEBUG`, `PSMUX_SESSION_DEBUG`, `PSMUX_WARM_DEBUG`) only takes effect on a
+server started after the variable was set, which is why the example kills the old server first.
+Warm servers are pre-spawned, so add `$env:PSMUX_NO_WARM = "1"` when you need the very first server
+process to carry your setting. See [warm-sessions.md](warm-sessions.md).
+
+To turn a logger back off, clear the variable and restart:
+
+```powershell
+Remove-Item Env:\PSMUX_INPUT_DEBUG
+psmux kill-server
+```
+
+### The Windows Build Seam
+
+| Variable | What it does |
+|---|---|
+| `PSMUX_FAKE_WIN_BUILD=19045` | Makes psmux report that build number instead of the real one |
+
+Several mouse code paths branch on the Windows build number, because conhost handles VT mouse
+input differently below build 22523 (see [mouse-ssh.md](mouse-ssh.md) and
+[faq.md](faq.md)). Those branches are unreachable on a modern host, so this variable exists to
+exercise them: set it to `19045` to see what a Windows 10 pane does, or to `26100` to see the
+modern path from an older machine.
+
+This is diagnostic only. It changes nothing about the machine and nothing about the console, it
+only changes which branch psmux picks, so a build set here that does not match reality gives you
+a mouse path your conhost was not built for. Set it while reproducing a report, then clear it. It
+must be set on the **server** process to affect a pane, so kill the server first and add
+`$env:PSMUX_NO_WARM = "1"` so that a warm server spawned earlier, without your setting, does not
+answer instead.
+
+## Always On Diagnostic Files
+
+These three are written without any variable being set. They exist because the failures they
+describe happen where you cannot see them.
+
+### `~/.psmux/server-startup.log`
+
+Written when the server fails during startup, typically when the first pane cannot be spawned.
+The classic case is a `default-shell` pointing at a path that does not exist or cannot be executed,
+where all the user sees is psmux flashing and returning to the prompt. The log records:
+
+- the real error text, including the raw Windows error (for example `CreateProcessW err 87`),
+- the exact path psmux tried to spawn,
+- the psmux build that produced the failure,
+- the size of the inherited environment block and its largest single variable, because an
+  oversized environment is itself a common cause of `err 87` on profiles where OneDrive and
+  WindowsApps entries have inflated it toward the 32 KB Windows limit.
+
+The attaching client reads this file back and echoes a fresh failure to your terminal rather than
+leaving it buried, so in most cases you will see the real cause on screen. The file is the fuller
+record. Only a log written during the current startup attempt is surfaced. An older one is treated
+as stale and ignored.
+
+### `~/.psmux/config-warnings.log`
+
+Non-fatal config parse problems, such as an unknown option name, a malformed value, or an unknown
+command in your config file. The detached server has no stderr to complain to, so it records the
+warnings here and the next client to attach echoes them to your terminal. As with the startup log,
+only warnings from the current startup are shown, and the file is removed once a config parses
+cleanly, so a fixed config stops reporting.
+
+This is the file to check first when a config line appears to have been silently ignored.
+
+### `~/.psmux/crash.log`
+
+Written by the server's panic handler: the panic message and a full backtrace. The handler also
+removes that session's `.port` and `.key` files, so a crashed server does not leave stale discovery
+files behind for the next client to trip over.
+
+If this file exists and its timestamp matches your problem, attach it. It is the single most useful
+artifact in a bug report.
+
+## Runtime State and Bookkeeping
+
+psmux keeps all of its runtime bookkeeping in one directory, `%USERPROFILE%\.psmux\`. The home
+directory is resolved from `USERPROFILE` first, then the Win32 profile API, then
+`HOMEDRIVE` plus `HOMEPATH`, then `HOME`. Setting `PSMUX_DATA_DIR` to an absolute path moves the
+whole directory, which gives you a second, fully independent registry (its own sessions, its own
+warm server, its own `last_session`) without touching the default one. See
+[configuration.md](configuration.md#environment-variables).
+
+Per-session files are named after the session:
 
 | File | Purpose |
-|------|---------|
-| `~\.psmux\__warm__.port` | TCP port of the warm server |
-| `~\.psmux\__warm__.key` | Auth key for the warm server |
-| `~\.psmux\<ns>____warm__.port` | Warm server under `-L <ns>` namespace |
+|---|---|
+| `<session>.port` | The TCP port that session's server is listening on |
+| `<session>.key` | The auth key a client must present to that server |
+| `<session>.sid` | The session's stable id, the `$N` used in targets |
+| `<session>.pid` | Liveness anchor, stored as `pid:creation_filetime` |
+| `<session>.act` | Last activity stamp, Unix epoch microseconds. Written on client attach and on real keystrokes from an attached client (throttled to one write per second), the same `activity_time` tmux keeps. It is what a bare `psmux <command>` with no `-t` uses to pick the session you are actually working in ([#603](https://github.com/psmux/psmux/issues/603)). A detached session that was never attached has none and ranks by its `.port` file's age |
+| `<session>.spawnlock` | Warm pool spawn lock, prevents two racing spawns |
 
----
+The `.pid` file is worth understanding, because it is what makes psmux safe to clean up after
+itself. A bare pid can be recycled by Windows and reused by an unrelated process. Storing the
+process creation time alongside it means psmux can prove a pid is still the same process it wrote
+down before it acts on it, so the orphan server reaper and `kill-server` can never terminate
+something that merely inherited the number.
 
-<!-- performance -->
-# psmux Performance: How Fast Is tmux for Windows?
+The warm server uses the reserved session name `__warm__`, so it owns a full set of the files above
+named `__warm__.port`, `__warm__.key` and so on. That is why `psmux ls` does not show it.
 
-psmux is a native terminal multiplexer for Windows, and this page is its performance record: what a psmux command costs, how long a new pane takes to show a PowerShell prompt, what the server uses in memory per pane, and where the time actually goes. Every number below was measured on a real machine with the commands shown, so you can reproduce them on yours.
+Socket namespaces created with `-L <name>` prefix the session name, so the files become
+`<namespace>__<session>.port` and so on. A namespaced warm server is therefore
+`<namespace>____warm__.port`, with the doubled underscore coming from the namespace separator plus
+the warm name.
 
-## Key facts
+Three files have fixed names and are not tied to any session:
 
-- **A psmux CLI command round trip is about 15 to 25 ms**, including starting the `psmux.exe` client process, reading the registry files, connecting over loopback TCP, and printing the reply.
-- **`new-session -d` takes about 50 ms** when the warm pool has a standby server ready, about 215 ms when it has to cold start one.
-- **A new window shows a pwsh prompt in about 100 ms** when the server's spare shell is ready, 400 to 550 ms when the shell has to boot from scratch. Bare `pwsh -NoProfile -c exit` takes about 210 ms on the same machine, so psmux is not the bottleneck; the shell is.
-- **The server process needs about 30 MB working set (15 MB private) for a session with 11 windows and 16 panes.** Each pane adds three lightweight threads and its scrollback buffer. The shells themselves (about 90 MB per pwsh) dominate memory, exactly as they would outside psmux.
-- **Output rendering is event driven.** The server pushes a frame within a few milliseconds of ConPTY output; the client never has to poll for it.
-- **Release builds use `opt-level = 3`, full LTO, one codegen unit, and stripped symbols** (`[profile.release]` in `Cargo.toml`).
+| File | Purpose |
+|---|---|
+| `latency.log` | Client latency trace, only written under `PSMUX_LATENCY_LOG=1` |
+| `last_session` | The session name written on the most recent attach. A bare `psmux` invocation no longer trusts it outright: routing ranks sessions by their `.act` stamp first, and this file only breaks a tie between sessions with identical activity, which in practice means a registry written by an older psmux that nobody has attached to since |
+| `next_session_id` | Counter that hands out the next stable session id |
 
-For how these numbers come about, read [How psmux Multiplexes Natively on Windows](architecture.md). For the warm pool, read [Warm Sessions](warm-sessions.md).
+A stale `.port` (a server that is gone but whose registry files survived) is reaped by the next
+client that trips over it. `psmux attach -t name` against one prints tmux's
+`can't find session: name` and exits 1, and a bare `psmux attach` that finds nothing left prints
+`no sessions`. Neither surfaces the underlying winsock error any more
+([#605](https://github.com/psmux/psmux/issues/605)). If you see a raw
+`No connection could be made because the target machine actively refused it` you are on an older
+build.
 
-## Reference machine
+The same directory also holds `plugins\` (see [plugins.md](plugins.md)) and, in control mode,
+`cc_debug.log` (see [iterm2-control-mode.md](iterm2-control-mode.md)).
 
-All measurements on this page were taken on 2026-08-29 with psmux 3.3.8 (commit cbb9c10) installed from `cargo install --path .`:
-
-- Windows 11, build 26200
-- PowerShell 7.6.5 as the default shell
-- AMD Ryzen AI MAX+ 395, 96 GB RAM
-- Timed from a PowerShell script with `System.Diagnostics.Stopwatch` around each `& psmux ...` call, so every figure includes the client process start
-
-Your numbers will differ. Shell startup in particular depends on your profile, PSReadLine, oh-my-posh, and antivirus scanning of `pwsh.exe`.
-
-## How long does a psmux command take?
-
-Ten runs each against a session with one window (`psmux new-session -d -s perf -x 200 -y 50`):
-
-| Command | min | median | max |
-|---------|----:|-------:|----:|
-| `display-message -p '#{session_name}'` | 16 ms | 18 ms | 26 ms |
-| `list-panes` | 15 ms | 18 ms | 23 ms |
-| `send-keys 'echo hi' Enter` | 15 ms | 20 ms | 26 ms |
-| `capture-pane -p` | 18 ms | 24 ms | 38 ms |
-| `split-window -h` (command returns; shell keeps booting) | 25 ms | 36 ms | 70 ms |
-| `new-window` (command returns; shell keeps booting) | 31 ms | 58 ms | 74 ms |
-| `kill-session` (waits for the process tree to exit) | 250 ms | 255 ms | 283 ms |
-
-What that means for scripts: a loop that sends 100 `send-keys` commands finishes in about two seconds, and most of that is Windows creating 100 `psmux.exe` client processes, not the server. Chain commands with `\;` or use [control mode](control-mode.md) to send many commands over one connection when that matters.
-
-## How long until a new pane is usable?
-
-The command returning is not the same as the prompt being visible. This measures `new-window` until `capture-pane` shows a `PS C:\...>` prompt, polling every 5 ms:
-
-| Run | new-window to visible pwsh prompt |
-|-----|----------------------------------:|
-| 1 | 562 ms (spare shell not ready, cold pwsh start) |
-| 2 | 106 ms (spare shell claimed) |
-| 3 | 432 ms |
-| 4 | 94 ms |
-| 5 | 403 ms |
-
-The two clusters are the warm pane pool at work. Every server keeps one spare shell booted; the first `new-window` or `split-window` after a pause gets it in about 100 ms, and a burst of creates falls back to cold shell starts of 400 to 550 ms while the pool refills. Baseline for comparison, on the same machine:
-
-| Command | min | median | max |
-|---------|----:|-------:|----:|
-| `pwsh -NoProfile -c exit` (no psmux involved) | 206 ms | 211 ms | 246 ms |
-
-A cold pane costs the shell's own startup plus a couple of hundred milliseconds of PSReadLine and prompt rendering inside a fresh console. psmux's share of that is the ConPTY creation and the first frame, well under 50 ms.
-
-## How long does session creation take?
-
-| Scenario | min | median | max |
-|----------|----:|-------:|----:|
-| `new-session -d` with the warm pool enabled (default) | 45 ms | 50 ms | 51 ms |
-| `new-session -d` with `PSMUX_NO_WARM=1` (cold server) | 203 ms | 216 ms | 243 ms |
-
-The warm path is a rename of the standby `__warm__` server's registry files plus a claim message, which is why it is four times faster than spawning a server, binding the listener, loading the config, and booting the first shell. See [Warm Sessions](warm-sessions.md).
-
-## What does the server use in memory?
-
-After creating 11 windows and splitting the first window into 5 panes (16 panes in total, all pwsh):
-
-| Process | Working set | Private bytes | Threads |
-|---------|------------:|--------------:|--------:|
-| `psmux.exe server -s perf` | 29.5 MB | 14.4 MB | 55 |
-| each `pwsh.exe` pane (average) | about 94 MB | | |
-
-Per pane the server adds three threads (ConPTY reader, VT parser, write queue) and the scrollback grid, which is `history-limit` rows times the pane width. With the default history the server's private memory grows by well under a megabyte per pane. The shells dominate: 16 panes of pwsh is about 1.5 GB of working set, the same as 16 Windows Terminal tabs. Use `cmd`, `nu`, or `pwsh -NoProfile` for panes that only need to run one command (see [Multi-Shell](multi-shell.md)).
-
-## The extreme scale harness
-
-`tests/test_extreme_perf.ps1` is the repository's stress benchmark. It creates 100 sequential windows, 50 windows in a burst, splits one window until psmux refuses, builds a 20 windows by 5 splits mixed session, and then measures command round trips and `dump-state` serialisation with 100 panes alive. It writes a JSON summary with these fields:
-
-| Field | Meaning |
-|-------|---------|
-| `baseline_noprofile_ms`, `baseline_profile_ms` | Raw `pwsh` startup with and without the profile, no psmux involved |
-| `cold_start_ms` | `new-session -d` on a cold server until its first prompt is visible |
-| `seq_prompt_p50`, `seq_prompt_p90`, `seq_prompt_p99` | Prompt ready latency percentiles across 100 sequential `new-window` calls |
-| `seq_cmd_avg` | Average `new-window` command return time in that run |
-| `burst_total_ms` | Wall time to fire 50 `new-window` commands and see 50 prompts |
-| `max_splits` | Splits accepted in one window before "pane too small" (depends on the terminal size you give the session) |
-| `mixed_total_ms`, `mixed_mem_mb` | Wall time and server memory for the 100 pane mixed session |
-| `rtt_avg_ms`, `rtt_p90_ms` | Command round trip with 100 panes alive |
-| `dumpstate_avg_ms` | Server time to serialise a full frame with 100 panes alive |
-| `throughput_wps` | `new-window` commands per second over 200 calls |
-| `final_mem_mb`, `mem_after_kill_mb` | Server memory at the end and after `kill-session` |
-
-Run it yourself after a release build (it looks for `target\release\psmux.exe`):
+### Inspecting the Directory
 
 ```powershell
-cargo build --release
-pwsh -NoProfile -File tests\test_extreme_perf.ps1
-# smaller and faster:
-pwsh -NoProfile -File tests\test_extreme_perf.ps1 -SequentialWindows 20 -BurstWindows 10 -SkipPromptCheck
+Get-ChildItem "$env:USERPROFILE\.psmux" | Sort-Object LastWriteTime -Descending
 ```
 
-A recorded run kept in the repository root (`test_extreme_perf_results.txt`, from an earlier build on a smaller terminal) shows `seq_prompt_p50` of 158 ms, `seq_prompt_p90` of 418 ms, `seq_prompt_p99` of 433 ms, `dumpstate_avg_ms` of 1 ms, and a server `final_mem_mb` of 73 MB with 100 panes alive. The p50 to p90 gap is the same warm versus cold shell split visible in the table above.
+```text
+Mode    LastWriteTime        Length Name
+----    -------------        ------ ----
+d----   7/27/2026  9:14 AM          plugins
+-a---   7/27/2026  9:14 AM      21  work.port
+-a---   7/27/2026  9:14 AM      44  work.key
+-a---   7/27/2026  9:14 AM      26  work.pid
+-a---   7/27/2026  9:12 AM      21  __warm__.port
+-a---   7/27/2026  9:12 AM       4  last_session
+```
 
-## Where the time goes
+Deleting a stale `.port` or `.key` file for a session whose server is gone is safe. psmux also
+cleans these up on its own, both at startup and when a server exits or panics. Never delete files
+belonging to a session you still have attached.
 
-- **Shell startup dominates.** pwsh takes 200 to 1000 ms to a prompt depending on the profile; psmux spends tens of milliseconds per pane. The warm pool exists to overlap the two.
-- **Client process start is most of a CLI round trip.** The server answers a query in about a millisecond; the other 15 ms is Windows creating `psmux.exe`, loading it, and reading three small files. This is why control mode and `\;` chains are faster for automation.
-- **Frame serialisation is about 1 ms.** `dump_layout_json_fast` (`src/layout.rs`) snapshots each pane's cells under its parser mutex for about a millisecond and serialises outside the lock, so rendering never blocks a pane's reader thread.
-- **`kill-session` is slow on purpose.** It walks the process tree of every pane, verifies each pid's creation time so a recycled pid is never killed, and waits for the exits, which is where the 250 ms goes.
+## What to Attach to a Bug Report
 
-## How psmux keeps latency low
+Collect these before opening an issue at
+[GitHub Issues](https://github.com/psmux/psmux/issues). The first four are almost always enough.
 
-All of these are in the source today; the file is named so you can check.
+1. **Version and build.** `psmux -V` prints the version, the commit hash, and the build date.
+2. **Your config**, or the smallest config that still reproduces it. If you are unsure whether your
+   config is involved, test with an empty one: `psmux -f NUL new-session`.
+3. **The always on logs, if they exist and are recent:** `~/.psmux/crash.log`,
+   `~/.psmux/server-startup.log`, `~/.psmux/config-warnings.log`.
+4. **Exact reproduction steps**, including which shell you launched psmux from and which terminal
+   emulator you are running in. Windows Terminal, conhost and ConEmu behave differently.
+5. **A relevant debug log**, if you can guess the subsystem. Keys or modifiers not arriving,
+   use `PSMUX_INPUT_DEBUG`. Mouse misbehaving, use `PSMUX_MOUSE_DEBUG`. Anything over SSH, use
+   `PSMUX_SSH_DEBUG`. Wrong colors or a broken theme, use `PSMUX_STYLE_DEBUG`. A client that will
+   not attach, use `PSMUX_AUTH_DEBUG`. A program inside a pane that seems to lose a colour, a
+   screen mode or its mouse registration, use `PSMUX_PANE_RAW` and look at what the program
+   really wrote. A bare command landing in the wrong session, use `PSMUX_ROUTE_DEBUG`.
+6. **A directory listing** of `%USERPROFILE%\.psmux\` when the problem is about sessions not being
+   found, servers not starting, or stale sessions appearing in `psmux ls`.
+7. **Your Windows version.** `[System.Environment]::OSVersion.Version` prints it. Several
+   subsystems, notably mouse over SSH, are gated on the Windows build number. See
+   [mouse-ssh.md](mouse-ssh.md).
 
-| Technique | Effect | Where |
-|-----------|--------|-------|
-| Server push rendering | A dirty state pushes a frame to attached clients within a few milliseconds instead of waiting for the next client poll | `src/server/mod.rs` |
-| Adaptive client polling | 10 ms while typing, 16 ms idle with pushed frames, 1 ms while assembling a paste | `src/client.rs` |
-| Reader and parser split | A 64 KB reader thread never takes the parser lock, and the parser coalesces bursts in 1 ms ticks | `src/pane.rs` |
-| Per pane write queue | Keystrokes are queued and written by a dedicated thread, so a wedged child cannot stall the server loop | `src/pane.rs` (PR #543) |
-| Lazy pane resize | Only the active window's panes are resized; background windows resize when shown, avoiding O(n) `ResizePseudoConsole` calls | `src/tree.rs` |
-| Cached shell resolution | The default shell's path is resolved once per server in an `OnceLock` | `src/pane.rs` |
-| Early port file write | The server binds its listener and writes `.port` before loading config or spawning shells, so an attaching client connects immediately | `src/server/mod.rs` |
-| 10 ms attach polling | The client watches for the `.port` beacon in 10 ms ticks | `src/main.rs` |
-| Warm servers and warm panes | Pre booted standby server and spare shell per server | [Warm Sessions](warm-sessions.md) |
-| ConPTY passthrough | On Windows 11 22H2+ conhost forwards VT output as written instead of re rendering it | `crates/portable-pty-psmux` |
-| Above normal priority | psmux's own server and client processes get `ABOVE_NORMAL_PRIORITY_CLASS` so a compile on every core cannot starve keystrokes (issue #608) | `src/platform.rs` |
-| Release profile | `opt-level = 3`, `lto = true`, `codegen-units = 1`, `strip = "symbols"` | `Cargo.toml` |
-
-## Why native multiplexing suits scripted TUIs and terminal agents
-
-Running a dozen terminal agents, a build watcher, a log tail, and a couple of editors from one script is the workload psmux is tuned for:
-
-- **Dozens of panes are cheap on the psmux side.** The server cost is a few threads and a screen buffer per pane; the harness routinely runs 100 panes in one server. What you pay for is the programs in the panes, which you would pay for anyway.
-- **Commands are local and cheap.** `send-keys`, `capture-pane`, `wait-for`, and `pipe-pane` are 15 to 25 ms loopback calls. There is no WSL boundary and no shell wrapper between your script and the pane.
-- **Detached servers keep running.** A supervisor script can create sessions at boot, hand agents their panes, and attach from any terminal later. See [Windows Use Cases](use-cases.md).
-- **Output arrives as it happens.** Push rendering means an attached client sees an agent's output within milliseconds, and `capture-pane` reads the same screen the parser holds.
-- **The interactive path is protected.** Above normal priority for psmux's own processes keeps the client responsive while agents saturate the CPU.
-
-The step by step guide is [Running Terminal Agents and TUIs in psmux](tutorials/terminal-agents-and-tuis.md), and the command reference is [Scripting and Automation](scripting.md).
-
-## Measure it yourself
-
-Command round trip and session creation, in PowerShell 7:
+A one-liner that gathers the common set:
 
 ```powershell
-function Time-Psmux([string[]]$cmd, [int]$n = 10) {
-    $t = 1..$n | ForEach-Object {
-        $sw = [Diagnostics.Stopwatch]::StartNew()
-        $null = & psmux @cmd
-        $sw.Stop(); $sw.ElapsedMilliseconds
-    }
-    $s = $t | Sort-Object
-    "{0,-40} min={1} med={2} max={3}" -f ($cmd -join ' '), $s[0], $s[[int]($s.Count / 2)], $s[-1]
+psmux -V
+Get-ChildItem "$env:USERPROFILE\.psmux" -Filter "*.log" | ForEach-Object {
+    "===== $($_.Name) ====="
+    Get-Content $_.FullName -Tail 50
 }
-
-psmux new-session -d -s perf -x 200 -y 50
-Time-Psmux @('display-message', '-p', '-t', 'perf', '#{session_name}')
-Time-Psmux @('send-keys', '-t', 'perf', 'echo hi', 'Enter')
-Time-Psmux @('capture-pane', '-p', '-t', 'perf')
-Time-Psmux @('new-window', '-t', 'perf') 5
-psmux kill-session -t perf
-
-# Session creation, warm versus cold
-Time-Psmux @('new-session', '-d', '-s', 'perf2') 1; psmux kill-session -t perf2
-$env:PSMUX_NO_WARM = '1'
-Time-Psmux @('new-session', '-d', '-s', 'perf3') 1; psmux kill-session -t perf3
-Remove-Item Env:PSMUX_NO_WARM
 ```
 
-Prompt ready latency for a new window:
+Debug logs can contain the text you typed and the output of your panes. Read them before you paste
+them into a public issue.
 
-```powershell
-$sw = [Diagnostics.Stopwatch]::StartNew()
-psmux new-window -t perf -n probe
-while ($sw.ElapsedMilliseconds -lt 20000) {
-    $screen = (psmux capture-pane -p -t perf:probe) -join "`n"
-    if ($screen -match 'PS [A-Z]:') { break }
-    Start-Sleep -Milliseconds 5
-}
-"new-window to prompt: $($sw.ElapsedMilliseconds) ms"
-```
+> **Note:** psmux also reads a small number of `PSMUX_TEST_*` variables and one build-number
+> override. These are internal test seams used by the test suite to force timing races and are not
+> supported knobs. Do not set them.
 
-Server memory:
+## See Also
 
-```powershell
-Get-CimInstance Win32_Process -Filter "Name='psmux.exe'" |
-    Where-Object CommandLine -match 'server -s perf' |
-    ForEach-Object { Get-Process -Id $_.ProcessId } |
-    Select-Object Id, @{n='WS_MB';e={[math]::Round($_.WorkingSet64/1MB,1)}},
-                      @{n='Private_MB';e={[math]::Round($_.PrivateMemorySize64/1MB,1)}}, Threads
-```
-
-If a number looks wrong, the debug and crash logs described in [Diagnostics](diagnostics.md) show where the time went.
-
-## FAQ
-
-### Is psmux faster than tmux inside WSL?
-
-For Windows shells, yes by construction: a pwsh pane in psmux is a direct ConPTY child, while reaching pwsh from tmux in WSL means `wsl.exe` to `pwsh.exe` interop on every pane and every script call. For Linux shells inside WSL the two are comparable; psmux runs `wsl.exe` in a pane and the Linux side is unchanged.
-
-### Why does the first split after a pause feel instant and a burst of splits does not?
-
-The spare shell. Each server keeps one shell booted for the next `split-window` or `new-window`; a burst uses it up and the rest cold start while the pool refills. Windows created in a loop still return in about 50 ms each; only the prompt takes longer to appear.
-
-### Does psmux add input latency?
-
-A keystroke goes client to server over loopback (sub millisecond), into the pane's write queue, into ConPTY, and the echo comes back through the reader, parser, and a pushed frame. End to end this is a few milliseconds, below the 16 ms frame time of the terminal you are typing into.
-
-### How many panes can one server hold?
-
-The harness runs 100 panes in one session as a routine test. The practical limit is memory for the shells and your patience with `list-panes`, not psmux.
-
-### What should I change to make it faster?
-
-1. Trim your PowerShell profile or use `pwsh -NoProfile` for utility panes; the shell is the slow part.
-2. Leave the warm pool on (default).
-3. Prefer `\;` chains or control mode over hundreds of separate `psmux` invocations in tight loops.
-4. Keep `history-limit` reasonable if you run hundreds of panes; scrollback is the only per pane memory psmux itself allocates.
+- [configuration.md](configuration.md) for the supported options and user facing environment variables
+- [warm-sessions.md](warm-sessions.md) for the `__warm__` server and how to disable it
+- [performance.md](performance.md) for what the latency numbers should look like
+- [faq.md](faq.md) for the common questions these logs usually answer
 
 ---
 
@@ -8128,545 +10054,5 @@ When porting Unix tmux integrations to Windows:
 - [configuration.md](configuration.md) : All options and config file format
 - [claude-code.md](claude-code.md) : Claude Code agent team integration
 - [features.md](features.md) : Complete feature list
-
----
-
-<!-- README -->
-# psmux Documentation: tmux for Windows
-
-psmux is a native Windows terminal multiplexer written in Rust on ConPTY. It speaks the tmux command language, reads your `.tmux.conf`, and ships `tmux.exe` and `pmux.exe` aliases, so tmux knowledge, tmux scripts, tmux themes and tmux plugins carry over to PowerShell, cmd, Git Bash, WSL and nushell without WSL, Cygwin or MSYS2. This page is the index of every guide, tutorial and reference in the `docs/` folder.
-
-New here? Start with [Getting Started on Windows](tutorials/getting-started-windows.md), then skim [Windows Use Cases](use-cases.md). Coming from tmux? Read [Compatibility](compatibility.md) and [Cross Platform tmux Scripts](tutorials/cross-platform-tmux-scripts.md).
-
-## Tutorials
-
-Step by step, tested on the shipped binary, copy pasteable.
-
-| Tutorial | What you will learn |
-|----------|---------------------|
-| [Getting Started on Windows](tutorials/getting-started-windows.md) | Install channels, first session, prefix key, splits and windows, detach and reattach, copy mode and the Windows clipboard, a first `~/.psmux.conf`, a Windows Terminal profile that opens straight into a session |
-| [Cross Platform tmux Scripts](tutorials/cross-platform-tmux-scripts.md) | Write one bash or PowerShell automation script against the tmux command language and run it unchanged on Windows through psmux and on Linux or macOS through tmux; quoting, `--`, exit codes, format strings, a portability checklist |
-| [Terminal AI Agents and Multi Pane TUIs](tutorials/terminal-agents-and-tuis.md) | Run Claude Code, Codex CLI, Gemini CLI, aider and TUIs such as neovim, lazygit, btop and yazi in panes; drive them with `send-keys`, read them with `capture-pane`, log them with `pipe-pane`, restart them with `respawn-pane` |
-| [Dev Environment Layouts](tutorials/dev-environment-layouts.md) | Design multi window and multi pane project sessions, layout presets and sizing, synchronize-panes, bootstrap scripts, saving and restoring layouts |
-
-## How psmux works
-
-| Page | Description |
-|------|-------------|
-| [Architecture](architecture.md) | Client and server model, one ConPTY per pane, the VT parser and screen model, input and output paths, the warm pane pool, process priority, and why native multiplexing beats tmux inside WSL |
-| [Performance](performance.md) | Measured session, split and command latencies, memory per pane, what dominates startup, and how to measure it yourself |
-| [Warm Sessions](warm-sessions.md) | The pre spawned server and spare shell behind instant session and pane creation |
-| [Features](features.md) | Full feature list: mouse, copy mode, layouts, popups, menus, format engine |
-| [Compatibility](compatibility.md) | tmux command and option compatibility matrix |
-
-## Using psmux
-
-| Page | Description |
-|------|-------------|
-| [Windows Use Cases](use-cases.md) | Boot time services, jobs that survive logout, ops dashboards, SSH administration, AI agents in parallel, reproducible dev environments, driving interactive programs, logging scheduled jobs |
-| [Key Bindings](keybindings.md) | Default keys, copy mode keys, key tables, `bind-key` customisation |
-| [Configuration](configuration.md) | Config file search order, every option, `PSMUX_*` environment variables |
-| [Plugins and Themes](plugins.md) | The psmux plugin ecosystem: how plugins run, tmux plugin parity, themes, writing a plugin in PowerShell |
-| [Multi Shell](multi-shell.md) | pwsh, cmd, Git Bash, WSL and nushell panes side by side |
-| [Pane Titles](pane-titles.md) | Pane titles, border labels, OSC sequences, why pwsh shows a path |
-| [Chooser Preview](preview.md) | The live preview pane in `choose-tree` and `choose-session` |
-| [Mouse Over SSH](mouse-ssh.md) | Mouse support on remote Windows servers and the Windows build requirements |
-| [Claude Code](claude-code.md) | Claude Code agent teams: teammates spawn into psmux panes automatically |
-| [FAQ](faq.md) | Common questions: mouse and wheel behaviour, Windows builds, shells, colours |
-| [Diagnostics](diagnostics.md) | Debug logs, crash logs, state files, what to attach to a bug report |
-
-## Scripting and integration
-
-| Page | Description |
-|------|-------------|
-| [Scripting and Automation](scripting.md) | Commands, targets, hooks, buffers, `pipe-pane`, `wait-for`, format variables |
-| [Command Reference](tmux_args_reference.md) | Per command flag tables |
-| [Control Mode](control-mode.md) | The `-C` and `-CC` wire protocol for IDE and plugin authors |
-| [iTerm2 Control Mode](iterm2-control-mode.md) | Driving psmux from the iTerm2 tmux gateway over SSH |
-| [Developer Integration](integration.md) | Driving psmux from Python (libtmux), Node.js, Go and Rust |
-
-## For AI assistants and crawlers
-
-The repository root carries an [llms.txt](../llms.txt) that summarises psmux and links every page above with a one line description. Every page in `docs/` opens with a short statement of what it covers, uses question shaped headings, and ends with a FAQ, so answers can be quoted directly.
-
-## Frequently asked questions
-
-**Q: Is psmux a port of tmux or a wrapper around WSL?**
-Neither. psmux is an independent Rust implementation of the tmux command language and behaviour on top of Windows ConPTY. It does not need WSL, Cygwin or MSYS2. See [Architecture](architecture.md).
-
-**Q: Will my existing `.tmux.conf` and tmux scripts work?**
-Yes for the large majority of options, bindings and commands; the [Compatibility](compatibility.md) matrix lists what is supported and [Cross Platform tmux Scripts](tutorials/cross-platform-tmux-scripts.md) covers the Windows specific differences (paths, shell quoting, default shell).
-
-**Q: Where do I report a bug or ask a question?**
-Open an issue at https://github.com/psmux/psmux/issues and attach what [Diagnostics](diagnostics.md) asks for.
-
----
-
-<!-- architecture -->
-# How psmux Multiplexes Natively on Windows
-
-psmux is a terminal multiplexer for Windows, a tmux for Windows written in Rust that drives real ConPTY pseudo consoles directly through the Win32 API. This page explains the architecture: the detached server process, the thin client that Windows Terminal or any console host attaches to, the per pane ConPTY and VT parser, and how bytes move between your shell and your screen. It is written so that a developer, a script author, or an AI agent can verify every claim against the source files named below.
-
-## Key facts
-
-- **One server per session, one client per attached window.** `psmux new-session` spawns `psmux.exe server -s <name>` as a detached background process. `psmux attach` starts a client that connects to it over loopback TCP. Closing the window kills only the client.
-- **Every pane is a native ConPTY.** Each pane is created with `CreatePseudoConsole` through the vendored `portable-pty-psmux` crate. There is no WSL, Cygwin, or MSYS layer between psmux and the shell.
-- **No POSIX emulation.** psmux does not need `fork()`, Unix sockets, or a pty device. The tmux socket is replaced by `127.0.0.1:<port>` plus a per session key file, both under `~\.psmux\`.
-- **The client is a renderer, not a shell host.** The client never owns the shell processes. It receives screen frames as JSON and pushes keystrokes back as `send-key` commands.
-- **Three names, one binary.** `psmux.exe`, `pmux.exe`, and `tmux.exe` are the same program (three `[[bin]]` entries in `Cargo.toml` pointing at `src/main.rs`), so scripts written for `tmux` run unchanged.
-- **Windows first process model.** psmux's own processes run at `above-normal` priority by default (issue #608), shells stay at normal priority, the Windows clipboard is used directly, and detached servers survive Task Scheduler and RDP disconnects.
-
-Related reading: [Performance](performance.md), [Warm Sessions](warm-sessions.md), [Multi-Shell](multi-shell.md), [Scripting and Automation](scripting.md), [Control Mode](control-mode.md), [Windows Use Cases](use-cases.md).
-
-## What does "native" mean for a Windows terminal multiplexer?
-
-There are three ways to get tmux style multiplexing on Windows:
-
-| Approach | Where the shells run | What you lose |
-|----------|----------------------|---------------|
-| tmux inside WSL | Linux processes inside the WSL VM | Native pwsh, cmd, and Windows tools become remote calls through `wsl.exe`; Windows paths, the Windows clipboard, and Windows job control are one hop away |
-| tmux under Cygwin or MSYS2 | Windows processes wrapped by a POSIX emulation layer and its pty shim | Console apps that need a real console (PSReadLine, Windows Terminal features, ConPTY aware TUIs) misbehave; performance is bounded by the emulation layer |
-| **psmux** | **Real Windows processes in real ConPTY consoles** | Nothing on the Windows side; tmux features that depend on Unix signals are emulated (see [Compatibility](compatibility.md)) |
-
-With psmux a pane running `pwsh`, a pane running `cmd`, a pane running `nu`, and a pane running `wsl` are four ordinary child processes of one server. Each has its own console, its own working directory (a Windows path, or a WSL path translated by `src/wsl_path.rs`), and its own environment. `#{pane_current_path}` is read from the child's process environment block, and for WSL panes from the OSC 7 sequence the shell emits (issue #615).
-
-## The client and server model
-
-```
-  Windows Terminal tab            ~\.psmux\                    background process
- +----------------------+      +----------------+      +-----------------------------+
- |  psmux.exe (client)  |      | work.port      |      | psmux.exe server -s work    |
- |  attach -t work      |----->| work.key       |----->|  TcpListener 127.0.0.1:0    |
- |                      |      | work.pid       |      |  AppState (windows, panes)  |
- |  ratatui renderer    |<=====| work.sid       |=====>|  per pane ConPTY + parser   |
- |  crossterm input     | TCP  +----------------+ TCP  |  hooks, options, buffers    |
- +----------------------+                              +-----------------------------+
-                                                          |         |         |
-                                                       pwsh.exe  cmd.exe   wsl.exe
-```
-
-### How does a client find its server?
-
-There is no Unix socket on Windows, so `src/server/mod.rs` binds a `TcpListener` to `127.0.0.1` on an ephemeral port (`TcpListener::bind(("127.0.0.1", 0))`) and publishes it through four small files in the data directory (`src/paths.rs`):
-
-| File | Content | Purpose |
-|------|---------|---------|
-| `<session>.key` | random auth key | Every connection must send `AUTH <key>` first; the server rejects anything else in `src/server/connection.rs` |
-| `<session>.sid` | session id | Stable identity for `#{session_id}` |
-| `<session>.pid` | `pid:creation_time` | Liveness anchor: a recycled pid with a different creation time is never mistaken for a live server |
-| `<session>.port` | TCP port | Written **last**, so its existence is the readiness beacon a client waits on |
-
-The write order matters and is enforced in `ensure_session_registry_files`: key, sid, and pid go first, port goes last. A client such as `psmux attach` polls for the `.port` file every 10 ms (`src/main.rs`) and connects as soon as it appears, so a cold start attaches within one polling tick of the server being ready.
-
-The data directory is `~\.psmux\` by default and can be moved with `PSMUX_DATA_DIR`. The `-L <name>` socket namespace of tmux maps to a file prefix (`<ns>__<session>.port`), so `psmux -L work ls` and `psmux -L home ls` see different registries. A named Win32 mutex keyed on the data root and session name (`acquire_session_mutex` in `src/platform.rs`) guarantees that at most one server owns a given name, which is what makes `new-session -A` and the warm pool safe against races (issues #509 and #599).
-
-### What happens when you run a psmux command?
-
-Every CLI invocation, whether it is `psmux split-window -h` from a script or a keystroke from an attached client, is one line of text sent over the TCP connection:
-
-1. `src/main.rs` parses the command line, normalises tmux style attached flags (`-Lwork`, `-tname`), resolves the target session from `-t`, `PSMUX_SESSION_NAME`, or the most recently active session (issue #603), and reads that session's `.port` and `.key`.
-2. The client connects, sends `AUTH <key>`, then the command line (`src/client.rs`).
-3. The accept thread in `src/server/mod.rs` spawns a per connection thread. `handle_connection` in `src/server/connection.rs` parses the line, splits `;` separated command chains, and either answers directly (queries such as `list-panes` and `display-message -p`) or posts a `CtrlReq` enum value to the server's main loop through a channel.
-4. The main loop in `run_server` applies the request to `AppState` (the tree of windows and panes defined in `src/types.rs` and `src/tree.rs`), fires any hooks, marks the state dirty, and pushes a new frame to attached clients.
-
-Accepted sockets are explicitly made non inheritable with `SetHandleInformation` before any child is spawned, because the server starts children with inherited handles (ConPTY shells, `pipe-pane` sinks, `run-shell` commands) and an inherited socket would keep a one shot command's connection open after the reply.
-
-The same wire protocol is what [control mode](control-mode.md) (`psmux -C`) exposes to IDEs and plugin authors.
-
-## How a pane works: ConPTY, reader, parser, screen
-
-```
-   child process (pwsh.exe)
-        |  writes VT bytes to its console
-        v
-   ConPTY (conhost.exe / OpenConsole)         crates/portable-pty-psmux/src/win/
-        |  output pipe                        psuedocon.rs, conpty.rs
-        v
-   reader thread ---------> staging buffer ----> parser thread -----> vt100::Parser
-   (64 KB reads,             (Mutex + Condvar)    (adaptive 1 ms       (screen grid +
-    src/pane.rs)                                   coalescing)          scrollback)
-                                                                             |
-   write queue thread <---- server main loop <---- CtrlReq channel           |
-   (per pane, PR #543)          |                                            |
-        |                       +---- dump_layout_json_fast() snapshot <-----+
-        v                       |
-   ConPTY input pipe            +---- push frame over TCP to every attached client
-```
-
-### Spawning
-
-`src/pane.rs` asks the pty crate for a pseudo console of the pane's size (`native_pty_system().openpty(size)`), builds a `CommandBuilder` for the shell (resolved once and cached in an `OnceLock`, so PATH lookups are not repeated per pane), and calls `spawn_command`. On the Windows side that is `CreatePseudoConsole` plus `CreateProcessW` with a `PROC_THREAD_ATTRIBUTE_PSEUDOCONSOLE` attribute list (`crates/portable-pty-psmux/src/win/psuedocon.rs`). The child is a normal Windows process whose console happens to be owned by psmux.
-
-### Reading output
-
-Each pane owns three threads (`src/pane.rs`):
-
-- **Reader thread.** Pure I/O. It reads up to 64 KB at a time from the ConPTY output pipe into a staging buffer and never touches the parser lock, so a busy pane cannot stall its own reads. It also answers terminal colour queries (OSC 4, 10, 11) straight off the read, which is what stopped `yazi` from misreading a late reply as a keystroke (issue #556).
-- **Parser thread.** Waits on the staging buffer's condition variable, then keeps draining in 1 ms ticks while bytes are still arriving (adaptive coalescing), and feeds the bytes into a `vt100::Parser` from the vendored `vt100-psmux` crate. The parser owns the screen grid, the alternate screen, the scrollback (`history-limit` rows), cell attributes including the SGR 58 underline colours added for issue #589, and the OSC 8 hyperlink and OSC 7 working directory state.
-- **Write queue thread.** Keystrokes and pasted text are queued per pane and written to the ConPTY input pipe by a dedicated thread, so a slow or wedged child never blocks the server loop and a transient write error is retried rather than dropped (PR #543).
-
-### Building a frame
-
-The server does not re render on a timer. Whenever a pane's parser reports new output or the window tree changes, the main loop marks the state dirty and, if any client is attached, serialises the visible cells of every pane in the active window with `dump_layout_json_fast` (`src/layout.rs`). The snapshot holds each parser's mutex for about a millisecond, then the JSON frame is pushed to every attached client. Frames therefore arrive a few milliseconds after ConPTY output rather than on the next poll.
-
-### Rendering in the client
-
-`src/client.rs` (`run_remote`) drives a `ratatui` terminal on a `PsmuxBackend` (`src/platform.rs`). It reads frames from the socket, draws pane contents, borders, the status line, and any popup or floating pane, and forwards input. The poll cadence adapts: 10 ms while you are typing, 16 ms when idle and frames are being pushed, 1 ms while a bracketed paste is being assembled. Mouse and keyboard events arrive through the Win32 console input API (`src/ssh_input.rs`, `src/input.rs`), are translated to tmux key names (`C-a`, `M-Left`, `S-Enter`), and go back to the server as `send-key` lines. Copy mode (`src/copy_mode.rs`) runs inside the server against the pane's own scrollback, so `send-keys -X` works from scripts exactly as in tmux.
-
-### Resizing
-
-`resize_all_panes` in `src/tree.rs` resizes only the panes of the active window. Background windows are resized when you switch to them. That keeps a session with fifty windows from issuing fifty `ResizePseudoConsole` calls every time the Windows Terminal tab changes size.
-
-## ConPTY passthrough mode
-
-On Windows 11 22H2 and later (build 22621+), psmux creates each pseudo console with `PSEUDOCONSOLE_PASSTHROUGH_MODE` (`0x8`, defined in `crates/portable-pty-psmux/src/win/psuedocon.rs`, added in PR #538). In passthrough mode conhost stops re rendering the child's output into its own screen buffer and forwards the VT stream as the application wrote it, which preserves sequences that conhost would otherwise rewrite (cursor shape, some colour queries) and removes a copy from the output path.
-
-If `CreatePseudoConsole` rejects the flag, or a later `ResizePseudoConsole` fails on a build that advertises the flag but does not fully support it, the crate recreates the console without passthrough and logs the fallback (`conpty.rs`). You can disable it yourself with:
-
-```powershell
-$env:PSMUX_NO_PASSTHROUGH = "1"
-```
-
-Whether a pane got passthrough is recorded in the debug log (see [Diagnostics](diagnostics.md)).
-
-## Warm servers and warm panes
-
-Shell startup, not psmux, is the slow part of opening a pane (see [Performance](performance.md)). psmux hides it twice:
-
-- A hidden `__warm__` server is pre spawned with your config already loaded. `psmux new-session` claims it by renaming its registry files, which turns a cold start into a rename (measured at about 50 ms on the reference machine versus about 215 ms cold).
-- Inside every server a spare shell is kept booted. `split-window` and `new-window` hand you that shell and boot the next spare in the background, so the prompt is visible in roughly 100 ms instead of a full shell start.
-
-[Warm Sessions](warm-sessions.md) documents the lifecycle, the `warm` option, and `PSMUX_NO_WARM`.
-
-## Process priority: why typing stays responsive under load
-
-Issue #608 reported that a compile or a test sweep pegging every core made the interactive path (server loop, client renderer) starve at normal priority. psmux now sets its **own** processes, the server and the client, to `ABOVE_NORMAL_PRIORITY_CLASS` by default (`set_process_priority` in `src/platform.rs`). Pane shells and everything they run are created without an explicit class and stay at normal priority, so psmux never steals time from the work you are running, only from other background processes competing with the multiplexer itself.
-
-Three values are accepted, deliberately not `realtime` or the below normal classes:
-
-```tmux
-set -g priority above-normal   # default
-set -g priority high
-set -g priority normal
-```
-
-`PSMUX_PRIORITY` in the environment outranks the option, so you can recover from a bad configured value from the shell you launch psmux from. A claimed warm server inherits the claiming client's priority (the claim message carries it, see `src/types.rs` and `src/main.rs`), so the setting is effective from the first keystroke.
-
-## Windows integration points
-
-| Concern | How psmux does it | Source |
-|---------|-------------------|--------|
-| Clipboard (`copy-pipe`, `set-clipboard`, OSC 52) | `OpenClipboard` / `SetClipboardData(CF_UNICODETEXT)` on the client side, no `clip.exe` round trip | `src/clipboard.rs` |
-| Killing a pane's process tree | Walks the child tree by parent pid and creation time so a recycled pid is never killed | `src/platform.rs` (`process_kill`) |
-| Working directory of a pane | Read from the child's process environment block, or from OSC 7 for shells Win32 cannot see (WSL) | `src/platform.rs`, `src/wsl_path.rs` |
-| Foreground command (`#{pane_current_command}`) | The live foreground process of the pane's shell tree, not the shell itself (PR #577) | `src/platform.rs` |
-| Mouse | Win32 `MOUSE_EVENT` records translated to SGR mouse reports for panes that enabled them | `src/ssh_input.rs`, `src/input.rs` |
-| Detached operation | The server is spawned with no console window and null stdio, so it survives the parent window, an RDP disconnect, or a Task Scheduler launch at boot | `src/main.rs` |
-| Multiple shells | Any Windows executable can be a pane: `pwsh`, `powershell`, `cmd`, `nu`, `bash` (Git for Windows, MSYS2), `wsl` | [Multi-Shell](multi-shell.md) |
-
-## Source map
-
-| Path | What lives there |
-|------|------------------|
-| `src/main.rs` | CLI entry point, argument normalisation, session routing, server spawn, attach |
-| `src/cli.rs` | Attached flag normalisation and argv helpers |
-| `src/server/mod.rs` | `run_server`: listener, registry files, accept thread, main loop, frame push |
-| `src/server/connection.rs` | Wire protocol: auth, command parsing, per command handlers |
-| `src/server/options.rs`, `src/server/option_catalog.rs` | `set-option` / `show-options` |
-| `src/pane.rs` | ConPTY spawn, reader, parser, write queue threads |
-| `src/tree.rs`, `src/layout.rs` | Window and pane tree, layouts, frame serialisation |
-| `src/client.rs` | Attached client: render loop, input forwarding, mouse, copy drag |
-| `src/copy_mode.rs` | Copy mode, search, selection |
-| `src/format.rs` | The `#{...}` format engine |
-| `src/config.rs`, `src/commands.rs` | Config parsing, key bindings, hooks |
-| `src/control.rs` | Control mode (`-C`, `-CC`) |
-| `src/platform.rs` | Win32: console modes, process tree, priority, clipboard, mutexes |
-| `crates/portable-pty-psmux` | ConPTY wrapper (fork of `portable-pty` with passthrough mode and psmux fixes) |
-| `crates/vt100-psmux` | VT parser and screen model (fork of `vt100` with scrollback, OSC 7/8, SGR 58, mouse mode tracking) |
-
-## FAQ
-
-### Does psmux need WSL, Cygwin, or MSYS2?
-
-No. psmux is a single Rust binary that talks to ConPTY through the Win32 API. WSL is optional and only involved if you open a pane running `wsl.exe`.
-
-### Is the server a Windows service?
-
-No. It is an ordinary background process running as your user, started by the first `new-session`. That is what lets you attach to it later from any terminal, including after a Task Scheduler launch at boot (see [Windows Use Cases](use-cases.md)).
-
-### Why TCP instead of a named pipe?
-
-Loopback TCP gives the same stream semantics on every Windows version, works from inside WSL and over SSH port forwards, and lets control mode clients written in any language connect with a plain socket. The auth key file, readable only by your user profile, is the access control.
-
-### Can another user on the machine see my sessions?
-
-They would need read access to your `~\.psmux\<session>.key` file. Keep your profile directory private, or point `PSMUX_DATA_DIR` at a directory with the ACL you want.
-
-### Does each pane really get its own conhost?
-
-Yes. `CreatePseudoConsole` starts a conhost (or OpenConsole, depending on Windows Terminal's configuration) per pseudo console. That is a Windows design constraint and it is what gives each pane a fully independent console, including its own input mode and its own cursor state.
-
-### How is this different from Windows Terminal panes?
-
-Windows Terminal panes live inside the Windows Terminal process; close the window and the shells die. psmux panes live in a detached server, can be driven from scripts (`send-keys`, `capture-pane`, `pipe-pane`, `wait-for`), can be attached from SSH, and answer to your existing `.tmux.conf`. Many people use both: Windows Terminal as the window, psmux as the multiplexer inside it.
-
----
-
-<!-- diagnostics -->
-# Diagnostics
-
-psmux runs its server detached, with no visible stderr. When something goes wrong there is
-nowhere for an error message to land on screen, so psmux writes what it knows to files instead.
-This page lists every diagnostic file psmux can produce, the environment variables that turn the
-optional ones on, and what to attach when you file a bug report.
-
-Everything on this page is read only observation, with one exception called out where it appears:
-`PSMUX_FAKE_WIN_BUILD` moves psmux onto a different branch on purpose, so that a platform specific
-path can be reproduced on a machine that is not that platform.
-
-## Debug Logging
-
-psmux has fourteen independent debug loggers. All of them are **off by default** and cost nothing
-when disabled (one atomic load per call site). Each writes a timestamped line per event, and the
-loggers under `~/.psmux/` are capped at a fixed number of entries so an enabled log can never fill
-your disk.
-
-| Variable | Log file | What it records |
-|---|---|---|
-| `PSMUX_CLIENT_DEBUG=1` | `~/.psmux/client_debug.log` | Client frame receive, JSON parse, draw lifecycle, status bar rendering |
-| `PSMUX_STYLE_DEBUG=1` | `~/.psmux/style_debug.log` | Style and theme parsing, inline `#[...]` directives |
-| `PSMUX_INPUT_DEBUG=1` | `~/.psmux/input_debug.log` | Every input event plus the console mode in effect when it arrived |
-| `PSMUX_SERVER_DEBUG=1` | `~/.psmux/server_debug.log` | Server side request tracing and session switching |
-| `PSMUX_SESSION_DEBUG=1` | `~/.psmux/session_debug.log` | Session registry scans and stale port cleanup |
-| `PSMUX_MOUSE_DEBUG=1` | `~/.psmux/mouse_debug.log` | Mouse injection, screen to pane coordinate mapping, and the wheel gate's decision per notch (which mouse protocol the pane holds and who enabled it) |
-| `PSMUX_SSH_DEBUG=1` | `~/.psmux/ssh_input.log` | SSH escape sequence decoding into Win32 input records |
-| `PSMUX_LATENCY_LOG=1` | `~/.psmux/latency.log` | Keypress to render latency, measured client side |
-| `PSMUX_PANE_RAW=1` | `~/.psmux/pane_raw.bin` | The raw byte stream a pane's child wrote, before psmux's VT parser touched it. The file to read when a colour, a mode switch or a mouse DECSET seems to be missing: it shows what the program (and conhost, which echoes console mode changes into the same stream as `ESC [ ? 1003 ; 1006 h` / `l`) actually emitted |
-| `PSMUX_AUTORENAME_DEBUG=1` | `~/.psmux/autorename.log` | The process tree walk behind `automatic-rename` and `#{pane_current_command}` |
-| `PSMUX_ROUTE_DEBUG=1` | stderr of the CLI process | Which session a bare `psmux <command>` (no `-t`, no `$TMUX`) was routed to and why |
-| `PSMUX_POPUP_DEBUG=1` | `%TEMP%\psmux_popup_debug.log` | Popup creation, resize, and teardown |
-| `PSMUX_WARM_DEBUG=1` | `%TEMP%\psmux_warm_debug.log` | Warm server and warm pane lifecycle |
-| `PSMUX_AUTH_DEBUG=1` | `%TEMP%\psmux_auth_debug.log` | The `.port` and `.key` handshake between client and server |
-
-Three of these deliberately live in `%TEMP%` rather than `~/.psmux/`. Popup, warm pool and auth
-diagnostics are all about races between concurrent psmux processes, so those three logs are
-append-only and per-machine rather than truncate-on-start, and no process can clobber another's
-evidence. `PSMUX_AUTH_DEBUG` additionally echoes the client side of the handshake to stderr, which
-is visible when you run the client in a normal console.
-
-Two more details worth knowing:
-
-- `PSMUX_SESSION_DEBUG` appends rather than truncates. Registry cleanup runs in every short-lived
-  `psmux` CLI process, so truncating on open would erase the log before you could read it.
-- `PSMUX_LATENCY_LOG=1` also enables a server side companion at
-  `%USERPROFILE%\psmux_server_latency.log` holding dump-state build times. Read the two together
-  to tell a slow server from a slow client.
-
-### Enabling a Log
-
-Set the variable in the shell you launch psmux from, then reproduce the problem:
-
-```powershell
-$env:PSMUX_INPUT_DEBUG = "1"     # turn the input logger on for this shell only
-psmux kill-server                # make sure the next launch is a fresh server
-psmux new-session -s repro       # reproduce the problem here
-Get-Content "$env:USERPROFILE\.psmux\input_debug.log" -Tail 40
-```
-
-The variable must be set before the process you want to trace starts. A logger that traces the
-server (`PSMUX_SERVER_DEBUG`, `PSMUX_SESSION_DEBUG`, `PSMUX_WARM_DEBUG`) only takes effect on a
-server started after the variable was set, which is why the example kills the old server first.
-Warm servers are pre-spawned, so add `$env:PSMUX_NO_WARM = "1"` when you need the very first server
-process to carry your setting. See [warm-sessions.md](warm-sessions.md).
-
-To turn a logger back off, clear the variable and restart:
-
-```powershell
-Remove-Item Env:\PSMUX_INPUT_DEBUG
-psmux kill-server
-```
-
-### The Windows Build Seam
-
-| Variable | What it does |
-|---|---|
-| `PSMUX_FAKE_WIN_BUILD=19045` | Makes psmux report that build number instead of the real one |
-
-Several mouse code paths branch on the Windows build number, because conhost handles VT mouse
-input differently below build 22523 (see [mouse-ssh.md](mouse-ssh.md) and
-[faq.md](faq.md)). Those branches are unreachable on a modern host, so this variable exists to
-exercise them: set it to `19045` to see what a Windows 10 pane does, or to `26100` to see the
-modern path from an older machine.
-
-This is diagnostic only. It changes nothing about the machine and nothing about the console, it
-only changes which branch psmux picks, so a build set here that does not match reality gives you
-a mouse path your conhost was not built for. Set it while reproducing a report, then clear it. It
-must be set on the **server** process to affect a pane, so kill the server first and add
-`$env:PSMUX_NO_WARM = "1"` so that a warm server spawned earlier, without your setting, does not
-answer instead.
-
-## Always On Diagnostic Files
-
-These three are written without any variable being set. They exist because the failures they
-describe happen where you cannot see them.
-
-### `~/.psmux/server-startup.log`
-
-Written when the server fails during startup, typically when the first pane cannot be spawned.
-The classic case is a `default-shell` pointing at a path that does not exist or cannot be executed,
-where all the user sees is psmux flashing and returning to the prompt. The log records:
-
-- the real error text, including the raw Windows error (for example `CreateProcessW err 87`),
-- the exact path psmux tried to spawn,
-- the psmux build that produced the failure,
-- the size of the inherited environment block and its largest single variable, because an
-  oversized environment is itself a common cause of `err 87` on profiles where OneDrive and
-  WindowsApps entries have inflated it toward the 32 KB Windows limit.
-
-The attaching client reads this file back and echoes a fresh failure to your terminal rather than
-leaving it buried, so in most cases you will see the real cause on screen. The file is the fuller
-record. Only a log written during the current startup attempt is surfaced. An older one is treated
-as stale and ignored.
-
-### `~/.psmux/config-warnings.log`
-
-Non-fatal config parse problems, such as an unknown option name, a malformed value, or an unknown
-command in your config file. The detached server has no stderr to complain to, so it records the
-warnings here and the next client to attach echoes them to your terminal. As with the startup log,
-only warnings from the current startup are shown, and the file is removed once a config parses
-cleanly, so a fixed config stops reporting.
-
-This is the file to check first when a config line appears to have been silently ignored.
-
-### `~/.psmux/crash.log`
-
-Written by the server's panic handler: the panic message and a full backtrace. The handler also
-removes that session's `.port` and `.key` files, so a crashed server does not leave stale discovery
-files behind for the next client to trip over.
-
-If this file exists and its timestamp matches your problem, attach it. It is the single most useful
-artifact in a bug report.
-
-## Runtime State and Bookkeeping
-
-psmux keeps all of its runtime bookkeeping in one directory, `%USERPROFILE%\.psmux\`. The home
-directory is resolved from `USERPROFILE` first, then the Win32 profile API, then
-`HOMEDRIVE` plus `HOMEPATH`, then `HOME`. Setting `PSMUX_DATA_DIR` to an absolute path moves the
-whole directory, which gives you a second, fully independent registry (its own sessions, its own
-warm server, its own `last_session`) without touching the default one. See
-[configuration.md](configuration.md#environment-variables).
-
-Per-session files are named after the session:
-
-| File | Purpose |
-|---|---|
-| `<session>.port` | The TCP port that session's server is listening on |
-| `<session>.key` | The auth key a client must present to that server |
-| `<session>.sid` | The session's stable id, the `$N` used in targets |
-| `<session>.pid` | Liveness anchor, stored as `pid:creation_filetime` |
-| `<session>.act` | Last activity stamp, Unix epoch microseconds. Written on client attach and on real keystrokes from an attached client (throttled to one write per second), the same `activity_time` tmux keeps. It is what a bare `psmux <command>` with no `-t` uses to pick the session you are actually working in ([#603](https://github.com/psmux/psmux/issues/603)). A detached session that was never attached has none and ranks by its `.port` file's age |
-| `<session>.spawnlock` | Warm pool spawn lock, prevents two racing spawns |
-
-The `.pid` file is worth understanding, because it is what makes psmux safe to clean up after
-itself. A bare pid can be recycled by Windows and reused by an unrelated process. Storing the
-process creation time alongside it means psmux can prove a pid is still the same process it wrote
-down before it acts on it, so the orphan server reaper and `kill-server` can never terminate
-something that merely inherited the number.
-
-The warm server uses the reserved session name `__warm__`, so it owns a full set of the files above
-named `__warm__.port`, `__warm__.key` and so on. That is why `psmux ls` does not show it.
-
-Socket namespaces created with `-L <name>` prefix the session name, so the files become
-`<namespace>__<session>.port` and so on. A namespaced warm server is therefore
-`<namespace>____warm__.port`, with the doubled underscore coming from the namespace separator plus
-the warm name.
-
-Three files have fixed names and are not tied to any session:
-
-| File | Purpose |
-|---|---|
-| `latency.log` | Client latency trace, only written under `PSMUX_LATENCY_LOG=1` |
-| `last_session` | The session name written on the most recent attach. A bare `psmux` invocation no longer trusts it outright: routing ranks sessions by their `.act` stamp first, and this file only breaks a tie between sessions with identical activity, which in practice means a registry written by an older psmux that nobody has attached to since |
-| `next_session_id` | Counter that hands out the next stable session id |
-
-A stale `.port` (a server that is gone but whose registry files survived) is reaped by the next
-client that trips over it. `psmux attach -t name` against one prints tmux's
-`can't find session: name` and exits 1, and a bare `psmux attach` that finds nothing left prints
-`no sessions`. Neither surfaces the underlying winsock error any more
-([#605](https://github.com/psmux/psmux/issues/605)). If you see a raw
-`No connection could be made because the target machine actively refused it` you are on an older
-build.
-
-The same directory also holds `plugins\` (see [plugins.md](plugins.md)) and, in control mode,
-`cc_debug.log` (see [iterm2-control-mode.md](iterm2-control-mode.md)).
-
-### Inspecting the Directory
-
-```powershell
-Get-ChildItem "$env:USERPROFILE\.psmux" | Sort-Object LastWriteTime -Descending
-```
-
-```text
-Mode    LastWriteTime        Length Name
-----    -------------        ------ ----
-d----   7/27/2026  9:14 AM          plugins
--a---   7/27/2026  9:14 AM      21  work.port
--a---   7/27/2026  9:14 AM      44  work.key
--a---   7/27/2026  9:14 AM      26  work.pid
--a---   7/27/2026  9:12 AM      21  __warm__.port
--a---   7/27/2026  9:12 AM       4  last_session
-```
-
-Deleting a stale `.port` or `.key` file for a session whose server is gone is safe. psmux also
-cleans these up on its own, both at startup and when a server exits or panics. Never delete files
-belonging to a session you still have attached.
-
-## What to Attach to a Bug Report
-
-Collect these before opening an issue at
-[GitHub Issues](https://github.com/psmux/psmux/issues). The first four are almost always enough.
-
-1. **Version and build.** `psmux -V` prints the version, the commit hash, and the build date.
-2. **Your config**, or the smallest config that still reproduces it. If you are unsure whether your
-   config is involved, test with an empty one: `psmux -f NUL new-session`.
-3. **The always on logs, if they exist and are recent:** `~/.psmux/crash.log`,
-   `~/.psmux/server-startup.log`, `~/.psmux/config-warnings.log`.
-4. **Exact reproduction steps**, including which shell you launched psmux from and which terminal
-   emulator you are running in. Windows Terminal, conhost and ConEmu behave differently.
-5. **A relevant debug log**, if you can guess the subsystem. Keys or modifiers not arriving,
-   use `PSMUX_INPUT_DEBUG`. Mouse misbehaving, use `PSMUX_MOUSE_DEBUG`. Anything over SSH, use
-   `PSMUX_SSH_DEBUG`. Wrong colors or a broken theme, use `PSMUX_STYLE_DEBUG`. A client that will
-   not attach, use `PSMUX_AUTH_DEBUG`. A program inside a pane that seems to lose a colour, a
-   screen mode or its mouse registration, use `PSMUX_PANE_RAW` and look at what the program
-   really wrote. A bare command landing in the wrong session, use `PSMUX_ROUTE_DEBUG`.
-6. **A directory listing** of `%USERPROFILE%\.psmux\` when the problem is about sessions not being
-   found, servers not starting, or stale sessions appearing in `psmux ls`.
-7. **Your Windows version.** `[System.Environment]::OSVersion.Version` prints it. Several
-   subsystems, notably mouse over SSH, are gated on the Windows build number. See
-   [mouse-ssh.md](mouse-ssh.md).
-
-A one-liner that gathers the common set:
-
-```powershell
-psmux -V
-Get-ChildItem "$env:USERPROFILE\.psmux" -Filter "*.log" | ForEach-Object {
-    "===== $($_.Name) ====="
-    Get-Content $_.FullName -Tail 50
-}
-```
-
-Debug logs can contain the text you typed and the output of your panes. Read them before you paste
-them into a public issue.
-
-> **Note:** psmux also reads a small number of `PSMUX_TEST_*` variables and one build-number
-> override. These are internal test seams used by the test suite to force timing races and are not
-> supported knobs. Do not set them.
-
-## See Also
-
-- [configuration.md](configuration.md) for the supported options and user facing environment variables
-- [warm-sessions.md](warm-sessions.md) for the `__warm__` server and how to disable it
-- [performance.md](performance.md) for what the latency numbers should look like
-- [faq.md](faq.md) for the common questions these logs usually answer
 
 ---
