@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-08-29 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-08-31 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -2400,8 +2400,8 @@ Details worth knowing:
 | `pane-border-status` | Str | | Pane border status position (`top`/`bottom`/`off`) |
 | `copy-mode-line-number-style` | Str | `fg=brightblack` | Style of the copy-mode line number gutter |
 | `copy-mode-current-line-number-style` | Str | `fg=yellow,bold` | Style of the line number on the copy-mode cursor row |
-| `window-style` | Str | | Style applied to the contents of every pane |
-| `window-active-style` | Str | | Style applied to the contents of the active pane |
+| `window-style` | Str | | Style applied to the contents of panes that are not the active pane (tmux `options-table.c` wording), and the fallback for the active pane; fills only cells whose colour is the terminal default. Also accepts `dim=N` (0 to 100 percent) |
+| `window-active-style` | Str | | Style applied to the contents of the active pane; each of `fg` and `bg` falls back to `window-style` when this option does not name it. Explicit application colours always win. Also accepts `dim=N` |
 | `popup-border-style` | Str | `fg=yellow` | Border style of `display-popup` overlays |
 | `popup-border-lines` | Str | `single` | Popup border glyph set: `single`, `double`, `heavy`, `rounded` |
 | `popup-style` | Str | | Accepted and stored, but never read. See [Accepted but Not Functional](#accepted-but-not-functional) |
@@ -2526,6 +2526,39 @@ set -g window-active-style "fg=colour250,bg=black"
 
 # Colour of the clock-mode digits (Prefix + t)
 set -g clock-mode-colour cyan
+```
+
+### How the two window styles combine
+
+`window-active-style` does not replace `window-style` for the active pane, it
+layers on top of it one attribute at a time, matching tmux `tty.c`
+`tty_default_colours`. The active pane takes `fg` from `window-active-style`
+only when that option actually names an `fg`, and the same holds separately for
+`bg`. Anything it leaves unnamed comes from `window-style`.
+
+Three consequences worth knowing:
+
+* `set -g window-style "bg=colour52"` on its own tints **every** pane, the
+  active one included. You do not need to repeat the colour in
+  `window-active-style`.
+* Mixing works. With `window-style "bg=blue"` and
+  `window-active-style "fg=red"`, the active pane is red on blue while the
+  other panes keep the terminal foreground on blue.
+* `bg=default` (tmux colour 8) names no colour, so
+  `window-active-style "bg=default"` reads as "inherit `window-style`", not as
+  "use the terminal background".
+
+Both options also accept a `dim=N` percentage, where `N` runs from 0 to 100, as
+newer tmux does. It scales the pane's colours toward black by that percentage
+and applies to application colours too, not only to the ones the window style
+supplies. Unlike `fg` and `bg`, `dim` does not fall back: the active pane uses
+the `dim` from `window-active-style`, other panes use the one from
+`window-style`.
+
+```tmux
+# Every pane sits on a dark red ground, the active pane simply undimmed
+set -g window-style "bg=colour52,dim=40"
+set -g window-active-style "bg=colour52"
 ```
 
 `popup-border-lines` accepts `single` (the default), `double`, `heavy` and `rounded`. The values `none` and `simple` are accepted but render as plain single lines, because a popup always draws a border.
@@ -4919,16 +4952,16 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `set-buffer` | `setb` | `wb:` | CLI, SRV, CFG |
 | `set-environment` | `setenv` | `grhut:` | CLI, SRV, CFG, CTL |
 | `set-hook` | *(none)* | `gua` | CLI, SRV, CFG, CTL |
-| `set-option` | `set` | `guaqopwUt:` plus `--` | CLI, SRV, CFG, CTL |
+| `set-option` | `set` | `guaqopswUt:` plus `--` | CLI, SRV, CFG, CTL |
 | `set-pane-title` | *(none)* | none, takes the title as positional arguments | SRV |
-| `set-window-option` | `setw` | `guaqopwUt:` plus `--` | CLI, SRV, CFG, CTL |
+| `set-window-option` | `setw` | `guaqopswUt:` plus `--` | CLI, SRV, CFG, CTL |
 | `show-buffer` | `showb` | `b:` | CLI, SRV, CFG, CTL |
 | `show-environment` | `showenv` | `gsht:` | CLI, SRV, CFG, CTL |
 | `show-hooks` | *(none)* | `g` | CLI, SRV, CFG, CTL |
 | `show-messages` | `showmsgs` | none | CLI, SRV, CFG |
-| `show-options` | `show`, `show-option` | `Aswvqt:` | CLI, SRV, CFG, CTL |
+| `show-options` | `show`, `show-option` | `Agpqsvwt:` plus `--` | CLI, SRV, CFG, CTL |
 | `show-prompt-history` | `showphist` | none | SRV |
-| `show-window-options` | `showw`, `show-window-option` | `Aswvqt:` | CLI, SRV, CFG, CTL |
+| `show-window-options` | `showw`, `show-window-option` | `Agpqsvwt:` plus `--` | CLI, SRV, CFG, CTL |
 | `source-file` | `source` | `qnv` | CLI, SRV, CFG, CTL |
 | `split-window` | `splitw`, `split-pane`, `splitp` | `hvdPZc:e:F:l:p:T:t:` | CLI, SRV, CFG, CTL |
 | `start-server` | `start`, `warmup` | none | CLI, SRV, CFG |
@@ -5252,19 +5285,25 @@ A psmux extension that creates a pane floating above the tiled layout.
 ### Configuration commands
 
 **set-option** (`set`) and **set-window-option** (`setw`)
-- Boolean: `-g` (global, accepted, psmux has one scope so this is effectively a selector no-op), `-u` (unset), `-U` (unset alias of `-u`, tmux parity, #553), `-a` (append to the current value), `-q` (quiet), `-o` (only set if currently unset), `-w` (window scope), `-p` (pane scope, #580). None of these consume the next argument.
+- Boolean: `-g` (global, accepted, psmux has one scope so this is effectively a selector no-op), `-s` (server scope, #618), `-u` (unset), `-U` (unset alias of `-u`, tmux parity, #553), `-a` (append to the current value), `-q` (quiet), `-o` (only set if currently unset), `-w` (window scope), `-p` (pane scope, #580). None of these consume the next argument.
+- `-s` is the tmux 3.2+ server scope flag, the documented way to write `default-terminal`, `extended-keys` and `extended-keys-format`. psmux runs one server per session and keeps a single option store, so `-s` resolves to the same store as `-g`: the write lands where a caller using tmux syntax expects to find it, but this is **not** genuine cross-session server-option storage. tmux's own `set-window-option` table has no `-s`; psmux shares one flag guard across all four spellings and accepts it on `setw` too.
 - Value: `-t` (target, value consumed)
 - Flags parse only **before** the option name, as tmux's getopt does (#583). Once the option name has been seen, everything that follows is the value, dashes included: `set @k -u` stores the literal string `-u`, where it used to consume `-u` as the unset flag and delete `@k` at exit 0. `--` ends option parsing outright, so `set -- @k -g` also stores `-g`.
 - Flags are also matched inside combined tokens such as `-ga`, `-gu` and `-gq`.
+- `-u` **restores the option's table default** on every route, and it clears the record that the user ever set it, so a following `-o` sees an unset option and applies (#619). `set -g escape-time 5` then `set -gu escape-time` reads 500 again, and `set -gu status-left` reads `[#S] `. All three unset routes (config file, server request loop, plugin drain loop) share one restore driven by the option catalog, which `tests-rs/test_option_default_parity.rs` pins to a freshly started server. Before that the server carried a hand written table of about thirty options and silently did nothing for the rest (`set -su default-terminal` left `screen-256color` in place), while the config-file parser wrote an empty value instead of the default, so the CLI and a `.tmux.conf` disagreed about what an unset means. Measured on the pre-fix build, 37 of 42 probed options did not come back to the value a fresh server reports.
+- On a `@name` option `-u` removes the key outright rather than restoring anything, which is what tmux does: a user option carries no table entry, so `options_remove_or_default` takes its `options_remove` branch.
+- `-u` and `-o` in the same command is an unset, never a set: tmux skips the `-o` guard whenever `-u` is present, so `set -guo status-left NEVER` unsets `status-left` and stores nothing.
+- `-o` on an option that **is** set fails: `already set: <name>` on stderr at exit 1, matching tmux's `cmdq_error` (#619). `-q` restores tmux's silent exit 0. The value is left untouched either way. Through a config file the refusal is recorded in `~/.psmux/config-warnings.log` as `<file>:<line>: already set: <name>`, the same shape as `unknown option`, and the in-TUI command prompt shows it as a status message. Before this, every route swallowed the refusal at exit 0 with empty output, so a caller seeding a default could not tell "I set it" from "the user already had it", which is `-o`'s entire purpose.
 - A `@name` argument is never treated as a flag.
-- Not accepted: `-F`, `-s`. Since #553 any flag outside the accepted set is rejected with `unknown flag -X` at exit 1 instead of being silently dropped while the write lands.
+- Not accepted: `-F`. Since #553 any flag outside the accepted set is rejected with `unknown flag -X` at exit 1 instead of being silently dropped while the write lands.
 
 **show-options** (`show`, `show-option`) and **show-window-options** (`showw`, `show-window-option`)
-- Boolean: `-A` (include inherited), `-s` (server scope), `-w` (window scope), `-v` (value only), `-q` (quiet)
+- Boolean: `-A` (include inherited), `-g` (global), `-s` (server scope), `-w` (window scope), `-p` (pane scope, #580), `-v` (value only), `-q` (quiet)
 - Value: `-t` (window selector)
+- A bare `show-options -s` lists the server-scope options only, as tmux does (#618). Before that fix the flag was parsed and then ignored, so it printed the whole store, session options included. A named query such as `show-options -s escape-time` ignores `-s`, which is what tmux does for a table option too.
 - Combined tokens are handled the same way as for `set-option`.
 - The singular aliases `show-option` and `show-window-option` are accepted on every layer (#586), so a `.tmux.conf` or plugin that uses tmux's singular spelling works unchanged.
-- Not accepted: `-g` as a distinct behavior (it is absorbed but tolerated), `-H`, `-p`. Since #553 flags outside `-A -g -q -s -v -w` (plus `-t <target>`) are rejected with `unknown flag -X` at exit 1.
+- Not accepted: `-H`. `-g` is absorbed rather than acted on, psmux having one store. Since #553 flags outside `-A -g -p -q -s -v -w` (plus `-t <target>`) are rejected with `unknown flag -X` at exit 1.
 
 **set-hook** and **show-hooks**
 - Boolean: `-u` (unset, also as `-gu` or `-ug`), `-a` (append, also as `-ga` or `-ag`), `-g` (global, accepted and absorbed)
@@ -8608,7 +8647,7 @@ Inside the chooser, `p` always toggles the preview for the current session regar
 
 The preview pane is fed by the same renderer that draws the main viewport. Each open chooser fetches a JSON dump of the target window using the internal `window-dump` TCP command. The dump includes per-cell text, foreground and background colours, and style flags (bold, underline, italic, reversed, etc.) for every visible row of every pane in that window.
 
-That dump is then drawn into the preview area using `render_layout_json`, the same function that draws the live psmux viewport. As a result, a preview is a true miniature of what you would see if you switched to that target right now, including:
+That dump is then drawn into the preview area using `render_layout_json`, the same function that draws the live psmux viewport. The result is a styled miniature of the serialized pane content, including:
 
 * Pane borders, including their colours and the active pane highlight.
 * Pane title bars and status indicators.
@@ -8641,7 +8680,7 @@ psmux aims to keep the preview feature on par with tmux, with a few intentional 
 * `choose-session` and `choose-tree` both have a preview pane.
 * `p` toggles the preview while a chooser is open.
 * The preview is a live mirror of the target, not a frozen snapshot.
-* Pane borders, colours, and styles are preserved.
+* Serialized cell colours and styles, plus pane-border geometry, are preserved.
 * Wide characters are handled correctly.
 * The preview width is roughly half the popup width, with the picker list on the left.
 * The preview never modifies the target session in any way (it is read only).
@@ -8658,7 +8697,7 @@ psmux aims to keep the preview feature on par with tmux, with a few intentional 
 
 * The option name `choose-tree-preview` is psmux specific. tmux does not recognise it. Adding it to a shared configuration file is safe because tmux's set-option command will warn but not fail; if you want to be strict, guard the line with `if-shell` or split your config.
 * The option key in `show-options` output and in the JSON sent to the client uses kebab-case (`choose-tree-preview`) and snake_case (`choose_tree_preview`) respectively, matching the existing psmux convention.
-* The preview pane respects all your style options (`pane-border-style`, `pane-active-border-style`, `mode-style`, etc.) because it goes through the same renderer.
+* The preview uses the target's serialized cell styles and the chooser's pane-border styles. The `window-dump` response does not include target `window-style` or `window-active-style` options.
 
 ## Performance
 

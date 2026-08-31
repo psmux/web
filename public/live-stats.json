@@ -1,13 +1,13 @@
 {
-  "stars": 3378,
-  "forks": 212,
+  "stars": 3388,
+  "forks": 213,
   "contributors": 32,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 595
+      "contributions": 612
     },
     {
       "login": "computersrmyfriends",
@@ -22,15 +22,15 @@
       "contributions": 27
     },
     {
-      "login": "marhel",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
-      "url": "https://github.com/marhel",
-      "contributions": 16
-    },
-    {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
+      "contributions": 20
+    },
+    {
+      "login": "marhel",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
+      "url": "https://github.com/marhel",
       "contributions": 16
     },
     {
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 28,
+  "issues": 29,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -996,8 +996,15 @@
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 14,
+      "stars": 15,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
+      "category": "claude-code"
+    },
+    {
+      "name": "mkcrew",
+      "author": "rayngnpc",
+      "stars": 3,
+      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
     },
     {
@@ -1015,6 +1022,20 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-restore",
+      "author": "tarikguney",
+      "stars": 3,
+      "description": "Standalone Go CLI to save and restore psmux sessions across restarts",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-skill",
+      "author": "zzj-Mark",
+      "stars": 3,
+      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
+      "category": "claude-code"
+    },
+    {
       "name": "claude-notification",
       "author": "nappa0326",
       "stars": 2,
@@ -1029,13 +1050,6 @@
       "category": "claude-code"
     },
     {
-      "name": "mkcrew",
-      "author": "rayngnpc",
-      "stars": 2,
-      "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
-      "category": "claude-code"
-    },
-    {
       "name": "psmux-claude-skill",
       "author": "Oruga420",
       "stars": 2,
@@ -1043,18 +1057,11 @@
       "category": "claude-code"
     },
     {
-      "name": "psmux-restore",
-      "author": "tarikguney",
+      "name": "wt-psmux",
+      "author": "tobiowo",
       "stars": 2,
-      "description": "Standalone Go CLI to save and restore psmux sessions across restarts",
+      "description": "Patched Windows Terminal with close-tab and rename-tab CLI subcommands for psmux session sync",
       "category": "tool"
-    },
-    {
-      "name": "psmux-skill",
-      "author": "zzj-Mark",
-      "stars": 2,
-      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
-      "category": "claude-code"
     },
     {
       "name": "ccg_app_rust_psmuxPlus",
@@ -1103,13 +1110,6 @@
       "author": "avielf04",
       "stars": 1,
       "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
-      "category": "tool"
-    },
-    {
-      "name": "wt-psmux",
-      "author": "tobiowo",
-      "stars": 1,
-      "description": "Patched Windows Terminal with close-tab and rename-tab CLI subcommands for psmux session sync",
       "category": "tool"
     },
     {
@@ -1212,7 +1212,6 @@
         "#729",
         "#733",
         "#660",
-        "#537",
         "#738",
         "#673",
         "#732",
@@ -1225,13 +1224,14 @@
         "#525",
         "#542",
         "#731",
-        "#662",
         "#513",
         "#511",
+        "#662",
+        "#537",
         "#658",
+        "#750",
         "#659",
-        "#669",
-        "#488"
+        "#669"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
@@ -1256,8 +1256,8 @@
         "#866",
         "#884",
         "#651",
-        "#881",
         "#467",
+        "#881",
         "#970",
         "#766"
       ],
@@ -1266,24 +1266,23 @@
     {
       "repo": "zer0ken/xmux",
       "issues": [
-        "#158",
-        "#171",
+        "#209",
         "#137",
-        "#152",
         "#166",
+        "#158",
         "#117",
         "#165",
-        "#60",
         "#139",
+        "#60",
         "#66",
         "#102",
-        "#141",
         "#176",
+        "#171",
         "#65",
         "#101",
         "#169"
       ],
-      "context": "psmux 세션 전환에 대한 nav 미추종"
+      "context": "로컬 psmux 소스가 생성되지 않음 (help 출력의 tmux 언급이 신원 분류를 가림)"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1352,6 +1351,15 @@
       "context": "Make psmux PATH repair tests portable under PowerShell on Linux"
     },
     {
+      "repo": "anomalyco/opencode",
+      "issues": [
+        "#46242",
+        "#36472",
+        "#41254"
+      ],
+      "context": "Can't start an opencode session anymore if the prompt contains a tag."
+    },
+    {
       "repo": "vanman2024/claude-crew",
       "issues": [
         "#14",
@@ -1377,52 +1385,107 @@
         "#62"
       ],
       "context": "opening an old agent session doesn't work."
-    },
-    {
-      "repo": "ARCJ137442/anymate-cc",
-      "issues": [
-        "#13",
-        "#23",
-        "#19"
-      ],
-      "context": "feat: cross-platform split-window support beyond tmux"
     }
   ],
   "dotfilesRepos": [
     {
-      "repo": "videolan/vlc",
-      "detail": "profile_selector.cpp"
+      "repo": "nathanielvarona/dotfiles",
+      "detail": ".psmux.ps1"
     },
     {
-      "repo": "SamuelMarks/libscript",
-      "detail": "cli.ps1"
+      "repo": "mejares-jamesmichael/windows-dotfiles",
+      "detail": ".psmux.conf"
     },
     {
-      "repo": "seonggyun-kim/dotfiles",
-      "detail": "README.md"
+      "repo": "MattKotsenas/dotfiles",
+      "detail": ".psmux.conf"
     },
     {
-      "repo": "andrqxa-tools/dotfiles",
-      "detail": "tmux.conf"
+      "repo": "victor-basurto/dotfiles",
+      "detail": ".psmux.conf"
     },
     {
-      "repo": "gtbuchanan/dotfiles",
-      "detail": "dot_bashrc.tmpl"
+      "repo": "Suida/dot",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "gen4438/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "dotgibson/dotfiles-Windows",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "maxrzaw/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "tomas-barros1/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "anhdngo/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "ptquang2000/.dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "capypara20/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "triumph/oymywinclaude",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "Ikkjo/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
     },
     {
       "repo": "jinyeow/dotfiles",
       "detail": "README.md"
-    },
-    {
-      "repo": "afen261/vlc-av2",
-      "detail": "profile_selector.cpp"
-    },
-    {
-      "repo": "dotgibson/dotfiles-web",
-      "detail": "generated.json"
     }
   ],
-  "dotfilesReferences": 8,
+  "dotfilesReferences": 24,
   "latestVersion": "3.3.8",
   "mapPoints": [
     {
@@ -1875,5 +1938,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-29T12:21:58Z"
+  "lastUpdated": "2026-08-31T13:04:44Z"
 }
