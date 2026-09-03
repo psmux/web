@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-08-31 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-09-03 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes

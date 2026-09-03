@@ -1,5 +1,5 @@
 {
-  "stars": 3388,
+  "stars": 3413,
   "forks": 213,
   "contributors": 32,
   "topContributors": [
@@ -7,7 +7,7 @@
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 612
+      "contributions": 632
     },
     {
       "login": "computersrmyfriends",
@@ -25,7 +25,7 @@
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 20
+      "contributions": 21
     },
     {
       "login": "marhel",
@@ -76,7 +76,7 @@
       "contributions": 5
     }
   ],
-  "issues": 29,
+  "issues": 36,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,13 +991,20 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 38,
+  "ecosystemRepos": 39,
   "ecosystemProjects": [
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
       "stars": 15,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
+      "category": "claude-code"
+    },
+    {
+      "name": "psmux-skill",
+      "author": "zzj-Mark",
+      "stars": 4,
+      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
       "category": "claude-code"
     },
     {
@@ -1027,13 +1034,6 @@
       "stars": 3,
       "description": "Standalone Go CLI to save and restore psmux sessions across restarts",
       "category": "tool"
-    },
-    {
-      "name": "psmux-skill",
-      "author": "zzj-Mark",
-      "stars": 3,
-      "description": "psmux skill for AI agents - Windows native terminal multiplexer (tmux alternative)",
-      "category": "claude-code"
     },
     {
       "name": "claude-notification",
@@ -1197,11 +1197,11 @@
       "category": "claude-code"
     },
     {
-      "name": "psmux-config",
-      "author": "F4NT0",
+      "name": "psmux-ai-resurrect",
+      "author": "crashbandicode",
       "stars": 0,
-      "description": "My PSMUX (TMUX for windows) configuration",
-      "category": "tool"
+      "description": "Crash-safe psmux workspaces for Codex, Cursor Agent CLI, and Claude Code",
+      "category": "claude-code"
     }
   ],
   "crossRepoMentions": [
@@ -1210,10 +1210,11 @@
       "issues": [
         "#730",
         "#729",
+        "#754",
         "#733",
         "#660",
-        "#738",
         "#673",
+        "#738",
         "#732",
         "#531",
         "#562",
@@ -1228,10 +1229,9 @@
         "#511",
         "#662",
         "#537",
-        "#658",
         "#750",
-        "#659",
-        "#669"
+        "#658",
+        "#659"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
@@ -1248,6 +1248,7 @@
         "#525",
         "#885",
         "#730",
+        "#1073",
         "#647",
         "#628",
         "#519",
@@ -1256,33 +1257,28 @@
         "#866",
         "#884",
         "#651",
-        "#467",
-        "#881",
-        "#970",
-        "#766"
+        "#467"
       ],
       "context": "[改善][Windows] tako が書く tmux-backend.conf に psmux が持たないオプションが 4 つあり、psmux コマンドごとに警告が出る"
     },
     {
       "repo": "zer0ken/xmux",
       "issues": [
-        "#209",
         "#137",
         "#166",
+        "#209",
         "#158",
         "#117",
-        "#165",
         "#139",
+        "#165",
         "#60",
         "#66",
         "#102",
+        "#219",
         "#176",
-        "#171",
-        "#65",
-        "#101",
-        "#169"
+        "#171"
       ],
-      "context": "로컬 psmux 소스가 생성되지 않음 (help 출력의 tmux 언급이 신원 분류를 가림)"
+      "context": "psmux 세션 전환에 대한 nav 미추종"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1297,10 +1293,22 @@
         "#697",
         "#670",
         "#666",
-        "#557",
-        "#696"
+        "#557"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
+    },
+    {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#89202",
+        "#89203",
+        "#81880",
+        "#24384",
+        "#83153",
+        "#91284",
+        "#88127"
+      ],
+      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
     {
       "repo": "LowOnContext/pi-interactive-subagents-windows",
@@ -1316,16 +1324,16 @@
       "context": "Windows Psmux Support for subagent spawning"
     },
     {
-      "repo": "anthropics/claude-code",
+      "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#89202",
-        "#89203",
-        "#81880",
-        "#24384",
-        "#83153",
-        "#88127"
+        "#1055",
+        "#102",
+        "#1584",
+        "#1514",
+        "#1534",
+        "#978"
       ],
-      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
+      "context": "Make psmux PATH repair tests portable under PowerShell on Linux"
     },
     {
       "repo": "JonathanRosado/duet-agents",
@@ -1340,15 +1348,13 @@
       "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
     {
-      "repo": "ThomasMichon/copilot-extensions",
+      "repo": "dotgibson/dotfiles-Windows",
       "issues": [
-        "#1055",
-        "#102",
-        "#978",
-        "#990",
-        "#70"
+        "#232",
+        "#228",
+        "#230"
       ],
-      "context": "Make psmux PATH repair tests portable under PowerShell on Linux"
+      "context": "release-readiness: go/no-go for the next dotfiles-Windows release"
     },
     {
       "repo": "anomalyco/opencode",
@@ -1376,116 +1382,10 @@
         "#10"
       ],
       "context": "Research and bundle psmux for Windows agent team support"
-    },
-    {
-      "repo": "savoy9/tackle",
-      "issues": [
-        "#88",
-        "#12",
-        "#62"
-      ],
-      "context": "opening an old agent session doesn't work."
     }
   ],
-  "dotfilesRepos": [
-    {
-      "repo": "nathanielvarona/dotfiles",
-      "detail": ".psmux.ps1"
-    },
-    {
-      "repo": "mejares-jamesmichael/windows-dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "MattKotsenas/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "victor-basurto/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "Suida/dot",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "gen4438/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "luisgui1757/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "sebastianstudniczek/.dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "dotgibson/dotfiles-Windows",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "tomas-barros1/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "anhdngo/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "ptquang2000/.dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "capypara20/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "triumph/oymywinclaude",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "mikecubed/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "david-risney/PwshProfile",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Ikkjo/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
-    }
-  ],
-  "dotfilesReferences": 24,
+  "dotfilesRepos": [],
+  "dotfilesReferences": 0,
   "latestVersion": "3.3.8",
   "mapPoints": [
     {
@@ -1938,5 +1838,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-08-31T13:04:44Z"
+  "lastUpdated": "2026-09-03T10:51:02Z"
 }
