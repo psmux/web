@@ -1,13 +1,13 @@
 {
-  "stars": 3435,
-  "forks": 211,
-  "contributors": 32,
+  "stars": 3587,
+  "forks": 218,
+  "contributors": 35,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 683
+      "contributions": 1061
     },
     {
       "login": "computersrmyfriends",
@@ -40,10 +40,28 @@
       "contributions": 15
     },
     {
+      "login": "tanaeakihiko",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
+      "url": "https://github.com/tanaeakihiko",
+      "contributions": 14
+    },
+    {
       "login": "krhougs",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
       "url": "https://github.com/krhougs",
       "contributions": 13
+    },
+    {
+      "login": "altrosyn",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/44962895?v=4",
+      "url": "https://github.com/altrosyn",
+      "contributions": 12
+    },
+    {
+      "login": "tscodeplus",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
+      "url": "https://github.com/tscodeplus",
+      "contributions": 11
     },
     {
       "login": "Gerrrt",
@@ -52,31 +70,13 @@
       "contributions": 10
     },
     {
-      "login": "acoliver",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
-      "url": "https://github.com/acoliver",
-      "contributions": 9
-    },
-    {
       "login": "andrew-tawfeek",
       "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
       "url": "https://github.com/andrew-tawfeek",
-      "contributions": 8
-    },
-    {
-      "login": "ToxMox",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/22566356?v=4",
-      "url": "https://github.com/ToxMox",
-      "contributions": 7
-    },
-    {
-      "login": "LizardLiang",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/12999887?v=4",
-      "url": "https://github.com/LizardLiang",
-      "contributions": 5
+      "contributions": 9
     }
   ],
-  "issues": 41,
+  "issues": 51,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,8 +991,15 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 39,
+  "ecosystemRepos": 40,
   "ecosystemProjects": [
+    {
+      "name": "termote",
+      "author": "lamngockhuong",
+      "stars": 57,
+      "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
+      "category": "claude-code"
+    },
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
@@ -1040,13 +1047,6 @@
       "author": "nappa0326",
       "stars": 2,
       "description": "Windows 向け Claude Code 通知 + click-to-focus (psmux / WSL tmux)",
-      "category": "claude-code"
-    },
-    {
-      "name": "clavity",
-      "author": "ckir",
-      "stars": 2,
-      "description": "A remote control for Antigravity (agy): Claude Code drives a live agy session in the same folder via a psmux doorbell + the agentmemory signal bus.",
       "category": "claude-code"
     },
     {
@@ -1099,6 +1099,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-configuration",
+      "author": "phamhongphuc1403",
+      "stars": 1,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "tebis",
       "author": "johnkozaris",
       "stars": 1,
@@ -1134,20 +1141,6 @@
       "category": "claude-code"
     },
     {
-      "name": "ARH-Terminal",
-      "author": "arhsmoque2",
-      "stars": 0,
-      "description": "Native, psmux/tmux-native, agent-aware Android terminal & coding workspace for ARH-OS",
-      "category": "claude-code"
-    },
-    {
-      "name": "devbox-cli",
-      "author": "ww4yne",
-      "stars": 0,
-      "description": "Persistent Windows development sessions over Dev Tunnels, OpenSSH, and psmux",
-      "category": "tool"
-    },
-    {
       "name": "dotfiles",
       "author": "mikecubed",
       "stars": 0,
@@ -1160,6 +1153,13 @@
       "stars": 0,
       "description": "My Windows setup: PowerShell profile, psmux, Windows Terminal, scoop apps",
       "category": "tool"
+    },
+    {
+      "name": "dotfiles",
+      "author": "CtrlCarlitos",
+      "stars": 0,
+      "description": "Cross-platform dotfiles: zsh + PowerShell, chezmoi-managed multi-account git identities, tmux/psmux, AI tooling (Claude Code, OpenCode, agy) with Superpowers + guardrails, 3-OS GitHub Actions CI",
+      "category": "claude-code"
     },
     {
       "name": "dotfiles",
@@ -1206,61 +1206,71 @@
   ],
   "crossRepoMentions": [
     {
-      "repo": "bmad-code-org/bmad-loop",
+      "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#730",
-        "#729",
-        "#754",
-        "#733",
-        "#660",
-        "#673",
-        "#738",
-        "#732",
-        "#531",
-        "#562",
-        "#530",
-        "#549",
-        "#538",
-        "#527",
-        "#525",
-        "#542",
-        "#513",
-        "#511",
-        "#731",
-        "#662",
-        "#750",
-        "#537",
-        "#658",
-        "#659"
+        "#4305",
+        "#4564",
+        "#2830",
+        "#2062",
+        "#4102",
+        "#2696",
+        "#2619",
+        "#1055",
+        "#3588",
+        "#102",
+        "#4417",
+        "#4423",
+        "#2730",
+        "#2633",
+        "#1584",
+        "#3303",
+        "#2339",
+        "#4454",
+        "#2422"
       ],
-      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
+      "context": "agent-worktrees: mux wheel-event passthrough uses send-keys -M, unsupported by the in-use psmux version"
     },
     {
       "repo": "takushio2525/tako",
       "issues": [
-        "#1114",
+        "#1282",
         "#724",
         "#729",
         "#728",
         "#641",
+        "#1594",
         "#842",
+        "#1538",
         "#525",
         "#885",
         "#730",
-        "#1073",
         "#647",
-        "#628",
+        "#1073",
         "#519",
-        "#974",
-        "#583",
-        "#937",
-        "#972",
-        "#651",
-        "#866",
-        "#884",
-        "#467"
+        "#628",
+        "#1205",
+        "#937"
       ],
-      "context": "[テスト] psmux の永続化 e2e が Windows 実機で間欠的に落ちる（同一コミットで pass → fail を実測）"
+      "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
+    },
+    {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#551",
+        "#565",
+        "#567",
+        "#466",
+        "#561",
+        "#547",
+        "#548",
+        "#549",
+        "#534",
+        "#516",
+        "#518",
+        "#568",
+        "#571"
+      ],
+      "context": "Reconcile conflicting Codex and psmux policy docs"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1274,47 +1284,15 @@
         "#677",
         "#697",
         "#670",
-        "#750",
         "#666",
-        "#557"
+        "#750"
       ],
       "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
     },
     {
-      "repo": "ThomasMichon/copilot-extensions",
-      "issues": [
-        "#1055",
-        "#102",
-        "#1584",
-        "#2039",
-        "#1514",
-        "#1974",
-        "#2034",
-        "#1534",
-        "#978",
-        "#70"
-      ],
-      "context": "Make psmux PATH repair tests portable under PowerShell on Linux"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "issues": [
-        "#137",
-        "#166",
-        "#209",
-        "#158",
-        "#139",
-        "#117",
-        "#165",
-        "#60",
-        "#66",
-        "#102"
-      ],
-      "context": "psmux 세션 전환에 대한 nav 미추종"
-    },
-    {
       "repo": "anthropics/claude-code",
       "issues": [
+        "#92757",
         "#89202",
         "#89203",
         "#81880",
@@ -1326,55 +1304,65 @@
       "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
     },
     {
-      "repo": "JonathanRosado/duet-agents",
+      "repo": "bmad-code-org/bmad-loop",
       "issues": [
-        "#13",
-        "#21",
-        "#16",
-        "#23",
-        "#22",
-        "#14"
+        "#730",
+        "#729",
+        "#754",
+        "#733",
+        "#660",
+        "#673",
+        "#731"
       ],
-      "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
+      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
     {
-      "repo": "LowOnContext/pi-interactive-subagents-windows",
+      "repo": "lamngockhuong/termote",
       "issues": [
-        "#12",
-        "#20",
-        "#19",
-        "#6",
-        "#1",
-        "#3"
+        "#234",
+        "#259",
+        "#252",
+        "#235",
+        "#247"
       ],
-      "context": "Windows Psmux Support for subagent spawning"
-    },
-    {
-      "repo": "anomalyco/opencode",
-      "issues": [
-        "#46242",
-        "#36472",
-        "#41254"
-      ],
-      "context": "Can't start an opencode session anymore if the prompt contains a tag."
-    },
-    {
-      "repo": "FrancisVarga/zed",
-      "issues": [
-        "#11",
-        "#4",
-        "#10"
-      ],
-      "context": "Research and bundle psmux for Windows agent team support"
+      "context": "[FEATURE] Support Zellij as a session backend"
     },
     {
       "repo": "vanman2024/claude-crew",
       "issues": [
+        "#22",
         "#14",
         "#13",
         "#15"
       ],
-      "context": "Extend Observability"
+      "context": "Move orchestration and review outside psmux; require native Playwright design verification"
+    },
+    {
+      "repo": "Thurbeen/thurbox",
+      "issues": [
+        "#1170",
+        "#1242",
+        "#1168"
+      ],
+      "context": "Remote hook status is lost on a psmux (Windows) SSH host: pane user options are a no-op"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "issues": [
+        "#270",
+        "#137",
+        "#318"
+      ],
+      "context": "원격 psmux 호스트가 1.5초마다 무한 재부착"
+    },
+    {
+      "repo": "JonathanRosado/duet-agents",
+      "issues": [
+        "#13",
+        "#16",
+        "#21"
+      ],
+      "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
     {
       "repo": "savoy9/tackle",
@@ -1386,105 +1374,8 @@
       "context": "opening an old agent session doesn't work."
     }
   ],
-  "dotfilesRepos": [
-    {
-      "repo": "nathanielvarona/dotfiles",
-      "detail": ".psmux.ps1"
-    },
-    {
-      "repo": "mejares-jamesmichael/windows-dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "gen4438/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "luisgui1757/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "tomas-barros1/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "anhdngo/dotfiles",
-      "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "Graham42/windows-dot-files",
-      "detail": "setup-psmux.ps1"
-    },
-    {
-      "repo": "ptquang2000/.dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "DS-argus/window-dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "dduyanhhoang/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "david-risney/PwshProfile",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "ChrisWithakay42/DotFiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "vchirikov/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "Ikkjo/dotfiles",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "pieberrykinnie/.psmux.conf",
-      "detail": ".psmux.conf"
-    },
-    {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "eXpandFramework/Reactive.XAF",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "jinyeow/dotfiles",
-      "detail": "README.md"
-    },
-    {
-      "repo": "caolib/kira",
-      "detail": "run.ps1"
-    }
-  ],
-  "dotfilesReferences": 24,
+  "dotfilesRepos": [],
+  "dotfilesReferences": 0,
   "latestVersion": "3.3.8",
   "mapPoints": [
     {
@@ -1937,5 +1828,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-09-07T11:51:55Z"
+  "lastUpdated": "2026-10-01T12:39:31Z"
 }
