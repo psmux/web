@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-10-01 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-10-05 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -335,6 +335,17 @@ A: Session creation takes < 100ms. New windows/panes add < 80ms overhead. The bo
 **Q: Does psmux support mouse?**
 A: Full mouse support: click to focus panes, drag to resize borders, scroll wheel, click status-bar tabs, drag-select text (including tmux-like copy-on-release with `pwsh-mouse-selection on`), and right-click copy/paste paths. Plus VT mouse forwarding for TUI apps like vim, htop, and midnight commander.
 
+**Q: When I select lines with the mouse, the selection runs across every pane. How do I copy from just one pane?**
+A: A selection that spans panes, covers whole rows of the window and runs straight through the pane border is drawn by your terminal (Windows Terminal, conhost, WezTerm), not by psmux. The terminal only sees one big grid of characters and knows nothing about panes, so its selection cannot stop at a pane edge. tmux behaves exactly the same way. You get the terminal's selection in two cases:
+
+- `mouse` is off in your config (`set -g mouse off`). psmux then leaves every mouse event to the terminal. psmux turns `mouse` on by default; tmux defaults it to off.
+- You hold **Shift** while dragging. Windows Terminal and most other terminals treat Shift+drag as "select it myself" even when the program inside asks for the mouse. That is handy for grabbing text from several panes at once, and it is how you get the terminal's selection back while `mouse` is on.
+
+To copy from one pane only, let psmux do the selecting:
+
+- With the mouse: make sure your config has `set -g mouse on` (or no `mouse` line at all), then drag inside the pane. psmux enters copy mode, keeps the selection inside the pane you started in even if the pointer wanders into the next one, and copies to the paste buffer and the Windows clipboard when you release the button.
+- With the keyboard: press `Prefix` then `[` to enter copy mode in the active pane, move to the start, press `Space`, move to the end, press `Enter`. Paste with `Prefix` then `]`. Add `set -g mode-keys vi` if you prefer vi movement keys (`h j k l`, `w`, `b`, `/` to search). See [Copy/Scroll Mode](keybindings.md#copyscroll-mode-vi).
+
 **Q: The scroll wheel does nothing inside some full screen program. Why?**
 A: Because that program never asked for the mouse, and psmux follows tmux here. tmux only writes a mouse report to a pane whose application has enabled a mouse mode (`input_key_mouse` in `input-keys.c` returns immediately otherwise), and its default `WheelUpPane` binding treats the alternate screen only as a reason NOT to fall through to copy mode. So over a full screen program with no mouse support the wheel is a no-op in tmux, and now in psmux too. Before psmux 3.3.9 psmux forwarded the report anyway, and a program that does not parse mouse reports read the bytes as keystrokes: htop opened its `Search:` prompt and typed the report into it, and codex lost its transcript ([#598](https://github.com/psmux/psmux/issues/598)). Turn the program's own mouse support on (`:set mouse=a` in vim and neovim, `--mouse` for `less`, the mouse setting in htop) and the wheel starts working again. Over a plain shell prompt the wheel still enters copy mode and scrolls psmux's own scrollback, unchanged.
 
@@ -366,7 +377,7 @@ A: Add `set -g bell-action none` to your `~/.psmux.conf`. This silences both the
 A: Yes, first-class support. Start psmux, run `claude` inside a pane, and ask Claude to create a team. psmux automatically sets the required environment variables and injects `--teammate-mode tmux`. Each teammate agent gets its own visible pane. See [claude-code.md](claude-code.md) for details.
 
 **Q: Do CJK characters (Chinese/Japanese/Korean) and IME input work?**
-A: Yes. CJK character input, IME composition, and pasting CJK text all work correctly. The paste detection heuristic is tuned to avoid misidentifying rapid IME bursts as clipboard pastes, keeping IME input latency minimal.
+A: Yes. CJK character input, IME composition, and pasting CJK text all work correctly. The paste detection heuristic is tuned to avoid misidentifying rapid IME bursts as clipboard pastes, keeping IME input latency minimal. Emoji and other characters outside the Basic Multilingual Plane (such as the JIS X 0213 kanji `𠮟`) work too, pasted, typed through the IME or picked from the Win+. emoji panel.
 
 **Q: Can I save and restore sessions across reboots?**
 A: Yes, using the [psmux-resurrect](https://github.com/psmux/psmux-plugins/tree/main/psmux-resurrect) plugin. For automatic periodic save/restore, pair it with [psmux-continuum](https://github.com/psmux/psmux-plugins/tree/main/psmux-continuum). See [plugins.md](plugins.md) for setup.
@@ -677,6 +688,10 @@ See [claude-code.md](claude-code.md) for detailed setup and troubleshooting.
 - Korean IME input correctly handled without bracketed paste sequence injection
 - CJK text pasting works reliably for any length
 - UTF-8 multi-byte characters (box-drawing, emoji, CJK) render correctly in ConPTY panes
+- Characters outside the Basic Multilingual Plane (emoji, JIS X 0213 kanji such as `𠮟`) arrive whole
+  whether pasted, committed by the IME or picked from the Win+. emoji panel, in panes and in psmux's
+  own prompts, on every host. The console hands such a character over as one key record per UTF-16
+  half; psmux pairs the halves itself because crossterm 0.29 drops them (#742)
 
 ## Interactive Choosers
 
@@ -2229,7 +2244,8 @@ set -g status-left "[#S] "
 set -g status-right "%H:%M %d-%b-%y"
 set -g status-style "bg=green,fg=black"
 
-# Cursor style: block, underline, or bar
+# Cursor shape. Leave both out, as most configs do, and psmux asks for no
+# shape, so the cursor you had before starting it is the cursor you keep.
 set -g cursor-style bar
 set -g cursor-blink on
 
@@ -2416,6 +2432,9 @@ Details worth knowing:
 | `pane-border-status` | Str | | Pane border status position (`top`/`bottom`/`off`) |
 | `copy-mode-line-number-style` | Str | `fg=brightblack` | Style of the copy-mode line number gutter |
 | `copy-mode-current-line-number-style` | Str | `fg=yellow,bold` | Style of the line number on the copy-mode cursor row |
+| `copy-mode-match-style` | Str | `bg=cyan,fg=black` | Style of search matches in copy mode |
+| `copy-mode-current-match-style` | Str | `bg=magenta,fg=black` | Style of the search match under the copy-mode cursor |
+| `copy-mode-mark-style` | Str | `bg=red,fg=black` | Style of the line marked with `X` (set-mark); the marked cell has its colours swapped |
 | `window-style` | Str | | Style applied to the contents of panes that are not the active pane (tmux `options-table.c` wording), and the fallback for the active pane; fills only cells whose colour is the terminal default. Also accepts `dim=N` (0 to 100 percent) |
 | `window-active-style` | Str | | Style applied to the contents of the active pane; each of `fg` and `bg` falls back to `window-style` when this option does not name it. Explicit application colours always win. Also accepts `dim=N` |
 | `popup-border-style` | Str | `fg=yellow` | Border style of `display-popup` overlays |
@@ -2546,6 +2565,79 @@ set -g copy-mode-line-number-style "fg=brightblack"
 # The line number on the cursor row
 set -g copy-mode-current-line-number-style "fg=yellow,bold"
 ```
+
+The gutter does not move what the mouse points at: a click or a drag in copy
+mode selects the cell under the pointer whichever mode is set.
+
+### Cursor
+
+**With neither option set, which is how most configurations run, psmux asks
+the terminal for no cursor shape at all, so the cursor you had before starting
+psmux is the cursor you see inside it, blinking or steady as you had it.** A
+program running in a pane can still ask for its own shape, exactly as it would
+outside psmux, and psmux passes that through. This is what tmux does as well:
+its `cursor-style` defaults to `default`, and it sends a shape only once
+something has asked for one.
+
+When psmux does change the cursor, it puts it back on the way out, shape and
+blinking both, rather than resetting the terminal to its own default. It asks
+the terminal at attach what it is drawing (DECRQSS for the shape, DECRQM for
+DEC private mode 12) and writes that back when the session ends. A terminal
+that will not answer gets the plain reset instead, which is where tmux stops.
+
+`cursor-style` is the shape psmux asks for when you do want it to pick:
+
+```tmux
+# Steady shapes
+set -g cursor-style block
+set -g cursor-style underline
+set -g cursor-style bar
+
+# The same three, blinking. tmux spells them this way and carries no separate
+# blink option, so a configuration written for tmux works unchanged
+set -g cursor-style blinking-block
+set -g cursor-style blinking-underline
+set -g cursor-style blinking-bar
+
+# Back to asking for nothing
+set -g cursor-style default
+```
+
+`cursor-blink` adds or removes the blink of whichever shape is named, so it is
+another way to spell the same six:
+
+```tmux
+# A blinking bar, two ways
+set -g cursor-style blinking-bar
+set -g cursor-style bar
+set -g cursor-blink on
+
+# A steady bar, two ways
+set -g cursor-style bar
+set -g cursor-style blinking-bar
+set -g cursor-blink off
+```
+
+Set, `cursor-blink` decides; left alone, the shape's own name decides.
+
+It can also be set on its own, with no `cursor-style` at all:
+
+```tmux
+# Blink the cursor the terminal already draws, whatever shape that is
+set -g cursor-blink on
+```
+
+A shape is asked for with DECSCUSR, which says whether it blinks, so there is
+nothing more to send for it. Without a shape there is no such code, and the
+blink goes out as DEC private mode 12 instead, which asks for the blink alone.
+Either way it is sent only because you asked: leave both options out and
+nothing is sent at all.
+
+That last form is the one terminals differ on. Windows Terminal acts on mode
+12; WezTerm 20240203 records it, and reports it back when asked, but goes on
+drawing the cursor it was drawing. Both of them act on the blink a DECSCUSR
+code carries, so naming a shape is the form that works everywhere:
+`set -g cursor-style blinking-bar`, or `bar` with `cursor-blink on`.
 
 ### Popup and Window Styling
 
@@ -2850,8 +2942,8 @@ bind-key C-Space send-prefix
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `prediction-dimming` | Bool | `off` | Dim predictive/speculative text |
-| `cursor-style` | Str | `bar` | Cursor shape: `block`, `underline`, or `bar` |
-| `cursor-blink` | Bool | `on` | Cursor blinking |
+| `cursor-style` | Str | `default` | The cursor shape psmux asks the terminal for. `block`, `underline` and `bar` are steady; `blinking-block`, `blinking-underline` and `blinking-bar` blink; `default` asks for no shape at all. See [Cursor](#cursor) |
+| `cursor-blink` | Bool | `off` | Adds or removes the blink of the shape above: `on` makes a steady shape blink, `off` stops a blinking one. Set on its own, with no shape named, it asks the terminal for the blink alone and leaves the shape as it was. See [Cursor](#cursor) |
 | `env-shim` | Bool | `on` | Inject Unix-compatible `env` function in PowerShell panes |
 | `claude-code-fix-tty` | Bool | `on` | Patch Node.js process.stdout.isTTY for Claude Code |
 | `claude-code-force-interactive` | Bool | `on` | Set CLAUDE_CODE_FORCE_INTERACTIVE=1 in panes |
@@ -3060,7 +3152,7 @@ hatch you want for one invocation rather than forever.
 | Variable | Effect |
 |---|---|
 | `PSMUX_CURSOR_STYLE` | Cursor shape: `bar`, `block`, `underline`, or `default`. Normally set for you by `set -g cursor-style` |
-| `PSMUX_CURSOR_BLINK` | Cursor blink. `0` disables it. Normally set for you by `set -g cursor-blink` |
+| `PSMUX_CURSOR_BLINK` | Cursor blink. `1`, `on` or `true` enables it, anything else disables it, and leaving it unset is not the same as `0`: see `cursor-blink` above. Normally set for you by `set -g cursor-blink` |
 | `PSMUX_DIM_PREDICTIONS` | Dim PSReadLine prediction text for this shell only. The option form is `prediction-dimming` |
 | `PSMUX_HOST_COLORS` | Supplies the host terminal's palette so psmux can answer OSC 4, 10 and 11 colour queries. psmux normally queries the host itself; set this when the host misreports or when the query cannot run |
 | `PSMUX_XTVERSION_NAME` | The terminal name psmux reports when a pane asks XTVERSION (`ESC [ > q`). Defaults to `tmux`, matching the identity a pane already sees in `$TMUX` and in the first line of `psmux -V`. Set it to `psmux` to be announced under psmux's own name |
@@ -3273,7 +3365,15 @@ set -g exit-empty on
 
 With `destroy-unattached on`, the server process terminates as soon as the last client detaches. This is useful for single-use sessions.
 
-With `exit-empty off`, the server stays alive even after all sessions are closed, allowing new sessions to be created without restarting.
+With `exit-empty off`, an empty server stays alive. The tmux idiom for holding a private server before it has a session works as it does in tmux:
+
+```powershell
+psmux -S $sock start-server ';' set-option -g exit-empty off
+psmux -S $sock display-message -p "#{socket_path}`t#{pid}"   # answers before any session exists
+psmux -S $sock new-session -d -s work                        # lands in that same server process
+```
+
+psmux keeps one process per session, so its empty server is the namespace's standby server, made visible while it is unclaimed with `exit-empty off`. The first `new-session` in that namespace becomes that process, whatever flags it carries (`-f` is ignored, as tmux ignores it for a running server). With `exit-empty on` (the default), a plain `start-server` leaves nothing to query, as in tmux, where the server exits at once. Unlike tmux, killing the last session of a namespace still ends that session's process even with `exit-empty off`.
 
 ## Dead Panes and Respawn
 
@@ -3596,7 +3696,7 @@ rebind the prefix, the new key is bound to `send-prefix` for you.
 | `Prefix + w` | Interactive session/window/pane chooser (`choose-tree`) |
 | `Prefix + &` | Kill current window (with confirmation) |
 | `Prefix + ,` | Rename current window |
-| `Prefix + '` | Prompt for window index (jump to any window) |
+| `Prefix + '` | Prompt for a window index or name and select it (`select-window -t ':%%'`, as tmux) |
 | `Prefix + .` | Prompt for an index and move the current window there (`move-window`) |
 | `Prefix + 0-9` | Select window by number |
 
@@ -3919,16 +4019,29 @@ stays put, use the scrolling keys below.
 | `g` | Top of scrollback |
 | `G` | Bottom (live output) |
 | `z` | Centre the cursor line in the pane (scroll-middle) |
-| `r` | Toggle following live output (see below) |
+| `r` | Copy the pane's current output into copy mode once (refresh-from-pane, see below) |
 
 A full page is the pane height minus two lines and a half page is half the pane height, the same
 amounts tmux uses (`window_copy_pageup1` in `window-copy.c`). A pane two rows tall or shorter moves
 one line. The view moves and the cursor stays on its row, except at the top or bottom of the
 history, where the cursor is pulled along so repeated presses reach the first or last line.
 
-`r` is a psmux extension with no tmux equivalent. Copy mode normally anchors the view so new output
-cannot shift the text under your cursor. `r` releases that anchor, so the pane follows live output
-again and jumps to the bottom of the history. Press `r` again to re-anchor.
+Copy mode reads a copy of the pane taken when it opened, so new output cannot shift the text under
+your cursor. `r` is tmux's `refresh-from-pane`: it takes that copy again once, so everything the
+pane printed since becomes reachable, and it keeps the line at the top of the view where it was, the
+way tmux 3.7 does (`window_copy_cmd_refresh_from_pane` in `window-copy.c`). The new lines land
+below the view; `G` goes to them. Like tmux it clears the selection and stays in copy mode.
+`send-keys -X refresh-now` is the same command under the name OpenBSD's current manual uses.
+
+To follow output continuously instead, tmux after 3.7c has an automatic refresh, and psmux has it too:
+`send-keys -X refresh-on`, `refresh-off` and `refresh-toggle`. While it is on, copy mode takes a
+new copy whenever the pane prints. It follows the output while the cursor sits on the last row at the
+live bottom, keeps your place anywhere else, and pauses while a selection is being made. To get the
+newer tmux binding:
+
+```tmux
+bind-key -T copy-mode-vi r send-keys -X refresh-toggle
+```
 
 ### Screen Position
 
@@ -3955,7 +4068,8 @@ again and jumps to the bottom of the history. Press `r` again to re-anchor.
 | `X` | Set the mark at the cursor |
 | `Alt+x` | Exchange the cursor and the mark |
 
-`Alt+x` swaps rather than jumps, matching tmux. Pressing it twice returns you to where you started.
+`Alt+x` swaps rather than jumps, matching tmux. Pressing it twice returns you to where you started. The marked line is drawn in
+`copy-mode-mark-style` (`bg=red,fg=black`) with the marked cell's colours swapped, as tmux draws it.
 
 ### Bracket / Paragraph
 
@@ -3972,15 +4086,16 @@ again and jumps to the bottom of the history. Press `r` again to re-anchor.
 | `Space` | Begin character selection at the cursor |
 | `V` | Begin line selection at the cursor |
 | `Ctrl+Space` | Set the selection anchor at the cursor |
-| `v` | Toggle rectangle mode on the selection (does not start one) |
-| `Ctrl+v` | Force rectangle mode on the selection |
+| `v` / `Ctrl+v` | Toggle rectangle mode (does not start a selection) |
 | `o` | Swap cursor/anchor ends |
+| `Esc` | Clear the selection and stay in copy mode (`mode-keys vi`) |
 
 **psmux follows tmux here, not vi.** In vi, `v` starts a character selection. In tmux and in psmux,
 `v` is `rectangle-toggle`: it flips the selection between character mode and block mode and does not
 set an anchor, so pressing `v` on its own selects nothing. Use `Space` (or `Ctrl+Space`) to start a
-selection and `V` to start a line selection. `Ctrl+v` differs from `v` in that it always switches to
-rectangle mode rather than toggling out of it. If you want vi muscle memory, rebind it:
+selection and `V` to start a line selection. Pressed before `Space`, `v` makes the selection a
+rectangle from the start, as in tmux. Builds before discussion #694 began a character selection on
+`v` despite this table; if you got used to that, rebind it:
 
 ```tmux
 bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -4008,6 +4123,19 @@ Search covers the whole scrollback, not just the rows on screen. A match that is
 scrolls the view to it, parked a quarter of a screen from the bottom the way tmux does, and
 `?` stops at the nearest match above the cursor.
 
+Every match on screen is drawn in `copy-mode-match-style` (`bg=cyan,fg=black`) and the one under the
+cursor in `copy-mode-current-match-style` (`bg=magenta,fg=black`), tmux's defaults. As in tmux the
+highlight stays while you move with `n`, `N` and the cursor keys, and goes when a command that
+changes the selection or the mark runs (`Space`, `Esc`, `V`, `v`, `X`, `z`, `%`, `^`).
+
+### Goto Line
+
+| Key | Action |
+|-----|--------|
+| `:` | Ask for a line number and move the view to it (`mode-keys vi` only) |
+
+See [Copy Mode Goto Line Prompt](#copy-mode-goto-line-prompt) for what the number counts.
+
 ### Text Objects & Registers
 
 | Key | Action |
@@ -4021,7 +4149,8 @@ scrolls the view to it, parked a quarter of a screen from the bottom the way tmu
 
 | Key | Action |
 |-----|--------|
-| `Esc` / `q` / `]` | Exit copy mode |
+| `q` / `]` | Exit copy mode |
+| `Esc` | Clear the selection and stay in copy mode with `mode-keys vi`; exit with `mode-keys emacs` |
 | `Ctrl+C` / `Ctrl+G` | Exit copy mode |
 
 ### Copy Mode Search Prompt
@@ -4030,10 +4159,42 @@ Opened by `/`, `?`, `Ctrl+s` or `Ctrl+r`. While it is open the copy mode keys ar
 
 | Key | Action |
 |-----|--------|
-| Any character | Append to the search pattern |
-| `Backspace` | Delete the last character |
+| Any character, `Space` included | Insert at the cursor |
+| `Left` / `Right` | Move the cursor |
+| `Home` / `Ctrl+a` | Move to the start |
+| `End` / `Ctrl+e` | Move to the end |
+| `Backspace` | Delete the character before the cursor |
+| `Delete` / `Ctrl+d` | Delete the character under the cursor |
+| `Ctrl+u` / `Ctrl+k` / `Ctrl+w` | Clear the line / cut to the end / cut the word before the cursor |
+| `Up` / `Down` | Recall earlier searches |
 | `Enter` | Accept the search and jump to the match |
-| `Esc` | Cancel the search |
+| `Esc` / `Ctrl+c` / `Ctrl+g` | Cancel the search |
+
+These are the keys of tmux's prompt editor that apply here. The cursor position is not drawn on the
+status line yet. `Ctrl+b` and `Ctrl+f` also move the cursor, but `Ctrl+b` is the default prefix, which
+the client takes first. The goto line prompt takes the same editing keys.
+
+### Copy Mode Goto Line Prompt
+
+Opened by `:` with `mode-keys vi`, which is the key tmux binds it to in `copy-mode-vi`. While it is
+open the copy mode keys are inactive.
+
+| Key | Action |
+|-----|--------|
+| Any character | Append to the line number |
+| `Backspace` | Delete the last character |
+| `Enter` | Move the view to that line |
+| `Esc` | Cancel and leave the view where it was |
+
+What the number counts follows `copy-mode-line-numbers`, so it always matches the gutter on screen:
+
+| `copy-mode-line-numbers` | The number means |
+|-----|--------|
+| `absolute`, `relative`, `hybrid` | A line of the whole buffer, counting the oldest retained line as 1 |
+| `off`, `default` | How many lines back from the live bottom to scroll |
+
+A line number past the end is clamped to the end, and anything that is not a number leaves the view
+alone. The same rules apply to `send-keys -X goto-line <n>`.
 
 ### Emacs Copy Mode
 
@@ -4505,6 +4666,8 @@ The [Plugin Developer Guide](https://github.com/psmux/psmux-plugins/blob/main/PL
 **The plugin configured the wrong server.** Only happens when a script ignores `PSMUX_TARGET_SESSION` and hard codes `-L` or `-t`. Let the environment variable route the calls.
 
 **`run-shell` output pops up over the pane.** That is tmux behaviour for a foreground `run-shell` with output. Use `run-shell -b` for scripts that should stay silent, or send their output to `Out-Null`.
+
+**A key bound to a slow `run-shell`.** The prefix indicator clears as soon as the key is pressed and the client keeps drawing and reading keys while the script runs; the output popup appears when it finishes. As in tmux, the rest of the binding waits for it: in `bind C-s run-shell 'save.ps1' \; display-message saved` the message shows only after `save.ps1` exits. One difference: tmux holds keys typed during a foreground `run-shell` until it ends, while psmux delivers them to the pane straight away.
 
 ## FAQ
 
@@ -5336,7 +5499,8 @@ Five mouse wire commands are an exception and are genuinely usable for scripting
 - See [compatibility.md](compatibility.md#kill-server-with-multiple-sockets).
 
 **start-server** (`start`, `warmup`)
-- No flags. Pre-spawns a warm server so the next `new-session` is instant.
+- No flags. Starts the namespace's server (a warm standby, so the next `new-session` is also instant).
+- Commands queued after it (`start-server ; set-option -g exit-empty off`) run against that server, in order, stopping at the first error, as in tmux. With `exit-empty off` the empty server answers untargeted commands (`display-message -p '#{pid}'`, `show-options`, `list-sessions`) before any session exists, and the next `new-session` lands in it (issue #734).
 
 **server-info** (`info`)
 - No flags.
@@ -5732,7 +5896,7 @@ These are parsed before psmux looks at the command name.
 | `-C` | Control mode with command echo. |
 | `-CC` | Control mode without command echo. |
 | `-t <target>` | Target `session`, `session:window` or `session:window.pane` for the command that follows. |
-| `-S <path>` | Socket path, accepted and its value consumed. |
+| `-S <path>` | Selects the server for that path, and wins over `-L` as in tmux. A path inside the psmux data dir (`<dir>/<label>`, what `#{socket_path}` prints) or the `$TMUX` first field selects that label; any other path selects a private namespace keyed by a hash of the normalized absolute path, so every spelling of one path reaches one server. `#{socket_path}` and the first field of `$TMUX` in its panes report the path as given. |
 | `-h`, `--help` | Usage. |
 | `-V`, `-v`, `--version` | Version. |
 
@@ -6035,10 +6199,11 @@ backslashes, with or without `.exe`, in any letter case, quoted, and with argume
 | `pwsh`, `powershell` | `cd '<dir>'; [System.IO.Directory]::SetCurrentDirectory(...); cls` (the second call keeps the Win32 working directory in step so `#{pane_current_path}` follows) |
 | `cmd` | `cd /d "<dir>" & cls` |
 | `bash`, `zsh`, `sh`, `fish`, `dash`, `ksh`, `tcsh`, `csh`, `ash`, `busybox` | `cd '<dir>'; clear` with the path written with forward slashes |
+| `nu`, `nushell` | `cd '<dir>'; clear` with the path as given (a backslash is an ordinary character in nu single quotes); a path containing an apostrophe switches to double quotes (`cd "<dir>"`, every backslash doubled) because a nushell single-quoted string has no quote escape at all |
 | anything else | the PowerShell form |
 
 `git-bash.exe` (Git Bash's GUI launcher, which psmux runs as the console `bash.exe` beside it)
-counts as bash. Nushell and `wsl` fall into the last row; a `default-shell` of
+counts as bash. `wsl` falls into the last row; a `default-shell` of
 `C:\Windows\System32\bash.exe` is WSL's bash and gets the bash row, because the shell on the other
 side of it is a POSIX shell. If your `default-shell` falls into the last row and the injected line
 errors, turn warm panes off with `set -g warm off` so every pane starts cold in the requested
@@ -7001,6 +7166,17 @@ booting beats a cold spawn that is not started at all.
 A `default-shell` that never writes anything would otherwise never be handed
 out, so a spare older than 1500 ms counts as started regardless.
 
+Measured on 2026-10-04, the quiet rule fires earlier than its name suggests.
+Of 1009 promotions traced over nine full runs of the perf suite and twenty runs
+of its depth five section, none needed the backstop, but 872 happened while
+the spare's screen was still blank: the first output (`dv=1` or `dv=2`) is
+the pseudoconsole's own setup sequence, and a Store pwsh then stays silent for
+more than 250 ms while it loads, under load or when several start together.
+Such a spare is counted as ready 300 to 800 ms after spawn without a prompt
+yet. It matters only to creations that follow each other within about a
+second; a spare that has idled for seconds, as in the depth five contract,
+always has its prompt.
+
 ### Bursts (surge)
 
 Depth on its own cannot serve a *run* of creations. Ten windows opened back to
@@ -7034,6 +7210,185 @@ waits up to 250 ms for a spare that is already being spawned before cold
 spawning, which covers the slowest spawn at that concurrency. Over the ten call
 burst the two together took the p50 from 57 ms to about 25 ms and removed the
 450 to 550 ms outliers entirely.
+
+### The third quick creation at depth two
+
+Five `new-window` calls in a row, each waiting for its prompt (TEST 2 of
+`tests/test_pane_startup_perf.ps1`), come out like `[51, 34, 1118, 39, 34]` at
+the default depth of two: the first two take settled spares, the third pays
+0.9 to 1.2 s against a bare `pwsh -NoProfile` of about 335 ms. The trace says
+why. The second call takes the last ready spare, which opens a surge, and the
+pool schedules seven spawns at once (two waves of four `CreateProcessW`). The
+third call is handed the one spare that was already starting, and that shell
+boots alongside both waves.
+
+Other shells starting nearby slow a shell's startup, and it is not the CPU.
+Measured with no psmux (a C# probe starting the Store pwsh with `-NoProfile`
+and timing it by its own exit time, 32 logical CPUs mostly idle, seven runs
+each): alone 306 ms; four more started 0 to 50 ms after it 473 to 494; 100 to
+200 ms after it about 410; 300 ms after it 306. Four started 300 ms before it
+cost 384, 400 ms or more before it nothing. Eight cost about the same as four
+(484). Starting the others at idle priority changed nothing. So the cost is
+contention in the first 300 to 400 ms of each process's life, and the only lever
+is when the other shells start.
+
+That lever was tried and rejected, because it only moves the cost. Capping how
+many spares may start while the shell a caller waits on is still starting
+(three, five in a burst) took the third window to 450 to 726 ms over ten
+interleaved runs, but the pool then had fewer started spares when the next
+creations came: the four splits that follow the window run (TEST 3) went from a
+worst of 33 to 80 ms on master to 160 to 653 ms, and once the depth five
+contract failed (p90 202 ms). Protecting the waiting shell for a fixed time
+instead (400, 700 or 1000 ms after it started) either lost the gain (1167, 892,
+900 ms) or kept the split cost (779, 806, 414 ms). One wave of eight
+`CreateProcessW` instead of two waves of four did not help either (1075,
+1748 ms). The total amount of shell starting is fixed by how many creations
+follow, and at depth two one of them pays for it; `warm-pool-size 5` is the
+setting for a user who opens windows in runs, and its contract (every creation
+fast, p90 150 ms) holds. The experiment is kept on the branch
+`perf-refill-budget-experiment` with all of its numbers.
+
+One side effect visible in the same traces was also tried on its own and
+dropped. A claim that waits for in flight spares takes the first one to land,
+while package activation returns a batch of concurrent spawns within a couple
+of milliseconds of each other in no id order; the claim's id raises the pool's
+floor, so the lower ids landing a millisecond later are killed on arrival
+("refused spare pane=5 below floor 6") and spawned again. Landing the whole
+batch before choosing (5 ms) is correct and unit testable, but over three
+interleaved runs of `tests/test_issue686_pool_surge_and_reap.ps1` it changed
+nothing measurable: burst mean 247, 246, 154 ms against 97, 136, 187 on
+master, refusals 16, 48, 8 against 13, 11, 32. An earlier set of three had
+shown the opposite, which is the size of the noise on this machine.
+
+### A claimed spare keeps the directory it started in
+
+A spare's shell can not be moved from outside once it is running, so a creation
+that asks for a directory (`new-window -c <dir>`, and also a `new-window` or
+`split-window` without `-c`, which asks for the calling client's working
+directory) used to have the claim type ` cd '<dir>'; ...; cls` into the
+transplanted shell. The shell has to read that line, run it and draw a fresh
+prompt before the window shows anything again, so every warm creation carried a
+whole shell round trip, and that round trip is exactly what slows down when the
+machine is busy, for example while the claim's own refills are booting.
+
+That is what made the depth five contract in `tests/test_pane_startup_perf.ps1`
+(TEST 3b) flaky. Its five spares are all four seconds old, and the trace showed
+the prompt on every one of them at claim time (100 of 100 claims over twenty
+runs). Yet under load the fifth creation came out at 126 to 178 ms in six runs
+of ten, against 50 to 80 ms for the first four, because its shell was answering
+the injected `cd` alongside four booting refills. In some runs the first
+`capture-pane` after `new-window` found the pane completely blank: the `cls`
+had landed and the new prompt had not.
+
+Spares are spawned in the server's working directory. A creation from a client
+working in that same directory (the suite's case, and any script or shell that
+started the server from where it runs) is handed a shell that is already where
+a cold spawn would have put it, whose profile has already run there exactly as
+it would after a cold spawn. The claim now records the directory each spare was
+started in and only rehomes a spare that was started somewhere else. Over two
+sets of ten runs under the same load the fifth creation is 55 to 107 ms, and
+no creation of the hundred exceeds 107 ms. A creation asking for any other directory
+still rehomes, as before.
+
+### Nothing boots beside the first shell
+
+A fresh server starts the session's own shell and then has background shells
+to start: the two pool spares and the warm standby server, which brings its own
+shell and spare. They used to go out the moment the loop started, so a cold
+`new-session` booted four more pwsh processes while the user's shell was still
+booting.
+
+pwsh 7 does not tolerate that. With no psmux involved at all, one pwsh launched
+together with four others reached its first line of script about 200 ms later
+than alone (median boot 440 ms alone, 640 ms with four neighbours), and its own
+CPU time was the same either way (about 420 ms), so it was waiting, not
+computing. It is not the Store activation (launching the package's `pwsh.exe`
+directly behaves the same) and not the startup profile file (decoys with their
+own `LOCALAPPDATA` behave the same). Four Windows PowerShell 5.1 neighbours
+cost the same shell only about 30 ms. The machine has 32 logical processors.
+
+That is the whole of the old bimodal cold launch. Traced with
+`PSMUX_STARTUP_TRACE`, `PSMUX_SPAWN_TRACE` and `PSMUX_WARM_TRACE` over 24 cold
+reps, every step up to `srv.child.spawned` (about 327 ms, including the 185 ms
+first `CreateProcessW` of the Store pwsh) was identical in the fast and the slow
+mode; the 110 to 125 ms difference lay entirely between `CreateProcessW`
+returning and the shell's first script line. Turning the pool off, or the
+standby off, each removed the slow mode; turning both off removed the cost
+entirely.
+
+So the server now holds the pool refill and the standby spawn until the first
+pane's shell has started, by the same test a spare's readiness uses (it has
+written and then been quiet for 250 ms, or 1.5 s have passed). That first
+version held only the idle refill tick and cost the first window dearly; the
+next section has what the hold does now. Measured over 20 interleaved cold
+reps, `new-session` with a pwsh
+command, launch to the shell's first script line:
+
+| build  | fast mode           | slow mode           |
+|--------|---------------------|---------------------|
+| before | 739 to 759 ms (12)  | 854 to 921 ms (8)   |
+| after  | 663 to 709 ms (20)  | none                |
+
+With the default shell and the user's profile, launch to the prompt visible in
+`capture-pane` went from 989 to 1035 ms to 734 to 833 ms (14 interleaved reps
+each). The standby and the spares arrive about 600 ms later than before; a
+`new-window` three seconds after launch still claims a ready spare.
+
+### The first window after launch
+
+That first version moved the cost instead of removing it. A `new-window`
+right after the prompt (what agent team tooling does: it creates panes the
+moment `new-session` returns) arrived during the hold, found the pool empty
+and cold spawned. And the trace showed it worse than one shell: the server's
+own first window takes the early spare through the claim path, so the user's
+first `new-window` counted as the second claim of a burst and surged eight
+spares beside its cold spawn, plus the standby when the hold let go. Test 2
+of `tests/test_pane_startup_perf.ps1` went from a first window of 37 to 283
+ms to 1692 to 2066 ms.
+
+What one companion costs, measured the same way as above: one pwsh 7 beside
+the measured one adds ~70 ms, two add ~110 ms, four ~200 ms. A neighbour that
+starts later costs less: two started 150, 300 and 450 ms after the measured
+shell added ~90, ~50 and ~0 ms. Releasing the hold earlier than the prompt
+(at a fixed 150 or 250 ms into the boot) made the first window 200 to 490 ms
+but put 60 to 110 ms back on every launch, so it was not taken.
+
+What the hold does now:
+
+* It watches every pane that exists while it is on, not only the first, so a
+  window or split created during the hold cold spawns alone and the hold
+  waits for that shell too. Nothing is refilled during the hold, from the
+  tick or from a claim.
+* A shell counts as started at its first visible text (the prompt, or
+  whatever its profile prints first; ConPTY's own startup sequences draw
+  nothing), so the release no longer waits 250 ms of quiet after the prompt.
+  Written then quiet for 250 ms still counts, for a shell that draws nothing,
+  and 1.5 s after the last pane joined the hold lets go regardless.
+* On release the pool trickles: one spare booting at a time until one is
+  ready or somebody claims. The standby is spawned last, once the pool has
+  its spares or 2 s after the release; only the next `new-session` needs it.
+* The server's own first window no longer counts as a claim for the surge.
+
+Interleaved, test 2's sequence (detached session, prompt, then five
+`new-window` back to back, 15 ms prompt polling), first window over 8 reps:
+
+| build                    | first window         | the whole vector, one rep      |
+|--------------------------|----------------------|--------------------------------|
+| before the hold          | 37 to 283 ms         | 39, 32, 1374, 78, 36           |
+| first hold               | 1692 to 2066 ms      | 2020, 232, 40, 35, 34          |
+| this                     | 611 to 701 ms        | 613, 79, 25, 1351, 37          |
+
+The first window is now one shell booting alone, about what a bare pwsh with
+the profile costs here. The 1.2 to 1.7 s creation later in the sequence is the
+surge (two quick claims that both missed): it was the third creation before
+the hold and is the fourth now, and the suite's budget of two slow creations
+covers it. Cold launch keeps its single mode: 682 to 724 ms over 20 reps
+against 666 to 706 for the first hold and 744 to 938 (8 fast, 12 slow) before
+it; a second interleaved set put the first hold at 695 to 717 and this at 675
+to 718. `tests/test_perf_vs_terminals.ps1` T4b, whose first window is one
+shell booting alone right after the prompt (350 to 456 ms), came out 281.7,
+220.1, 280.8 and 247.3 ms against its 300 ms limit; with five samples the p90
+is 0.6 of that one creation, so the margin is that shell's boot.
 
 ### Teardown
 
@@ -7074,12 +7429,30 @@ A spawn line carries its own breakdown, which is how a serialised surge is told
 apart from a slow machine:
 
 ```
-pool: spawned spare pane=6 pid=Some(28164) in 99.9ms (pty 6.2ms, proc 93.2ms, console wait 0.0ms)
+pool: spawned spare pane=6 pid=Some(28164) in 99.9ms (pty 6.2ms, proc 93.2ms, console wait 0.0ms, in CreateProcessW 92.4ms)
 ```
 
-`pty` is the ConPTY allocation, `proc` is the `CreateProcessW`, and `console
-wait` is how long that spawn waited to get into the console state. A non zero
-console wait means something is holding it exclusively.
+`pty` is the ConPTY allocation, `proc` is the whole process spawn, `console
+wait` is how long that spawn waited to get into the console state, and `in
+CreateProcessW` is the part of `proc` spent inside the operating system's
+`CreateProcessW`. A non zero console wait means something is holding it
+exclusively. Spares that started together and differ only in `in
+CreateProcessW` were held up by Windows, not by psmux: the Store packaged pwsh
+is created through package activation, which returns concurrent creations in
+batches.
+
+A claim line describes the spare it took and every spare left behind as
+`id:age:state:data_version:quiet`, state being `Q` (started, its output went
+quiet), `B` (counted as started only by the 1500 ms backstop) or `W` (still
+starting), followed by the last line on the taken spare's screen. A `READY`
+line says which rule promoted the spare (`via=quiet` or `via=BACKSTOP`) and
+what its screen showed at that moment. `rehome:` lines show every claim that
+typed a `cd` into its shell.
+
+`PSMUX_SPAWN_TRACE=1` goes one level deeper and times every step of each
+spawn (job object, attribute list, console state, each `CreateProcessW`
+attempt, job assignment, resume) into `%TEMP%\psmux_spawn_trace.log`
+(override with `PSMUX_SPAWN_TRACE_FILE`).
 
 ## Disabling Warm Sessions
 
@@ -7633,12 +8006,21 @@ bind-key -n C-h if-shell -F "#{pane_at_left}" "send-keys C-h" "select-pane -L"
 
 ### Client variables
 
+Each of these describes one client: the row's client in `list-clients -F`, the client named by
+`display-message -c`, and otherwise the most recently active client of the session. With no
+client attached, the identity variables (`client_name`, `client_pid`, `client_readonly`,
+`client_flags`, `client_control_mode`) are empty, as in tmux.
+
 | Variable | Description |
 |----------|-------------|
+| `#{client_name}` / `#{client_tty}` | Name of the client, `/dev/pts/<pid>`. Unique across the `-L` namespace and kept when the client switches session |
+| `#{client_pid}` | PID of the attached client process (a TUI, `attach -r` or `-CC` client) |
+| `#{client_readonly}` | `1` for a client attached with `attach -r` (or `-f read-only`), else `0` |
+| `#{client_flags}` | tmux style flag list, for example `attached,read-only,UTF-8` (also `focused`, `control-mode`) |
+| `#{client_control_mode}` | `1` for a `-CC` control mode client |
 | `#{client_width}` / `#{client_height}` | Size of the client terminal |
 | `#{client_prefix}` | `1` if the prefix key was pressed |
 | `#{client_key_table}` | Key table the client is currently in, for example `root` |
-| `#{client_pid}` | PID of the client process |
 | `#{client_session}` / `#{client_last_session}` | Current and previous session of the client |
 | `#{client_activity}` / `#{client_created}` | Timestamps for the client |
 | `#{client_activity_string}` / `#{client_created_string}` | The same, already formatted |
@@ -7655,7 +8037,7 @@ bind-key -n C-h if-shell -F "#{pane_at_left}" "send-keys C-h" "select-pane -L"
 | `#{server_instance}` | Stable identity of the `-L` namespace. Constant while the namespace is up, whichever of its servers answers; changes only after a genuine restart. Empty for a namespace that has no server |
 | `#{version}` | psmux version, for example `3.3.7` |
 | `#{start_time}` | Server start time |
-| `#{socket_path}` | Path of the server's discovery files |
+| `#{socket_path}` | The server that answered: `<psmux dir>/default`, `<psmux dir>/<label>` under `-L`, or the `-S` path |
 | `#{history_size}` | Lines currently held in the pane's scrollback |
 | `#{alternate_on}` | `1` if the pane is on the alternate screen |
 | `#{mouse_any_flag}` | `1` if the pane has any mouse tracking mode on (DECSET 1000, 1002 or 1003) |
@@ -7703,9 +8085,6 @@ rather than live state. They exist for tmux format compatibility. Do not build l
 | `#{pane_start_path}` / `#{pane_tabs}` | empty |
 | `#{cursor_flag}` | `0` |
 | `#{scroll_region_upper}` | `0` |
-| `#{client_name}` / `#{client_tty}` | `client0` |
-| `#{client_control_mode}` | `0` |
-| `#{client_flags}` | `focused` |
 | `#{client_termfeatures}` | a fixed string |
 | `#{client_utf8}` | `1` |
 | `#{client_cell_width}` / `#{client_cell_height}` | a fixed value |
@@ -8487,6 +8866,7 @@ tmux), and `unbind-key -a -T copy-mode-vi` takes all of them.
 | `middle-line` | Move to the middle visible line |
 | `bottom-line` | Move to the bottom visible line |
 | `history-top` | Move to the top of the scrollback |
+| `goto-line <n>` | Move the view to line `n`, counted the way `copy-mode-line-numbers` counts |
 | `history-bottom` | Move to the live bottom of the scrollback |
 | `next-paragraph` | Move to the next blank line |
 | `previous-paragraph` | Move to the previous blank line |
@@ -8523,7 +8903,7 @@ tmux), and `unbind-key -a -T copy-mode-vi` takes all of them.
 |------|-------------|
 | `begin-selection` | Start a selection at the cursor |
 | `stop-selection` | Stop extending the selection without clearing it |
-| `clear-selection` | Discard the selection |
+| `clear-selection` | Discard the selection and stay in copy mode (Escape with `mode-keys vi`) |
 | `select-line` | Select the whole current line |
 | `select-word` | Select the word under the cursor |
 | `rectangle-toggle` | Toggle block (rectangular) selection |
@@ -8553,11 +8933,10 @@ viewport scrolls to bring an off screen match into view.
 | Name | Description |
 |------|-------------|
 | `cancel` | Leave copy mode |
-| `refresh-from-pane` | Toggle live refresh of the copy mode view from the running pane (psmux extension) |
-| `refresh-toggle` | Synonym of `refresh-from-pane` (psmux extension) |
+| `refresh-from-pane` | Copy the pane's current output into copy mode once, keeping the line at the top of the view (tmux 3.4 to 3.7c, bound to `r`). `refresh-now` is an accepted synonym |
+| `refresh-on` / `refresh-off` / `refresh-toggle` | Turn on, off or toggle automatic refresh: copy mode takes a new copy whenever the pane prints, following the output while the cursor is on the last row at the live bottom, and pausing during a selection (tmux after 3.7c) |
 
-`copy-line`, `refresh-from-pane` and `refresh-toggle` have no tmux equivalent. Everything else in
-these tables is named the same way it is in tmux.
+`copy-line` has no tmux equivalent. Everything else in these tables is named the same way it is in tmux.
 
 ## Session Groups
 
@@ -9744,6 +10123,27 @@ host on that build mangles them. Under it psmux also takes the cheaper pipe rout
 bracketed paste rather than the `WriteConsoleInputW` injection it uses on the inbox host below
 build 22523; `PSMUX_PASTE_INJECT=1` still forces injection if you need it.
 
+The inbox host also drops a cursor move made while the cursor is hidden, on Windows 11 26200 as
+well as on 19045 (#726). A program that draws its own caret hides the hardware cursor with
+`ESC[?25l` and still moves it onto the caret with CUP, because the outer terminal anchors IME
+composition (Korean, Japanese, Chinese) to that cursor whether it is shown or not. Claude Code and
+other Ink based CLIs work this way. The inbox host never paints a hidden cursor, so that final CUP
+never reaches the pseudoconsole output and psmux sees the cursor wherever the last drawn cell left
+it. psmux moves the outer terminal's hidden cursor to the pane's cursor on every frame, like tmux,
+but on the inbox host that is the wrong cell. Measured with a probe that writes
+`ESC[?25l ... ESC[5;6H` into a 100 by 29 pane:
+
+```
+                              inbox conhost      OpenConsole (from WezTerm)
+#{cursor_x},#{cursor_y}       0,28               5,4
+same probe without ESC[?25l   5,4                5,4
+```
+
+Under `PSMUX_CONPTY_DIR` the composition lands on the caret. One limit remains with either host:
+a pane resize makes the console host repaint its buffer, and a hidden cursor is not put back
+afterwards, so the position is only right again once the program redraws, which Ink based CLIs do
+on every resize.
+
 Measured on Windows 11 26200 with that package at 1.24.2607.10001, against the inbox host, three
 runs each:
 
@@ -9782,6 +10182,79 @@ console host that Windows Update does not patch for you.
 
 `PSMUX_NO_PASSTHROUGH=1` is independent of this and does not change either number.
 
+## Measuring the Terminal Around You
+
+The sections above are about what psmux tells you. This one is the other direction: what the
+terminal psmux is running in will tell psmux, which decides what psmux can promise.
+
+### `scripts\probe-terminal-cursor.ps1`
+
+```powershell
+.\scripts\probe-terminal-cursor.ps1 -Eye
+```
+
+Run it in the terminal you want to measure, not inside psmux or tmux. A multiplexer answers
+these queries itself, so the result would describe the multiplexer and not the terminal, and the
+script refuses to run when `TMUX` or `PSMUX_SESSION` is set. Either PowerShell will do.
+
+It asks five questions, one at a time, and reads the replies off the console input buffer:
+
+| Sent | What it asks |
+|---|---|
+| `ESC[>q` | XTVERSION, which terminal is this |
+| `ESC[?12$p` | DECRQM, is the cursor blinking |
+| `ESC[?25$p` | DECRQM, is the cursor visible. A control: every terminal implements mode 25, so a silent 12 beside a spoken 25 means 12 specifically is unsupported |
+| `ESC P$q SP q ESC\` | DECRQSS, what is the cursor style |
+| `ESC[c` | DA1, answered by almost everything, so a silence here means the queries are not getting through at all |
+
+With `-Eye` it then walks mode 12 both ways, a steady bar and the reset, and DECSCUSR 0 through
+8, asking you after each one what you see. That is the part no query can answer: whether what a
+terminal reports is what it draws. Nothing is left changed, whatever state the probe finds is
+written back before it returns. The last thing it prints is a Markdown block to paste into a
+reply on the terminal survey discussion, stamped with the time, the version of the script and
+the shell, so a result can be placed later.
+
+Why any of this matters to psmux. The shape goes out as DECSCUSR, and its reset, `ESC[0 q`,
+means the terminal's default rather than what the user had. The blink is worse: terminals have no
+setting for it, so it is only ever moved by a sequence, and DEC private mode 12 has two states
+and no default to go back to. So the only way to put either back exactly is to read it first,
+and not every terminal answers, which is what there is to measure.
+
+What each answer makes possible, with reading the cursor at attach and restoring only what psmux
+changed being issue #735:
+
+| The terminal | What is possible |
+|---|---|
+| answers DECRQM for mode 12 | the blink is put back exactly on exit |
+| does not | psmux can only undo its own write, by its opposite |
+| answers DECRQSS with a style | the shape is put back exactly on exit |
+| refuses, or says nothing | psmux falls back to `ESC[0 q`, which is where tmux stops |
+| draws mode 12, not just tracks it | `cursor-blink` works on its own |
+| tracks it without drawing it | the blink has to come from the shape, as in `cursor-style blinking-bar` |
+| draws neither | nothing psmux sends moves the blink, the terminal decides it |
+
+Three things measured this way are worth knowing before you read a report:
+
+A terminal can answer a query faithfully and ignore the mode the query describes. WezTerm reports
+mode 12 exactly as it was set and never uses it to decide whether to blink, while conhost, which
+refuses DECRQSS, does act on mode 12. The two halves come apart, so an answer tells you nothing
+about the behaviour.
+
+A report can also be frozen. The VS Code terminal answers DECRQSS with `2`, a steady block, and
+goes on answering `2` after a bar has been asked for and drawn. A restore built on that would
+write `ESC[2 q` on the way out and leave a block behind for someone who had configured an
+underline, which is worse than falling back to the terminal's own default.
+
+And a report can be true about every write and wrong about the state it was found in. Alacritty
+answered that mode 12 was set over a cursor that was not blinking, then tracked both writes
+faithfully afterwards. Reading the report back after a write does not catch that one, which is
+the argument for restoring only what was changed rather than asserting whatever was read.
+
+Eight terminals are measured in the terminal survey discussion, with the raw output of each run:
+Windows Terminal, conhost, Alacritty, WezTerm, mintty, the VS Code terminal, ConEmu and the
+JetBrains terminal. Every shape DECSCUSR names is drawn in all eight. What differs is whether the
+cursor can be read back, and which of the two ways of asking for a blink the terminal acts on.
+
 ## Always On Diagnostic Files
 
 These three are written without any variable being set. They exist because the failures they
@@ -9805,6 +10278,11 @@ leaving it buried, so in most cases you will see the real cause on screen. The f
 record. Only a log written during the current startup attempt is surfaced. An older one is treated
 as stale and ignored.
 
+Every server sharing the data directory appends to this one file, each report under a header
+`=== session <name> pid <pid> at epoch <seconds> ===`, so two servers that fail together keep both
+reports, and each client echoes the report of the server it started. When the file reaches 512 KB it
+is renamed to `server-startup.log.1` (replacing any older copy) and a fresh file is started.
+
 ### `~/.psmux/config-warnings.log`
 
 Non-fatal config parse problems, such as an unknown option name, a malformed value, or an unknown
@@ -9819,7 +10297,8 @@ This is the file to check first when a config line appears to have been silently
 
 Written by the server's panic handler: the panic message and a full backtrace. The handler also
 removes that session's `.port` and `.key` files, so a crashed server does not leave stale discovery
-files behind for the next client to trip over.
+files behind for the next client to trip over. Like the startup log it is appended to by every
+server in the data directory, one headed report per panic, and rotated to `crash.log.1` at 512 KB.
 
 If this file exists and its timestamp matches your problem, attach it. It is the single most useful
 artifact in a bug report.
@@ -9942,6 +10421,7 @@ them into a public issue.
 ## See Also
 
 - [configuration.md](configuration.md) for the supported options and user facing environment variables
+- [configuration.md](configuration.md) for `cursor-style` and `cursor-blink`, which the terminal probe is about
 - [warm-sessions.md](warm-sessions.md) for the `__warm__` server and how to disable it
 - [performance.md](performance.md) for what the latency numbers should look like
 - [faq.md](faq.md) for the common questions these logs usually answer
@@ -10684,7 +11164,7 @@ row per object. The full catalogue, including the human facing status bar variab
 | `#{version}` | `3.3.7` | psmux version, for capability gating |
 | `#{pid}` / `#{server_pid}` | `19004` | PID of the server process that answered. **Session-scoped**, see below |
 | `#{server_instance}` | `b644f0a347fa5e14` | Stable identity of the `-L` namespace. Poll this to detect a real restart |
-| `#{socket_path}` | `C:\Users\me/.psmux/default` | Server discovery path |
+| `#{socket_path}` | `C:\Users\me/.psmux/default` | The server that answered: `<psmux dir>/default`, `<psmux dir>/<label>` under `-L`, or the exact path given to `-S`. Passing it back to `-S` reaches the same server |
 | `#{host}` / `#{host_short}` / `#{user}` | `BOX` / `me` | Host and user identity |
 
 > **Supervising a namespace.** Unlike tmux, psmux runs one server process per
@@ -10778,15 +11258,14 @@ in a tool that keys on them. Do not build on these:
 `session_stack`, `window_bigger`, `window_offset_x`, `window_offset_y`, `window_stack_index`,
 `window_cell_width`, `window_cell_height`, `window_linked_sessions_list`, `pane_dead_signal`,
 `pane_dead_status`, `pane_dead_time`, `pane_start_path`, `pane_tabs`, `cursor_flag`,
-`scroll_region_upper`, `client_name`, `client_tty`, `client_control_mode`, `client_flags`,
-`client_termfeatures`, `client_utf8`, `client_cell_width`, `client_cell_height`,
+`scroll_region_upper`, `client_termfeatures`, `client_utf8`, `client_cell_width`, `client_cell_height`,
 `client_written`, `client_discarded`, `alternate_saved_x`, `alternate_saved_y`, `origin_flag`,
 `insert_flag`, `keypad_cursor_flag`, `keypad_flag`, `wrap_flag`, `line`, `command`,
 `command_list_name`, `command_list_alias`, `command_list_usage`, `config_files`.
 
-Note in particular that `#{client_control_mode}` is always `0`, even for a `-CC` client, and
-`#{client_name}` is always `client0`, so neither can be used to tell clients apart. The
-per-variable values are tabulated in
+To tell attached clients apart, use `list-clients -F '#{client_name} #{client_pid}
+#{client_readonly} #{client_flags}'` or `display-message -c <client> -p '...'`: those are live
+per client values. The per-variable placeholder values are tabulated in
 [scripting.md, "Accepted but not yet meaningful"](scripting.md#accepted-but-not-yet-meaningful).
 
 ## Named Paste Buffers
@@ -10895,7 +11374,7 @@ psmux sets these environment variables in child processes, matching tmux:
 
 | Variable | Example | Description |
 |----------|---------|-------------|
-| `TMUX` | `/tmp/psmux-58828/default,51961,0` | Indicates a tmux/psmux session is active. The shape is `/tmp/psmux-<server pid>/<socket name>,<port>,0`, so the middle field is the server's TCP port rather than a Unix pid |
+| `TMUX` | `/tmp/psmux-58828/default,51961,0` | Indicates a tmux/psmux session is active. The shape is `/tmp/psmux-<server pid>/<socket name>,<port>,0` (for a server started with `-S`, the first field is that exact path), so the middle field is the server's TCP port rather than a Unix pid. The first field passed to `-S` reaches the same server |
 | `TMUX_PANE` | `%1` | The pane ID of the current pane |
 | `PSMUX_SESSION` | `work` | The session the pane belongs to (psmux extension) |
 | `TERM` | `xterm-256color` | Terminal type |

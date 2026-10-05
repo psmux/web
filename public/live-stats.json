@@ -1,13 +1,13 @@
 {
-  "stars": 3587,
-  "forks": 218,
-  "contributors": 35,
+  "stars": 3613,
+  "forks": 222,
+  "contributors": 37,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1061
+      "contributions": 1214
     },
     {
       "login": "computersrmyfriends",
@@ -28,6 +28,12 @@
       "contributions": 25
     },
     {
+      "login": "tanaeakihiko",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
+      "url": "https://github.com/tanaeakihiko",
+      "contributions": 25
+    },
+    {
       "login": "marhel",
       "avatarUrl": "https://avatars.githubusercontent.com/u/2725205?v=4",
       "url": "https://github.com/marhel",
@@ -40,15 +46,15 @@
       "contributions": 15
     },
     {
-      "login": "tanaeakihiko",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
-      "url": "https://github.com/tanaeakihiko",
-      "contributions": 14
-    },
-    {
       "login": "krhougs",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
       "url": "https://github.com/krhougs",
+      "contributions": 13
+    },
+    {
+      "login": "tscodeplus",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
+      "url": "https://github.com/tscodeplus",
       "contributions": 13
     },
     {
@@ -58,25 +64,19 @@
       "contributions": 12
     },
     {
-      "login": "tscodeplus",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
-      "url": "https://github.com/tscodeplus",
-      "contributions": 11
-    },
-    {
       "login": "Gerrrt",
       "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
       "url": "https://github.com/Gerrrt",
       "contributions": 10
     },
     {
-      "login": "andrew-tawfeek",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
-      "url": "https://github.com/andrew-tawfeek",
+      "login": "acoliver",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
+      "url": "https://github.com/acoliver",
       "contributions": 9
     }
   ],
-  "issues": 51,
+  "issues": 43,
   "companiesRepresented": 478,
   "topCompanies": [
     {
@@ -991,19 +991,19 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 40,
+  "ecosystemRepos": 42,
   "ecosystemProjects": [
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 57,
+      "stars": 58,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 15,
+      "stars": 14,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -1050,13 +1050,6 @@
       "category": "claude-code"
     },
     {
-      "name": "psmux-claude-skill",
-      "author": "Oruga420",
-      "stars": 2,
-      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
-      "category": "claude-code"
-    },
-    {
       "name": "wt-psmux",
       "author": "tobiowo",
       "stars": 2,
@@ -1097,6 +1090,13 @@
       "stars": 1,
       "description": "Auto-rename psmux/tmux sessions to opencode conversation titles",
       "category": "tool"
+    },
+    {
+      "name": "psmux-claude-skill",
+      "author": "Oruga420",
+      "stars": 1,
+      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
+      "category": "claude-code"
     },
     {
       "name": "psmux-configuration",
@@ -1240,10 +1240,10 @@
         "#641",
         "#1594",
         "#842",
-        "#1538",
         "#525",
-        "#885",
+        "#1538",
         "#730",
+        "#885",
         "#647",
         "#1073",
         "#519",
@@ -1276,8 +1276,8 @@
       "repo": "vybestack/llxprt-jefe",
       "issues": [
         "#638",
-        "#592",
         "#253",
+        "#592",
         "#546",
         "#539",
         "#591",
@@ -1287,21 +1287,7 @@
         "#666",
         "#750"
       ],
-      "context": "[Windows] windows_native never runs against an unqualified psmux, so the refusal path is unproven end to end (E1 gap from #540)"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#92757",
-        "#89202",
-        "#89203",
-        "#81880",
-        "#24384",
-        "#83153",
-        "#91284",
-        "#88127"
-      ],
-      "context": "[BUG] teammatemode in-process in global .claude/settings.json is ignored in psmux session"
+      "context": "Support native Windows with psmux and feature parity"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
@@ -1309,23 +1295,47 @@
         "#730",
         "#729",
         "#754",
-        "#733",
         "#660",
+        "#733",
         "#673",
         "#731"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
     {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#89202",
+        "#92757",
+        "#89203",
+        "#24384",
+        "#83153",
+        "#91284",
+        "#88127"
+      ],
+      "context": "Agent Teams (tmux mode) forces pane-border-status on, overriding user config"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "issues": [
+        "#334",
+        "#137",
+        "#318",
+        "#360",
+        "#270",
+        "#139"
+      ],
+      "context": "Windows 이웃 기기의 psmux 별칭을 tmux 카드로 중복 표시"
+    },
+    {
       "repo": "lamngockhuong/termote",
       "issues": [
+        "#295",
         "#234",
-        "#259",
-        "#252",
-        "#235",
-        "#247"
+        "#237",
+        "#252"
       ],
-      "context": "[FEATURE] Support Zellij as a session backend"
+      "context": "Codex Chat view on Windows (psmux, Herdr)"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1336,24 +1346,6 @@
         "#15"
       ],
       "context": "Move orchestration and review outside psmux; require native Playwright design verification"
-    },
-    {
-      "repo": "Thurbeen/thurbox",
-      "issues": [
-        "#1170",
-        "#1242",
-        "#1168"
-      ],
-      "context": "Remote hook status is lost on a psmux (Windows) SSH host: pane user options are a no-op"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "issues": [
-        "#270",
-        "#137",
-        "#318"
-      ],
-      "context": "원격 psmux 호스트가 1.5초마다 무한 재부착"
     },
     {
       "repo": "JonathanRosado/duet-agents",
@@ -1372,6 +1364,15 @@
         "#62"
       ],
       "context": "opening an old agent session doesn't work."
+    },
+    {
+      "repo": "ARCJ137442/anymate-cc",
+      "issues": [
+        "#13",
+        "#23",
+        "#19"
+      ],
+      "context": "feat: cross-platform split-window support beyond tmux"
     }
   ],
   "dotfilesRepos": [],
@@ -1828,5 +1829,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-10-01T12:39:31Z"
+  "lastUpdated": "2026-10-05T13:54:54Z"
 }
