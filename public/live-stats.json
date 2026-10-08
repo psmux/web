@@ -7,7 +7,7 @@
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1269
+      "contributions": 1271
     },
     {
       "login": "computersrmyfriends",
@@ -58,12 +58,6 @@
       "contributions": 13
     },
     {
-      "login": "altrosyn",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/44962895?v=4",
-      "url": "https://github.com/altrosyn",
-      "contributions": 12
-    },
-    {
       "login": "Gerrrt",
       "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
       "url": "https://github.com/Gerrrt",
@@ -73,6 +67,12 @@
       "login": "andrew-tawfeek",
       "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
       "url": "https://github.com/andrew-tawfeek",
+      "contributions": 9
+    },
+    {
+      "login": "acoliver",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
+      "url": "https://github.com/acoliver",
       "contributions": 9
     }
   ],
@@ -995,7 +995,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 883,
+      "followers": 884,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -1049,7 +1049,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 45,
+  "ecosystemRepos": 32,
   "ecosystemProjects": [
     {
       "name": "termote",
@@ -1078,13 +1078,6 @@
       "stars": 3,
       "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
       "category": "claude-code"
-    },
-    {
-      "name": "my-tmux-settings",
-      "author": "wjgoarxiv",
-      "stars": 3,
-      "description": "Tokyonight Night-themed tmux config for Windows (psmux) and Mac/WSL2/Linux",
-      "category": "tool"
     },
     {
       "name": "psmux-agent-orchestrator",
@@ -1129,20 +1122,6 @@
       "category": "claude-code"
     },
     {
-      "name": "claude-code-config",
-      "author": "johnhnguyen97",
-      "stars": 1,
-      "description": "Complete Claude Code setup: 151 specialist agents, global rules, hooks, psmux/Windows Terminal integration, and data recovery project example",
-      "category": "claude-code"
-    },
-    {
-      "name": "dotfiles-Windows",
-      "author": "dotgibson",
-      "stars": 1,
-      "description": "🪟 The Windows host layer — PowerShell, Windows Terminal, scoop/winget, psmux (native tmux) & the WSL2 bridge. A first-class CLI on Windows.",
-      "category": "tool"
-    },
-    {
       "name": "opencode-psmux-rename",
       "author": "sterraMind",
       "stars": 1,
@@ -1155,13 +1134,6 @@
       "stars": 1,
       "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
       "category": "claude-code"
-    },
-    {
-      "name": "psmux-configuration",
-      "author": "phamhongphuc1403",
-      "stars": 1,
-      "description": "psmux-related project",
-      "category": "tool"
     },
     {
       "name": "tebis",
@@ -1178,53 +1150,11 @@
       "category": "tool"
     },
     {
-      "name": ".psmux.conf",
-      "author": "pieberrykinnie",
-      "stars": 0,
-      "description": "My psmux config",
-      "category": "tool"
-    },
-    {
-      "name": ".psmux.conf",
-      "author": "MKoushikYadav",
-      "stars": 0,
-      "description": "My  personal psmux config for windows. Integrates with claude and nvim. With handwritten Nord status bar",
-      "category": "claude-code"
-    },
-    {
       "name": "agent-team",
       "author": "stardino2lab",
       "stars": 0,
       "description": "Windows-native multi-agent orchestrator for Claude CLI and Codex CLI with psmux",
       "category": "claude-code"
-    },
-    {
-      "name": "dotfiles",
-      "author": "mikecubed",
-      "stars": 0,
-      "description": "Personal development environment configs: nvim, tmux, starship, psmux",
-      "category": "tool"
-    },
-    {
-      "name": "dotfiles",
-      "author": "dduyanhhoang",
-      "stars": 0,
-      "description": "My Windows setup: PowerShell profile, psmux, Windows Terminal, scoop apps",
-      "category": "tool"
-    },
-    {
-      "name": "dotfiles",
-      "author": "CtrlCarlitos",
-      "stars": 0,
-      "description": "Cross-platform dotfiles: zsh + PowerShell, chezmoi-managed multi-account git identities, tmux/psmux, AI tooling (Claude Code, OpenCode, agy) with Superpowers + guardrails, 3-OS GitHub Actions CI",
-      "category": "claude-code"
-    },
-    {
-      "name": "dotfiles",
-      "author": "luisgui1757",
-      "stars": 0,
-      "description": "Cross-platform Rose Pine terminal/editor setup for Apple Silicon macOS, Linux, WSL2, and Windows: Neovim, Herdr, tmux/psmux, Starship, Ghostty, WezTerm, Windows Terminal, AeroSpace, zsh/PowerShell, lazygit, and CLI tooling. Nix on POSIX; chezmoi configs everywhere.",
-      "category": "tool"
     },
     {
       "name": "flux",
@@ -1260,6 +1190,76 @@
       "stars": 0,
       "description": "Pi-interactive-subagents by amosblomqvist modified for psmux on windows",
       "category": "claude-code"
+    },
+    {
+      "name": "Poor-Mans-Bootleg-tmux",
+      "author": "NomadicSasquatch",
+      "stars": 0,
+      "description": "A funny workaround for the lack of tmux/psmux on a system",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-ai-resurrect",
+      "author": "crashbandicode",
+      "stars": 0,
+      "description": "Crash-safe psmux workspaces for Codex, Cursor Agent CLI, and Claude Code",
+      "category": "claude-code"
+    },
+    {
+      "name": "psmux-feedstock",
+      "author": "conda-forge",
+      "stars": 0,
+      "description": "A conda-smithy repository for psmux.",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-scrollback-oom-repro",
+      "author": "ColinKennedy",
+      "stars": 0,
+      "description": "Minimal reproduction + analysis: psmux scrollback stores every line as a full-width row, causing multi-GB server memory. Includes tmux comparison.",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-todo",
+      "author": "pyjhoop",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-win-build",
+      "author": "ghy020",
+      "stars": 0,
+      "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
+      "category": "tool"
+    },
+    {
+      "name": "psmux-wt-sync",
+      "author": "tobiowo",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
+      "name": "psmuxplus",
+      "author": "ZeroPointSix",
+      "stars": 0,
+      "description": "psmux fork with AI agent detection and optional status sidebar",
+      "category": "claude-code"
+    },
+    {
+      "name": "psx",
+      "author": "Fre0Grella",
+      "stars": 0,
+      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
+      "category": "tool"
+    },
+    {
+      "name": "tmux",
+      "author": "omiritz",
+      "stars": 0,
+      "description": "minhas configs para tmux / psmux",
+      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -1307,8 +1307,8 @@
         "#1073",
         "#519",
         "#628",
-        "#1205",
-        "#937"
+        "#937",
+        "#1205"
       ],
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
     },
@@ -1316,8 +1316,8 @@
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#730",
-        "#754",
         "#660",
+        "#754",
         "#733",
         "#861",
         "#863",
@@ -1326,6 +1326,21 @@
         "#731"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
+    },
+    {
+      "repo": "tellang/triflux",
+      "issues": [
+        "#567",
+        "#650",
+        "#649",
+        "#667",
+        "#648",
+        "#547",
+        "#549",
+        "#568",
+        "#551"
+      ],
+      "context": "규칙 문서와 설계 문서가 없는 파일과 퇴역 경로를 가리킨다"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1350,25 +1365,10 @@
         "#234",
         "#237",
         "#252",
-        "#357",
         "#356",
         "#355"
       ],
       "context": "Check pane process names on Windows (psmux)"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#567",
-        "#650",
-        "#649",
-        "#548",
-        "#648",
-        "#547",
-        "#549",
-        "#568"
-      ],
-      "context": "규칙 문서와 설계 문서가 없는 파일과 퇴역 경로를 가리킨다"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1820,6 +1820,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 52.4,
+      "lng": 4.9,
+      "label": "Netherlands",
+      "detail": "11 developers · roxlu, Senior Software Architect, WeAreInSpark",
+      "size": "lg",
+      "country": "Netherlands",
+      "continent": "Europe"
+    },
+    {
       "lat": 43.7,
       "lng": -79.4,
       "label": "Toronto",
@@ -1847,15 +1856,6 @@
       "country": "Greece",
       "continent": "Europe",
       "color": "#fbbf24"
-    },
-    {
-      "lat": 52.4,
-      "lng": 4.9,
-      "label": "Netherlands",
-      "detail": "10 developers · roxlu, Senior Software Architect, WeAreInSpark",
-      "size": "lg",
-      "country": "Netherlands",
-      "continent": "Europe"
     },
     {
       "lat": -34.6,
@@ -1984,5 +1984,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.8",
-  "lastUpdated": "2026-10-08T05:04:47Z"
+  "lastUpdated": "2026-10-08T07:45:01Z"
 }
