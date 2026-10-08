@@ -1,19 +1,25 @@
 {
-  "stars": 3613,
-  "forks": 222,
-  "contributors": 37,
+  "stars": 3625,
+  "forks": 223,
+  "contributors": 38,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1214
+      "contributions": 1269
     },
     {
       "login": "computersrmyfriends",
       "avatarUrl": "https://avatars.githubusercontent.com/u/323931?v=4",
       "url": "https://github.com/computersrmyfriends",
       "contributions": 165
+    },
+    {
+      "login": "tanaeakihiko",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
+      "url": "https://github.com/tanaeakihiko",
+      "contributions": 32
     },
     {
       "login": "tarikguney",
@@ -25,13 +31,7 @@
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 25
-    },
-    {
-      "login": "tanaeakihiko",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
-      "url": "https://github.com/tanaeakihiko",
-      "contributions": 25
+      "contributions": 26
     },
     {
       "login": "marhel",
@@ -70,9 +70,9 @@
       "contributions": 10
     },
     {
-      "login": "acoliver",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
-      "url": "https://github.com/acoliver",
+      "login": "andrew-tawfeek",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
+      "url": "https://github.com/andrew-tawfeek",
       "contributions": 9
     }
   ],
@@ -991,7 +991,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 42,
+  "ecosystemRepos": 45,
   "ecosystemProjects": [
     {
       "name": "termote",
@@ -1190,17 +1190,17 @@
       "category": "tool"
     },
     {
+      "name": "omo-psmux-bridge",
+      "author": "danielrepublic",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "pi-interactive-subagents-windows",
       "author": "LowOnContext",
       "stars": 0,
       "description": "Pi-interactive-subagents by amosblomqvist modified for psmux on windows",
-      "category": "claude-code"
-    },
-    {
-      "name": "psmux-ai-resurrect",
-      "author": "crashbandicode",
-      "stars": 0,
-      "description": "Crash-safe psmux workspaces for Codex, Cursor Agent CLI, and Claude Code",
       "category": "claude-code"
     }
   ],
@@ -1208,8 +1208,8 @@
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#4305",
         "#4564",
+        "#4305",
         "#2830",
         "#2062",
         "#4102",
@@ -1225,6 +1225,7 @@
         "#1584",
         "#3303",
         "#2339",
+        "#5612",
         "#4454",
         "#2422"
       ],
@@ -1267,8 +1268,7 @@
         "#534",
         "#516",
         "#518",
-        "#568",
-        "#571"
+        "#568"
       ],
       "context": "Reconcile conflicting Codex and psmux policy docs"
     },
@@ -1283,22 +1283,35 @@
         "#591",
         "#677",
         "#697",
-        "#670",
-        "#666",
-        "#750"
+        "#670"
       ],
       "context": "Support native Windows with psmux and feature parity"
+    },
+    {
+      "repo": "lamngockhuong/termote",
+      "issues": [
+        "#377",
+        "#295",
+        "#234",
+        "#237",
+        "#252",
+        "#357",
+        "#356",
+        "#355"
+      ],
+      "context": "Check pane process names on Windows (psmux)"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#730",
-        "#729",
         "#754",
         "#660",
         "#733",
+        "#861",
+        "#863",
         "#673",
-        "#731"
+        "#864"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
@@ -1318,24 +1331,13 @@
     {
       "repo": "zer0ken/xmux",
       "issues": [
-        "#334",
-        "#137",
+        "#773",
+        "#760",
+        "#139",
         "#318",
-        "#360",
-        "#270",
-        "#139"
+        "#360"
       ],
-      "context": "Windows 이웃 기기의 psmux 별칭을 tmux 카드로 중복 표시"
-    },
-    {
-      "repo": "lamngockhuong/termote",
-      "issues": [
-        "#295",
-        "#234",
-        "#237",
-        "#252"
-      ],
-      "context": "Codex Chat view on Windows (psmux, Herdr)"
+      "context": "Nav does not follow session moves inside a remote psmux client"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1375,8 +1377,105 @@
       "context": "feat: cross-platform split-window support beyond tmux"
     }
   ],
-  "dotfilesRepos": [],
-  "dotfilesReferences": 0,
+  "dotfilesRepos": [
+    {
+      "repo": "nathanielvarona/dotfiles",
+      "detail": ".psmux.ps1"
+    },
+    {
+      "repo": "mejares-jamesmichael/windows-dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "Suida/dot",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "daisukekobayashi/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "luisgui1757/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "nappa0326/claude-notification",
+      "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "maxrzaw/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "ChrisWithakay42/DotFiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "F4NT0/psmux-config",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "tomas-barros1/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "anhdngo/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "SrBlackVoid/dotfiles",
+      "detail": "dot_psmux.conf"
+    },
+    {
+      "repo": "Graham42/windows-dot-files",
+      "detail": "setup-psmux.ps1"
+    },
+    {
+      "repo": "ptquang2000/.dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "capypara20/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "mikecubed/dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "david-risney/PwshProfile",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "vchirikov/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "Ikkjo/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "pieberrykinnie/.psmux.conf",
+      "detail": ".psmux.conf"
+    },
+    {
+      "repo": "LizardLiang/configs",
+      "detail": "psmux.conf"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "Edemilorhea/dotfile",
+      "detail": "SUMMARY.md"
+    },
+    {
+      "repo": "sgruendel/dotfiles",
+      "detail": "install_tools.ps1"
+    }
+  ],
+  "dotfilesReferences": 24,
   "latestVersion": "3.3.8",
   "mapPoints": [
     {
@@ -1829,5 +1928,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-10-05T13:54:54Z"
+  "lastUpdated": "2026-10-08T02:42:39Z"
 }

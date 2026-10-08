@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-10-05 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-10-08 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -4170,8 +4170,9 @@ Opened by `/`, `?`, `Ctrl+s` or `Ctrl+r`. While it is open the copy mode keys ar
 | `Enter` | Accept the search and jump to the match |
 | `Esc` / `Ctrl+c` / `Ctrl+g` | Cancel the search |
 
-These are the keys of tmux's prompt editor that apply here. The cursor position is not drawn on the
-status line yet. `Ctrl+b` and `Ctrl+f` also move the cursor, but `Ctrl+b` is the default prefix, which
+These are the keys of tmux's prompt editor that apply here. The cursor is drawn on the status line
+where it sits, and the prompt scrolls when the search term is longer than the line, so the cursor
+stays on screen. `Ctrl+b` and `Ctrl+f` also move the cursor, but `Ctrl+b` is the default prefix, which
 the client takes first. The goto line prompt takes the same editing keys.
 
 ### Copy Mode Goto Line Prompt
@@ -5112,6 +5113,8 @@ A command with no `-t` reaches the session with the most recent activity, the sa
 ### UTF-8 and CJK Support
 
 Multi-byte UTF-8 characters (box-drawing, emoji, CJK text) render correctly in panes. Pasting CJK text no longer crashes the session. Japanese and Korean IME input is handled with minimal latency (the paste-detection heuristic was tuned to avoid misidentifying rapid IME bursts).
+
+Emoji clusters take the columns tmux gives them (#749). A ZWJ sequence such as a family, an emoji with a skin tone modifier, a flag spelled with two regional indicators, and a character followed by the variation selector U+FE0F each occupy one cell two columns wide, so `U+1F468 ZWJ U+1F469 ZWJ U+1F467 ZWJ U+1F466` moves the cursor two columns, not eight. The rules are tmux's `utf8_should_combine` (utf8-combined.c) and `screen_write_combine` (screen-write.c), including tmux's 32 byte limit on one cell, and command prompts count columns with the same rule. Windows Terminal, VS Code, JetBrains, WezTerm, Alacritty, ConEmu and conhost draw these sequences as one glyph too; mintty is the known outlier and draws the parts separately.
 
 ### Window-scoped Options
 
@@ -7129,7 +7132,10 @@ slow. Depth is the cure, because the spare handed to creation N+1 has then had
 the whole of creation N to finish booting.
 
 ```
-# default: keep two spare shells ready
+# default: keep three spare shells ready
+set -g warm-pool-size 3
+
+# the old default, one idle shell less
 set -g warm-pool-size 2
 
 # a machine with memory to spare and bursty window creation
@@ -7140,10 +7146,34 @@ set -g warm-pool-size 0
 ```
 
 The value is clamped to 8. Each spare is a real shell process, so the cost is
-linear: measured on Windows 11 with pwsh, one unit of depth costs one process
-and about 94 MB of working set, and an idle server plus its spares burns under
+linear: measured on Windows 11 with pwsh, one unit of depth costs one shell
+plus its console host and about 100 MB of working set, and an idle server plus its spares burns under
 0.1% of a 32 core machine. `PSMUX_WARM_POOL_SIZE` sets the boot time value for a
 single run without touching the config.
+
+### Why the default is three
+
+The default was two until 2026-10-08. Two serves a creation now and then, and
+it stalls the moment somebody opens a few windows in quick succession after
+launching psmux. Measured with `tests/probe_pool_depth_cold_launch.ps1` on the
+same build, depth set by `PSMUX_WARM_POOL_SIZE`, six runs per depth: a cold
+`new-session`, 2 s for the user to see the prompt, then five `new-window` 300 ms
+apart, each timed until its prompt is visible (p50 / max in ms):
+
+| depth | cold launch | 1st | 2nd | 3rd       | 4th       | 5th | idle tree         |
+|-------|-------------|-----|-----|-----------|-----------|-----|-------------------|
+| 2     | 833 / 932   | 3/7 | 3/4 | 173 / 535 | 791 / 918 | 3/4 | 559 MB, 14 procs  |
+| 3     | 834 / 850   | 3/3 | 3/3 | 3 / 4     | 3 / 3     | 3/3 | 662 MB, 16 procs  |
+| 4     | 847 / 858   | 3/4 | 3/3 | 3 / 3     | 3 / 3     | 3/3 | 764 MB, 18 procs  |
+
+The idle tree is the server, the standby server and every descendant (shells
+and their console hosts) 14 s after launch. With a full second between
+creations even depth two keeps up (every creation 3 to 7 ms), and with no gap
+at all no depth is enough for every creation (see the bursts below). Three is
+the least memory that removes the stall at a human pace, and cold launch did
+not move. The standby server still waits for two ready spares, not three, before
+it spawns after the boot hold (`STANDBY_OWED_READY` in `src/server/mod.rs`), so
+the default behaves exactly like `PSMUX_WARM_POOL_SIZE=3` did on the old build.
 
 Refills run on a background thread, so a burst of creations never waits on a
 `CreateProcess` and the server loop is never stalled by one.
@@ -7389,6 +7419,35 @@ to 718. `tests/test_perf_vs_terminals.ps1` T4b, whose first window is one
 shell booting alone right after the prompt (350 to 456 ms), came out 281.7,
 220.1, 280.8 and 247.3 ms against its 300 ms limit; with five samples the p90
 is 0.6 of that one creation, so the margin is that shell's boot.
+
+### Creations right after launch: two trickle variants tried and dropped
+
+A deeper pool does nothing for a `new-window` issued the moment pane one shows
+its prompt: the pool is still empty behind the boot hold, the claim takes the
+one trickled spare, and its refill starts the whole `warm-pool-size` beside it
+(at depth 8 that first window took 1.6 to 1.7 s; at depth 3 five windows each
+issued the moment the last showed its prompt came out p50 [788, 91, 2, 2,
+1648] ms with the fifth up to 2 s). Two ways of keeping the trickle on past
+that claim were measured on 2026-10-08, interleaved, depth 3, eight runs:
+
+* Keep the trickle after a claim that found nothing ready (a ready claim still
+  ends it). The first window went from about 790 to 510 ms, but the stall moved
+  to the third: [528, 90, 1622, 2, 3] and up to 2.2 s.
+* Keep the trickle while creations keep coming (one shell booting at a time
+  until claims stop for 1.5 s). Back to back windows became [500, 95, 500,
+  100, 505] with nothing over 546 ms, and eight issued at once right after the
+  prompt came up in 1.65 to 1.73 s instead of 3.5 to 4.5 s. It failed
+  `tests/test_pane_startup_perf.ps1` three runs of three (new-window median
+  over creations two to five 345 ms against 300; the splits after it
+  [34, 527, 282, 531] against a budget of one slow), which passed three of
+  three without it, and `tests/test_issue661_warm_pool_depth_holds.ps1` once in
+  three, because the pool never fills while creations keep coming.
+
+Both only move the shell starting around, as the experiments in "The third
+quick creation at depth two" found: the total is fixed by how many creations
+follow, and a run issued faster than a shell boots pays for it somewhere. The
+pace a person creates windows at (see "Why the default is three") never meets
+the trickle at all.
 
 ### Teardown
 
@@ -10254,6 +10313,56 @@ Eight terminals are measured in the terminal survey discussion, with the raw out
 Windows Terminal, conhost, Alacritty, WezTerm, mintty, the VS Code terminal, ConEmu and the
 JetBrains terminal. Every shape DECSCUSR names is drawn in all eight. What differs is whether the
 cursor can be read back, and which of the two ways of asking for a blink the terminal acts on.
+
+### `scripts\probe-emoji-width.ps1`
+
+```powershell
+.\scripts\probe-emoji-width.ps1
+```
+
+How many columns the terminal gives an emoji sequence. Run it in the terminal you want measured,
+not inside psmux or tmux, and not through a pipe: it needs a console whose cursor it can read.
+Either PowerShell will do.
+
+It writes ten sequences one at a time with `WriteConsoleW`, which is the call psmux writes with,
+reads the console's own cursor before and after, and erases each line it used. The difference is
+the number of columns the host gave that sequence. Nothing is taken from a width table.
+
+| Sequence | What it separates |
+|---|---|
+| `U+0041`, `U+3042` | ASCII and a wide character, the control |
+| `U+2764` and `U+2764 U+FE0F` | whether a variation selector makes a text presentation character wide |
+| `U+1F44D` | an emoji that is wide on its own |
+| `U+1F44D U+1F3FD` | a skin tone modifier |
+| `U+1F1EF U+1F1F5` | a regional indicator pair |
+| `U+1F3F3 U+FE0F ZWJ U+1F308`, and a four person family | sequences joined with a zero width joiner |
+
+The run ends with a block that draws each sequence followed by a bar at the column the console
+counted. A glyph that reaches past its own bar was drawn wider than it was counted, and a gap
+before the bar is the opposite, so a screenshot of that block carries what the table cannot.
+
+### `scripts\probe-pane-emoji-shift.ps1`
+
+```powershell
+pwsh -NoProfile -File .\scripts\probe-pane-emoji-shift.ps1
+```
+
+Where a pane's text actually lands. This one runs INSIDE a psmux pane. It prints a ruler, then a
+line per sequence holding the sequence and a `>>` marker, and asks psmux through
+`display-message -p '#{cursor_x}'` where it believes the cursor is. If the marker sits left of
+the column psmux names, the terminal drew the sequence narrower than psmux counted it and the gap
+is the error; if the text after it is overwritten, the terminal drew it wider. Three CJK
+characters on the first line are the control, six columns everywhere measured so far.
+
+The two probes answer different questions and do not always agree inside one terminal. The first
+measures what the console counts for a raw write; this one measures what the screen does once
+psmux has drawn its grid. A terminal whose console counts eleven columns for a joined sequence
+can still draw it as one glyph, and what a user sees is the second.
+
+It forces the output encoding to UTF-8 before writing, and reads each line back with
+`capture-pane` to check the characters arrived. Without the first, .NET turns anything the console
+code page cannot hold into a question mark, one per UTF-16 code unit, and the numbers that come
+back look plausible; the first run of this script measured a row of question marks.
 
 ## Always On Diagnostic Files
 
