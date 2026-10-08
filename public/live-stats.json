@@ -1313,6 +1313,22 @@
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
     },
     {
+      "repo": "vybestack/llxprt-jefe",
+      "issues": [
+        "#638",
+        "#253",
+        "#592",
+        "#546",
+        "#539",
+        "#591",
+        "#677",
+        "#697",
+        "#670",
+        "#666"
+      ],
+      "context": "Support native Windows with psmux and feature parity"
+    },
+    {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#730",
@@ -1326,36 +1342,6 @@
         "#731"
       ],
       "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
-    },
-    {
-      "repo": "tellang/triflux",
-      "issues": [
-        "#567",
-        "#650",
-        "#649",
-        "#667",
-        "#648",
-        "#547",
-        "#549",
-        "#568",
-        "#551"
-      ],
-      "context": "규칙 문서와 설계 문서가 없는 파일과 퇴역 경로를 가리킨다"
-    },
-    {
-      "repo": "vybestack/llxprt-jefe",
-      "issues": [
-        "#638",
-        "#253",
-        "#592",
-        "#546",
-        "#539",
-        "#591",
-        "#677",
-        "#697",
-        "#670"
-      ],
-      "context": "Support native Windows with psmux and feature parity"
     },
     {
       "repo": "lamngockhuong/termote",
@@ -1390,7 +1376,8 @@
         "#760",
         "#139",
         "#318",
-        "#360"
+        "#360",
+        "#320"
       ],
       "context": "Nav does not follow session moves inside a remote psmux client"
     },
@@ -1430,6 +1417,15 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
+    },
+    {
+      "repo": "TLOBillyQ/uml-viewer",
+      "issues": [
+        "#8",
+        "#6",
+        "#1"
+      ],
+      "context": "修复原生 Windows recovery:respawn 后 psmux #{pane_pid} 为空导致 harness 失败"
     }
   ],
   "dotfilesRepos": [
@@ -1984,5 +1980,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.8",
-  "lastUpdated": "2026-10-08T07:45:01Z"
+  "lastUpdated": "2026-10-08T08:31:22Z"
 }
