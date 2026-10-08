@@ -159,7 +159,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/live-stats.json public/docs.json public/sitemap.xml public/llms.txt public/llms-full.txt
+          git add public/live-stats.json public/stats-card.svg public/docs.json public/sitemap.xml public/llms.txt public/llms-full.txt
           if git diff --staged --quiet; then
             echo "No changes to commit"
             echo "changed=false" >> "$GITHUB_OUTPUT"
@@ -188,7 +188,7 @@ jobs:
           if [ -z "${CLOUDFLARE_API_TOKEN:-}" ]; then
             echo "::warning::CLOUDFLARE_API_TOKEN secret is not set; skipping Pages deploy."
             echo "Add the secret with:"
-            echo "  gh secret set CLOUDFLARE_API_TOKEN --repo psmux/psmux-website --body '<token>'"
+            echo "  gh secret set CLOUDFLARE_API_TOKEN --repo psmux/web --body '<token>'"
             exit 0
           fi
           npx wrangler@4 pages deploy dist \
