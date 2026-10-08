@@ -1,5 +1,5 @@
 {
-  "stars": 3626,
+  "stars": 3627,
   "forks": 223,
   "contributors": 38,
   "topContributors": [
@@ -77,7 +77,7 @@
     }
   ],
   "issues": 43,
-  "companiesRepresented": 583,
+  "companiesRepresented": 584,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -128,12 +128,6 @@
       "name": "Samsung Electronics",
       "count": 2,
       "logoUrl": "https://www.google.com/s2/favicons?domain=samsungelectronics.com&sz=128"
-    },
-    {
-      "name": "Alibaba",
-      "count": 2,
-      "logo": "alibaba",
-      "logoUrl": "https://cdn.simpleicons.org/alibaba/ffffff"
     },
     {
       "name": "Bytedance",
@@ -538,6 +532,11 @@
     {
       "name": "Wiener lab.",
       "count": 1
+    },
+    {
+      "name": "AIlater",
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=ailater.com&sz=128"
     }
   ],
   "universities": 84,
@@ -900,7 +899,7 @@
     },
     {
       "month": "2026-10",
-      "total": 3626
+      "total": 3627
     }
   ],
   "notableUsers": [
@@ -923,7 +922,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4771,
+      "followers": 4770,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -979,7 +978,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 971,
+      "followers": 972,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -1270,8 +1269,8 @@
         "#4305",
         "#2830",
         "#2062",
-        "#4102",
         "#2696",
+        "#4102",
         "#2619",
         "#1055",
         "#3588",
@@ -1352,7 +1351,7 @@
         "#237",
         "#252",
         "#356",
-        "#355"
+        "#395"
       ],
       "context": "Check pane process names on Windows (psmux)"
     },
@@ -1980,5 +1979,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.8",
-  "lastUpdated": "2026-10-08T08:31:22Z"
+  "lastUpdated": "2026-10-08T13:02:10Z"
 }
