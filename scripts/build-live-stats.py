@@ -348,6 +348,19 @@ UNRELATED_REPO = re.compile(r"gb\s?28181|mpeg|\brtp\b|rtsp|h\.?26[45]|\bts\s?mux
 BLOCKED_OWNERS = {"nileshfating"}
 BLOCKED_REPOS = {"nileshfating/psmux"}
 
+# Accounts that are never shown anywhere on the site (contributors, notable
+# users, ecosystem, mentions, dotfiles). Keep in sync with HIDDEN_USERS in
+# src/hooks/useLiveStats.ts.
+HIDDEN_USERS = {"altrosyn"}
+
+# Personal dotfiles and config repos belong in the dotfiles section, never in
+# the ecosystem project list. Keep in sync with DOTFILE_REPO in
+# src/hooks/useLiveStats.ts.
+DOTFILE_REPO = re.compile(
+    r"^\.|dotfile|\.conf$|(^|[-_.])(config|configs|configuration|settings|setup)([-_.]|$)",
+    re.I,
+)
+
 def categorize_repo(name: str, owner: str, description: str) -> str:
     text = f"{name} {description or ''}".lower()
     if "claude" in text or "agent" in text:
@@ -372,6 +385,7 @@ def main() -> int:
     repo = json.loads(Path(args.repo_json).read_text())
     contributors = json.loads(Path(args.contributors).read_text())
     stargazers = json.loads(Path(args.stargazers).read_text())
+    stargazers = [s for s in stargazers if (s.get("login") or "").lower() not in HIDDEN_USERS]
     ecosystem = json.loads(Path(args.ecosystem).read_text())
     issues_raw = json.loads(Path(args.issue_mentions).read_text())
     code_raw = json.loads(Path(args.code_mentions).read_text())
@@ -387,6 +401,8 @@ def main() -> int:
     for c in contributors:
         login = c.get("login") or ""
         if not login or login.endswith("[bot]") or c.get("type") == "Bot":
+            continue
+        if login.lower() in HIDDEN_USERS:
             continue
         top_contribs.append({
             "login": login,
@@ -537,6 +553,7 @@ def main() -> int:
 
     # ---- Ecosystem repos ----
     eco = []
+    dotfile_eco: list[dict] = []
     for r in ecosystem:
         full = r.get("fullName") or r.get("nameWithOwner") or ""
         if "/" not in full:
@@ -548,8 +565,12 @@ def main() -> int:
             owner.lower() in BLOCKED_OWNERS
             or full.lower() in BLOCKED_REPOS
             or name.lower() == "psmux"
+            or owner.lower() in HIDDEN_USERS
         ):
             continue  # impersonators never get listed
+        if DOTFILE_REPO.search(name):
+            dotfile_eco.append({"repo": full, "detail": "psmux config"})
+            continue  # personal configs go to the dotfiles section
         text = name.lower() + " " + (r.get("description") or "").lower()
         if "psmux" not in text:
             continue
@@ -580,7 +601,7 @@ def main() -> int:
         # Filter: repo must not be psmux's own, nor a blocked impersonator
         if repo_full.lower().startswith("psmux/"):
             continue
-        if repo_full.lower().split("/")[0] in BLOCKED_OWNERS or repo_full.lower() in BLOCKED_REPOS:
+        if repo_full.lower().split("/")[0] in BLOCKED_OWNERS | HIDDEN_USERS or repo_full.lower() in BLOCKED_REPOS:
             continue
         number = it.get("number")
         if not number:
@@ -608,6 +629,8 @@ def main() -> int:
             continue
         if repo_full.lower().startswith("psmux/"):
             continue
+        if repo_full.lower().split("/")[0] in BLOCKED_OWNERS | HIDDEN_USERS:
+            continue
         path = hit.get("path", "")
         # Heuristic: looks like a dotfiles/setup file
         lower = path.lower()
@@ -617,6 +640,8 @@ def main() -> int:
                 continue
         if repo_full not in df_seen:
             df_seen[repo_full] = {"repo": repo_full, "detail": path.split("/")[-1] or path}
+    for d in dotfile_eco:
+        df_seen.setdefault(d["repo"], d)
     dotfiles = list(df_seen.values())[:24]
     out["dotfilesRepos"] = dotfiles
     out["dotfilesReferences"] = len(dotfiles)

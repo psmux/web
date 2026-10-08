@@ -13,6 +13,17 @@ import {
   type MapPoint,
 } from "../data";
 
+// Accounts never shown anywhere on the site. Keep in sync with HIDDEN_USERS
+// in scripts/build-live-stats.py.
+const HIDDEN_USERS = new Set(["altrosyn"]);
+const visibleUser = (login?: string) =>
+  !HIDDEN_USERS.has((login ?? "").toLowerCase());
+const visibleRepo = (full?: string) => visibleUser((full ?? "").split("/")[0]);
+// Personal dotfiles and config repos are not ecosystem projects. Keep in
+// sync with DOTFILE_REPO in scripts/build-live-stats.py.
+const DOTFILE_REPO =
+  /^\.|dotfile|\.conf$|(^|[-_.])(config|configs|configuration|settings|setup)([-_.]|$)/i;
+
 export type LiveCompany = { name: string; count: number; logo?: string; logoUrl?: string };
 export type LiveUniversity = { name: string; domain?: string };
 export type LiveNotableUser = {
@@ -158,7 +169,7 @@ const SEED: Pick<
     name: u.name,
     domain: u.domain,
   })),
-  notableUsers: staticNotableUsers.map((u) => ({
+  notableUsers: staticNotableUsers.filter((u) => visibleUser(u.login)).map((u) => ({
     login: u.login,
     name: u.name,
     followers: u.followers,
@@ -167,7 +178,9 @@ const SEED: Pick<
     highlight: u.highlight,
     quote: u.quote,
   })),
-  ecosystemProjects: staticEcosystem.map((e) => ({
+  ecosystemProjects: staticEcosystem
+    .filter((e) => visibleUser(e.author) && !DOTFILE_REPO.test(e.name))
+    .map((e) => ({
     name: e.name,
     author: e.author,
     stars: e.stars,
@@ -179,9 +192,13 @@ const SEED: Pick<
     issues: [...m.issues],
     context: m.context,
   })),
-  dotfilesRepos: staticDotfiles.map((d) => ({ repo: d.repo, detail: d.detail })),
+  dotfilesRepos: staticDotfiles
+    .filter((d) => visibleRepo(d.repo))
+    .map((d) => ({ repo: d.repo, detail: d.detail })),
   mapPoints: staticMapPoints.map((p) => ({ ...p })),
-  topContributors: staticContributors.map((c) => ({ ...c })),
+  topContributors: staticContributors
+    .filter((c) => visibleUser(c.login))
+    .map((c) => ({ ...c })),
 };
 
 export function useLiveStats(): LiveStats {
@@ -300,7 +317,9 @@ export function useLiveStats(): LiveStats {
           merged.topUniversities = data.topUniversities;
         }
         if (Array.isArray(data.notableUsers) && data.notableUsers.length > 0) {
-          merged.notableUsers = data.notableUsers;
+          merged.notableUsers = (data.notableUsers as LiveNotableUser[]).filter(
+            (u) => visibleUser(u.login)
+          );
         }
         if (
           Array.isArray(data.ecosystemProjects) &&
@@ -322,6 +341,8 @@ export function useLiveStats(): LiveStats {
             (p) =>
               p.author?.toLowerCase() !== "psmux" &&
               !blockedOwners.has(p.author?.toLowerCase() ?? "") &&
+              visibleUser(p.author) &&
+              !DOTFILE_REPO.test(p.name ?? "") &&
               p.name?.toLowerCase() !== "psmux" &&
               !unrelated.test(`${p.name} ${p.description ?? ""}`)
           );
@@ -334,13 +355,17 @@ export function useLiveStats(): LiveStats {
           Array.isArray(data.crossRepoMentions) &&
           data.crossRepoMentions.length > 0
         ) {
-          merged.crossRepoMentions = data.crossRepoMentions;
+          merged.crossRepoMentions = (
+            data.crossRepoMentions as LiveCrossRepoMention[]
+          ).filter((m) => visibleRepo(m.repo));
         }
         if (
           Array.isArray(data.dotfilesRepos) &&
           data.dotfilesRepos.length > 0
         ) {
-          merged.dotfilesRepos = data.dotfilesRepos;
+          merged.dotfilesRepos = (data.dotfilesRepos as LiveDotfilesRepo[]).filter(
+            (d) => visibleRepo(d.repo)
+          );
         }
         if (Array.isArray(data.mapPoints) && data.mapPoints.length > 0) {
           merged.mapPoints = data.mapPoints;
@@ -349,7 +374,9 @@ export function useLiveStats(): LiveStats {
           Array.isArray(data.topContributors) &&
           data.topContributors.length > 0
         ) {
-          merged.topContributors = data.topContributors;
+          merged.topContributors = (
+            data.topContributors as LiveContributor[]
+          ).filter((c) => visibleUser(c.login));
         }
         if (typeof data.lastUpdated === "string") {
           merged.lastUpdated = data.lastUpdated;
