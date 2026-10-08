@@ -1,5 +1,5 @@
 {
-  "stars": 3625,
+  "stars": 3626,
   "forks": 223,
   "contributors": 38,
   "topContributors": [
@@ -1255,19 +1255,31 @@
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
     },
     {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#730",
+        "#754",
+        "#660",
+        "#733",
+        "#861",
+        "#863",
+        "#673",
+        "#864",
+        "#731"
+      ],
+      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
+    },
+    {
       "repo": "tellang/triflux",
       "issues": [
         "#551",
-        "#565",
-        "#567",
         "#466",
+        "#567",
         "#561",
         "#547",
         "#548",
         "#549",
-        "#534",
         "#516",
-        "#518",
         "#568"
       ],
       "context": "Reconcile conflicting Codex and psmux policy docs"
@@ -1300,20 +1312,6 @@
         "#355"
       ],
       "context": "Check pane process names on Windows (psmux)"
-    },
-    {
-      "repo": "bmad-code-org/bmad-loop",
-      "issues": [
-        "#730",
-        "#754",
-        "#660",
-        "#733",
-        "#861",
-        "#863",
-        "#673",
-        "#864"
-      ],
-      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1439,6 +1437,10 @@
       "detail": "psmux.conf"
     },
     {
+      "repo": "dotgibson/dotfiles-Windows",
+      "detail": "psmux.conf"
+    },
+    {
       "repo": "mikecubed/dotfiles",
       "detail": "psmux.conf"
     },
@@ -1469,10 +1471,6 @@
     {
       "repo": "Edemilorhea/dotfile",
       "detail": "SUMMARY.md"
-    },
-    {
-      "repo": "sgruendel/dotfiles",
-      "detail": "install_tools.ps1"
     }
   ],
   "dotfilesReferences": 24,
@@ -1928,5 +1926,5 @@
   "cities": 74,
   "countries": 47,
   "continents": 6,
-  "lastUpdated": "2026-10-08T02:42:39Z"
+  "lastUpdated": "2026-10-08T04:51:57Z"
 }
