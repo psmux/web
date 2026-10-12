@@ -1,13 +1,13 @@
 {
-  "stars": 3627,
-  "forks": 223,
-  "contributors": 38,
+  "stars": 3652,
+  "forks": 229,
+  "contributors": 39,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1271
+      "contributions": 1345
     },
     {
       "login": "computersrmyfriends",
@@ -19,7 +19,7 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 32
+      "contributions": 36
     },
     {
       "login": "tarikguney",
@@ -77,7 +77,7 @@
     }
   ],
   "issues": 43,
-  "companiesRepresented": 584,
+  "companiesRepresented": 587,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -376,8 +376,7 @@
     },
     {
       "name": "Buguard",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=buguard.com&sz=128"
+      "count": 1
     },
     {
       "name": "SD Com",
@@ -875,7 +874,7 @@
     },
     {
       "month": "2026-04",
-      "total": 1582
+      "total": 1583
     },
     {
       "month": "2026-05",
@@ -883,23 +882,23 @@
     },
     {
       "month": "2026-06",
-      "total": 2716
+      "total": 2714
     },
     {
       "month": "2026-07",
-      "total": 3096
+      "total": 3094
     },
     {
       "month": "2026-08",
-      "total": 3378
+      "total": 3376
     },
     {
       "month": "2026-09",
-      "total": 3578
+      "total": 3576
     },
     {
       "month": "2026-10",
-      "total": 3627
+      "total": 3652
     }
   ],
   "notableUsers": [
@@ -914,7 +913,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5405,
+      "followers": 5404,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -922,7 +921,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4770,
+      "followers": 4781,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -930,7 +929,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2184,
+      "followers": 2185,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -938,7 +937,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2128,
+      "followers": 2130,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -946,7 +945,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1902,
+      "followers": 1903,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -954,7 +953,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1576,
+      "followers": 1577,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -978,7 +977,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 972,
+      "followers": 969,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -986,7 +985,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 896,
+      "followers": 894,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -994,7 +993,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 884,
+      "followers": 882,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -1002,7 +1001,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 822,
+      "followers": 823,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1010,7 +1009,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 754,
+      "followers": 756,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -1018,7 +1017,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 738,
+      "followers": 737,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1026,7 +1025,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 732,
+      "followers": 734,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1034,7 +1033,7 @@
     {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 732,
+      "followers": 733,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
@@ -1042,18 +1041,18 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 728,
+      "followers": 729,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 32,
+  "ecosystemRepos": 34,
   "ecosystemProjects": [
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 58,
+      "stars": 60,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1156,6 +1155,13 @@
       "category": "claude-code"
     },
     {
+      "name": "flathub-deskvnc",
+      "author": "deepaash",
+      "stars": 0,
+      "description": "Community-maintained Flatpak build manifest for DeskVNC, the native VNC, RDP and SSH client from psmux.",
+      "category": "tool"
+    },
+    {
       "name": "flux",
       "author": "reddley",
       "stars": 0,
@@ -1252,27 +1258,24 @@
       "stars": 0,
       "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
       "category": "tool"
-    },
-    {
-      "name": "tmux",
-      "author": "omiritz",
-      "stars": 0,
-      "description": "minhas configs para tmux / psmux",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
+        "#6327",
+        "#6040",
+        "#2062",
         "#4564",
         "#4305",
         "#2830",
-        "#2062",
         "#2696",
         "#4102",
         "#2619",
         "#1055",
+        "#6266",
+        "#6181",
         "#3588",
         "#102",
         "#4417",
@@ -1282,11 +1285,13 @@
         "#1584",
         "#3303",
         "#2339",
+        "#5898",
         "#5612",
+        "#5878",
         "#4454",
         "#2422"
       ],
-      "context": "agent-worktrees: mux wheel-event passthrough uses send-keys -M, unsupported by the in-use psmux version"
+      "context": "worktree-manager: suppress console windows for recurring PSMux children of pythonw daemons"
     },
     {
       "repo": "takushio2525/tako",
@@ -1312,6 +1317,23 @@
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
     },
     {
+      "repo": "lamngockhuong/termote",
+      "issues": [
+        "#234",
+        "#468",
+        "#410",
+        "#237",
+        "#452",
+        "#252",
+        "#408",
+        "#356",
+        "#377",
+        "#295",
+        "#395"
+      ],
+      "context": "psmux: Chat view messages fail, paste-buffer -b finds no buffer"
+    },
+    {
       "repo": "vybestack/llxprt-jefe",
       "issues": [
         "#638",
@@ -1330,30 +1352,15 @@
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
-        "#730",
+        "#879",
         "#660",
         "#754",
         "#733",
-        "#861",
-        "#863",
         "#673",
-        "#864",
-        "#731"
+        "#877",
+        "#730"
       ],
-      "context": "psmux: decide whether bmad-loop should support `PSMUX_BARE_ENV`"
-    },
-    {
-      "repo": "lamngockhuong/termote",
-      "issues": [
-        "#377",
-        "#295",
-        "#234",
-        "#237",
-        "#252",
-        "#356",
-        "#395"
-      ],
-      "context": "Check pane process names on Windows (psmux)"
+      "context": "retire the trailer's pinned psmux path once psmux releases the psmux#773 fix; the case-folding session key stays"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1362,23 +1369,10 @@
         "#92757",
         "#89203",
         "#24384",
-        "#83153",
         "#91284",
         "#88127"
       ],
       "context": "Agent Teams (tmux mode) forces pane-border-status on, overriding user config"
-    },
-    {
-      "repo": "zer0ken/xmux",
-      "issues": [
-        "#773",
-        "#760",
-        "#139",
-        "#318",
-        "#360",
-        "#320"
-      ],
-      "context": "Nav does not follow session moves inside a remote psmux client"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1389,6 +1383,25 @@
         "#15"
       ],
       "context": "Move orchestration and review outside psmux; require native Playwright design verification"
+    },
+    {
+      "repo": "zer0ken/xmux",
+      "issues": [
+        "#773",
+        "#760",
+        "#139",
+        "#318"
+      ],
+      "context": "Nav does not follow session moves inside a remote psmux client"
+    },
+    {
+      "repo": "dotgibson/dotfiles-Windows",
+      "issues": [
+        "#287",
+        "#286",
+        "#283"
+      ],
+      "context": "Get-InitCache: a contended Set-Content escapes its try/catch, so two shells starting together print 'cannot access the file ... mise-shims.ps1'"
     },
     {
       "repo": "JonathanRosado/duet-agents",
@@ -1402,11 +1415,11 @@
     {
       "repo": "savoy9/tackle",
       "issues": [
-        "#88",
         "#12",
+        "#88",
         "#62"
       ],
-      "context": "opening an old agent session doesn't work."
+      "context": "Tackle: VS Code Extension for Task-Scoped Workspace Management"
     },
     {
       "repo": "ARCJ137442/anymate-cc",
@@ -1416,15 +1429,6 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
-    },
-    {
-      "repo": "TLOBillyQ/uml-viewer",
-      "issues": [
-        "#8",
-        "#6",
-        "#1"
-      ],
-      "context": "修复原生 Windows recovery:respawn 后 psmux #{pane_pid} 为空导致 harness 失败"
     }
   ],
   "dotfilesRepos": [
@@ -1531,7 +1535,7 @@
       "lat": 36.4,
       "lng": 127.0,
       "label": "South Korea",
-      "detail": "86 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
+      "detail": "87 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
       "size": "lg",
       "country": "South Korea",
       "continent": "Asia",
@@ -1550,7 +1554,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "66 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "67 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1625,7 +1629,7 @@
       "lat": -14.2,
       "lng": -51.9,
       "label": "Brazil",
-      "detail": "27 developers · Averin, Software Engineer, Personal",
+      "detail": "28 developers · Averin, Software Engineer, Personal",
       "size": "lg",
       "country": "Brazil",
       "continent": "South America"
@@ -1634,7 +1638,7 @@
       "lat": -6.2,
       "lng": 106.8,
       "label": "Indonesia",
-      "detail": "25 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
+      "detail": "26 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
       "size": "lg",
       "country": "Indonesia",
       "continent": "Asia"
@@ -1652,7 +1656,7 @@
       "lat": 25.0,
       "lng": 121.6,
       "label": "Taipei",
-      "detail": "23 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "detail": "24 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
       "size": "lg",
       "country": "Taiwan",
       "continent": "Asia"
@@ -1714,6 +1718,16 @@
       "continent": "North America"
     },
     {
+      "lat": 40.7,
+      "lng": -74.0,
+      "label": "New York",
+      "detail": "14 developers · Gentrace, NomosArtificial, Microsoft",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
       "lat": 30.3,
       "lng": 120.2,
       "label": "Hangzhou",
@@ -1731,16 +1745,6 @@
       "size": "lg",
       "country": "Czechia",
       "continent": "Europe"
-    },
-    {
-      "lat": 40.7,
-      "lng": -74.0,
-      "label": "New York",
-      "detail": "13 developers · Gentrace, NomosArtificial, Microsoft",
-      "size": "lg",
-      "country": "United States",
-      "continent": "North America",
-      "color": "#60a5fa"
     },
     {
       "lat": 30.6,
@@ -1777,15 +1781,6 @@
       "size": "lg",
       "country": "Brazil",
       "continent": "South America"
-    },
-    {
-      "lat": 21.0,
-      "lng": 105.9,
-      "label": "Vietnam",
-      "detail": "12 developers · Anphabe JSC, tencat-dev @ncscvietnam @oasm-platform, Full Stack .NET",
-      "size": "lg",
-      "country": "Vietnam",
-      "continent": "Asia"
     },
     {
       "lat": 40.4,
@@ -1853,6 +1848,15 @@
       "color": "#fbbf24"
     },
     {
+      "lat": 21.0,
+      "lng": 105.9,
+      "label": "Vietnam",
+      "detail": "11 developers · Anphabe JSC, Full Stack .NET, KMS Technology",
+      "size": "lg",
+      "country": "Vietnam",
+      "continent": "Asia"
+    },
+    {
       "lat": -34.6,
       "lng": -58.4,
       "label": "Argentina",
@@ -1860,6 +1864,16 @@
       "size": "lg",
       "country": "Argentina",
       "continent": "South America"
+    },
+    {
+      "lat": 13.0,
+      "lng": 77.6,
+      "label": "Bangalore",
+      "detail": "10 developers · apache @aws @opensearch-project, Microsoft, EPAM Systems",
+      "size": "lg",
+      "country": "India",
+      "continent": "Asia",
+      "color": "#60a5fa"
     },
     {
       "lat": 47.1,
@@ -1889,16 +1903,6 @@
       "continent": "Asia"
     },
     {
-      "lat": 13.0,
-      "lng": 77.6,
-      "label": "Bangalore",
-      "detail": "9 developers · apache @aws @opensearch-project, Microsoft, EPAM Systems",
-      "size": "md",
-      "country": "India",
-      "continent": "Asia",
-      "color": "#60a5fa"
-    },
-    {
       "lat": 55.7,
       "lng": 12.6,
       "label": "Copenhagen",
@@ -1907,6 +1911,15 @@
       "country": "Denmark",
       "continent": "Europe",
       "color": "#60a5fa"
+    },
+    {
+      "lat": 53.3,
+      "lng": -6.3,
+      "label": "Ireland",
+      "detail": "8 developers · http://ibm.github.io/, Personal Account, Dev @Teicsoft",
+      "size": "md",
+      "country": "Ireland",
+      "continent": "Europe"
     },
     {
       "lat": 1.4,
@@ -1957,15 +1970,6 @@
       "color": "#60a5fa"
     },
     {
-      "lat": 53.3,
-      "lng": -6.3,
-      "label": "Ireland",
-      "detail": "7 developers · http://ibm.github.io/, Personal Account, Dev @Teicsoft",
-      "size": "md",
-      "country": "Ireland",
-      "continent": "Europe"
-    },
-    {
       "lat": 13.8,
       "lng": 100.5,
       "label": "Bangkok",
@@ -1979,5 +1983,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.3.8",
-  "lastUpdated": "2026-10-08T13:02:10Z"
+  "lastUpdated": "2026-10-12T14:45:36Z"
 }

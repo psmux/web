@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-10-08 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-10-12 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -2398,12 +2398,12 @@ Details worth knowing:
 | `allow-set-title` | Bool | `off` | Allow programs to set pane title via OSC 0/2 escape sequences (see [pane-titles.md](pane-titles.md)) |
 | `allow-predictions` | Bool | `off` | Preserve PSReadLine prediction settings (see below) |
 | `default-terminal` | Str | | Terminal type string (sets `TERM` env var in panes) |
-| `update-environment` | Str | *(tmux defaults)* | Space-separated list of env vars to refresh on client attach |
+| `update-environment` | Str | *(tmux defaults)* | Space-separated glob patterns; at new-session and on every attach each matching variable of the client's environment is copied into the session environment, and a pattern nothing matches is recorded as a `-NAME` removal (tmux environ_update) |
 | `warm` | Bool | `on` | Pre-spawn shells for instant window/pane creation (see [warm-sessions.md](warm-sessions.md)) |
 | `copy-command` | Str | | Shell command for clipboard pipe |
 | `codepoint-widths` | Str | | Comma separated overrides for how many columns Unicode codepoints occupy (see [Codepoint widths](#codepoint-widths)) |
 | `terminal-overrides` | Str | | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen (see [Terminal overrides](#terminal-overrides)) |
-| `set-clipboard` | Str | `on` | Clipboard interaction (`on`/`off`/`external`) |
+| `set-clipboard` | Str | `external` | Clipboard interaction (`on`/`off`/`external`). A copy mode yank reaches the Windows clipboard on every value, with OSC 52 to the outer terminal unless `off`. An application's own OSC 52 creates a paste buffer only on `on`, as in tmux; on `external` psmux still forwards it to the outer terminal and the Windows clipboard, where tmux ignores it; `off` ignores it |
 | `main-pane-width` | Int | `0` | Main pane width in main-vertical layout |
 | `main-pane-height` | Int | `0` | Main pane height in main-horizontal layout |
 | `session-group` | Str | | Name of the session group this session joins. `none` or an empty value clears it. See [Session Groups](#session-groups) |
@@ -3102,7 +3102,7 @@ Notes:
 - Only the first matching branch runs. Once one has, later `%elif` and `%else` branches are skipped.
 - `%hidden` assignments inside a skipped branch are not applied.
 - The two ways to read a `%hidden` variable are not interchangeable. `$NAME` and `${NAME}` are substituted only on ordinary config lines, so they do **not** work inside a `%if` condition. Use the format form `#{NAME}` there, which resolves through the same session environment.
-- `%hidden` writes into the session environment, so the name is also visible to `show-environment` and is inherited by new panes. It is not a private compile-time constant.
+- `%hidden` writes a hidden entry into the global environment, as tmux does: it is usable as `$NAME` and `#{NAME}`, it is listed only by `show-environment -gh`, and it is never passed to new panes.
 
 ## Accepted but Not Functional
 
@@ -3208,10 +3208,17 @@ psmux set-environment MY_VAR value
 # Unset an env var
 psmux set-environment -gu MY_VAR
 
-# Show all environment variables
+# Keep a variable OUT of new panes, even one the server inherited
+psmux set-environment -r MY_VAR
+
+# Show the session environment, the global one, or one variable
 psmux show-environment
 psmux show-environment -g
+psmux show-environment MY_VAR      # MY_VAR=value, -MY_VAR, or "unknown variable: MY_VAR" (exit 1)
+psmux show-environment -s          # shell syntax: NAME="value"; export NAME;
 ```
+
+As in tmux there are two scopes. The global environment (`-g`) is the server's start environment (the environment of the shell that started the session) plus anything set with `-g`; the session environment holds what was set without `-g`, and `new-session -e`. A new pane gets the global environment with the session one laid over it, without names removed by `-r` or marked hidden with `-h`. Because psmux runs one server per session, "global" means global to that session's server, so `set-environment -g` affects the session it is sent to rather than every session.
 
 Environment variables set this way are injected at the process level when new panes spawn, so they are completely invisible (no commands echoed in the shell).
 
@@ -3810,13 +3817,18 @@ so muscle memory carries over.
 | `Enter` | Switch to the selected entry (or to the jump buffer index if non-empty) |
 | `f` | Enter session-name filter mode (choose-session only) |
 | `p` | Toggle live preview |
-| `x` | Kill the highlighted entry (session in choose-session, window in choose-tree) |
-| `Esc` | Clear an active session filter; otherwise close the chooser |
+| `x` | Kill the highlighted entry (session in choose-session, window in choose-tree), with confirmation |
+| `Esc` | Answer a pending kill question with no; otherwise clear an active session filter; otherwise close the chooser |
 
 In the session picker, `f` starts filter mode, which matches session names
 case-insensitively as you type. `Backspace` edits the filter. `Esc` with filter
 text entered clears the filter and shows every session again; `Esc` with no
 filter text closes the picker.
+
+`x` puts up a `y/n` question before it kills, as `Prefix + x` and
+`Prefix + &` do, and as tmux's chooser does. Only `y` kills; every other key
+cancels, including `Enter`, which inside a chooser is the key that activates a
+row. The chooser stays open behind the question either way.
 
 `q` does **not** close these two choosers. Every printable key other than the ones above is
 swallowed so it cannot leak into the focused pane, and `q` falls into that group. Use `Esc`.
@@ -4995,6 +5007,17 @@ Multiple commands can be chained with `;` on a single line, matching tmux behavi
 bind-key M-s split-window -h \; select-pane -L
 ```
 
+From the command line, a `;` or `\;` given as its own argument separates commands the same way. The commands run in order; the first command that fails (including an unknown command) ends the list, and its error is printed with exit status 1:
+
+```powershell
+psmux select-pane -t work ';' set-option -t work @ready yes
+psmux new-session -d -s dev ';' split-window -h ';' select-layout even-horizontal
+```
+
+Commands that stay on the session the first command was routed to go to its server over one connection. A command that names another session (or a `%N`, `@N` or `$N` id, whose owner the CLI looks up), and commands that work on the client or across every session (`list-sessions`, `kill-server`, `has-session`, `kill-session`, `run-shell`, `if-shell`, `switch-client`, `detach-client`), run as their own invocation, exactly as they do alone. After `new-session`, the rest of the list runs on the session it created, before the client attaches. `bind-key`, `set-hook`, `confirm-before`, `command-prompt`, `display-menu`, `start-server` and `attach-session` still take the whole line as their own arguments.
+
+Unlike tmux, which parses the whole list before running any of it, commands before an unknown command have already run when it is reported.
+
 ### Run Shell Output
 
 `run-shell` now displays output in the status bar, matching tmux behavior. Background mode with `-b` runs fire and forget.
@@ -5052,7 +5075,7 @@ The `-F` flag on `bind-key` now properly expands format variables, enabling plug
 
 ### Set Environment
 
-`set-environment` and `show-environment` are fully functional. Environment variables set with `set-environment -g` are inherited by all new panes at the process level (no shell commands echoed). The `new-session -e VAR=val` flag also sets session environment correctly.
+`set-environment` and `show-environment` follow tmux: `-g` global vs session scope, `-u`, `-r` removal markers (`-NAME`), `-h` hidden entries, `-F`, `show-environment NAME` with `unknown variable: NAME` at exit 1, and `-s` shell output. The global environment is the session server's start environment, since psmux runs one server per session. Variables are inherited by new panes at the process level (no shell commands echoed). The `new-session -e VAR=val` flag also sets session environment correctly.
 
 ### Unbind All Keys
 
@@ -5097,6 +5120,10 @@ The `#{window_zoomed_flag}` format variable is correctly maintained during zoom/
 ### Title-only `select-pane`
 
 `select-pane -T` and `select-pane -P` set the pane title or style without moving the active window or pane, matching tmux (#592). Only a direction flag or `-l` changes focus.
+
+### Pane Input Off (`select-pane -d` / `-e`)
+
+`select-pane -d` stops input from reaching a pane's program and `select-pane -e` lets it through again, tmux's `PANE_INPUTOFF`; `#{pane_input_off}` reports which. Neither selects the pane. While input is off, typed keys, `send-keys` in every form, `paste-buffer` and forwarded mouse events are dropped and `synchronize-panes` leaves the pane out, while copy mode, `send-keys -X` and psmux's answers to the program's terminal queries keep working. The flag survives `respawn-pane`. See [tmux_args_reference.md](tmux_args_reference.md) for the details. Earlier releases accepted both flags and ignored them.
 
 ### Bare Command Routing
 
@@ -5609,16 +5636,18 @@ A psmux extension that creates a pane floating above the tiled layout.
 - Value: `-B` (border style), `-T` (title), `-c` (start directory), `-x` (width), `-y` (height), `-X` (column position), `-Y` (row position)
 
 **select-pane** (`selectp`)
-- Boolean: `-U`, `-D`, `-L`, `-R` (directional), `-l` (last pane), `-Z` (keep the zoom while navigating), `-m` (mark), `-M` (unmark), `-e` (enable input), `-d` (disable input)
+- Boolean: `-U`, `-D`, `-L`, `-R` (directional), `-l` (last pane), `-Z` (keep the zoom while navigating), `-m` (mark), `-M` (unmark), `-e` (enable input), `-d` (disable input; see below)
 - Value: `-T` (set and lock the pane title), `-P` (pane style), `-t` (target pane)
 - `-T` and `-P` without a direction flag are attribute only (#592): `select-pane -t %7 -T logs` titles pane `%7` and leaves the active window and pane exactly where they were, as tmux does. Combine with `-U`/`-D`/`-L`/`-R`/`-l` if you also want to move.
 - `-t` also accepts positional targets: `{top}`, `{bottom}`, `{left}`, `{right}`, `{top-left}`, `{top-right}`, `{bottom-left}`, `{bottom-right}`
 - A `-t` naming a pane in ANOTHER window sets that window's active pane and leaves the session's current window alone, which is what tmux does: cmd-select-pane.c:274 calls `window_set_active_pane` on the target window and the file never calls `session_select`. Before #693 psmux switched to the target window as a side effect, so `select-pane -t sess:1.0` moved the user off their window. Use `select-window` to change windows. A bare `%id` in another window follows the same rule.
 - `-l` (and `last-pane`) takes the window's last pane, falls back to the sibling when the window has exactly two panes and neither was ever visited, and otherwise fails with `no last pane` at exit 1, which is cmd-select-pane.c:165-177. Before #693 it exited 0 in silence for both of the last two.
+- `-d` disables and `-e` re-enables input to the target pane (tmux's `PANE_INPUTOFF`), and `#{pane_input_off}` reports it. Neither selects the pane: `select-pane -d -t %7` leaves the active window and pane, zoom, the last pane and `after-select-pane` alone, as in tmux. While input is off, nothing reaches the pane's program: keys typed by attached clients, every `send-keys` form (named keys, `-l`, `-H`), `send-prefix`, `paste-buffer` (which still deletes the buffer with `-d`, and is not an error) and mouse events forwarded to the program are dropped, and `synchronize-panes` leaves the pane out (a key typed INTO an input-off pane reaches none of its synchronized siblings either, as in tmux's `window_pane_key`). Copy mode and its prompts, `send-keys -X`, and psmux's own replies to the program's terminal queries still work. The flag belongs to the pane and survives `respawn-pane`. `-e` wins when both are given; with `-l` they apply to the last pane. Combined with a direction (`-U`/`-D`/`-L`/`-R`) or a relative `:.+`/`:.-` target, psmux still navigates and ignores `-e`/`-d`, where tmux would toggle the neighbour without selecting it. Flags cluster as in tmux (`select-pane -dt %7`), and a `source-file` line runs the toggle. Before this, `-d`/`-e` were parsed and ignored, and their `-t` selected the pane.
 - Not accepted: `-g`
 
 **last-pane** (`lastp`)
-- No flags. Same operation, and the same `no last pane` at exit 1, as `select-pane -l`.
+- Same operation, and the same `no last pane` at exit 1, as `select-pane -l`.
+- `-d` / `-e` disable and enable the last pane's input without selecting it, as `select-pane -l -d` / `-e` (tmux runs last-pane through the same code); `-e` wins when both are given, and `-t` names the window. Before this, both flags were dropped and `last-pane -d` selected the last pane.
 
 **kill-pane** (`killp`)
 - Value: `-t` (target pane, via the global `-t` handler)
@@ -7571,10 +7600,19 @@ that later claims them. psmux carries the parts that matter across the claim:
 What does not carry over: `-e VAR=value` on `new-session`, `new-window` or `split-window` cannot
 reach a shell that already has its environment, so a spawn with `-e` skips the warm pool and starts
 cold. For the same reason the standby's first shell, the one you land in, keeps the environment it
-was born with: a running process's environment block cannot be edited from outside. Its `PATH` is
-read from the registry when the shell is spawned rather than inherited, so installed tools stay
-resolvable there; a variable you exported in your own shell reaches the panes you open next, not
-that first one. tmux behaves the same way, for the same reason.
+was born with: a running process's environment block cannot be edited from outside. The one
+exception is `PATH`: when your shell's `PATH` differs from the standby's, the claim respawns that
+first shell (it is one nobody has typed into yet) so a dev build or portable tool you put first on
+`PATH` is found there too ([#773](https://github.com/psmux/psmux/issues/773)). That respawn makes
+the claim cost about what a cold start does; a claim from a shell with the same `PATH` as the
+standby, the common case, stays instant. Any other variable you exported in your own shell reaches
+the panes you open next, not that first one. tmux behaves the same way, for the same reason.
+
+Every pane inherits the environment of the server, which is the environment of the shell you
+started psmux from, like tmux. The registry environment (`HKLM\...\Session Manager\Environment`
+and `HKCU\Environment`) only fills variables that environment does not have at all; before
+[#773](https://github.com/psmux/psmux/issues/773) it replaced them, so your shell's `PATH`, `TEMP`,
+`GOPATH` and the like were swapped for the registry values in every pane.
 
 ## One Warm Server per Registry
 
