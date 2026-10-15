@@ -1,13 +1,13 @@
 {
-  "stars": 3652,
-  "forks": 229,
-  "contributors": 39,
+  "stars": 3669,
+  "forks": 234,
+  "contributors": 41,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1345
+      "contributions": 1446
     },
     {
       "login": "computersrmyfriends",
@@ -19,19 +19,19 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 36
+      "contributions": 41
+    },
+    {
+      "login": "MattKotsenas",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
+      "url": "https://github.com/MattKotsenas",
+      "contributions": 28
     },
     {
       "login": "tarikguney",
       "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
       "url": "https://github.com/tarikguney",
       "contributions": 27
-    },
-    {
-      "login": "MattKotsenas",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
-      "url": "https://github.com/MattKotsenas",
-      "contributions": 26
     },
     {
       "login": "marhel",
@@ -64,20 +64,20 @@
       "contributions": 10
     },
     {
-      "login": "andrew-tawfeek",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
-      "url": "https://github.com/andrew-tawfeek",
-      "contributions": 9
-    },
-    {
       "login": "acoliver",
       "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
       "url": "https://github.com/acoliver",
       "contributions": 9
+    },
+    {
+      "login": "andrew-tawfeek",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/81664969?v=4",
+      "url": "https://github.com/andrew-tawfeek",
+      "contributions": 9
     }
   ],
-  "issues": 43,
-  "companiesRepresented": 587,
+  "issues": 47,
+  "companiesRepresented": 594,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -538,7 +538,7 @@
       "logoUrl": "https://www.google.com/s2/favicons?domain=ailater.com&sz=128"
     }
   ],
-  "universities": 84,
+  "universities": 83,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -719,10 +719,6 @@
       "domain": "kari.re.kr"
     },
     {
-      "name": "Sejong University",
-      "domain": "sejong.ac.kr"
-    },
-    {
       "name": "University of Emergency Management"
     },
     {
@@ -866,46 +862,46 @@
     },
     {
       "month": "2026-02",
-      "total": 244
+      "total": 243
     },
     {
       "month": "2026-03",
-      "total": 830
+      "total": 828
     },
     {
       "month": "2026-04",
-      "total": 1583
+      "total": 1582
     },
     {
       "month": "2026-05",
-      "total": 2271
+      "total": 2270
     },
     {
       "month": "2026-06",
-      "total": 2714
+      "total": 2713
     },
     {
       "month": "2026-07",
-      "total": 3094
+      "total": 3093
     },
     {
       "month": "2026-08",
-      "total": 3376
+      "total": 3375
     },
     {
       "month": "2026-09",
-      "total": 3576
+      "total": 3575
     },
     {
       "month": "2026-10",
-      "total": 3652
+      "total": 3669
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9867,
+      "followers": 9866,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -913,7 +909,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5404,
+      "followers": 5403,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -921,7 +917,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4781,
+      "followers": 4789,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -937,7 +933,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2130,
+      "followers": 2131,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -953,7 +949,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1577,
+      "followers": 1579,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -969,7 +965,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1312,
+      "followers": 1313,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -977,7 +973,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 969,
+      "followers": 970,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -985,7 +981,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 894,
+      "followers": 897,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -993,7 +989,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 882,
+      "followers": 886,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -1001,7 +997,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 823,
+      "followers": 825,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1015,25 +1011,25 @@
       "highlight": false
     },
     {
-      "login": "yuiseki",
-      "name": "yuiseki",
-      "followers": 737,
-      "title": "Product manager & Software engineer",
-      "company": "Geolonia",
-      "highlight": false
-    },
-    {
       "login": "dualface",
       "name": "dualface",
-      "followers": 734,
+      "followers": 742,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
     },
     {
+      "login": "yuiseki",
+      "name": "yuiseki",
+      "followers": 739,
+      "title": "Product manager & Software engineer",
+      "company": "Geolonia",
+      "highlight": false
+    },
+    {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 733,
+      "followers": 732,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
@@ -1052,14 +1048,14 @@
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 60,
+      "stars": 62,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
     {
       "name": "claude-psmux-team",
       "author": "gonnector",
-      "stars": 14,
+      "stars": 15,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
       "category": "claude-code"
     },
@@ -1099,6 +1095,13 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-claude-skill",
+      "author": "Oruga420",
+      "stars": 2,
+      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
+      "category": "claude-code"
+    },
+    {
       "name": "wt-psmux",
       "author": "tobiowo",
       "stars": 2,
@@ -1125,13 +1128,6 @@
       "stars": 1,
       "description": "Auto-rename psmux/tmux sessions to opencode conversation titles",
       "category": "tool"
-    },
-    {
-      "name": "psmux-claude-skill",
-      "author": "Oruga420",
-      "stars": 1,
-      "description": "Slash command to toggle psmux + Agent Teams in Claude Code",
-      "category": "claude-code"
     },
     {
       "name": "tebis",
@@ -1272,8 +1268,9 @@
         "#2830",
         "#2696",
         "#4102",
-        "#2619",
         "#1055",
+        "#2619",
+        "#6274",
         "#6266",
         "#6181",
         "#3588",
@@ -1286,12 +1283,33 @@
         "#3303",
         "#2339",
         "#5898",
-        "#5612",
-        "#5878",
-        "#4454",
-        "#2422"
+        "#5612"
       ],
       "context": "worktree-manager: suppress console windows for recurring PSMux children of pythonw daemons"
+    },
+    {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#914",
+        "#921",
+        "#948",
+        "#919",
+        "#949",
+        "#952",
+        "#947",
+        "#950",
+        "#673",
+        "#920",
+        "#727",
+        "#879",
+        "#905",
+        "#877",
+        "#906",
+        "#903",
+        "#904",
+        "#925"
+      ],
+      "context": "retire _transportable's refusal of -X=value, -t... and -- once a psmux release carries the psmux/psmux#795 fix"
     },
     {
       "repo": "takushio2525/tako",
@@ -1300,38 +1318,20 @@
         "#724",
         "#729",
         "#728",
+        "#885",
         "#641",
         "#1594",
         "#842",
         "#525",
         "#1538",
         "#730",
-        "#885",
         "#647",
-        "#1073",
         "#519",
+        "#1073",
         "#628",
-        "#937",
-        "#1205"
+        "#937"
       ],
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
-    },
-    {
-      "repo": "lamngockhuong/termote",
-      "issues": [
-        "#234",
-        "#468",
-        "#410",
-        "#237",
-        "#452",
-        "#252",
-        "#408",
-        "#356",
-        "#377",
-        "#295",
-        "#395"
-      ],
-      "context": "psmux: Chat view messages fail, paste-buffer -b finds no buffer"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1344,23 +1344,24 @@
         "#591",
         "#677",
         "#697",
-        "#670",
-        "#666"
+        "#670"
       ],
       "context": "Support native Windows with psmux and feature parity"
     },
     {
-      "repo": "bmad-code-org/bmad-loop",
+      "repo": "lamngockhuong/termote",
       "issues": [
-        "#879",
-        "#660",
-        "#754",
-        "#733",
-        "#673",
-        "#877",
-        "#730"
+        "#468",
+        "#410",
+        "#452",
+        "#237",
+        "#252",
+        "#356",
+        "#408",
+        "#377",
+        "#295"
       ],
-      "context": "retire the trailer's pinned psmux path once psmux releases the psmux#773 fix; the case-folding session key stays"
+      "context": "psmux: Chat view messages fail, paste-buffer -b finds no buffer"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1388,20 +1389,10 @@
       "repo": "zer0ken/xmux",
       "issues": [
         "#773",
-        "#760",
         "#139",
-        "#318"
+        "#760"
       ],
       "context": "Nav does not follow session moves inside a remote psmux client"
-    },
-    {
-      "repo": "dotgibson/dotfiles-Windows",
-      "issues": [
-        "#287",
-        "#286",
-        "#283"
-      ],
-      "context": "Get-InitCache: a contended Set-Content escapes its try/catch, so two shells starting together print 'cannot access the file ... mise-shims.ps1'"
     },
     {
       "repo": "JonathanRosado/duet-agents",
@@ -1415,11 +1406,11 @@
     {
       "repo": "savoy9/tackle",
       "issues": [
-        "#12",
         "#88",
+        "#12",
         "#62"
       ],
-      "context": "Tackle: VS Code Extension for Task-Scoped Workspace Management"
+      "context": "opening an old agent session doesn't work."
     },
     {
       "repo": "ARCJ137442/anymate-cc",
@@ -1429,6 +1420,14 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
+    },
+    {
+      "repo": "robot-council/fleet-kit",
+      "issues": [
+        "#4",
+        "#1"
+      ],
+      "context": "Research: does `capture-pane` work under psmux"
     }
   ],
   "dotfilesRepos": [
@@ -1455,6 +1454,10 @@
     {
       "repo": "nappa0326/claude-notification",
       "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "dotgibson/dotfiles-Windows",
+      "detail": "psmux.conf"
     },
     {
       "repo": "maxrzaw/dotfiles",
@@ -1490,10 +1493,6 @@
     },
     {
       "repo": "capypara20/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "dotgibson/dotfiles-Windows",
       "detail": "psmux.conf"
     },
     {
@@ -1545,7 +1544,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "77 developers · Ke, erasin.wang, Home",
+      "detail": "78 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1583,7 +1582,7 @@
       "lat": 20.6,
       "lng": 79.0,
       "label": "India",
-      "detail": "32 developers · midtown-technology-group, Visionary, intel-private",
+      "detail": "33 developers · midtown-technology-group, Visionary, intel-private",
       "size": "lg",
       "country": "India",
       "continent": "Asia"
@@ -1700,15 +1699,6 @@
       "continent": "Europe"
     },
     {
-      "lat": 41.0,
-      "lng": 29.0,
-      "label": "Istanbul",
-      "detail": "15 developers · isikkaynak, GR Digital Products, Agito",
-      "size": "lg",
-      "country": "Turkey",
-      "continent": "Europe"
-    },
-    {
       "lat": 37.4,
       "lng": -122.1,
       "label": "San Francisco Bay Area",
@@ -1736,6 +1726,15 @@
       "country": "China",
       "continent": "Asia",
       "color": "#60a5fa"
+    },
+    {
+      "lat": 41.0,
+      "lng": 29.0,
+      "label": "Istanbul",
+      "detail": "14 developers · isikkaynak, GR Digital Products, Agito",
+      "size": "lg",
+      "country": "Turkey",
+      "continent": "Europe"
     },
     {
       "lat": 50.1,
@@ -1903,6 +1902,15 @@
       "continent": "Asia"
     },
     {
+      "lat": 59.3,
+      "lng": 18.1,
+      "label": "Stockholm",
+      "detail": "9 developers · EmbarkStudios, Tradera AB, bullfinch-se",
+      "size": "md",
+      "country": "Sweden",
+      "continent": "Europe"
+    },
+    {
       "lat": 55.7,
       "lng": 12.6,
       "label": "Copenhagen",
@@ -1941,15 +1949,6 @@
       "color": "#fbbf24"
     },
     {
-      "lat": 59.3,
-      "lng": 18.1,
-      "label": "Stockholm",
-      "detail": "8 developers · EmbarkStudios, Tradera AB, bullfinch-se",
-      "size": "md",
-      "country": "Sweden",
-      "continent": "Europe"
-    },
-    {
       "lat": 23.1,
       "lng": 113.3,
       "label": "Guangzhou",
@@ -1982,6 +1981,6 @@
   "cities": 75,
   "countries": 47,
   "continents": 6,
-  "latestVersion": "3.3.8",
-  "lastUpdated": "2026-10-12T14:45:36Z"
+  "latestVersion": "3.4.0",
+  "lastUpdated": "2026-10-15T11:03:26Z"
 }
