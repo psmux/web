@@ -1,13 +1,13 @@
 {
-  "stars": 3669,
-  "forks": 234,
+  "stars": 3700,
+  "forks": 243,
   "contributors": 41,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1446
+      "contributions": 1525
     },
     {
       "login": "computersrmyfriends",
@@ -19,13 +19,13 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 41
+      "contributions": 52
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 28
+      "contributions": 29
     },
     {
       "login": "tarikguney",
@@ -76,8 +76,8 @@
       "contributions": 9
     }
   ],
-  "issues": 47,
-  "companiesRepresented": 594,
+  "issues": 34,
+  "companiesRepresented": 604,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -93,7 +93,7 @@
     },
     {
       "name": "Google",
-      "count": 2,
+      "count": 3,
       "logo": "google",
       "logoUrl": "https://cdn.simpleicons.org/google/ffffff"
     },
@@ -405,6 +405,10 @@
       "count": 1
     },
     {
+      "name": "townco | https://www.town.com",
+      "count": 1
+    },
+    {
       "name": "energyworldnet",
       "count": 1,
       "logoUrl": "https://www.google.com/s2/favicons?domain=energyworldnet.com&sz=128"
@@ -531,14 +535,9 @@
     {
       "name": "Wiener lab.",
       "count": 1
-    },
-    {
-      "name": "AIlater",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=ailater.com&sz=128"
     }
   ],
-  "universities": 83,
+  "universities": 84,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -849,6 +848,9 @@
     },
     {
       "name": "Indian Institute of Technology, Roorkee"
+    },
+    {
+      "name": "Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University"
     }
   ],
   "starHistory": [
@@ -870,38 +872,38 @@
     },
     {
       "month": "2026-04",
-      "total": 1582
+      "total": 1581
     },
     {
       "month": "2026-05",
-      "total": 2270
+      "total": 2269
     },
     {
       "month": "2026-06",
-      "total": 2713
+      "total": 2712
     },
     {
       "month": "2026-07",
-      "total": 3093
+      "total": 3092
     },
     {
       "month": "2026-08",
-      "total": 3375
+      "total": 3374
     },
     {
       "month": "2026-09",
-      "total": 3575
+      "total": 3573
     },
     {
       "month": "2026-10",
-      "total": 3669
+      "total": 3700
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9866,
+      "followers": 9867,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -909,7 +911,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5403,
+      "followers": 5406,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -917,7 +919,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4789,
+      "followers": 4794,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -925,7 +927,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2185,
+      "followers": 2188,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -933,7 +935,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2131,
+      "followers": 2130,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -941,7 +943,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1903,
+      "followers": 1905,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -957,7 +959,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1425,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -973,7 +975,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 970,
+      "followers": 972,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -981,7 +983,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 897,
+      "followers": 898,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -989,7 +991,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 886,
+      "followers": 895,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -997,7 +999,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 825,
+      "followers": 835,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1013,7 +1015,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 742,
+      "followers": 744,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1021,7 +1023,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 739,
+      "followers": 741,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1029,7 +1031,7 @@
     {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 732,
+      "followers": 733,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
@@ -1043,7 +1045,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 34,
+  "ecosystemRepos": 35,
   "ecosystemProjects": [
     {
       "name": "termote",
@@ -1179,6 +1181,13 @@
       "category": "tool"
     },
     {
+      "name": "oh-my-psmux",
+      "author": "zhexhem",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "omo-psmux-bridge",
       "author": "danielrepublic",
       "stars": 0,
@@ -1247,13 +1256,6 @@
       "stars": 0,
       "description": "psmux fork with AI agent detection and optional status sidebar",
       "category": "claude-code"
-    },
-    {
-      "name": "psx",
-      "author": "Fre0Grella",
-      "stars": 0,
-      "description": "Named psmux layouts for Windows PowerShell, with a visual editor. Draw a workspace once, reopen it with one word.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -1262,20 +1264,22 @@
       "issues": [
         "#6327",
         "#6040",
-        "#2062",
         "#4564",
+        "#2062",
         "#4305",
         "#2830",
         "#2696",
+        "#7116",
         "#4102",
         "#1055",
+        "#7073",
         "#2619",
-        "#6274",
         "#6266",
         "#6181",
         "#3588",
         "#102",
         "#4417",
+        "#6274",
         "#4423",
         "#2730",
         "#2633",
@@ -1288,30 +1292,6 @@
       "context": "worktree-manager: suppress console windows for recurring PSMux children of pythonw daemons"
     },
     {
-      "repo": "bmad-code-org/bmad-loop",
-      "issues": [
-        "#914",
-        "#921",
-        "#948",
-        "#919",
-        "#949",
-        "#952",
-        "#947",
-        "#950",
-        "#673",
-        "#920",
-        "#727",
-        "#879",
-        "#905",
-        "#877",
-        "#906",
-        "#903",
-        "#904",
-        "#925"
-      ],
-      "context": "retire _transportable's refusal of -X=value, -t... and -- once a psmux release carries the psmux/psmux#795 fix"
-    },
-    {
       "repo": "takushio2525/tako",
       "issues": [
         "#1282",
@@ -1321,17 +1301,52 @@
         "#885",
         "#641",
         "#1594",
-        "#842",
         "#525",
+        "#842",
         "#1538",
         "#730",
         "#647",
         "#519",
-        "#1073",
         "#628",
-        "#937"
+        "#1073"
       ],
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
+    },
+    {
+      "repo": "bmad-code-org/bmad-loop",
+      "issues": [
+        "#914",
+        "#921",
+        "#673",
+        "#727",
+        "#879",
+        "#905",
+        "#877",
+        "#906",
+        "#903",
+        "#948",
+        "#904",
+        "#919",
+        "#949",
+        "#952"
+      ],
+      "context": "retire _transportable's refusal of -X=value, -t... and -- once a psmux release carries the psmux/psmux#795 fix"
+    },
+    {
+      "repo": "Thurbeen/thurbox",
+      "issues": [
+        "#1472",
+        "#1473",
+        "#1469",
+        "#1470",
+        "#1466",
+        "#1457",
+        "#1456",
+        "#1489",
+        "#1429",
+        "#1433"
+      ],
+      "context": "fix(core): bound the psmux -EncodedCommand window launcher against Windows command-line limits"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1349,31 +1364,27 @@
       "context": "Support native Windows with psmux and feature parity"
     },
     {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#92757",
+        "#102905",
+        "#102911",
+        "#24384",
+        "#102928",
+        "#91284"
+      ],
+      "context": "[BUG] Ctrl+G external editor receives no keyboard input inside ConPTY-based terminal multiplexers on Windows (refiling #73301)"
+    },
+    {
       "repo": "lamngockhuong/termote",
       "issues": [
-        "#468",
-        "#410",
-        "#452",
         "#237",
         "#252",
         "#356",
         "#408",
-        "#377",
-        "#295"
+        "#377"
       ],
       "context": "psmux: Chat view messages fail, paste-buffer -b finds no buffer"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#89202",
-        "#92757",
-        "#89203",
-        "#24384",
-        "#91284",
-        "#88127"
-      ],
-      "context": "Agent Teams (tmux mode) forces pane-border-status on, overriding user config"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1395,6 +1406,15 @@
       "context": "Nav does not follow session moves inside a remote psmux client"
     },
     {
+      "repo": "danielrepublic/omo-psmux-bridge",
+      "issues": [
+        "#1",
+        "#4",
+        "#2"
+      ],
+      "context": "feat: full psmux support for OmO team-mode tmux_visualization panes on Windows"
+    },
+    {
       "repo": "JonathanRosado/duet-agents",
       "issues": [
         "#13",
@@ -1411,23 +1431,6 @@
         "#62"
       ],
       "context": "opening an old agent session doesn't work."
-    },
-    {
-      "repo": "ARCJ137442/anymate-cc",
-      "issues": [
-        "#13",
-        "#23",
-        "#19"
-      ],
-      "context": "feat: cross-platform split-window support beyond tmux"
-    },
-    {
-      "repo": "robot-council/fleet-kit",
-      "issues": [
-        "#4",
-        "#1"
-      ],
-      "context": "Research: does `capture-pane` work under psmux"
     }
   ],
   "dotfilesRepos": [
@@ -1454,6 +1457,10 @@
     {
       "repo": "nappa0326/claude-notification",
       "detail": "start-psmux.ps1"
+    },
+    {
+      "repo": "sebastianstudniczek/.dotfiles",
+      "detail": ".psmux.conf"
     },
     {
       "repo": "dotgibson/dotfiles-Windows",
@@ -1522,10 +1529,6 @@
     {
       "repo": "jinyeow/dotfiles",
       "detail": "README.md"
-    },
-    {
-      "repo": "Edemilorhea/dotfile",
-      "detail": "SUMMARY.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1544,7 +1547,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "78 developers · Ke, erasin.wang, Home",
+      "detail": "79 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1591,7 +1594,7 @@
       "lat": 39.8,
       "lng": -98.6,
       "label": "United States",
-      "detail": "31 developers · Blue Shark Friends, borggames, PLC PRODUCE INC",
+      "detail": "32 developers · Blue Shark Friends, borggames, PLC PRODUCE INC",
       "size": "lg",
       "country": "United States",
       "continent": "North America"
@@ -1643,6 +1646,15 @@
       "continent": "Asia"
     },
     {
+      "lat": 25.0,
+      "lng": 121.6,
+      "label": "Taipei",
+      "detail": "25 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "size": "lg",
+      "country": "Taiwan",
+      "continent": "Asia"
+    },
+    {
       "lat": -33.9,
       "lng": 151.2,
       "label": "Australia",
@@ -1650,15 +1662,6 @@
       "size": "lg",
       "country": "Australia",
       "continent": "Oceania"
-    },
-    {
-      "lat": 25.0,
-      "lng": 121.6,
-      "label": "Taipei",
-      "detail": "24 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
-      "size": "lg",
-      "country": "Taiwan",
-      "continent": "Asia"
     },
     {
       "lat": 47.6,
@@ -1690,6 +1693,16 @@
       "color": "#fbbf24"
     },
     {
+      "lat": 40.7,
+      "lng": -74.0,
+      "label": "New York",
+      "detail": "15 developers · Gentrace, NomosArtificial, Microsoft",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
       "lat": 51.5,
       "lng": -0.1,
       "label": "London",
@@ -1697,6 +1710,16 @@
       "size": "lg",
       "country": "United Kingdom",
       "continent": "Europe"
+    },
+    {
+      "lat": 30.3,
+      "lng": 120.2,
+      "label": "Hangzhou",
+      "detail": "15 developers · Zhejiang University, Huawei, Alibaba",
+      "size": "lg",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#60a5fa"
     },
     {
       "lat": 37.4,
@@ -1708,24 +1731,22 @@
       "continent": "North America"
     },
     {
-      "lat": 40.7,
-      "lng": -74.0,
-      "label": "New York",
-      "detail": "14 developers · Gentrace, NomosArtificial, Microsoft",
+      "lat": 30.6,
+      "lng": -96.3,
+      "label": "Texas",
+      "detail": "14 developers · energyworldnet, Trading & Commodities, Nutiliti",
       "size": "lg",
       "country": "United States",
-      "continent": "North America",
-      "color": "#60a5fa"
+      "continent": "North America"
     },
     {
-      "lat": 30.3,
-      "lng": 120.2,
-      "label": "Hangzhou",
-      "detail": "14 developers · Zhejiang University, Huawei, Alibaba",
+      "lat": 40.4,
+      "lng": -3.7,
+      "label": "Madrid",
+      "detail": "14 developers · Innomerics, Marfeel, wannme",
       "size": "lg",
-      "country": "China",
-      "continent": "Asia",
-      "color": "#60a5fa"
+      "country": "Spain",
+      "continent": "Europe"
     },
     {
       "lat": 41.0,
@@ -1746,13 +1767,13 @@
       "continent": "Europe"
     },
     {
-      "lat": 30.6,
-      "lng": -96.3,
-      "label": "Texas",
-      "detail": "13 developers · energyworldnet, Trading & Commodities, Nutiliti",
+      "lat": 41.9,
+      "lng": 12.5,
+      "label": "Italy",
+      "detail": "13 developers · Six Degrees Consulting, Vaimoo, DotSp",
       "size": "lg",
-      "country": "United States",
-      "continent": "North America"
+      "country": "Italy",
+      "continent": "Europe"
     },
     {
       "lat": 56.1,
@@ -1764,15 +1785,6 @@
       "continent": "North America"
     },
     {
-      "lat": 41.9,
-      "lng": 12.5,
-      "label": "Italy",
-      "detail": "12 developers · Six Degrees Consulting, Vaimoo, DotSp",
-      "size": "lg",
-      "country": "Italy",
-      "continent": "Europe"
-    },
-    {
       "lat": -23.5,
       "lng": -46.6,
       "label": "Sao Paulo",
@@ -1782,13 +1794,14 @@
       "continent": "South America"
     },
     {
-      "lat": 40.4,
-      "lng": -3.7,
-      "label": "Madrid",
-      "detail": "12 developers · Innomerics, Marfeel, wannme",
+      "lat": 55.8,
+      "lng": 37.6,
+      "label": "Moscow",
+      "detail": "12 developers · ОКОЛО Маркет, Diasoft, Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University",
       "size": "lg",
-      "country": "Spain",
-      "continent": "Europe"
+      "country": "Russia",
+      "continent": "Europe",
+      "color": "#fbbf24"
     },
     {
       "lat": 59.9,
@@ -1826,15 +1839,6 @@
       "country": "Canada",
       "continent": "North America",
       "color": "#60a5fa"
-    },
-    {
-      "lat": 55.8,
-      "lng": 37.6,
-      "label": "Moscow",
-      "detail": "11 developers · ОКОЛО Маркет, Diasoft",
-      "size": "lg",
-      "country": "Russia",
-      "continent": "Europe"
     },
     {
       "lat": 37.9,
@@ -1902,6 +1906,16 @@
       "continent": "Asia"
     },
     {
+      "lat": 30.6,
+      "lng": 114.3,
+      "label": "Wuhan",
+      "detail": "9 developers · Central China Normal University, J&T Express, Huazhong University of Science & Technology",
+      "size": "md",
+      "country": "China",
+      "continent": "Asia",
+      "color": "#fbbf24"
+    },
+    {
       "lat": 59.3,
       "lng": 18.1,
       "label": "Stockholm",
@@ -1939,16 +1953,6 @@
       "continent": "Asia"
     },
     {
-      "lat": 30.6,
-      "lng": 114.3,
-      "label": "Wuhan",
-      "detail": "8 developers · Central China Normal University, J&T Express, Huazhong University of Science & Technology",
-      "size": "md",
-      "country": "China",
-      "continent": "Asia",
-      "color": "#fbbf24"
-    },
-    {
       "lat": 23.1,
       "lng": 113.3,
       "label": "Guangzhou",
@@ -1959,6 +1963,15 @@
       "color": "#fbbf24"
     },
     {
+      "lat": 14.6,
+      "lng": 121.0,
+      "label": "Manila",
+      "detail": "7 developers · Ubiquitous Computing Laboratory, ARKRAY | XOO, xdrobotics",
+      "size": "md",
+      "country": "Philippines",
+      "continent": "Asia"
+    },
+    {
       "lat": 41.4,
       "lng": 2.2,
       "label": "Barcelona",
@@ -1967,20 +1980,11 @@
       "country": "Spain",
       "continent": "Europe",
       "color": "#60a5fa"
-    },
-    {
-      "lat": 13.8,
-      "lng": 100.5,
-      "label": "Bangkok",
-      "detail": "7 developers · ALSSoftware",
-      "size": "md",
-      "country": "Thailand",
-      "continent": "Asia"
     }
   ],
   "cities": 75,
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-10-15T11:03:26Z"
+  "lastUpdated": "2026-10-19T12:31:02Z"
 }

@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-10-15 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-10-19 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -457,7 +457,7 @@ A: They are all the same binary. psmux installs as `psmux.exe` with `pmux.exe` a
 A: Yes. Add `set -g scroll-enter-copy-mode off` to your config. Scroll events will be passed directly to the running application instead of entering copy mode.
 
 **Q: Ctrl+V is intercepted by psmux even after unbinding. How do I let Ctrl+V reach neovim/vim?**
-A: psmux has a Windows paste detection system that intercepts Ctrl+V at the client input layer, outside of the key binding system. `unbind-key -n C-v` alone will not stop it. Add `set -g paste-detection off` to your `~/.psmux.conf`. This forwards Ctrl+V to the child application so neovim can use it for visual block mode. You can still paste using Ctrl+Shift+V, right click, or Prefix + ]. See [configuration.md](configuration.md#paste-detection-ctrlv-passthrough) for details.
+A: First check the terminal: Windows Terminal pastes on Ctrl+V by default and then the key never reaches psmux or neovim at all. Remove its `ctrl+v` paste action (or bind paste to Ctrl+Shift+V only). Once the terminal does not paste on Ctrl+V, psmux treats the key like tmux does: a `bind -n C-v` binding runs, and with no binding the pane gets C-v, so neovim enters visual block mode. Older psmux versions needed `set -g paste-detection off` for this; it is no longer required. You can still paste using Ctrl+Shift+V, right click, or Prefix + ]. See [configuration.md](configuration.md#paste-detection-ctrlv-passthrough) for details.
 
 **Q: How do I chain multiple commands in a key binding?**
 A: Use `\;` to separate commands: `bind-key M-s split-window -h \; select-pane -L`. The semicolon must be escaped in config files.
@@ -2338,13 +2338,15 @@ Details worth knowing:
 
 ## All Set Options
 
+As in tmux, a name that is neither in this table, nor in tmux's own options table, nor a `@user` option is refused: `set-option` and `show-options` fail with `invalid option: NAME`, and `-q` makes that a silent success that sets nothing. In a config file it is reported as `unknown option 'NAME'` and skipped. A tmux option psmux does not implement (`visual-silence`, `lock-command` and so on) is accepted and read back as text. Use `set-environment`, not `set-option`, for environment variables.
+
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
 | `prefix` | Key | `C-b` | Prefix key |
 | `prefix2` | Key | `none` | Secondary prefix key (optional) |
 | `base-index` | Int | `0` | First window number |
 | `pane-base-index` | Int | `0` | First pane number |
-| `escape-time` | Int | `500` | Escape delay (ms) |
+| `escape-time` | Int | `10` | Escape delay (ms), tmux 3.5+ default |
 | `repeat-time` | Int | `500` | How long a key bound with `bind-key -r` keeps repeating without the prefix, in ms. Range `0` to `2000000`; `0` disables repeat |
 | `history-limit` | Int | `2000` | Scrollback lines per pane |
 | `priority` | Str | `above-normal` | Scheduling class for psmux's own processes: `normal`, `above-normal`, `high`. Pane shells and the programs you run are never raised. See [Process Priority](#process-priority) |
@@ -2358,7 +2360,7 @@ Details worth knowing:
 | `ctrl-wheel-zoom` | Bool | `off` | Windows Terminal only: Ctrl+Wheel zooms the terminal font one step per notch instead of scrolling the pane. psmux has mouse reporting on, so Windows Terminal forwards Ctrl+Wheel to it; with this on, psmux sends Windows Terminal its default zoom keys (Ctrl+Numpad Plus / Minus) back. Does nothing over SSH, in other terminals, or when `experimental.scrollToZoom` is `false` in that terminal's settings |
 | `mouse-drag-enter-copy-mode` | Bool | `off` | Enter copy mode and select there on a left-button drag in a pane that does not track the mouse (tmux's `MouseDragStart` → `copy-mode -M`) instead of the psmux client-side selection overlay |
 | `pwsh-mouse-selection` | Bool | `off` | tmux-like release-copy selection with word/line multi-click and pane-clipped extraction |
-| `paste-detection` | Bool | `on` | Detect Ctrl+V paste from console host and send as bracketed paste (set `off` to let Ctrl+V reach child apps like neovim) |
+| `paste-detection` | Bool | `on` | Reassemble a terminal's Ctrl+V paste into one bracketed paste. A Ctrl+V the terminal does not paste on reaches bindings and the pane as C-v either way (set `off` to forward every key as typed) |
 | `choose-tree-preview` | Bool | `off` | Open `choose-session` / `choose-tree` pickers with the live preview pane already visible (saves pressing `p`). See [preview.md](preview.md) |
 | `bold-is-bright` | Bool | `on` | Restore standard SGR codes for the 16 basic colors so the outer terminal renders `bold` as bright (matches a bare shell). Set `off` to keep explicit 256-indexed low colors byte-accurate. See [Bold Is Bright](#bold-is-bright-color-rendering) |
 | `status` | Bool/Int | `on` | Show status bar (number = line count) |
@@ -2396,6 +2398,8 @@ Details worth knowing:
 | `bell-action` | Str | `any` | Bell action: controls audible bell forwarding and status bar flag (`any`, `none`, `current`, `other`) |
 | `visual-bell` | Bool | `off` | Visual bell indicator |
 | `allow-passthrough` | Str | `off` | Allow terminal passthrough sequences (`on`/`off`/`all`) |
+| `extended-keys` | Choice | `off` | tmux compatibility (`off`/`on`/`always`): stored and reported so a program probing `show -gv extended-keys` reads what tmux gives. psmux does not need it: extended keys from the terminal are always decoded, and modifiers reach panes through win32 input mode |
+| `extended-keys-format` | Choice | `xterm` | tmux compatibility (`csi-u`/`xterm`): stored and reported, not consulted |
 | `allow-rename` | Bool | `on` | Allow programs to set window title via escape sequences |
 | `allow-set-title` | Bool | `off` | Allow programs to set pane title via OSC 0/2 escape sequences (see [pane-titles.md](pane-titles.md)) |
 | `allow-predictions` | Bool | `off` | Preserve PSReadLine prediction settings (see below) |
@@ -2406,8 +2410,8 @@ Details worth knowing:
 | `codepoint-widths` | Str | | Comma separated overrides for how many columns Unicode codepoints occupy (see [Codepoint widths](#codepoint-widths)) |
 | `terminal-overrides` | Str | | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen (see [Terminal overrides](#terminal-overrides)) |
 | `set-clipboard` | Str | `external` | Clipboard interaction (`on`/`off`/`external`). A copy mode yank reaches the Windows clipboard on every value, with OSC 52 to the outer terminal unless `off`. An application's own OSC 52 creates a paste buffer only on `on`, as in tmux; on `external` psmux still forwards it to the outer terminal and the Windows clipboard, where tmux ignores it; `off` ignores it |
-| `main-pane-width` | Int | `0` | Main pane width in main-vertical layout |
-| `main-pane-height` | Int | `0` | Main pane height in main-horizontal layout |
+| `main-pane-width` | String | `80` | Main pane width in the main-vertical layout, in cells or a percentage such as `30%` |
+| `main-pane-height` | String | `24` | Main pane height in the main-horizontal layout, in cells or a percentage such as `30%` |
 | `session-group` | Str | | Name of the session group this session joins. `none` or an empty value clears it. See [Session Groups](#session-groups) |
 | `command-alias` | Str | | Define your own command alias as `alias=expansion`. See [Command Aliases](#command-aliases) |
 
@@ -2795,23 +2799,23 @@ This option is independent of `mouse` (which controls whether mouse events are r
 
 ### Paste Detection (Ctrl+V Passthrough)
 
-On Windows, the console host intercepts Ctrl+V, reads the clipboard, and injects the content as character events. psmux detects this pattern and reassembles it into a single bracketed paste for child applications. This is the `paste-detection` option and it is enabled by default.
+On Windows, a terminal that pastes on Ctrl+V (Windows Terminal does by default) takes the key itself and hands psmux the clipboard as a burst of character events. psmux detects this pattern and reassembles it into a single bracketed paste for child applications. This is the `paste-detection` option and it is enabled by default.
 
-If you use TUI applications like **neovim** or **vim** where Ctrl+V has a different meaning (visual block mode), the paste detection will intercept the keypress before it reaches the application. To let Ctrl+V pass through to the child app:
+If the terminal does **not** paste on Ctrl+V (for example Windows Terminal with its `ctrl+v` paste action removed), the key reaches psmux as an ordinary key and is treated like one, as in tmux: a binding such as `bind -n C-v split-window -h` runs and pastes nothing, and with no binding the pane receives C-v, so **neovim** and **vim** get visual block mode. psmux waits a moment after the press to tell this apart from a terminal that delivers the press and then the pasted characters.
+
+If the terminal itself pastes on Ctrl+V, the key never reaches psmux or the application, and only the terminal's own setting can change that. To stop psmux from reassembling character bursts into bracketed pastes:
 
 ```tmux
-# Disable paste detection so Ctrl+V reaches child apps
+# Forward every key as typed, with no paste reassembly
 set -g paste-detection off
 ```
 
-With paste detection off, you can still paste using:
+You can paste using:
 
 * **Ctrl+Shift+V** (Windows Terminal default paste shortcut)
 * **Right click** (paste in most terminals)
 * **Prefix + ]** (psmux paste from buffer)
 * **`psmux send-keys C-v`** from another terminal
-
-> **Note:** `unbind-key -n C-v` alone is not sufficient to stop Ctrl+V interception because the paste detection operates outside the key binding system. You must use `set -g paste-detection off`.
 
 ### Live Preview in Choosers
 
@@ -2913,7 +2917,7 @@ bind-key M-s split-window -h \; select-pane -L
 bind-key D split-window -v -p 30 \; split-window -h \; select-pane -t 0
 ```
 
-In config files, escape the semicolon with `\;` so it is not treated as a comment delimiter.
+Each command ends at a newline or a `;`, in a config file as at the command prompt, so `set -g @a on ; set -g @b on` sets both. A `;` inside quotes, inside a `{ }` block or after a `#` that starts a comment is not a separator. Write `\;` where the semicolon has to stay inside a command's arguments, which is how a key binding holds a list of commands, as above. A plain `;` ends the `bind-key` itself: `bind-key x split-window ; select-pane -L` binds `split-window` and runs `select-pane -L` at once, as in tmux.
 
 ### Case-Sensitive Key Bindings
 
@@ -3281,6 +3285,27 @@ This re-executes every line in the config file, applying any changes to options,
 Like tmux, `source-file` only runs the file's commands: bindings made before it stay. A `bind` typed at
 the CLI survives, and files sourced one after another (a plugin manager's, for example) all keep
 their bindings.
+
+The file's commands run in order, each once the one before it has finished, as tmux runs them: a
+`split-window` after a `new-window` splits the new window. The options and bindings before the file's
+first command apply at once; everything from that command on waits its turn. `psmux source-file`
+returns once the commands have run and prints what they print. Every problem in the file is an
+error, as in tmux: a command that fails, a nested file that cannot be read, an unknown option or a
+bad value. `source-file` prints each on stderr and exits 1, and the rest of the file still runs.
+With `-q`, a file that does not exist is skipped without a word.
+
+`source-file` takes one or more paths, as tmux does, and reads them in the order given:
+`source-file ~/.psmux.conf ~/.psmux.local.conf`. Quote a path that has a space in it. A path that
+cannot be read is reported and the others are still read. An older line that names one file with
+spaces and no quotes, such as `source-file C:\Users\Ann Lee\x.conf`, still reads that file.
+
+A file may source other files, and a path may be a glob. A nested file's commands run where its
+`source-file` line stands, before the rest of the outer file, down to 50 levels as in tmux (deeper
+is `too many nested files`). A file that would source a file already being sourced, itself or one
+further out, is an error. When the `source-file` line always runs, `source-file` refuses the whole
+file before any of its lines take effect; one in a key binding, a `%if` block or an `if-shell` block
+is checked only if and when it runs, so a reload key such as `bind r { source-file ~/.tmux.conf }` is
+fine. tmux has no such check and runs a self-sourcing file until the nesting limit.
 
 One deliberate difference from tmux: sourcing the config file the server **started with** (the `-f`
 file or `PSMUX_CONFIG_FILE`, otherwise the first of `~/.psmux.conf`, `~/.psmuxrc`, `~/.tmux.conf`,
@@ -3724,12 +3749,14 @@ rebind the prefix, the new key is bound to `send-prefix` for you.
 | `Prefix + .` | Prompt for an index and move the current window there (`move-window`) |
 | `Prefix + 0-9` | Select window by number |
 
-**Gotcha: `select-window-index` is not a real command.** `Prefix + '` is bound to
-`select-window-index`, which looks like a command but is a client only pseudo command. It exists
-solely so the client can open the window index prompt. It is not accepted by any command dispatcher,
-so `psmux select-window-index` fails with "unknown command", and it cannot be used from a config
-line, from a hook, or from `run-shell`. Rebinding another key to it does work, because key bindings
-go through the client.
+`Prefix + '` is bound to `command-prompt -T window-target -p index "select-window -t ':%%'"`, as in
+tmux, so the prompt has the same editing keys and history as any other prompt.
+
+**Gotcha: `select-window-index` is not a real command.** Before #821 `Prefix + '` was bound to
+`select-window-index`, a client only name for a window index box of the client's own. A key bound
+to that name still opens the prompt above, so a config that binds it keeps working, but no command
+dispatcher accepts it: `psmux select-window-index` fails with "unknown command", and it cannot be
+used from a config line, from a hook, or from `run-shell`.
 
 ### Pane Splitting
 
@@ -5480,7 +5507,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 
 **`-t` is global at the CLI.** psmux scans the whole command line for `-t <target>` before the command name is even dispatched, so `psmux -t work:1 kill-pane` and `psmux kill-pane -t work:1` both work even for commands whose own parser ignores `-t`.
 
-**Combined short flags** are expanded for `new-session` (`-As main` is `-A -s main`), for `set-option` and `show-options` (`-ga`, `-gu`, `-gq`), for `set-hook` (`-ga`, `-ug`) and for the config file forms of `if-shell` (`-bF`, `-Fb`). Elsewhere flags must be given separately.
+**Combined short flags** are expanded for `new-session` (`-As main` is `-A -s main`), for `set-option` and `show-options` (`-ga`, `-gu`, `-gq`), for `set-hook` (`-ga`, `-ug`), for `set-buffer` (`-ab NAME`, `-bNAME`, `-nNEW`) and for the config file forms of `if-shell` (`-bF`, `-Fb`). Elsewhere flags must be given separately.
 
 ## Complete command table
 
@@ -5553,7 +5580,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `respawn-window` | `respawnw` | `kc:e:t:` plus a command | CLI, SRV, CFG |
 | `rotate-window` | `rotatew` | `UDt:` | CLI, SRV, CFG, CTL |
 | `run-command` | `runcmd` | none, takes the command line as positional arguments | SRV, CTL |
-| `run-shell` | `run` | `b` | CLI, SRV, CFG |
+| `run-shell` | `run` | `bd:` | CLI, SRV, CFG |
 | `save-buffer` | `saveb` | `ab:` | CLI, SRV, CFG |
 | `select-layout` | `selectl` | `npoEt:` plus a positional layout name | CLI, SRV, CFG, CTL |
 | `select-pane` | `selectp` | `UDLRlZmMedP:T:t:` | CLI, SRV, CFG, CTL |
@@ -5563,7 +5590,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `send-prefix` | *(none)* | none | CLI, SRV, CFG |
 | `send-text` | *(none)* | none, takes the text as positional arguments | SRV |
 | `server-info` | `info` | none | CLI, SRV, CFG, CTL |
-| `set-buffer` | `setb` | `wb:` | CLI, SRV, CFG |
+| `set-buffer` | `setb` | `ab:t:n:w` | CLI, SRV, CFG, CTL |
 | `set-environment` | `setenv` | `grhut:` | CLI, SRV, CFG, CTL |
 | `set-hook` | *(none)* | `gua` | CLI, SRV, CFG, CTL |
 | `set-option` | `set` | `guaqopswUt:` plus `--` | CLI, SRV, CFG, CTL |
@@ -5576,7 +5603,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `show-options` | `show`, `show-option` | `Agpqsvwt:` plus `--` | CLI, SRV, CFG, CTL |
 | `show-prompt-history` | `showphist` | none | SRV |
 | `show-window-options` | `showw`, `show-window-option` | `Agpqsvwt:` plus `--` | CLI, SRV, CFG, CTL |
-| `source-file` | `source` | `qnv` | CLI, SRV, CFG, CTL |
+| `source-file` | `source` | `t:Fnqv` | CLI, SRV, CFG, CTL |
 | `split-window` | `splitw`, `split-pane`, `splitp` | `hvdPZc:e:F:l:p:T:t:` | CLI, SRV, CFG, CTL |
 | `start-server` | `start`, `warmup` | none | CLI, SRV, CFG |
 | `suspend-client` | `suspendc` | none | CLI, SRV, CFG |
@@ -5597,7 +5624,7 @@ The server also matches a set of internal wire commands that the client sends on
 
 Five mouse wire commands are an exception and are genuinely usable for scripting: `mouse-down`, `mouse-drag`, `mouse-up`, `mouse-down-right` and `mouse-up-right` are accepted at the CLI as well as on the socket.
 
-`select-window-index` appears in the default prefix bindings but is a client side pseudo command. `psmux select-window-index` fails with "unknown command" and it cannot be used from a config line, a hook or `run-shell`.
+`select-window-index` is a client side pseudo command. The default `Prefix + '` binding was this name before #821 and is tmux's `command-prompt` now; a key bound to the old name opens the same prompt. `psmux select-window-index` fails with "unknown command" and it cannot be used from a config line, a hook or `run-shell`.
 
 ## Flag details by command
 
@@ -5874,9 +5901,9 @@ A psmux extension that creates a pane floating above the tiled layout.
 - When the buffer stack is empty, psmux falls back to the Windows clipboard.
 
 **set-buffer** (`setb`)
-- Boolean: `-w` (also write to the Windows clipboard)
-- Value: `-b` (buffer name)
-- Not accepted: `-a`, `-n`, `-t`
+- Boolean: `-a` (append to the `-b` buffer), `-w` (also write to the Windows clipboard)
+- Value: `-b` (buffer name), `-n` (rename the `-b` buffer, or the newest automatic buffer, to this name; any data is not used), `-t` (target client. tmux uses it only with `-w`. psmux keeps buffers per session, so on the CLI a `-t` that names a session picks that session's buffers, and any other value is ignored. Inside a server (the command prompt, a key binding, `if-shell`, a hook, control mode) a `-t` that names another session is refused with `set-buffer: NAME is another session`, because that server cannot reach the other session's buffers)
+- With no data the command fails with `no data specified`. Empty data changes nothing.
 
 **delete-buffer** (`deleteb`) and **show-buffer** (`showb`)
 - Value: `-b` (buffer name)
@@ -5936,7 +5963,7 @@ A psmux extension that creates a pane floating above the tiled layout.
 - Value: `-t` (target, value consumed)
 - Flags parse only **before** the option name, as tmux's getopt does (#583). Once the option name has been seen, everything that follows is the value, dashes included: `set @k -u` stores the literal string `-u`, where it used to consume `-u` as the unset flag and delete `@k` at exit 0. `--` ends option parsing outright, so `set -- @k -g` also stores `-g`.
 - Flags are also matched inside combined tokens such as `-ga`, `-gu` and `-gq`.
-- `-u` **restores the option's table default** on every route, and it clears the record that the user ever set it, so a following `-o` sees an unset option and applies (#619). `set -g escape-time 5` then `set -gu escape-time` reads 500 again, and `set -gu status-left` reads `[#S] `. All three unset routes (config file, server request loop, plugin drain loop) share one restore driven by the option catalog, which `tests-rs/test_option_default_parity.rs` pins to a freshly started server. Before that the server carried a hand written table of about thirty options and silently did nothing for the rest (`set -su default-terminal` left `screen-256color` in place), while the config-file parser wrote an empty value instead of the default, so the CLI and a `.tmux.conf` disagreed about what an unset means. Measured on the pre-fix build, 37 of 42 probed options did not come back to the value a fresh server reports.
+- `-u` **restores the option's table default** on every route, and it clears the record that the user ever set it, so a following `-o` sees an unset option and applies (#619). `set -g escape-time 5` then `set -gu escape-time` reads 10 again, and `set -gu status-left` reads `[#S] `. All three unset routes (config file, server request loop, plugin drain loop) share one restore driven by the option catalog, which `tests-rs/test_option_default_parity.rs` pins to a freshly started server. Before that the server carried a hand written table of about thirty options and silently did nothing for the rest (`set -su default-terminal` left `screen-256color` in place), while the config-file parser wrote an empty value instead of the default, so the CLI and a `.tmux.conf` disagreed about what an unset means. Measured on the pre-fix build, 37 of 42 probed options did not come back to the value a fresh server reports.
 - On a `@name` option `-u` removes the key outright rather than restoring anything, which is what tmux does: a user option carries no table entry, so `options_remove_or_default` takes its `options_remove` branch.
 - `-u` and `-o` in the same command is an unset, never a set: tmux skips the `-o` guard whenever `-u` is present, so `set -guo status-left NEVER` unsets `status-left` and stores nothing.
 - `-o` on an option that **is** set fails: `already set: <name>` on stderr at exit 1, matching tmux's `cmdq_error` (#619). `-q` restores tmux's silent exit 0. The value is left untouched either way. Through a config file the refusal is recorded in `~/.psmux/config-warnings.log` as `<file>:<line>: already set: <name>`, the same shape as `unknown option`, and the in-TUI command prompt shows it as a status message. Before this, every route swallowed the refusal at exit 0 with empty output, so a caller seeding a default could not tell "I set it" from "the user already had it", which is `-o`'s entire purpose.
@@ -5974,8 +6001,9 @@ psmux show-options -w -A -t s:one    # remain-on-exit* off
 - Value: `-t` (target session)
 
 **source-file** (`source`)
-- Boolean: `-q` (quiet), `-n` (parse only, do not execute), `-v` (verbose)
-- Not accepted: `-F`, `-t`
+- Boolean: `-F` (each path is a format), `-n` (parse only, nothing runs), `-q` (a path that does not exist is not an error), `-v` (accepted, no effect)
+- Value: `-t` (target pane)
+- One or more paths, each of which may be a glob. They are read in order.
 
 **list-commands** (`lscm`)
 - No flags.
@@ -6023,8 +6051,10 @@ psmux show-options -w -A -t s:one    # remain-on-exit* off
 ### Shell and flow control commands
 
 **run-shell** (`run`)
-- Boolean: `-b` (background)
-- Everything else, including tokens that look like flags, is treated as part of the shell command. `-C`, `-d`, `-s`, `-c` and `-t` are **not** parsed, so passing them sends them straight to the shell.
+- Boolean: `-b` (background: start the command and do not wait for it)
+- Value: `-d` (wait this many seconds, fractions allowed, before starting the command; with no command it only waits; anything but a number is `invalid delay time`)
+- Without `-b` the command is waited for, and so are the commands after it: from the CLI, from a key binding, and in a file read by `source-file` on a running server, where the lines after it run once it has finished. A config file loaded when the server starts does not wait: the command is started and the next line runs.
+- The flags end at the first word that is not one of these, so a word like `-C` starts the shell command. Everything after that is the shell command. `-C`, `-s`, `-c` and `-t` are **not** parsed, so passing them sends them straight to the shell.
 
 **if-shell** (`if`)
 - Boolean: `-b` (background), `-F` (evaluate the condition as a format string instead of running a shell)
@@ -8851,6 +8881,12 @@ psmux list-sessions
 This is useful for running completely separate psmux environments, for example one for
 development and one for monitoring. On disk the state files become `<namespace>__<session>.*`
 under `~\.psmux\`.
+
+Because `__` joins the namespace and the session name on disk, a session in the default
+namespace (no `-L`) cannot have `__` in its name: `new-session` and `rename-session` refuse it
+with `invalid session: NAME`. A session named `a__b` would otherwise share its files with
+session `b` of `-L a`. Under `-L` any name works, including one that starts with the namespace
+itself (`psmux -L work new-session -s work__x`, then `-t work__x`).
 
 ## Key Binding Management
 
@@ -11924,7 +11960,23 @@ When porting Unix tmux integrations to Windows:
 <!-- design/multi-session-server -->
 # Design: a shared multi session server (issue #798)
 
-Status: proposal. Nothing in this document is implemented. Every number below was
+Status: proposal. Only the switch is implemented (stage 1, step 1: `PSMUX_SERVER_MODE`
+and `server-mode`, with `shared` refusing cleanly); the shared server itself is not.
+
+> **Owner ruling, 2026-10-17. This overrides anything below that disagrees with it.**
+>
+> 1. The shared server is a **switch**, not a structural change. It is turned on with
+>    `PSMUX_SERVER_MODE=shared` (or `set -s server-mode shared`) and turned off by
+>    unsetting it. With the switch off, psmux runs exactly the code it runs today.
+> 2. **Everything** for the shared server lives behind that switch. No PR may change
+>    the code path a default (per session) build runs, not even as a "zero behaviour
+>    change" refactor. Stage 0 as first written (refactors of the shared code paths)
+>    is withdrawn; the stage 0a id allocator (PR #838, 13064512) was merged and then
+>    reverted for this reason.
+> 3. There is **no planned default flip**. Stage 4 is withdrawn. One server per session
+>    stays the default; the shared mode stays opt in for as long as the owner decides.
+> 4. Multiple servers stay possible: each `-L` namespace is its own server, and in
+>    shared mode each one hosts many sessions, like tmux. Every number below was
 measured on master `98392248` (psmux 3.4.0, Windows 11 26200) with a private
 `PSMUX_DATA_DIR` and a unique `-L` namespace, or counted with `grep` over `src/`,
 `crates/`, `tests/` and `tests-rs/` at that commit. Where something could not be
@@ -11939,9 +11991,9 @@ three conditions:
 
 1. Multiple servers must still be possible: each `-L` namespace is one server, and
    each server hosts many sessions, exactly like tmux.
-2. It ships opt in, step by step, and today's one server per session model stays the
-   default until the shared mode has passed the full test sweep across several
-   releases.
+2. It ships as an opt in switch, step by step, and today's one server per session
+   model stays the default. Turning the switch off must always give back exactly
+   today's behaviour (see the owner ruling at the top).
 3. Every step must be shippable, reversible and tested on its own, because a bug in
    the process model is the kind that takes weeks to find on a project with 3.7k stars.
 
@@ -11968,7 +12020,8 @@ Goals
 
 Non goals
 
-* Changing the default in the same release that introduces the mode.
+* Changing the default. The shared mode is opt in only (owner ruling).
+* Changing the code that a default (per session) build runs.
 * A Unix socket, or any change to the TCP plus key file transport.
 * Moving a live ConPTY between processes (section 4.3 explains why).
 * Merging namespaces. `-L a` and `-L b` stay separate processes forever, which is
@@ -12224,9 +12277,14 @@ Every stage is a separate release train item, ships behind a switch where it cha
 behaviour, has its own test gate, and can be reverted without touching the stages
 before it.
 
-### Stage 0: make the code ready, zero behaviour change
+### Stage 0: withdrawn (owner ruling, 2026-10-17)
 
-The default build behaves byte for byte as today. Each item is its own PR.
+The items below were written as refactors of the code every build runs. Under the
+owner ruling they may not land that way. Where the shared server needs any of them
+(an id allocator, a session id on requests, per session loop state, option layering,
+an exit funnel), it gets its own version inside the shared mode code, entered only
+when the switch is on. The list stays here as a record of what the shared mode has to
+provide, not as a plan for the default path. Each item, when built, is its own PR.
 
 * **0a. Server owned id allocator.** Move `next_win_id`, `next_pane_id` and the
   forward id counter out of `AppState` into a `ServerIds` struct owned by the server
@@ -12267,6 +12325,71 @@ about to start a server, plus `set -s server-mode shared` in the config for the 
 server start. The default stays `per-session`. A namespace is in shared mode only if
 its server was started in shared mode; the mode is written to a namespace marker
 (`<ns>.server`) so CLIs without the variable still route correctly.
+
+#### Step 1 (implemented): the switch itself
+
+The switch exists and nothing behind it is built yet. The contract:
+
+* **Where it is read.** Only where a server is about to be started or the warm
+  standby is about to be claimed: CLI `new-session` / `new` (which also covers the
+  `attach` bootstrap from a config `new-session`, and the one shot `new-session -d`
+  a server forwards to the CLI for `if-shell` and TCP), CLI `start-server` /
+  `start` / `warmup`, the bare `psmux` and `-C` / `-CC` start (only when no live
+  session is being attached to), `new-session` run inside a server (hook, key
+  binding, command prompt: `execute_command_string` in `commands.rs`), the TCP
+  `new-session` spawn route in `connection.rs`, and the top of the internal
+  `psmux server` process, which every server process passes through however it was
+  spawned (including the warm standby refill). Nothing else reads it: `ls`,
+  `attach`, `kill-session`, `kill-server` and every other command behave as before
+  whatever its value.
+* **Values.** `PSMUX_SERVER_MODE` is `per-session` (the default) or `shared`.
+  Unset, empty or only whitespace is unset. Case and surrounding spaces are
+  ignored. If the variable is unset, the user's config file is scanned the way
+  the CLI already peeks at `warm` and `priority` before a server exists: a top
+  level `set` / `set-option` line (any flags) naming `server-mode`, last one wins,
+  `set -u server-mode` means the default. Lines inside `if-shell` or a sourced
+  file are not seen. Otherwise `per-session`. The environment outranks the config,
+  as `PSMUX_PRIORITY` outranks `priority`.
+* **Unknown values.** Any other value is an error, never a fallback, at exit 1
+  with no server started or claimed:
+  `psmux: PSMUX_SERVER_MODE: unknown value 'bogus' (expected per-session or shared)`
+  and, from the config,
+  `psmux: server-mode: unknown value 'x' in <file> (expected per-session or shared)`.
+  This is stricter than `PSMUX_PRIORITY` (which warns and ignores) on purpose: a
+  typo must never quietly run the other process model.
+* **`shared` in step 1.** It is handed to `src/server/shared/mod.rs`, the only
+  entry for the mode, which prints
+  `psmux: shared server mode is not available in this build yet (step 1 of #798); ...`
+  and exits 1. A start a running server makes on the user's behalf (hook, binding,
+  prompt, TCP) shows the same text as a status message or an `ERROR:` reply and
+  creates nothing. It never falls back to per session.
+* **The warm pool.** The gate runs before the warm claim on every route, so a
+  `shared` request is never served by the per session `__warm__` standby, and the
+  standby is left parked and untouched (the E2E checks the process list before and
+  after). If the switch says `shared` when a per session server tries to refill its
+  standby, the new standby process refuses at its own entry, so no per session
+  standby is created while the switch says shared. The shared server will not use
+  the `__warm__` standby at all; it will keep spare panes in its own process.
+* **`server-mode` as an option.** Known to `set` and `show` (a validation only name,
+  so `show -s`, `show -g` and the customize list are byte for byte unchanged), and
+  `#{server-mode}` expands. `show -s server-mode` answers the mode the server
+  actually runs in, so on every server today `server-mode per-session`, whatever
+  the asking shell's variable says. The mode is fixed when a server starts: `set -s
+  server-mode per-session` on a per session server is a silent no op (so a config
+  that names it, and a later `source-file` of that config, do not warn), and
+  `shared` or an unknown value is refused at exit 1 (`server-mode cannot change on
+  a running server`). tmux has no such option; it is psmux only.
+* **Proof the default path is untouched.**
+  `tests/test_issue798_server_mode_switch.ps1` runs one scenario (two
+  `new-session`, `new-window`, `ls`, `list-windows`, `display-message`,
+  `kill-session`, the registry file names, the server processes per session, the
+  warm standby) with the variable unset, `per-session` and empty, and requires
+  one identical signature, equal to a master build's when `PSMUX_BASELINE_EXE` is
+  given. `tests-rs/test_issue798_server_mode_switch.rs` covers the parser.
+
+Step 2, the first working slice, replaces the refusal in `shared/mod.rs` with a
+server that hosts one session and accepts a second `new-session` in the same
+namespace, writing the per session registry files described below.
 
 What changes in shared mode:
 
@@ -12317,9 +12440,10 @@ Gate: section 7 in full, twice (both modes), plus the shared mode only suites.
 * `switch-client -t`, `-n`, `-p`, `-l` and `choose-tree` switch sessions inside the
   server; the `SWITCH` reconnect remains for targets on other servers.
 
-### Stage 4: default flip
+### Stage 4: withdrawn (owner ruling, 2026-10-17)
 
-Only after all of the following hold:
+There is no planned default flip. The text below is kept only as a record of the old
+plan. If the owner ever reconsiders, these were the minimum conditions:
 
 * Three consecutive releases with shared mode available, and the full sweep green in
   both modes on every release candidate.
@@ -12433,6 +12557,38 @@ Shared mode specific gates:
 
 ## 11. The first contributor sized PR
 
+**Superseded by the owner ruling.** The PR described below (stage 0a) was merged as
+#838 and reverted, because it changed code every build runs. The first PR now is the
+switch itself: read `PSMUX_SERVER_MODE` / `server-mode` where a server is about to be
+started, with `per-session` (the default) taking exactly today's path, unchanged, and
+`shared` entering new code of its own. A test must prove that with the switch unset
+the default path is untouched (same ids, same files, same processes as master).
+
+That switch PR is now done (stage 1, step 1 above). The hunks it adds to code a
+default build runs, and nothing else:
+
+1. `src/main.rs`: one gate call each at the top of `new-session`, `start-server`
+   and the internal `server` entry, and one before the bare / `-CC` warm claim
+   (only when no live session is being attached).
+2. `src/commands.rs` and `src/server/connection.rs`: one gate each before the in
+   server `new-session` claims the warm standby or spawns a server; on refusal it
+   reports like the existing `duplicate session` branch beside it.
+3. `src/server/option_catalog.rs`: `server-mode` as a validation only name, and a
+   one line hand off in `validate_option_value` for that name.
+4. `src/server/options.rs`: the `server-mode` arm in `get_option_value` (answers
+   `per-session`) and in `apply_set_option` (no op for the running mode).
+5. `src/server/mod.rs`: `mod shared;`.
+
+With the switch unset each gate reads one environment variable and the config file
+and returns; every other line of the default path is the old code.
+
+The next contributor sized PR is step 2: a minimal shared server inside
+`src/server/shared/` that holds one session, answers the existing protocol on its
+port, and takes a second `new-session` in its namespace, with its own id allocator
+(stage 0a rebuilt inside the shared code, not in `AppState`).
+
+The original stage 0a text, for the record:
+
 **Stage 0a: a server owned id allocator, no behaviour change.**
 
 * Add `ServerIds { next_window: usize, next_pane: usize, next_forward: u64 }` with
@@ -12491,39 +12647,70 @@ switch on top of.
 ---
 
 <!-- program-status -->
-# Quiet program attention (OSC 7501)
+# Program status (OSC 7501)
 
-Programs can report their state with [OSC 7501](https://www.superlogical.com/rex/docs/build/program-status), revision 0.4. Support is off by default and turned on with the `program-status` option. Once it is on, psmux stores those reports separately from output monitoring, and [tab indicators](#opt-in-to-attention-indicators) can show blocked tasks and unseen results:
+Programs can report their state with [OSC 7501](https://www.superlogical.com/rex/docs/build/program-status), revision 0.4. Support is off by default; `set -g program-status on` enables collection and capability replies. psmux provides both the complete records for custom consumers and a representative status for each pane and window.
 
-| Indicator | Meaning |
+## Which status is shown
+
+psmux picks one report to represent each pane, then one of those to represent the window. All panes count, including floating panes and panes kept after their program exits. Reports are picked in this order:
+
+1. Waiting for input (`blocked`).
+2. An error you haven't seen (`error`).
+3. A successful completion you haven't seen (`done`).
+4. Work still running (`working`).
+5. Idle programs and results you've already seen.
+
+If several reports have the same priority, the one whose contents changed most recently wins. Sending the same report again doesn't move it ahead or mark it unseen. For changes at exactly the same time, record ids break ties within a pane and pane ids break ties across panes. The selected pane gets no special treatment: a task in another pane can represent the window.
+
+The summary keeps the chosen report's state and details, along with its pane, record id, and whether you've seen it. Reports don't set output-activity flags, ring a bell, or trigger desktop notifications. A window with no reports has no summary.
+
+## When a result is seen
+
+Selecting a pane, or switching to a window, marks that pane's current done/error results as seen. Other clients see the same flag. The reported state stays done/error. After a result is marked seen, another report can take its place in the summary, such as a task still running in a sibling pane.
+
+Blocked reports remain until the program updates them or they expire. A result that arrives while you stay in a pane stays unseen until you leave and return. Selecting the pane you're already in doesn't mark anything seen.
+
+Only results already recorded when you return are marked seen. Results recorded afterward stay unseen. Status continues to update while copy mode freezes the pane's contents.
+
+## Formats and inspection
+
+Both `pane_ps_` and `window_ps_` formats use the same selection policy. Pane formats select across the pane's root and child records; window formats select across the entire window.
+
+| Format suffix | Meaning |
 |---|---|
-| `[?%12]` | Pane `%12` needs input |
-| `[!%12]` | Pane `%12` has an unseen error |
-| `[+%12]` | Pane `%12` has an unseen completion |
+| `state` | Reported state: idle, working, blocked, done, or error |
+| `id` | Selected record id; empty for the root |
+| `kind` | Blocked kind |
+| `progress` | Percentage; empty for indeterminate, `0` for zero |
+| `app` | Application identifier inherited from the nearest explicit ancestor |
+| `seen` | `1` for an acknowledged result, otherwise `0` |
 
-Working and idle records have no indicator. Window attention includes tiled and floating panes, including panes retained after exit. Blocked takes priority over error, then done; the most recently changed record breaks ties. An identical retransmission does not change priority or make an acknowledged result unseen again.
+`window_ps_pane` identifies the source pane, such as `%12`. Absent summaries or fields expand to empty; test `state` to distinguish absence from a root record with an empty id. Titles and messages have no format variables. These names are psmux extensions, not a claim of tmux OSC 7501 support.
 
-Returning through pane selection or a window switch acknowledges the target pane's current done/error records. This acknowledgement is shared across clients and preserves the reported state for inspection. Blocked remains visible until the application changes it or its protocol lifetime ends. A result arriving while you stay in a pane remains unseen until you leave and return. On return, the server reads current records and marks them seen in one operation under the live parser lock. A result processed before that atomic acknowledgement can be seen; one processed afterward remains unseen. Copy mode continues to use live status behind its frozen screen.
+The window objects in `dump-state` frames include optional `ps_status` with the selected pane, id, state, kind, progress, app, and seen flag. It includes working, idle, and acknowledged results. `list-windows -J` adds `ps_panes`: every pane's records with id, state, kind, progress, inherited app, title, msg, and seen. No records are discarded by aggregation; custom consumers can implement their own ordering. Frames omit `ps_panes`, titles, and messages so application text is not pushed to every client on every redraw.
 
-## Opt in to attention indicators
+Titles and messages remain literal, untrusted JSON text. Inspection tools must never execute them as markup or commands.
 
-`program-status` is the single switch, and it is off by default. While it is off, psmux treats OSC 7501 as an unknown sequence, as it did before this support: reports are not stored and the `OSC 7501 ; ?` capability query draws no reply, so programs keep whatever notification they use without it. Adding the format variables below does not turn it on. Turning the option off, or `set -gu program-status`, withdraws every stored record.
+## Opt in to presentation
 
-The default tab formats match tmux and omit program attention. To accept reports and show indicators, add these lines to your psmux configuration:
+The default tab formats match tmux and show no program status. A font-independent example that shows every selected state is:
 
 ```tmux
 set -g program-status on
-set -g window-status-format '#I:#W#{?window_flags,#{window_flags},#{?window_ps_attention,, }}#{window_ps_attention}'
-set -g window-status-current-format '#I:#W#{?window_flags,#{window_flags},#{?window_ps_attention,, }}#{window_ps_attention}'
+set -g window-status-format '#I:#W#{?window_flags,#{window_flags},#{?window_ps_state,, }}#{?window_ps_state, [#{window_ps_state}],}'
+set -g window-status-current-format '#I:#W#{?window_flags,#{window_flags},#{?window_ps_state,, }}#{?window_ps_state, [#{window_ps_state}],}'
 ```
 
-Without pending attention these formats render exactly like the tmux defaults. With it, a tab reads `1:pwsh [?%12]` or `1:pwsh* [?%12]`: the flag placeholder space gives way to the indicator, so there is never a double space.
+Without records this matches the stock tab. With a report it reads `1:pwsh [working]` or `1:pwsh* [blocked]`, without a double space. An acknowledged done/error remains a reported result in this simple example. Custom formats can use `window_ps_seen` to choose how to style a result you've seen. Configure both active and inactive formats, including window-local overrides.
 
-For custom formats, append `#{window_ps_attention}` to your `window-status-format` and `window-status-current-format` values, including window-local overrides. The variable includes its leading space and expands to empty without pending attention.
+Output and silence monitoring are separate. Configure `monitor-activity off` and `monitor-silence 0` if you only want program status in your tabs.
 
 ## Reporting and lifetime
 
-For example, a shell script can send these sequences (shown with shell escape syntax):
+`program-status` is the single switch. While off, OSC 7501 is an unknown sequence: reports are not stored and the `OSC 7501 ; ?` capability query draws no reply. Format variables alone do not turn it on. Turning it off, or `set -gu program-status`, withdraws all stored records.
+
+For example, a shell script can send:
 
 ```sh
 printf '\033]7501;state=working:app=build\033\\'
@@ -12533,36 +12720,16 @@ printf '\033]7501;state=done:app=build\033\\'
 printf '\033]7501;state=clear\033\\'
 ```
 
-BEL is also accepted as a terminator. Programs can query support with `OSC 7501 ; ? ST`. With `program-status` on, psmux replies through the pane input pipe before a following primary-device-attributes reply. It consumes reports locally; it does not forward them to the outer terminal or produce desktop notifications.
+BEL is also accepted as a terminator. With `program-status` on, psmux replies to `OSC 7501 ; ? ST` through the pane input pipe before a following primary-device-attributes reply. Reports are consumed locally, not forwarded to the outer terminal.
 
-The root record has no id. Children use slash-separated ids, replace their own record completely, and inherit app from their nearest ancestor with an explicit app. A hierarchical clear removes the addressed record and its descendants. Each pane holds at most 64 records, evicting the least recently updated record when full. Valid identical reports refresh eviction order without changing acknowledgement.
+The root record has no id. Children use slash-separated ids, replace their own record completely, and inherit app from their nearest ancestor with an explicit app. A hierarchical clear removes the addressed record and its descendants. Each pane holds at most 64 records, evicting the least recently updated record when full.
 
-Primary/alternate screen switches and soft resets preserve records. Full reset (RIS) clears them. A new shell prompt (`OSC 133 A`) or attached-process exit removes idle, working, and blocked records; done/error survive. Respawning the pane clears its records and acknowledgement. Records are not persisted across server restarts.
+Primary/alternate screen switches and soft resets preserve records. Full reset (RIS) clears them. A new shell prompt (`OSC 133 A`) or attached-process exit removes idle, working, and blocked records; done/error survive. Respawning the pane clears records and acknowledgement. Records are not persisted across server restarts.
 
 Validation runs before record mutation and checks field limits, ids, base64, UTF-8, and decoded control characters. Completed reports use a 4096-byte dispatched-sequence budget, including standard OSC/terminator framing. Existing OSC intake behavior is unchanged, including ignored control bytes, termination semantics, and temporary buffering of unterminated sequences. This feature adds no general OSC or clipboard memory limit.
-
-## Formats and inspection
-
-| Format | Meaning |
-|---|---|
-| `pane_ps_state` | Root state |
-| `pane_ps_kind` | Root blocked kind |
-| `pane_ps_progress` | Root percentage; empty for indeterminate, `0` for zero |
-| `pane_ps_app` | Root application identifier |
-| `pane_ps_attention_state` | Selected attention state in the pane |
-| `pane_ps_attention_id` | Selected record id; empty for the root or no attention |
-| `window_ps_attention_state` | Selected attention state across the window |
-| `window_ps_attention_pane` | Selected pane id, such as `%12` |
-| `window_ps_attention` | Quiet text indicator |
-
-Custom formats can show `#{pane_ps_state}` to distinguish `working` from `idle`; root formats do not select child records. Absent fields expand to empty. These names are psmux extensions, inspired by a tmux proposal; they do not imply shipped tmux OSC 7501 support.
-
-The window objects in `dump-state` frames include an optional `ps_attention` field. `list-windows -J` adds `ps_panes`, which frames leave out so record text is not pushed to every client on every redraw. `ps_panes` contains pane ids and records with id, state, kind, progress, inherited app, title, msg, and seen. Titles and messages remain literal, untrusted text in JSON. They have no status-format variables and must never be treated as markup or commands by an inspection tool. Old clients can ignore the additive fields; old servers can omit them.
 
 ## Windows console detection
 
 Certain versions of ConPTY swallow the OSC reply and answer DA1 themselves, so programs can fail to detect support even when psmux implements the protocol. With psmux's default console host, updating Windows Terminal alone does not replace the ConPTY version used for its panes.
-
-Output monitoring remains available with its existing tmux-compatible semantics. For an attention-only setup, turn on `program-status` and the tab indicators, and disable `monitor-activity` and `monitor-silence` in your configuration.
 
 ---
