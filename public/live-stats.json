@@ -1,13 +1,13 @@
 {
-  "stars": 3700,
-  "forks": 243,
-  "contributors": 41,
+  "stars": 3717,
+  "forks": 248,
+  "contributors": 43,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1525
+      "contributions": 1588
     },
     {
       "login": "computersrmyfriends",
@@ -19,13 +19,13 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 52
+      "contributions": 55
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 29
+      "contributions": 32
     },
     {
       "login": "tarikguney",
@@ -58,16 +58,16 @@
       "contributions": 13
     },
     {
+      "login": "YuruDeveloper",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/101876010?v=4",
+      "url": "https://github.com/YuruDeveloper",
+      "contributions": 10
+    },
+    {
       "login": "Gerrrt",
       "avatarUrl": "https://avatars.githubusercontent.com/u/98648590?v=4",
       "url": "https://github.com/Gerrrt",
       "contributions": 10
-    },
-    {
-      "login": "acoliver",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/42029?v=4",
-      "url": "https://github.com/acoliver",
-      "contributions": 9
     },
     {
       "login": "andrew-tawfeek",
@@ -76,8 +76,8 @@
       "contributions": 9
     }
   ],
-  "issues": 34,
-  "companiesRepresented": 604,
+  "issues": 39,
+  "companiesRepresented": 605,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -376,7 +376,8 @@
     },
     {
       "name": "Buguard",
-      "count": 1
+      "count": 1,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=buguard.com&sz=128"
     },
     {
       "name": "SD Com",
@@ -892,18 +893,18 @@
     },
     {
       "month": "2026-09",
-      "total": 3573
+      "total": 3572
     },
     {
       "month": "2026-10",
-      "total": 3700
+      "total": 3717
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9867,
+      "followers": 9869,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -911,7 +912,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5406,
+      "followers": 5408,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -919,7 +920,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4794,
+      "followers": 4795,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -935,7 +936,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2130,
+      "followers": 2132,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -943,7 +944,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1905,
+      "followers": 1909,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -951,7 +952,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1579,
+      "followers": 1581,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -967,7 +968,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1313,
+      "followers": 1314,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -975,7 +976,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 972,
+      "followers": 974,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -983,7 +984,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 898,
+      "followers": 899,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -991,7 +992,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 895,
+      "followers": 894,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -999,7 +1000,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 835,
+      "followers": 838,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1023,7 +1024,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 741,
+      "followers": 743,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1031,7 +1032,7 @@
     {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 733,
+      "followers": 734,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
@@ -1050,7 +1051,7 @@
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 62,
+      "stars": 65,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1262,34 +1263,24 @@
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#6327",
-        "#6040",
-        "#4564",
-        "#2062",
-        "#4305",
         "#2830",
+        "#4305",
+        "#4564",
         "#2696",
-        "#7116",
-        "#4102",
-        "#1055",
         "#7073",
+        "#4102",
+        "#2062",
+        "#7116",
         "#2619",
-        "#6266",
-        "#6181",
         "#3588",
-        "#102",
-        "#4417",
-        "#6274",
-        "#4423",
-        "#2730",
+        "#6266",
         "#2633",
-        "#1584",
-        "#3303",
-        "#2339",
+        "#2670",
+        "#4417",
         "#5898",
-        "#5612"
+        "#3303"
       ],
-      "context": "worktree-manager: suppress console windows for recurring PSMux children of pythonw daemons"
+      "context": "agent-worktrees: mux wheel-event passthrough uses send-keys -M, unsupported by the in-use psmux version"
     },
     {
       "repo": "takushio2525/tako",
@@ -1308,7 +1299,8 @@
         "#647",
         "#519",
         "#628",
-        "#1073"
+        "#1073",
+        "#937"
       ],
       "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
     },
@@ -1335,10 +1327,10 @@
     {
       "repo": "Thurbeen/thurbox",
       "issues": [
-        "#1472",
+        "#1557",
         "#1473",
+        "#1472",
         "#1469",
-        "#1470",
         "#1466",
         "#1457",
         "#1456",
@@ -1346,7 +1338,7 @@
         "#1429",
         "#1433"
       ],
-      "context": "fix(core): bound the psmux -EncodedCommand window launcher against Windows command-line limits"
+      "context": "psmux: after a control-mode reconnect, pane targets resolve to the wrong pane — keystrokes and restart stop reaching sessions"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1368,10 +1360,10 @@
       "issues": [
         "#92757",
         "#102905",
-        "#102911",
         "#24384",
         "#102928",
-        "#91284"
+        "#91284",
+        "#88127"
       ],
       "context": "[BUG] Ctrl+G external editor receives no keyboard input inside ConPTY-based terminal multiplexers on Windows (refiling #73301)"
     },
@@ -1385,6 +1377,16 @@
         "#377"
       ],
       "context": "psmux: Chat view messages fail, paste-buffer -b finds no buffer"
+    },
+    {
+      "repo": "YoanWai/agent-manager",
+      "issues": [
+        "#828",
+        "#805",
+        "#802",
+        "#835"
+      ],
+      "context": "Windows (non wsl) lag"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1422,15 +1424,6 @@
         "#21"
       ],
       "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
-    },
-    {
-      "repo": "savoy9/tackle",
-      "issues": [
-        "#88",
-        "#12",
-        "#62"
-      ],
-      "context": "opening an old agent session doesn't work."
     }
   ],
   "dotfilesRepos": [
@@ -1499,7 +1492,7 @@
       "detail": "psmux.conf"
     },
     {
-      "repo": "capypara20/dotfiles",
+      "repo": "jamierpond/.config",
       "detail": "psmux.conf"
     },
     {
@@ -1547,7 +1540,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "79 developers · Ke, erasin.wang, Home",
+      "detail": "78 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1556,7 +1549,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "67 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "68 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1575,7 +1568,7 @@
       "lat": 31.2,
       "lng": 121.5,
       "label": "Shanghai",
-      "detail": "35 developers · Microsoft, Tongji University, 中国科学院数字生命研究所",
+      "detail": "36 developers · Microsoft, Tongji University, 中国科学院数字生命研究所",
       "size": "lg",
       "country": "China",
       "continent": "Asia",
@@ -1758,15 +1751,6 @@
       "continent": "Europe"
     },
     {
-      "lat": 50.1,
-      "lng": 14.4,
-      "label": "Prague",
-      "detail": "13 developers · Fine, Altap, Jaroslav Urbánek, TV NOVA",
-      "size": "lg",
-      "country": "Czechia",
-      "continent": "Europe"
-    },
-    {
       "lat": 41.9,
       "lng": 12.5,
       "label": "Italy",
@@ -1783,6 +1767,15 @@
       "size": "lg",
       "country": "Canada",
       "continent": "North America"
+    },
+    {
+      "lat": 50.1,
+      "lng": 14.4,
+      "label": "Prague",
+      "detail": "12 developers · Fine, Altap, Jaroslav Urbánek, TV NOVA",
+      "size": "lg",
+      "country": "Czechia",
+      "continent": "Europe"
     },
     {
       "lat": -23.5,
@@ -1860,6 +1853,15 @@
       "continent": "Asia"
     },
     {
+      "lat": 59.3,
+      "lng": 18.1,
+      "label": "Stockholm",
+      "detail": "10 developers · EmbarkStudios, Tradera AB, bullfinch-se",
+      "size": "lg",
+      "country": "Sweden",
+      "continent": "Europe"
+    },
+    {
       "lat": -34.6,
       "lng": -58.4,
       "label": "Argentina",
@@ -1897,6 +1899,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 1.4,
+      "lng": 103.8,
+      "label": "Singapore",
+      "detail": "9 developers · Unemployed since Jul'22",
+      "size": "md",
+      "country": "Singapore",
+      "continent": "Asia"
+    },
+    {
       "lat": 30.7,
       "lng": 104.1,
       "label": "Chengdu",
@@ -1916,15 +1927,6 @@
       "color": "#fbbf24"
     },
     {
-      "lat": 59.3,
-      "lng": 18.1,
-      "label": "Stockholm",
-      "detail": "9 developers · EmbarkStudios, Tradera AB, bullfinch-se",
-      "size": "md",
-      "country": "Sweden",
-      "continent": "Europe"
-    },
-    {
       "lat": 55.7,
       "lng": 12.6,
       "label": "Copenhagen",
@@ -1942,15 +1944,6 @@
       "size": "md",
       "country": "Ireland",
       "continent": "Europe"
-    },
-    {
-      "lat": 1.4,
-      "lng": 103.8,
-      "label": "Singapore",
-      "detail": "8 developers · Unemployed since Jul'22",
-      "size": "md",
-      "country": "Singapore",
-      "continent": "Asia"
     },
     {
       "lat": 23.1,
@@ -1986,5 +1979,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-10-19T12:31:02Z"
+  "lastUpdated": "2026-10-22T11:23:09Z"
 }
