@@ -1,13 +1,13 @@
 {
-  "stars": 3749,
-  "forks": 253,
-  "contributors": 44,
+  "stars": 3762,
+  "forks": 256,
+  "contributors": 46,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1621
+      "contributions": 1673
     },
     {
       "login": "computersrmyfriends",
@@ -19,13 +19,13 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 60
+      "contributions": 75
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 35
+      "contributions": 37
     },
     {
       "login": "tarikguney",
@@ -76,12 +76,12 @@
       "contributions": 9
     }
   ],
-  "issues": 39,
-  "companiesRepresented": 615,
+  "issues": 31,
+  "companiesRepresented": 619,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 34,
+      "count": 33,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -537,7 +537,7 @@
       "logoUrl": "https://cdn.simpleicons.org/visa/ffffff"
     }
   ],
-  "universities": 86,
+  "universities": 88,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -857,6 +857,12 @@
     },
     {
       "name": "University of Vienna"
+    },
+    {
+      "name": "Chaohu University"
+    },
+    {
+      "name": "Italian Institute of Technology"
     }
   ],
   "starHistory": [
@@ -886,30 +892,30 @@
     },
     {
       "month": "2026-06",
-      "total": 2711
+      "total": 2709
     },
     {
       "month": "2026-07",
-      "total": 3091
+      "total": 3089
     },
     {
       "month": "2026-08",
-      "total": 3373
+      "total": 3370
     },
     {
       "month": "2026-09",
-      "total": 3571
+      "total": 3568
     },
     {
       "month": "2026-10",
-      "total": 3749
+      "total": 3762
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9869,
+      "followers": 9872,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -917,7 +923,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5417,
+      "followers": 5424,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -925,7 +931,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4801,
+      "followers": 4804,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -933,7 +939,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2189,
+      "followers": 2193,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -941,7 +947,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2129,
+      "followers": 2130,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -949,7 +955,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1909,
+      "followers": 1910,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -957,7 +963,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1580,
+      "followers": 1581,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -965,7 +971,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1426,
+      "followers": 1427,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -981,7 +987,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 977,
+      "followers": 979,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -997,7 +1003,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 895,
+      "followers": 899,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -1005,7 +1011,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 846,
+      "followers": 843,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1021,7 +1027,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 744,
+      "followers": 748,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1045,13 +1051,13 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 728,
+      "followers": 727,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
     }
   ],
-  "ecosystemRepos": 35,
+  "ecosystemRepos": 36,
   "ecosystemProjects": [
     {
       "name": "termote",
@@ -1268,43 +1274,52 @@
     {
       "repo": "takushio2525/tako",
       "issues": [
-        "#1282",
+        "#2484",
         "#724",
+        "#1282",
+        "#641",
         "#729",
+        "#2428",
         "#728",
         "#885",
-        "#641",
+        "#2454",
+        "#2433",
         "#1594",
         "#525",
         "#842",
+        "#2462",
+        "#2432",
         "#730",
         "#1538",
         "#647",
         "#519",
         "#628",
         "#1073",
+        "#467",
         "#937"
       ],
-      "context": "[改善] [Windows] tako tmux cleanup --servers を psmux でも使えるようにする（実機の残骸を入口で片付ける）"
+      "context": "[改善][Windows] 本番の器（psmux）の conf に warm off が無い・クライアントの実行ファイルが backend とずれている（#885 の続き）"
     },
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
         "#8797",
+        "#9333",
         "#4305",
         "#4564",
         "#8811",
         "#2830",
         "#7073",
         "#4102",
-        "#7116",
         "#2619",
+        "#7116",
         "#6266",
         "#8108",
         "#8490",
         "#4417",
         "#5898",
-        "#3303"
+        "#3303",
+        "#8669"
       ],
       "context": "Launch Windows PSMux clients from user home while preserving pane working directories"
     },
@@ -1326,30 +1341,48 @@
       "context": "Support native Windows with psmux and feature parity"
     },
     {
+      "repo": "anthropics/claude-code",
+      "issues": [
+        "#104688",
+        "#92757",
+        "#102905",
+        "#24384",
+        "#102928",
+        "#91284"
+      ],
+      "context": "[BUG] Windows: `claude attach` in a psmux pane with no client attached takes no keystrokes from `tmux send-keys`, though other raw-mode programs there do"
+    },
+    {
       "repo": "Thurbeen/thurbox",
       "issues": [
         "#1472",
         "#1473",
-        "#1469",
         "#1466",
         "#1557",
         "#1457",
-        "#1456",
-        "#1489",
-        "#1429"
+        "#1456"
       ],
       "context": "psmux: after a control-mode reconnect, pane targets resolve to the wrong pane — keystrokes and restart stop reaching sessions"
+    },
+    {
+      "repo": "receptron/mulmoterminal",
+      "issues": [
+        "#3204",
+        "#3180",
+        "#3201",
+        "#3166",
+        "#3194",
+        "#3117"
+      ],
+      "context": "bug(windows): psmux が新しいセルごとに `unknown option 'terminal-features'` の警告を表示する"
     },
     {
       "repo": "bmad-code-org/bmad-loop",
       "issues": [
         "#914",
         "#921",
-        "#727",
-        "#879",
-        "#905",
-        "#877",
-        "#906"
+        "#1002",
+        "#879"
       ],
       "context": "retire _transportable's refusal of -X=value, -t... and -- once a psmux release carries the psmux/psmux#795 fix"
     },
@@ -1359,46 +1392,9 @@
         "#552",
         "#237",
         "#289",
-        "#252",
-        "#356",
-        "#408",
-        "#377"
+        "#252"
       ],
       "context": "Files and Changes on Windows with psmux"
-    },
-    {
-      "repo": "anthropics/claude-code",
-      "issues": [
-        "#104688",
-        "#92757",
-        "#102905",
-        "#24384",
-        "#102928",
-        "#91284",
-        "#88127"
-      ],
-      "context": "[BUG] Windows: `claude attach` in a psmux pane with no client attached takes no keystrokes from `tmux send-keys`, though other raw-mode programs there do"
-    },
-    {
-      "repo": "receptron/mulmoterminal",
-      "issues": [
-        "#3180",
-        "#3166",
-        "#3194",
-        "#3117",
-        "#3173"
-      ],
-      "context": "psmux: pick the sequence-folding rule by measuring, with Unicode 11 per-codepoint widths"
-    },
-    {
-      "repo": "YoanWai/agent-manager",
-      "issues": [
-        "#805",
-        "#828",
-        "#802",
-        "#835"
-      ],
-      "context": "Support a native Windows machine as an SSH connection host"
     },
     {
       "repo": "vanman2024/claude-crew",
@@ -1420,6 +1416,15 @@
       "context": "Nav does not follow session moves inside a remote psmux client"
     },
     {
+      "repo": "YoanWai/agent-manager",
+      "issues": [
+        "#805",
+        "#828",
+        "#802"
+      ],
+      "context": "Support a native Windows machine as an SSH connection host"
+    },
+    {
       "repo": "NobleFactor/noblefactor-engprod",
       "issues": [
         "#388",
@@ -1439,8 +1444,8 @@
       "detail": ".psmux.conf"
     },
     {
-      "repo": "vcfvct/dotfile",
-      "detail": ".psmux.conf"
+      "repo": "Suida/dot",
+      "detail": "psmux.conf"
     },
     {
       "repo": "rdrkr/dotfiles",
@@ -1451,16 +1456,8 @@
       "detail": "psmux.conf"
     },
     {
-      "repo": "gen4438/dotfiles",
+      "repo": "Liya2199/dotfiles",
       "detail": "dot_psmux.conf"
-    },
-    {
-      "repo": "nappa0326/claude-notification",
-      "detail": "start-psmux.ps1"
-    },
-    {
-      "repo": "7df-lab/devo",
-      "detail": "AGENTS.md"
     },
     {
       "repo": "maxrzaw/dotfiles",
@@ -1483,11 +1480,11 @@
       "detail": "dot_psmux.conf"
     },
     {
-      "repo": "dyskette/.dotconfigs",
-      "detail": "psmux.conf"
+      "repo": "kylemello/nixosdotfiles",
+      "detail": "psmux.nix"
     },
     {
-      "repo": "csaben/dotfiles",
+      "repo": "dyskette/.dotconfigs",
       "detail": "psmux.conf"
     },
     {
@@ -1495,11 +1492,11 @@
       "detail": "setup-psmux.ps1"
     },
     {
-      "repo": "aam-at/windots",
-      "detail": "psmux.conf"
+      "repo": "dduyanhhoang/dotfiles",
+      "detail": ".psmux.conf"
     },
     {
-      "repo": "david-risney/PwshProfile",
+      "repo": "mikecubed/dotfiles",
       "detail": "psmux.conf"
     },
     {
@@ -1507,24 +1504,32 @@
       "detail": "psmux.conf"
     },
     {
+      "repo": "vchirikov/dotfiles",
+      "detail": ".psmux.conf"
+    },
+    {
       "repo": "Ikkjo/dotfiles",
       "detail": ".psmux.conf"
     },
     {
-      "repo": "LizardLiang/configs",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "eXpandFramework/Reactive.XAF",
-      "detail": "AGENTS.md"
-    },
-    {
-      "repo": "gKrokod/vimrc",
+      "repo": "pieberrykinnie/.psmux.conf",
       "detail": ".psmux.conf"
     },
     {
       "repo": "stonetorch/wt-zsh-fastlauncher",
       "detail": "AGENTS.md"
+    },
+    {
+      "repo": "caolib/kira",
+      "detail": "run.ps1"
+    },
+    {
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "sgruendel/dotfiles",
+      "detail": "install_tools.ps1"
     }
   ],
   "dotfilesReferences": 24,
@@ -1533,7 +1538,7 @@
       "lat": 36.4,
       "lng": 127.0,
       "label": "South Korea",
-      "detail": "87 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
+      "detail": "88 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
       "size": "lg",
       "country": "South Korea",
       "continent": "Asia",
@@ -1543,7 +1548,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "78 developers · Ke, erasin.wang, Home",
+      "detail": "79 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1552,7 +1557,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "68 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "69 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1562,7 +1567,7 @@
       "lat": 51.2,
       "lng": 10.4,
       "label": "Germany",
-      "detail": "40 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
+      "detail": "39 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
       "size": "lg",
       "country": "Germany",
       "continent": "Europe"
@@ -1590,7 +1595,7 @@
       "lat": 39.8,
       "lng": -98.6,
       "label": "United States",
-      "detail": "33 developers · Blue Shark Friends, borggames, PLC PRODUCE INC",
+      "detail": "34 developers · Blue Shark Friends, borggames, PLC PRODUCE INC",
       "size": "lg",
       "country": "United States",
       "continent": "North America"
@@ -1692,11 +1697,29 @@
       "lat": 40.7,
       "lng": -74.0,
       "label": "New York",
-      "detail": "15 developers · Gentrace, NomosArtificial, Microsoft",
+      "detail": "16 developers · Gentrace, NomosArtificial, Microsoft",
       "size": "lg",
       "country": "United States",
       "continent": "North America",
       "color": "#60a5fa"
+    },
+    {
+      "lat": 41.9,
+      "lng": 12.5,
+      "label": "Italy",
+      "detail": "15 developers · Six Degrees Consulting, Vaimoo, DotSp",
+      "size": "lg",
+      "country": "Italy",
+      "continent": "Europe"
+    },
+    {
+      "lat": 30.6,
+      "lng": -96.3,
+      "label": "Texas",
+      "detail": "15 developers · energyworldnet, Trading & Commodities, Nutiliti",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America"
     },
     {
       "lat": 51.5,
@@ -1718,37 +1741,10 @@
       "color": "#60a5fa"
     },
     {
-      "lat": 41.0,
-      "lng": 29.0,
-      "label": "Istanbul",
-      "detail": "15 developers · isikkaynak, GR Digital Products, Agito",
-      "size": "lg",
-      "country": "Turkey",
-      "continent": "Europe"
-    },
-    {
       "lat": 37.4,
       "lng": -122.1,
       "label": "San Francisco Bay Area",
       "detail": "14 developers · XeroSecInc, Forbes Asset Management Inc., Code Crafters",
-      "size": "lg",
-      "country": "United States",
-      "continent": "North America"
-    },
-    {
-      "lat": 41.9,
-      "lng": 12.5,
-      "label": "Italy",
-      "detail": "14 developers · Six Degrees Consulting, Vaimoo, DotSp",
-      "size": "lg",
-      "country": "Italy",
-      "continent": "Europe"
-    },
-    {
-      "lat": 30.6,
-      "lng": -96.3,
-      "label": "Texas",
-      "detail": "14 developers · energyworldnet, Trading & Commodities, Nutiliti",
       "size": "lg",
       "country": "United States",
       "continent": "North America"
@@ -1760,6 +1756,15 @@
       "detail": "14 developers · Innomerics, Marfeel, wannme",
       "size": "lg",
       "country": "Spain",
+      "continent": "Europe"
+    },
+    {
+      "lat": 41.0,
+      "lng": 29.0,
+      "label": "Istanbul",
+      "detail": "14 developers · isikkaynak, GR Digital Products, Agito",
+      "size": "lg",
+      "country": "Turkey",
       "continent": "Europe"
     },
     {
@@ -1902,6 +1907,16 @@
       "color": "#60a5fa"
     },
     {
+      "lat": 55.7,
+      "lng": 12.6,
+      "label": "Copenhagen",
+      "detail": "9 developers · Uptime Development, Microsoft, DUOS",
+      "size": "md",
+      "country": "Denmark",
+      "continent": "Europe",
+      "color": "#60a5fa"
+    },
+    {
       "lat": 47.4,
       "lng": 8.5,
       "label": "Zurich",
@@ -1928,16 +1943,6 @@
       "country": "China",
       "continent": "Asia",
       "color": "#fbbf24"
-    },
-    {
-      "lat": 55.7,
-      "lng": 12.6,
-      "label": "Copenhagen",
-      "detail": "8 developers · Uptime Development, Microsoft, DUOS",
-      "size": "md",
-      "country": "Denmark",
-      "continent": "Europe",
-      "color": "#60a5fa"
     },
     {
       "lat": 53.3,
@@ -1982,5 +1987,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-10-26T12:29:41Z"
+  "lastUpdated": "2026-10-29T12:30:48Z"
 }
