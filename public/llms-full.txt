@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-10-29 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-11-02 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -2392,10 +2392,10 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `choose-tree-preview` | Bool | `off` | Open `choose-session` / `choose-tree` pickers with the live preview pane already visible (saves pressing `p`). See [preview.md](preview.md) |
 | `bold-is-bright` | Bool | `on` | Restore standard SGR codes for the 16 basic colors so the outer terminal renders `bold` as bright (matches a bare shell). Set `off` to keep explicit 256-indexed low colors byte-accurate. See [Bold Is Bright](#bold-is-bright-color-rendering) |
 | `status` | Bool/Int | `on` | Show status bar (number = line count) |
-| `status-position` | Str | `bottom` | `top` or `bottom` |
-| `status-justify` | Str | `left` | `left`, `centre`, `right`, `absolute-centre` |
-| `status-left-length` | Int | `10` | Max width of status-left |
-| `status-right-length` | Int | `40` | Max width of status-right |
+| `status-position` | Str | `bottom` | `top` or `bottom`; any other value is refused with `unknown value`, as in tmux |
+| `status-justify` | Str | `left` | `left`, `centre`, `right` or `absolute-centre`; any other value, `center` too, is refused with `unknown value`, as in tmux |
+| `status-left-length` | Int | `10` | Max width of status-left, 0 to 32767 |
+| `status-right-length` | Int | `40` | Max width of status-right, 0 to 32767 |
 | `focus-events` | Bool | `off` | Pass focus events to apps |
 | `sixel` | Choice | `auto` | When to draw the sixel images programs in a pane write (`off`/`on`/`auto`). They reach psmux only through a console host that passes sixel on, which the inbox `conhost.exe` does not: point `PSMUX_CONPTY_DIR` at an OpenConsole, see [The Console Host Seam](diagnostics.md#the-console-host-seam). With `auto` the client draws them only when the outer terminal's DA1 reply lists sixel (4), as Windows Terminal's does, which is what tmux does. `on` draws them whatever the terminal said, for a terminal that sends no reply, and `off` never draws them |
 | `input-buffer-size` | Int | `1048576` | Bytes a sixel image's DCS may hold before it is dropped, as in tmux. Range `1048576` to `4294967295`. tmux also holds OSC and APC strings to it; psmux holds only sixel |
@@ -2438,7 +2438,7 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `update-environment` | Str | *(tmux defaults)* | Space-separated glob patterns; at new-session and on every attach each matching variable of the client's environment is copied into the session environment, and a pattern nothing matches is recorded as a `-NAME` removal (tmux environ_update) |
 | `warm` | Bool | `on` | Pre-spawn shells for instant window/pane creation (see [warm-sessions.md](warm-sessions.md)) |
 | `copy-command` | Str | | Shell command for clipboard pipe |
-| `codepoint-widths` | Str | | Comma separated overrides for how many columns Unicode codepoints occupy (see [Codepoint widths](#codepoint-widths)) |
+| `codepoint-widths` | Str | | Array of overrides for how many columns Unicode codepoints occupy, comma separated or one element with `codepoint-widths[N]` (see [Codepoint widths](#codepoint-widths)) |
 | `terminal-overrides` | Str | `linux*:AX@` | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen (see [Terminal overrides](#terminal-overrides)) |
 | `set-clipboard` | Str | `external` | Clipboard interaction (`on`/`off`/`external`). A copy mode yank reaches the Windows clipboard on every value, with OSC 52 to the outer terminal unless `off`. An application's own OSC 52 creates a paste buffer only on `on`, as in tmux; on `external` psmux still forwards it to the outer terminal and the Windows clipboard, where tmux ignores it; `off` ignores it |
 | `main-pane-width` | String | `80` | Main pane width in the main-vertical layout, in cells or a percentage such as `30%` |
@@ -2455,8 +2455,8 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `status-style` | Str | `bg=green,fg=black` | Status bar style |
 | `status-left-style` | Str | | Left status style |
 | `status-right-style` | Str | | Right status style |
-| `status-bg` | Str | | Legacy convenience setter. Rewrites only the `bg=` part of `status-style` and leaves the rest intact |
-| `status-fg` | Str | | Legacy convenience setter. Rewrites only the `fg=` part of `status-style` and leaves the rest intact |
+| `status-bg` | Colour | `default` | Background colour of the status line, laid over `status-style` when the line is drawn (deprecated in tmux, use `status-style`). `default` and `terminal` leave `status-style`'s colour. `status-style` itself is not changed, so `set -u status-bg` takes it off again. It takes `#rrggbb`, `colour0` to `colour255`, `default`, `terminal`, the eight colour names and their `bright` forms, or their numbers `0` to `7` and `90` to `97`, and `show-options` prints the colour in that form (`1` as `red`). tmux also takes the X11 colour names and its theme colours, which psmux does not draw, so they are refused with `bad colour` |
+| `status-fg` | Colour | `default` | Foreground colour of the status line, laid over `status-style` the same way |
 | `message-style` | Str | `bg=yellow,fg=black` | Message style |
 | `message-command-style` | Str | `bg=black,fg=yellow` | Command prompt style |
 | `mode-style` | Str | `bg=yellow,fg=black` | Copy-mode highlight |
@@ -2502,6 +2502,8 @@ set -g status-format[1] "#[align=left]#{W:#[range=window|#{window_index}]#I:#W #
 ```
 
 The first line (`status-format[0]`) replaces the default status bar content. Additional lines stack below (or above, depending on `status-position`).
+
+`status-format` is an array option, as in tmux: each line is an element with its own index. `set -gu status-format[1]` removes one line and leaves the others where they are, `set -ga status-format "..."` adds a line at the lowest free index, `set -ga status-format[0] "..."` appends text to line 0, and a value without an index replaces every line, split on spaces and `,` (so write each line with its own `status-format[N]` when it holds either). `show -g status-format` prints one `status-format[N] value` line per element and `#{status-format[1]}` reads one. Only the lines below `status` are drawn; a missing one is a blank line, or the default layout on line 0. The default is empty, where tmux ships three formats: psmux draws its own status-left, window list and status-right while `status-format[0]` is empty, and `set -gu status-format` goes back to that.
 
 **Clickable window tabs.** In a custom `status-format[N]` line, tab click targets come from `#[range=window|N]`/`#[norange]` markers and nothing else: a window list written without them renders correctly but cannot be clicked, exactly as in tmux (tmux's shipped default `status-format[0]` carries these markers, which is why its window list is clickable out of the box). `N` is the window index itself, so `#[range=window|#{window_index}]` is the correct idiom at any `base-index`. Inside `#{W:inactive,current}` the comma separates the two loop arguments, so any other comma must be escaped as `#,` and combined styles are easier written as `#[fg=green]#[bold]` than `#[fg=green,bold]`. Ranges are honored on every status line, and clicks are hit-tested on every status row.
 
@@ -2942,6 +2944,7 @@ An alias resolves from the command line (`psmux dev`), a key binding, the comman
 - `-a` without an index adds an element at the lowest free index. `-a` on `command-alias[N]` adds text to the end of that element.
 - `-u command-alias[N]` removes one element and the others keep their indexes; `-u command-alias` puts the default array back, as tmux does for a global option. `set -s command-alias ''` empties it.
 - `show -s command-alias` lists them as `command-alias[N] value`, and `#{command-alias}` is every element joined with a space.
+- An element can be keyed by a name instead of a number, as in tmux 3.8: `set -s command-alias[dev] 'dev=split-window -h'` keeps your alias apart from the numbered defaults. A key of digits only is a number (`[007]` is `[7]`). `show` lists the numbered elements first, then the named ones in byte order, and `-a` without an index still takes the lowest free number. Every array option takes a name the same way (`terminal-overrides[mine]`); a named `status-format` element draws no line, as the status lines are read by number.
 
 > **Note:** the command line asks the server for an alias only when the name is not a psmux command, so an alias named after a real command (`ls`) works from a key binding or the prompt but not as `psmux ls`. A server starts with tmux's default aliases as elements 0 to 5: `split-pane=split-window`, `splitp=split-window`, `server-info=show-messages -JT`, `info=show-messages -JT`, `choose-window=choose-tree -w` and `choose-session=choose-tree -s`. A plain `set` replaces them along with the rest, so add your own aliases at an index of their own or with `-a`; `set -su command-alias` puts the defaults back.
 
@@ -3618,13 +3621,26 @@ The width must be `0`, `1` or `2`. An entry that is malformed, out of range, or
 names a codepoint that does not exist is ignored, and the remaining entries
 still apply.
 
-Because it is an array option, `-a` appends rather than replaces:
+An override tells psmux how many columns your terminal draws a character in;
+it does not change how the terminal draws it. Set a width your terminal does
+not use, and psmux and the terminal disagree about where the rest of the line
+begins.
+
+It is an array option, as in tmux, and each entry is an element with its own
+index, `codepoint-widths[N]`:
 
 ```tmux
-set -s codepoint-widths "U+2500-U+257F=2"
-set -sa codepoint-widths "U+25CF=2"     # both entries now apply
-set -su codepoint-widths                # back to the default (no overrides)
+set -s codepoint-widths "U+2500-U+257F=2"   # replaces the whole array: [0]
+set -sa codepoint-widths "U+25CF=2"         # adds at the lowest free index: [1]
+set -s codepoint-widths[5] "U+2603=2"       # sets one element
+set -su codepoint-widths[0]                 # removes one; the others keep their index
+set -su codepoint-widths                    # back to the default (no overrides)
 ```
+
+The elements are applied in index order, so when two of them name the same
+codepoint, the one with the higher index wins. A value is split on `,`, and
+psmux trims the spaces around each entry, so `"U+2502=2, U+25CF=2"` keeps both
+(tmux keeps the space, and its second entry then sets nothing).
 
 A change takes effect immediately, for text drawn after it. Text already on
 screen keeps the width it was drawn with, so redraw the pane or restart the
@@ -3635,6 +3651,9 @@ Read the current value back with:
 ```powershell
 psmux show-options -s codepoint-widths
 ```
+
+It prints one `codepoint-widths[N] entry` line per element, `-v` prints the
+entries alone, one a line, and `#{codepoint-widths}` joins them with a space.
 
 If you are unsure whether your terminal treats a character as one column or
 two, print a row of them and see where it wraps: in an 80 column window, 80 of
@@ -4465,6 +4484,15 @@ bind -n F9 {
 ```
 
 `list-keys` prints the block as its command list (`set -g @a 1 \; set -g @b 2`).
+
+A command given as one quoted argument is read as a command string, as in tmux: its `;` separates
+commands and the quotes inside it are its commands' own. The first line below binds the same list as
+the block above, and the second names the window `x y`:
+
+```
+bind -n F8 'set -g @a 1; set -g @b 2'
+bind r 'rename-window "x y"'
+```
 
 ### Extended keys from the host terminal
 
@@ -5595,7 +5623,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `has-session` | `has` | `t:` | CLI, SRV, CFG, CTL |
 | `if-shell` | `if` | `bFt:` | CLI, SRV, CFG |
 | `join-pane` | `joinp` | `dhvs:t:` | CLI, SRV, CFG |
-| `kill-pane` | `killp` | `t:` | CLI, SRV, CFG, CTL |
+| `kill-pane` | `killp` | `af:t:` | CLI, SRV, CFG, CTL |
 | `kill-server` | *(none)* | `a` (psmux extension) | CLI, SRV, CFG, CTL |
 | `kill-session` | `kill-ses` | `t:` | CLI, SRV, CFG |
 | `kill-window` | `killw` | `at:` | CLI, SRV, CFG, CTL |
@@ -5851,8 +5879,9 @@ A psmux extension that creates a pane floating above the tiled layout.
 - `-d` / `-e` disable and enable the last pane's input without selecting it, as `select-pane -l -d` / `-e` (tmux runs last-pane through the same code); `-e` wins when both are given, and `-t` names the window. Before this, both flags were dropped and `last-pane -d` selected the last pane.
 
 **kill-pane** (`killp`)
+- Boolean: `-a` keeps the target pane and kills every other pane of its window (cmd-kill-pane.c:72-93). The window is unzoomed first, a one-pane window is left alone, and with no `-t` the target is the current pane. Floating panes count as panes of the window: a tiled target closes all of them, and a floating target closes the other floats but leaves the tiled panes, since the tiled layout cannot be emptied. Clusters such as `-at %4` are split. Before #964, `-a` was ignored and the target itself was killed.
+- Value: `-f <filter>` with `-a`: only the other panes the format expands true for are killed (cmd-kill-pane.c:96-115); without `-a` it is the error `-f only valid with -a` and nothing is killed (cmd-kill-pane.c:56). Before this, `-f` was dropped: `-a -f` killed every other pane and a bare `-f` killed the current pane.
 - Value: `-t` (target pane, via the global `-t` handler)
-- Not accepted: `-a`
 
 **resize-pane** (`resizep`)
 - Boolean: `-U`, `-D`, `-L`, `-R` (directional), `-Z` (toggle zoom)
@@ -12630,9 +12659,9 @@ the other session's own listener; a window or pane in another session is refused
 as deferred), and a real attached client (dump-state, keys, paste, resize, focus,
 detach). Ids `@N`/`%N` are unique and
 dense across the server. Scoping as in tmux: `set -g`, `set -s`, `setw -g`,
-`setenv -g`, `set-hook -g` and key bindings are server wide (delivered to every
-session through its own listener and replayed on sessions created later; a
-delivery the server makes itself is an echo and is not propagated again); session
+`setenv -g`, `set-hook -g` and key bindings are server wide (tried directly on
+each session's own handler, not through its listener, and on sessions created
+later by replay; that delivery is not routed or propagated again); session
 options stay in their session. `show -s server-mode` answers `shared`.
 kill-session ends one session; the server exits when its last session ends
 (tmux with `exit-empty`). The per session `__warm__` standby is never claimed and

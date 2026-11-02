@@ -1,13 +1,13 @@
 {
-  "stars": 3762,
-  "forks": 256,
-  "contributors": 46,
+  "stars": 3788,
+  "forks": 259,
+  "contributors": 48,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1673
+      "contributions": 1717
     },
     {
       "login": "computersrmyfriends",
@@ -19,13 +19,13 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 75
+      "contributions": 97
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 37
+      "contributions": 40
     },
     {
       "login": "tarikguney",
@@ -37,7 +37,7 @@
       "login": "YuruDeveloper",
       "avatarUrl": "https://avatars.githubusercontent.com/u/101876010?v=4",
       "url": "https://github.com/YuruDeveloper",
-      "contributions": 17
+      "contributions": 21
     },
     {
       "login": "marhel",
@@ -76,8 +76,8 @@
       "contributions": 9
     }
   ],
-  "issues": 31,
-  "companiesRepresented": 619,
+  "issues": 36,
+  "companiesRepresented": 620,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -144,6 +144,11 @@
       "count": 2,
       "logo": "intel",
       "logoUrl": "https://cdn.simpleicons.org/intel/ffffff"
+    },
+    {
+      "name": "ESTIN",
+      "count": 2,
+      "logoUrl": "https://www.google.com/s2/favicons?domain=estin.com&sz=128"
     },
     {
       "name": "Open to collaborate",
@@ -483,7 +488,7 @@
       "logoUrl": "https://www.google.com/s2/favicons?domain=mikepfunk.com&sz=128"
     },
     {
-      "name": "NestLab",
+      "name": "NestLab (open-source studio)",
       "count": 1
     },
     {
@@ -529,12 +534,6 @@
     {
       "name": "PLC PRODUCE INC",
       "count": 1
-    },
-    {
-      "name": "Visa",
-      "count": 1,
-      "logo": "visa",
-      "logoUrl": "https://cdn.simpleicons.org/visa/ffffff"
     }
   ],
   "universities": 88,
@@ -617,10 +616,6 @@
     {
       "name": "Central South University",
       "domain": "csu.edu.cn"
-    },
-    {
-      "name": "Nanchang Hangkong University",
-      "domain": "nchu.edu.cn"
     },
     {
       "name": "Zhejiang University",
@@ -863,6 +858,9 @@
     },
     {
       "name": "Italian Institute of Technology"
+    },
+    {
+      "name": "Samsung R&D Institute Bangladesh"
     }
   ],
   "starHistory": [
@@ -880,7 +878,7 @@
     },
     {
       "month": "2026-03",
-      "total": 826
+      "total": 827
     },
     {
       "month": "2026-04",
@@ -892,30 +890,34 @@
     },
     {
       "month": "2026-06",
-      "total": 2709
+      "total": 2708
     },
     {
       "month": "2026-07",
-      "total": 3089
+      "total": 3088
     },
     {
       "month": "2026-08",
-      "total": 3370
+      "total": 3369
     },
     {
       "month": "2026-09",
-      "total": 3568
+      "total": 3567
     },
     {
       "month": "2026-10",
-      "total": 3762
+      "total": 3781
+    },
+    {
+      "month": "2026-11",
+      "total": 3788
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9872,
+      "followers": 9873,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -923,7 +925,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5424,
+      "followers": 5433,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -931,7 +933,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4804,
+      "followers": 4809,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -939,7 +941,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2193,
+      "followers": 2191,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -955,7 +957,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1910,
+      "followers": 1909,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -963,7 +965,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1581,
+      "followers": 1579,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -979,7 +981,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1314,
+      "followers": 1313,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -987,31 +989,31 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 979,
+      "followers": 984,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
     },
     {
-      "login": "shunkakinoki",
-      "name": "Shun Kakinoki",
-      "followers": 899,
-      "title": "OBLITERATE THE GALAXY",
-      "company": "",
-      "highlight": false
-    },
-    {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 899,
+      "followers": 903,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
     },
     {
+      "login": "shunkakinoki",
+      "name": "Shun Kakinoki",
+      "followers": 898,
+      "title": "OBLITERATE THE GALAXY",
+      "company": "",
+      "highlight": false
+    },
+    {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 843,
+      "followers": 841,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1019,7 +1021,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 755,
+      "followers": 754,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -1027,7 +1029,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 748,
+      "followers": 749,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1035,7 +1037,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 743,
+      "followers": 746,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1051,7 +1053,7 @@
     {
       "login": "andfanilo",
       "name": "Fanilo Andrianasolo",
-      "followers": 727,
+      "followers": 729,
       "title": "AI /CX Strategy Advisor / Solutions Architecture",
       "company": "Magellan",
       "highlight": false
@@ -1062,7 +1064,7 @@
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 67,
+      "stars": 68,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1304,11 +1306,11 @@
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
         "#8797",
-        "#9333",
-        "#4305",
         "#4564",
-        "#8811",
+        "#4305",
+        "#9333",
         "#2830",
+        "#8811",
         "#7073",
         "#4102",
         "#2619",
@@ -1317,9 +1319,7 @@
         "#8108",
         "#8490",
         "#4417",
-        "#5898",
-        "#3303",
-        "#8669"
+        "#5898"
       ],
       "context": "Launch Windows PSMux clients from user home while preserving pane working directories"
     },
@@ -1341,6 +1341,20 @@
       "context": "Support native Windows with psmux and feature parity"
     },
     {
+      "repo": "Thurbeen/thurbox",
+      "issues": [
+        "#1636",
+        "#1473",
+        "#1472",
+        "#1635",
+        "#1557",
+        "#1457",
+        "#1456",
+        "#1466"
+      ],
+      "context": "psmux: after a control-mode reconnect, pane targets resolve to the wrong pane — keystrokes and restart stop reaching sessions"
+    },
+    {
       "repo": "anthropics/claude-code",
       "issues": [
         "#104688",
@@ -1353,26 +1367,13 @@
       "context": "[BUG] Windows: `claude attach` in a psmux pane with no client attached takes no keystrokes from `tmux send-keys`, though other raw-mode programs there do"
     },
     {
-      "repo": "Thurbeen/thurbox",
-      "issues": [
-        "#1472",
-        "#1473",
-        "#1466",
-        "#1557",
-        "#1457",
-        "#1456"
-      ],
-      "context": "psmux: after a control-mode reconnect, pane targets resolve to the wrong pane — keystrokes and restart stop reaching sessions"
-    },
-    {
       "repo": "receptron/mulmoterminal",
       "issues": [
+        "#3233",
+        "#3236",
         "#3204",
         "#3180",
-        "#3201",
-        "#3166",
-        "#3194",
-        "#3117"
+        "#3201"
       ],
       "context": "bug(windows): psmux が新しいセルごとに `unknown option 'terminal-features'` の警告を表示する"
     },
@@ -1407,13 +1408,13 @@
       "context": "Move orchestration and review outside psmux; require native Playwright design verification"
     },
     {
-      "repo": "zer0ken/xmux",
+      "repo": "the9ball/.dotfiles",
       "issues": [
-        "#773",
-        "#139",
-        "#760"
+        "#201",
+        "#214",
+        "#185"
       ],
-      "context": "Nav does not follow session moves inside a remote psmux client"
+      "context": "psmuxの貼り付け検出・Escape待ち時間設定をchezmoiで管理する"
     },
     {
       "repo": "YoanWai/agent-manager",
@@ -1460,6 +1461,10 @@
       "detail": "dot_psmux.conf"
     },
     {
+      "repo": "aimmetal-tech/jev-skills-retrieval",
+      "detail": "psmux.ps1"
+    },
+    {
       "repo": "maxrzaw/dotfiles",
       "detail": "psmux.conf"
     },
@@ -1474,10 +1479,6 @@
     {
       "repo": "tomas-barros1/dotfiles",
       "detail": ".psmux.conf"
-    },
-    {
-      "repo": "anhdngo/dotfiles",
-      "detail": "dot_psmux.conf"
     },
     {
       "repo": "kylemello/nixosdotfiles",
@@ -1538,7 +1539,7 @@
       "lat": 36.4,
       "lng": 127.0,
       "label": "South Korea",
-      "detail": "88 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
+      "detail": "89 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
       "size": "lg",
       "country": "South Korea",
       "continent": "Asia",
@@ -1557,7 +1558,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "69 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "71 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1601,6 +1602,15 @@
       "continent": "North America"
     },
     {
+      "lat": 46.6,
+      "lng": 2.2,
+      "label": "France",
+      "detail": "32 developers · BatchLabs, SAGB0T, OrAnGeS",
+      "size": "lg",
+      "country": "France",
+      "continent": "Europe"
+    },
+    {
       "lat": 22.5,
       "lng": 114.1,
       "label": "Shenzhen",
@@ -1608,15 +1618,6 @@
       "size": "lg",
       "country": "China",
       "continent": "Asia"
-    },
-    {
-      "lat": 46.6,
-      "lng": 2.2,
-      "label": "France",
-      "detail": "30 developers · BatchLabs, SAGB0T, OrAnGeS",
-      "size": "lg",
-      "country": "France",
-      "continent": "Europe"
     },
     {
       "lat": 39.9,
@@ -1678,7 +1679,7 @@
       "lat": 52.4,
       "lng": -1.5,
       "label": "United Kingdom",
-      "detail": "18 developers · Pixel Inspiration, everstack, newscred",
+      "detail": "17 developers · Pixel Inspiration, everstack, newscred",
       "size": "lg",
       "country": "United Kingdom",
       "continent": "Europe"
@@ -1704,6 +1705,15 @@
       "color": "#60a5fa"
     },
     {
+      "lat": 51.5,
+      "lng": -0.1,
+      "label": "London",
+      "detail": "16 developers · doublewordai, ENDGAME, Tech Proxy",
+      "size": "lg",
+      "country": "United Kingdom",
+      "continent": "Europe"
+    },
+    {
       "lat": 41.9,
       "lng": 12.5,
       "label": "Italy",
@@ -1720,15 +1730,6 @@
       "size": "lg",
       "country": "United States",
       "continent": "North America"
-    },
-    {
-      "lat": 51.5,
-      "lng": -0.1,
-      "label": "London",
-      "detail": "15 developers · doublewordai, ENDGAME, Tech Proxy",
-      "size": "lg",
-      "country": "United Kingdom",
-      "continent": "Europe"
     },
     {
       "lat": 30.3,
@@ -1823,6 +1824,15 @@
       "color": "#fbbf24"
     },
     {
+      "lat": 21.0,
+      "lng": 105.9,
+      "label": "Vietnam",
+      "detail": "12 developers · Anphabe JSC, Full Stack .NET, KMS Technology",
+      "size": "lg",
+      "country": "Vietnam",
+      "continent": "Asia"
+    },
+    {
       "lat": 48.9,
       "lng": 2.3,
       "label": "Paris",
@@ -1852,15 +1862,6 @@
       "color": "#fbbf24"
     },
     {
-      "lat": 21.0,
-      "lng": 105.9,
-      "label": "Vietnam",
-      "detail": "11 developers · Anphabe JSC, Full Stack .NET, KMS Technology",
-      "size": "lg",
-      "country": "Vietnam",
-      "continent": "Asia"
-    },
-    {
       "lat": 59.3,
       "lng": 18.1,
       "label": "Stockholm",
@@ -1868,6 +1869,15 @@
       "size": "lg",
       "country": "Sweden",
       "continent": "Europe"
+    },
+    {
+      "lat": -34.6,
+      "lng": -58.4,
+      "label": "Argentina",
+      "detail": "11 developers · Wiener lab., EcimTech, Halley Accurate Solutions",
+      "size": "lg",
+      "country": "Argentina",
+      "continent": "South America"
     },
     {
       "lat": 47.1,
@@ -1882,19 +1892,10 @@
       "lat": 1.4,
       "lng": 103.8,
       "label": "Singapore",
-      "detail": "10 developers · Unemployed since Jul'22, Tiktok",
+      "detail": "10 developers · Unemployed since Jul'22",
       "size": "lg",
       "country": "Singapore",
       "continent": "Asia"
-    },
-    {
-      "lat": -34.6,
-      "lng": -58.4,
-      "label": "Argentina",
-      "detail": "10 developers · Wiener lab., EcimTech, Halley Accurate Solutions",
-      "size": "lg",
-      "country": "Argentina",
-      "continent": "South America"
     },
     {
       "lat": 13.0,
@@ -1954,6 +1955,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 3.1,
+      "lng": 101.7,
+      "label": "Kuala Lumpur",
+      "detail": "8 developers · MonstaStudios, Stratus Automation, Home sweet home",
+      "size": "md",
+      "country": "Malaysia",
+      "continent": "Asia"
+    },
+    {
       "lat": 23.1,
       "lng": 113.3,
       "label": "Guangzhou",
@@ -1971,21 +1981,11 @@
       "size": "md",
       "country": "Philippines",
       "continent": "Asia"
-    },
-    {
-      "lat": 41.4,
-      "lng": 2.2,
-      "label": "Barcelona",
-      "detail": "7 developers · IBM, Genie, Orbhi",
-      "size": "md",
-      "country": "Spain",
-      "continent": "Europe",
-      "color": "#60a5fa"
     }
   ],
   "cities": 75,
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-10-29T12:30:48Z"
+  "lastUpdated": "2026-11-02T15:04:02Z"
 }
