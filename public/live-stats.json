@@ -1,13 +1,13 @@
 {
-  "stars": 3802,
-  "forks": 261,
+  "stars": 3828,
+  "forks": 263,
   "contributors": 49,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1756
+      "contributions": 1800
     },
     {
       "login": "computersrmyfriends",
@@ -19,7 +19,7 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 107
+      "contributions": 119
     },
     {
       "login": "MattKotsenas",
@@ -37,7 +37,7 @@
       "login": "YuruDeveloper",
       "avatarUrl": "https://avatars.githubusercontent.com/u/101876010?v=4",
       "url": "https://github.com/YuruDeveloper",
-      "contributions": 21
+      "contributions": 27
     },
     {
       "login": "marhel",
@@ -76,12 +76,12 @@
       "contributions": 9
     }
   ],
-  "issues": 36,
-  "companiesRepresented": 625,
+  "issues": 43,
+  "companiesRepresented": 633,
   "topCompanies": [
     {
       "name": "Microsoft",
-      "count": 33,
+      "count": 34,
       "logo": "microsoft",
       "logoUrl": "https://cdn.simpleicons.org/microsoft/ffffff"
     },
@@ -105,8 +105,7 @@
     },
     {
       "name": "Uptime Development",
-      "count": 2,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=uptimedevelopment.com&sz=128"
+      "count": 2
     },
     {
       "name": "Piebald-AI",
@@ -234,8 +233,7 @@
     },
     {
       "name": "Matrixworks",
-      "count": 1,
-      "logoUrl": "https://www.google.com/s2/favicons?domain=matrixworks.com&sz=128"
+      "count": 1
     },
     {
       "name": "BatchLabs",
@@ -482,7 +480,7 @@
       "logoUrl": "https://www.google.com/s2/favicons?domain=mikepfunk.com&sz=128"
     },
     {
-      "name": "NestLab — AI automation studio",
+      "name": "NestLab Tech",
       "count": 1
     },
     {
@@ -536,7 +534,7 @@
       "logoUrl": "https://cdn.simpleicons.org/visa/ffffff"
     }
   ],
-  "universities": 87,
+  "universities": 88,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -858,6 +856,10 @@
     },
     {
       "name": "Samsung R&D Institute Bangladesh"
+    },
+    {
+      "name": "Kyung Hee University",
+      "domain": "khu.ac.kr"
     }
   ],
   "starHistory": [
@@ -875,39 +877,39 @@
     },
     {
       "month": "2026-03",
-      "total": 827
+      "total": 826
     },
     {
       "month": "2026-04",
-      "total": 1579
+      "total": 1577
     },
     {
       "month": "2026-05",
-      "total": 2267
+      "total": 2265
     },
     {
       "month": "2026-06",
-      "total": 2707
+      "total": 2705
     },
     {
       "month": "2026-07",
-      "total": 3086
+      "total": 3084
     },
     {
       "month": "2026-08",
-      "total": 3367
+      "total": 3365
     },
     {
       "month": "2026-09",
-      "total": 3564
+      "total": 3562
     },
     {
       "month": "2026-10",
-      "total": 3778
+      "total": 3776
     },
     {
       "month": "2026-11",
-      "total": 3802
+      "total": 3828
     }
   ],
   "notableUsers": [
@@ -922,7 +924,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5435,
+      "followers": 5432,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -930,7 +932,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4809,
+      "followers": 4817,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -946,7 +948,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2130,
+      "followers": 2131,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -954,7 +956,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1912,
+      "followers": 1916,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -962,7 +964,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1581,
+      "followers": 1582,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -970,7 +972,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1427,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -978,7 +980,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1313,
+      "followers": 1314,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -986,7 +988,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 991,
+      "followers": 992,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -994,7 +996,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 906,
+      "followers": 912,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-HighScool",
       "highlight": false
@@ -1002,7 +1004,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 899,
+      "followers": 898,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -1010,7 +1012,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 840,
+      "followers": 839,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1018,7 +1020,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 754,
+      "followers": 753,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -1026,7 +1028,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 750,
+      "followers": 752,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1034,7 +1036,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 747,
+      "followers": 748,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1056,12 +1058,12 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 36,
+  "ecosystemRepos": 38,
   "ecosystemProjects": [
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 68,
+      "stars": 71,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1070,6 +1072,13 @@
       "author": "gonnector",
       "stars": 15,
       "description": "Native Windows Claude Code agent team split panes via psmux — no WSL required",
+      "category": "claude-code"
+    },
+    {
+      "name": "psmux-agent-orchestrator",
+      "author": "kingkillery",
+      "stars": 4,
+      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
       "category": "claude-code"
     },
     {
@@ -1084,13 +1093,6 @@
       "author": "rayngnpc",
       "stars": 3,
       "description": "Your AI coding crew in one Windows terminal - run Claude Code, Codex, opencode & Antigravity as a real team (lead + workers) in a native psmux cockpit. Event-sourced, no WSL, no API keys.",
-      "category": "claude-code"
-    },
-    {
-      "name": "psmux-agent-orchestrator",
-      "author": "kingkillery",
-      "stars": 3,
-      "description": "Orchestrate multiple sub-agents on Windows using psmux (tmux-compatible terminal multiplexer). Launch design, research, ML, eval, preview, and hooks-master agents in parallel psmux sessions.",
       "category": "claude-code"
     },
     {
@@ -1227,6 +1229,13 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-claude-session-manager",
+      "author": "thecats1105",
+      "stars": 0,
+      "description": "Run many Claude Code sessions across your projects, each in its own psmux session — then list them, see which are done vs. still working, and jump to one from a single popup.",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-feedstock",
       "author": "conda-forge",
       "stars": 0,
@@ -1260,13 +1269,6 @@
       "stars": 0,
       "description": "psmux-related project",
       "category": "tool"
-    },
-    {
-      "name": "psmuxplus",
-      "author": "ZeroPointSix",
-      "stars": 0,
-      "description": "psmux fork with AI agent detection and optional status sidebar",
-      "category": "claude-code"
     }
   ],
   "crossRepoMentions": [
@@ -1275,9 +1277,9 @@
       "issues": [
         "#2484",
         "#724",
+        "#729",
         "#1282",
         "#641",
-        "#729",
         "#2428",
         "#728",
         "#885",
@@ -1288,10 +1290,10 @@
         "#842",
         "#2432",
         "#730",
-        "#647",
-        "#1538",
         "#519",
+        "#647",
         "#628",
+        "#1538",
         "#2462",
         "#1073",
         "#467"
@@ -1301,25 +1303,29 @@
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
+        "#11539",
         "#8797",
-        "#4564",
-        "#4305",
-        "#9333",
-        "#2830",
-        "#7073",
         "#4102",
+        "#4564",
+        "#10879",
+        "#2830",
+        "#11559",
+        "#10945",
         "#10627",
         "#2619",
-        "#7116",
+        "#10840",
+        "#10841",
+        "#10836",
+        "#10833",
         "#6266",
-        "#8811",
-        "#8108",
-        "#10359",
+        "#5898",
+        "#10946",
         "#8490",
+        "#11255",
         "#4417",
-        "#5898"
+        "#8811"
       ],
-      "context": "Launch Windows PSMux clients from user home while preserving pane working directories"
+      "context": "Restore safe prompted Windows Resume without executing PSMux discovery"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1330,8 +1336,8 @@
         "#546",
         "#539",
         "#775",
-        "#777",
         "#591",
+        "#777",
         "#677",
         "#697",
         "#670"
@@ -1341,13 +1347,13 @@
     {
       "repo": "lamngockhuong/termote",
       "issues": [
-        "#552",
+        "#772",
+        "#771",
         "#237",
-        "#289",
         "#252",
-        "#687"
+        "#552"
       ],
-      "context": "Files and Changes on Windows with psmux"
+      "context": "Worktrees on Windows for psmux and herdr-core (and Zellij)"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1371,25 +1377,6 @@
       "context": "Move orchestration and review outside psmux; require native Playwright design verification"
     },
     {
-      "repo": "NobleFactor/noblefactor-engprod",
-      "issues": [
-        "#388",
-        "#406",
-        "#301",
-        "#392"
-      ],
-      "context": "Start-Claude.ps1's guarded detached rename runs on Windows with no psmux server, and a session left working after its viewer was killed is checked again"
-    },
-    {
-      "repo": "bmad-code-org/bmad-loop",
-      "issues": [
-        "#914",
-        "#921",
-        "#1002"
-      ],
-      "context": "retire _transportable's refusal of -X=value, -t... and -- once a psmux release carries the psmux/psmux#795 fix"
-    },
-    {
       "repo": "the9ball/.dotfiles",
       "issues": [
         "#201",
@@ -1408,6 +1395,15 @@
       "context": "Windows (non wsl) lag"
     },
     {
+      "repo": "CochranResearchGroup/codex-wake",
+      "issues": [
+        "#517",
+        "#519",
+        "#509"
+      ],
+      "context": "Native Windows psmux formatting and exact restoration"
+    },
+    {
       "repo": "JonathanRosado/duet-agents",
       "issues": [
         "#13",
@@ -1424,6 +1420,15 @@
         "#62"
       ],
       "context": "opening an old agent session doesn't work."
+    },
+    {
+      "repo": "ARCJ137442/anymate-cc",
+      "issues": [
+        "#13",
+        "#23",
+        "#19"
+      ],
+      "context": "feat: cross-platform split-window support beyond tmux"
     }
   ],
   "dotfilesRepos": [
@@ -1462,10 +1467,6 @@
     {
       "repo": "F4NT0/psmux-config",
       "detail": "psmux.conf"
-    },
-    {
-      "repo": "tomas-barros1/dotfiles",
-      "detail": ".psmux.conf"
     },
     {
       "repo": "kylemello/nixosdotfiles",
@@ -1520,8 +1521,12 @@
       "detail": "AGENTS.md"
     },
     {
-      "repo": "caolib/kira",
-      "detail": "run.ps1"
+      "repo": "jinyeow/dotfiles",
+      "detail": "README.md"
+    },
+    {
+      "repo": "ctrueden/dotfiles",
+      "detail": "README.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1530,7 +1535,7 @@
       "lat": 36.4,
       "lng": 127.0,
       "label": "South Korea",
-      "detail": "88 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
+      "detail": "89 developers · Korea Advanced Institute of Science & Technology (KAIST), Gonnector, Layoff-Labs",
       "size": "lg",
       "country": "South Korea",
       "continent": "Asia",
@@ -1540,7 +1545,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "80 developers · Ke, erasin.wang, Home",
+      "detail": "82 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1578,7 +1583,7 @@
       "lat": 20.6,
       "lng": 79.0,
       "label": "India",
-      "detail": "35 developers · midtown-technology-group, Visionary, intel-private",
+      "detail": "36 developers · midtown-technology-group, Visionary, intel-private",
       "size": "lg",
       "country": "India",
       "continent": "Asia"
@@ -1642,7 +1647,7 @@
       "lat": 25.0,
       "lng": 121.6,
       "label": "Taipei",
-      "detail": "26 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "detail": "27 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
       "size": "lg",
       "country": "Taiwan",
       "continent": "Asia"
@@ -1660,7 +1665,7 @@
       "lat": 47.6,
       "lng": -122.3,
       "label": "Seattle",
-      "detail": "19 developers · Microsoft, Meta, University of Washington",
+      "detail": "18 developers · Microsoft, Meta, University of Washington",
       "size": "lg",
       "country": "United States",
       "continent": "North America",
@@ -1670,10 +1675,11 @@
       "lat": 52.2,
       "lng": 21.0,
       "label": "Warsaw",
-      "detail": "18 developers · NestLab — AI automation studio, Ceneo.pl, Evotec",
+      "detail": "18 developers · Ceneo.pl, Evotec, Jagiellonian University",
       "size": "lg",
       "country": "Poland",
-      "continent": "Europe"
+      "continent": "Europe",
+      "color": "#fbbf24"
     },
     {
       "lat": 52.4,
@@ -1741,6 +1747,15 @@
       "color": "#60a5fa"
     },
     {
+      "lat": 41.0,
+      "lng": 29.0,
+      "label": "Istanbul",
+      "detail": "15 developers · isikkaynak, GR Digital Products, Agito",
+      "size": "lg",
+      "country": "Turkey",
+      "continent": "Europe"
+    },
+    {
       "lat": 40.4,
       "lng": -3.7,
       "label": "Madrid",
@@ -1750,13 +1765,13 @@
       "continent": "Europe"
     },
     {
-      "lat": 41.0,
-      "lng": 29.0,
-      "label": "Istanbul",
-      "detail": "14 developers · isikkaynak, GR Digital Products, Agito",
+      "lat": 56.1,
+      "lng": -106.3,
+      "label": "Canada",
+      "detail": "14 developers · thinkertankApps, Electrovaya, SabioMobile",
       "size": "lg",
-      "country": "Turkey",
-      "continent": "Europe"
+      "country": "Canada",
+      "continent": "North America"
     },
     {
       "lat": 50.1,
@@ -1777,6 +1792,16 @@
       "continent": "Europe"
     },
     {
+      "lat": 55.8,
+      "lng": 37.6,
+      "label": "Moscow",
+      "detail": "13 developers · ОКОЛО Маркет, Diasoft, Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University",
+      "size": "lg",
+      "country": "Russia",
+      "continent": "Europe",
+      "color": "#fbbf24"
+    },
+    {
       "lat": 59.9,
       "lng": 10.8,
       "label": "Oslo",
@@ -1786,15 +1811,6 @@
       "continent": "Europe"
     },
     {
-      "lat": 56.1,
-      "lng": -106.3,
-      "label": "Canada",
-      "detail": "13 developers · thinkertankApps, Electrovaya, SabioMobile",
-      "size": "lg",
-      "country": "Canada",
-      "continent": "North America"
-    },
-    {
       "lat": -23.5,
       "lng": -46.6,
       "label": "Sao Paulo",
@@ -1802,16 +1818,6 @@
       "size": "lg",
       "country": "Brazil",
       "continent": "South America"
-    },
-    {
-      "lat": 55.8,
-      "lng": 37.6,
-      "label": "Moscow",
-      "detail": "12 developers · ОКОЛО Маркет, Diasoft, Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University",
-      "size": "lg",
-      "country": "Russia",
-      "continent": "Europe",
-      "color": "#fbbf24"
     },
     {
       "lat": 21.0,
@@ -1977,5 +1983,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-11-05T14:15:22Z"
+  "lastUpdated": "2026-11-09T15:32:25Z"
 }

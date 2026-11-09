@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-11-05 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-11-09 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -2957,6 +2957,7 @@ An alias resolves from the command line (`psmux dev`), a key binding, the comman
 - `-u command-alias[N]` removes one element and the others keep their indexes; `-u command-alias` puts the default array back, as tmux does for a global option. `set -s command-alias ''` empties it.
 - `show -s command-alias` lists them as `command-alias[N] value`, and `#{command-alias}` is every element joined with a space.
 - An element can be keyed by a name instead of a number, as in tmux 3.8: `set -s command-alias[dev] 'dev=split-window -h'` keeps your alias apart from the numbered defaults. A key of digits only is a number (`[007]` is `[7]`). `show` lists the numbered elements first, then the named ones in byte order, and `-a` without an index still takes the lowest free number. Every array option takes a name the same way (`terminal-overrides[mine]`); a named `status-format` element draws no line, as the status lines are read by number.
+- Only the array options and the hooks have elements. On any other option, `@` options included, `set` refuses an index with `not an array: status-left[0]` (with `-q` too) and sets nothing, as tmux does, while `show -g 'status-left[0]'` and `#{status-left[0]}` read the option itself. An index tmux cannot read (`status-left[]`, `status-left[0]x`) is an invalid option on every option.
 
 > **Note:** the command line asks the server for an alias only when the name is not a psmux command, so an alias named after a real command (`ls`) works from a key binding or the prompt but not as `psmux ls`. A server starts with tmux's default aliases as elements 0 to 5: `split-pane=split-window`, `splitp=split-window`, `server-info=show-messages -JT`, `info=show-messages -JT`, `choose-window=choose-tree -w` and `choose-session=choose-tree -s`. A plain `set` replaces them along with the rest, so add your own aliases at an index of their own or with `-a`; `set -su command-alias` puts the defaults back.
 
@@ -3770,11 +3771,12 @@ keys (`bind -n M-User2 ...` for a terminal that sends ESC before the
 sequence). `list-keys` prints `User1000` in full, where tmux 3.8 cuts it to
 `User100`.
 
-psmux keeps a user key as a character in the private use range U+F1000 to
-U+F13E8, which Nerd Fonts also uses for its Material Design icons. A glyph from
-that range that you type, paste or pick still reaches the pane: on the console
-route always, and on the VT route while `user-keys` is empty. With `user-keys`
-set, the VT route reads such a typed glyph as the user key of the same number.
+psmux keeps the mouse keys and the user keys as characters near the end of
+Supplementary Private Use Area-B, U+10E000 to U+10F068 (the user keys from
+U+10EC80). No common icon font draws there: the Nerd Fonts icons are in the
+BMP private use area and at U+F0001 to U+F1AF0, and Apple's SF Symbols take
+U+100000 to U+1022CF. A character from that range that you type or paste runs
+the binding of the key it stands for.
 
 `show-options -s user-keys` prints one `user-keys[N] value` line per element,
 with ESC written as `\033`, a backslash doubled, and quoted as tmux quotes it
@@ -5083,8 +5085,12 @@ Programs running inside a pane can change its title by sending **OSC (Operating 
 |----------|------|--------|
 | `ESC ] 0 ; <title> BEL` | OSC 0 | Sets both the window icon name and the pane title |
 | `ESC ] 2 ; <title> BEL` | OSC 2 | Sets the pane title |
+| `ESC [ 22 ; 0 t` | XTPUSHTITLE | Saves the title (`22 ; 2 t` too) |
+| `ESC [ 23 ; 0 t` | XTPOPTITLE | Restores the title saved last (`23 ; 2 t` too) |
 
 When psmux receives one of these from a child process, it updates `pane_title` so that format variables, status bar, and border labels all reflect the new value.
+
+As in tmux, the title is everything after the first `;`, so `ESC ] 2 ; a;b BEL` sets `a;b`. Up to ten titles are saved, and the oldest goes when an eleventh is saved. Restoring a title saved before any was set gives the pane its first title, the host name, back. RIS and `send-keys -R` keep the title and the saved ones. The inbox console host passes these two sequences on at once but holds a title for its next screen update, so a save, a title and a restore written in one go reach psmux in another order. Written apart, as a program saves at its start and restores at its end, they work on both console hosts.
 
 Two more OSC sequences are understood, and they never touch the title. They tell psmux where the shell is:
 
@@ -5617,6 +5623,8 @@ ESC]104;4 ESC\                 put index 4 back
 ESC]104 ESC\                   put every index back
 ESC]4;4;? ESC\                 answered from this pane's entry, then from the host terminal
 ```
+
+A query for any index from 0 to 255 is answered from the pane's entry, set by OSC 4 or by `pane-colours`, as tmux answers it from `colour_palette_get`. With no entry, the sixteen ANSI colours are answered from the host terminal, whose values the client reports; tmux also asks the host terminal for the other indexes, which psmux does not do yet, so they go unanswered. Each reply ends the way its query did, BEL or ST, as tmux's `input_osc_colour_reply` ends it, and so do the OSC 10 and OSC 11 replies.
 
 This matters most for Windows console applications. A pane child on ConPTY announces its console colour table as OSC 4 and then paints with indexed SGR rather than true colour, so Far Manager's panels are `ESC[48;5;4m` against an OSC 4 that says index 4 is `#000080`. Before #685 psmux dropped the palette and re rendered the cell as a plain `ESC[44m`, which Windows Terminal painted with its own Campbell `#0037DA`. Far inside psmux now paints `#000080`, `#008080` and `#00FFFF` exactly as Far outside psmux does.
 
@@ -12854,7 +12862,7 @@ had it: the switch is never planted in it.
 window or pane of another session, `choose-tree` and the session chooser;
 `rename-session`;
 cross session move-window/join-pane/swap-pane/link-window and session groups
-(`new-session -t` is refused); `new-session` from a hook, binding or prompt;
+(`new-session -t` is refused);
 run-shell, if-shell, source-file, buffers, popups, menus and the rest of the
 command set (refused with the unknown command reply); `update-environment` from a
 later session's client (panes inherit the server's start environment); warm
@@ -12871,6 +12879,18 @@ unsupported command answers `ERROR: unknown command: <name>`; whether the CLI th
 exits 1 depends on that command's CLI path, exactly as for any `ERROR` reply
 today. A crash that `catch_unwind` cannot catch (stack overflow, abort, a native
 fault) ends every session of the namespace (section 8).
+
+A hook's `new-session` makes its session after the hook, in the same loop cycle
+or in the next cycle. Thus a subsequent command of the same hook cannot find the new session.
+The session is always made as with `-d`, and the client stays in its session.
+When the start is correct, no message shows, as in `tmux` without `-P`. The
+`per-session` mode shows `created session 'NAME'`.
+
+When the start is not correct, the error shows on the status line of the hook's
+session at the next frame of that session. With no `-c` or a relative `-c`, the
+start directory of the hook's session must be an absolute directory that is on
+the disk. If it is not, the start gives an error, but the `per-session` mode
+makes the session.
 
 **Measured** (`tests/perf_issue798_shared_vs_per_session.ps1`, 5 rounds of three
 `new-session -d` in a fresh namespace, Windows 11 26200, metrics JSON in
@@ -13152,11 +13172,12 @@ Step 3, the next one, each item its own PR and still entirely behind the switch:
    * Commands the in server route runs in place rather than sending them to
      the listener (`set -t B: ...`, `kill-window -t B:1`, ...) from a hook:
      they act on, or fail in, the hook's own session.
-   * `new-session` from a hook: it runs on the loop thread, and the in
-     server route then waits for the new session's files, which only that
-     same thread can make. It stays refused (`new-session from a hook or the
-     config is not supported yet`). It needs a narrow hook in `commands.rs`
-     that hands the arguments to the shared server.
+   * `new-session` from a hook: the call in `commands.rs`
+     (`queue_loop_start`) puts the start in a queue of the loop. The loop
+     makes the session after the hook, in the same loop cycle or in the next
+     cycle. Thus the loop
+     thread does not wait for a session that it must make, and the start is
+     not stopped.
    * The config: on the shared server its command lines do not run at all,
      not even for their own session (`config.rs` keeps no startup source
      job for the shared server, and the shared loop runs none), so there is
