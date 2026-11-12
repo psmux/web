@@ -1,13 +1,13 @@
 {
-  "stars": 3828,
-  "forks": 263,
-  "contributors": 49,
+  "stars": 3844,
+  "forks": 265,
+  "contributors": 51,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1800
+      "contributions": 1931
     },
     {
       "login": "computersrmyfriends",
@@ -19,24 +19,24 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 119
+      "contributions": 132
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 41
-    },
-    {
-      "login": "tarikguney",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
-      "url": "https://github.com/tarikguney",
-      "contributions": 27
+      "contributions": 42
     },
     {
       "login": "YuruDeveloper",
       "avatarUrl": "https://avatars.githubusercontent.com/u/101876010?v=4",
       "url": "https://github.com/YuruDeveloper",
+      "contributions": 29
+    },
+    {
+      "login": "tarikguney",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/369188?v=4",
+      "url": "https://github.com/tarikguney",
       "contributions": 27
     },
     {
@@ -76,8 +76,8 @@
       "contributions": 9
     }
   ],
-  "issues": 43,
-  "companiesRepresented": 633,
+  "issues": 39,
+  "companiesRepresented": 637,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -905,18 +905,18 @@
     },
     {
       "month": "2026-10",
-      "total": 3776
+      "total": 3775
     },
     {
       "month": "2026-11",
-      "total": 3828
+      "total": 3844
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9875,
+      "followers": 9882,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -924,7 +924,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5432,
+      "followers": 5450,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -932,7 +932,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4817,
+      "followers": 4821,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -940,7 +940,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2193,
+      "followers": 2195,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -948,7 +948,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2131,
+      "followers": 2135,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -972,7 +972,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1426,
+      "followers": 1427,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -980,7 +980,7 @@
     {
       "login": "tangxiaofeng7",
       "name": "唐小风",
-      "followers": 1314,
+      "followers": 1313,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -988,7 +988,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 992,
+      "followers": 994,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -996,15 +996,15 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 912,
+      "followers": 909,
       "title": "HighScool Student・Vibe Coder\r",
-      "company": "N-HighScool",
+      "company": "N-highschool",
       "highlight": false
     },
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 898,
+      "followers": 896,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -1012,7 +1012,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 839,
+      "followers": 837,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1020,7 +1020,7 @@
     {
       "login": "satoruhiga",
       "name": "Satoru Higa",
-      "followers": 753,
+      "followers": 754,
       "title": "GitHub Developer",
       "company": "backspacetokyo",
       "highlight": false
@@ -1028,7 +1028,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 752,
+      "followers": 754,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1058,7 +1058,7 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 38,
+  "ecosystemRepos": 41,
   "ecosystemProjects": [
     {
       "name": "termote",
@@ -1180,6 +1180,13 @@
       "category": "claude-code"
     },
     {
+      "name": "MustardOS_RemoteAI",
+      "author": "raptyk",
+      "stars": 0,
+      "description": "Use a MustardOS (muOS) handheld as a pocket SSH terminal for Claude Code / agy and other AI CLI agents running in psmux sessions on your Windows PC.",
+      "category": "claude-code"
+    },
+    {
       "name": "mw_terminal_worknav",
       "author": "blueclover22",
       "stars": 0,
@@ -1222,6 +1229,13 @@
       "category": "tool"
     },
     {
+      "name": "psmux-agent-hatch",
+      "author": "thecats1105",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "claude-code"
+    },
+    {
       "name": "psmux-ai-resurrect",
       "author": "crashbandicode",
       "stars": 0,
@@ -1236,6 +1250,13 @@
       "category": "claude-code"
     },
     {
+      "name": "psmux-dashboard",
+      "author": "bjtj",
+      "stars": 0,
+      "description": "psmux-related project",
+      "category": "tool"
+    },
+    {
       "name": "psmux-feedstock",
       "author": "conda-forge",
       "stars": 0,
@@ -1248,30 +1269,38 @@
       "stars": 0,
       "description": "Minimal reproduction + analysis: psmux scrollback stores every line as a full-width row, causing multi-GB server memory. Includes tmux comparison.",
       "category": "tool"
-    },
-    {
-      "name": "psmux-todo",
-      "author": "pyjhoop",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "tool"
-    },
-    {
-      "name": "psmux-win-build",
-      "author": "ghy020",
-      "stars": 0,
-      "description": "从 psmux 源码自动编译 Windows 版并发布 Release（不 fork）",
-      "category": "tool"
-    },
-    {
-      "name": "psmux-wt-sync",
-      "author": "tobiowo",
-      "stars": 0,
-      "description": "psmux-related project",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
+    {
+      "repo": "ThomasMichon/copilot-extensions",
+      "issues": [
+        "#11539",
+        "#8797",
+        "#4102",
+        "#4564",
+        "#2830",
+        "#10945",
+        "#11559",
+        "#10627",
+        "#2619",
+        "#10879",
+        "#10840",
+        "#10841",
+        "#10836",
+        "#10833",
+        "#11726",
+        "#6266",
+        "#5898",
+        "#10946",
+        "#8490",
+        "#11718",
+        "#11255",
+        "#4417",
+        "#8811"
+      ],
+      "context": "Restore safe prompted Windows Resume without executing PSMux discovery"
+    },
     {
       "repo": "takushio2525/tako",
       "issues": [
@@ -1295,37 +1324,9 @@
         "#628",
         "#1538",
         "#2462",
-        "#1073",
-        "#467"
+        "#1073"
       ],
       "context": "[改善][Windows] 本番の器（psmux）の conf に warm off が無い・クライアントの実行ファイルが backend とずれている（#885 の続き）"
-    },
-    {
-      "repo": "ThomasMichon/copilot-extensions",
-      "issues": [
-        "#11539",
-        "#8797",
-        "#4102",
-        "#4564",
-        "#10879",
-        "#2830",
-        "#11559",
-        "#10945",
-        "#10627",
-        "#2619",
-        "#10840",
-        "#10841",
-        "#10836",
-        "#10833",
-        "#6266",
-        "#5898",
-        "#10946",
-        "#8490",
-        "#11255",
-        "#4417",
-        "#8811"
-      ],
-      "context": "Restore safe prompted Windows Resume without executing PSMux discovery"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1350,10 +1351,23 @@
         "#772",
         "#771",
         "#237",
+        "#796",
+        "#801",
         "#252",
-        "#552"
+        "#798"
       ],
       "context": "Worktrees on Windows for psmux and herdr-core (and Zellij)"
+    },
+    {
+      "repo": "CochranResearchGroup/codex-wake",
+      "issues": [
+        "#568",
+        "#517",
+        "#526",
+        "#529",
+        "#519"
+      ],
+      "context": "Qualify current tab and session management on native Windows psmux"
     },
     {
       "repo": "anthropics/claude-code",
@@ -1367,19 +1381,10 @@
       "context": "[BUG] Windows: `claude attach` in a psmux pane with no client attached takes no keystrokes from `tmux send-keys`, though other raw-mode programs there do"
     },
     {
-      "repo": "vanman2024/claude-crew",
-      "issues": [
-        "#22",
-        "#14",
-        "#13",
-        "#15"
-      ],
-      "context": "Move orchestration and review outside psmux; require native Playwright design verification"
-    },
-    {
       "repo": "the9ball/.dotfiles",
       "issues": [
         "#201",
+        "#265",
         "#214",
         "#185"
       ],
@@ -1395,22 +1400,13 @@
       "context": "Windows (non wsl) lag"
     },
     {
-      "repo": "CochranResearchGroup/codex-wake",
+      "repo": "vanman2024/claude-crew",
       "issues": [
-        "#517",
-        "#519",
-        "#509"
+        "#22",
+        "#14",
+        "#13"
       ],
-      "context": "Native Windows psmux formatting and exact restoration"
-    },
-    {
-      "repo": "JonathanRosado/duet-agents",
-      "issues": [
-        "#13",
-        "#16",
-        "#21"
-      ],
-      "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
+      "context": "Move orchestration and review outside psmux; require native Playwright design verification"
     },
     {
       "repo": "savoy9/tackle",
@@ -1429,6 +1425,14 @@
         "#19"
       ],
       "context": "feat: cross-platform split-window support beyond tmux"
+    },
+    {
+      "repo": "libtmux/libtmux-cxx",
+      "issues": [
+        "#80",
+        "#79"
+      ],
+      "context": "Add psmux to CI"
     }
   ],
   "dotfilesRepos": [
@@ -1466,14 +1470,6 @@
     },
     {
       "repo": "F4NT0/psmux-config",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "kylemello/nixosdotfiles",
-      "detail": "psmux.nix"
-    },
-    {
-      "repo": "dyskette/.dotconfigs",
       "detail": "psmux.conf"
     },
     {
@@ -1525,8 +1521,16 @@
       "detail": "README.md"
     },
     {
+      "repo": "aam-at/windots",
+      "detail": "pick.ps1"
+    },
+    {
+      "repo": "JetBrains/roer",
+      "detail": "install.md"
+    },
+    {
       "repo": "ctrueden/dotfiles",
-      "detail": "README.md"
+      "detail": "setup.ps1"
     }
   ],
   "dotfilesReferences": 24,
@@ -1626,6 +1630,15 @@
       "color": "#fbbf24"
     },
     {
+      "lat": 25.0,
+      "lng": 121.6,
+      "label": "Taipei",
+      "detail": "28 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
+      "size": "lg",
+      "country": "Taiwan",
+      "continent": "Asia"
+    },
+    {
       "lat": -14.2,
       "lng": -51.9,
       "label": "Brazil",
@@ -1638,18 +1651,9 @@
       "lat": -6.2,
       "lng": 106.8,
       "label": "Indonesia",
-      "detail": "27 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
+      "detail": "26 developers · KRONIK, PT SUM Digital Konsultan, fungsitama.com",
       "size": "lg",
       "country": "Indonesia",
-      "continent": "Asia"
-    },
-    {
-      "lat": 25.0,
-      "lng": 121.6,
-      "label": "Taipei",
-      "detail": "27 developers · https://www.cycraft.com/, Taiwan Semiconductor Manufacturing Company, 國興資訊股份有限公司",
-      "size": "lg",
-      "country": "Taiwan",
       "continent": "Asia"
     },
     {
@@ -1662,6 +1666,25 @@
       "continent": "Oceania"
     },
     {
+      "lat": 52.2,
+      "lng": 21.0,
+      "label": "Warsaw",
+      "detail": "19 developers · Ceneo.pl, Evotec, Jagiellonian University",
+      "size": "lg",
+      "country": "Poland",
+      "continent": "Europe",
+      "color": "#fbbf24"
+    },
+    {
+      "lat": 52.4,
+      "lng": -1.5,
+      "label": "United Kingdom",
+      "detail": "18 developers · Pixel Inspiration, everstack, newscred",
+      "size": "lg",
+      "country": "United Kingdom",
+      "continent": "Europe"
+    },
+    {
       "lat": 47.6,
       "lng": -122.3,
       "label": "Seattle",
@@ -1672,22 +1695,12 @@
       "color": "#60a5fa"
     },
     {
-      "lat": 52.2,
-      "lng": 21.0,
-      "label": "Warsaw",
-      "detail": "18 developers · Ceneo.pl, Evotec, Jagiellonian University",
+      "lat": 41.9,
+      "lng": 12.5,
+      "label": "Italy",
+      "detail": "16 developers · Six Degrees Consulting, Vaimoo, DotSp",
       "size": "lg",
-      "country": "Poland",
-      "continent": "Europe",
-      "color": "#fbbf24"
-    },
-    {
-      "lat": 52.4,
-      "lng": -1.5,
-      "label": "United Kingdom",
-      "detail": "17 developers · Pixel Inspiration, everstack, newscred",
-      "size": "lg",
-      "country": "United Kingdom",
+      "country": "Italy",
       "continent": "Europe"
     },
     {
@@ -1719,15 +1732,6 @@
       "continent": "North America"
     },
     {
-      "lat": 41.9,
-      "lng": 12.5,
-      "label": "Italy",
-      "detail": "15 developers · Six Degrees Consulting, Vaimoo, DotSp",
-      "size": "lg",
-      "country": "Italy",
-      "continent": "Europe"
-    },
-    {
       "lat": 30.6,
       "lng": -96.3,
       "label": "Texas",
@@ -1756,6 +1760,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 52.4,
+      "lng": 4.9,
+      "label": "Netherlands",
+      "detail": "14 developers · roxlu, Senior Software Architect, WeAreInSpark",
+      "size": "lg",
+      "country": "Netherlands",
+      "continent": "Europe"
+    },
+    {
       "lat": 40.4,
       "lng": -3.7,
       "label": "Madrid",
@@ -1780,15 +1793,6 @@
       "detail": "13 developers · Fine, Altap, Jaroslav Urbánek, TV NOVA",
       "size": "lg",
       "country": "Czechia",
-      "continent": "Europe"
-    },
-    {
-      "lat": 52.4,
-      "lng": 4.9,
-      "label": "Netherlands",
-      "detail": "13 developers · roxlu, Senior Software Architect, WeAreInSpark",
-      "size": "lg",
-      "country": "Netherlands",
       "continent": "Europe"
     },
     {
@@ -1838,6 +1842,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 47.1,
+      "lng": 15.4,
+      "label": "Austria",
+      "detail": "11 developers · ACME, TU Graz, Tieto",
+      "size": "lg",
+      "country": "Austria",
+      "continent": "Europe"
+    },
+    {
       "lat": 43.7,
       "lng": -79.4,
       "label": "Toronto",
@@ -1874,15 +1887,6 @@
       "size": "lg",
       "country": "Argentina",
       "continent": "South America"
-    },
-    {
-      "lat": 47.1,
-      "lng": 15.4,
-      "label": "Austria",
-      "detail": "10 developers · ACME, TU Graz, Tieto",
-      "size": "lg",
-      "country": "Austria",
-      "continent": "Europe"
     },
     {
       "lat": 1.4,
@@ -1983,5 +1987,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-11-09T15:32:25Z"
+  "lastUpdated": "2026-11-12T14:50:11Z"
 }

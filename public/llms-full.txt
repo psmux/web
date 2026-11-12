@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-11-09 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-11-12 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -485,6 +485,14 @@ A: 90+ tmux-compatible commands, covering session management, window and pane co
 
 **Q: psmux is misbehaving. Where are the logs?**
 A: Under `%USERPROFILE%\.psmux\`. Three files are written without you doing anything: `server-startup.log` (why a server failed to start, including the real Windows error and the path it tried to spawn), `config-warnings.log` (config lines that were silently ignored), and `crash.log` (a panic plus backtrace). Eleven more detailed loggers can be switched on one environment variable at a time, for example `$env:PSMUX_INPUT_DEBUG = "1"`. See [diagnostics.md](diagnostics.md) for the full list and for what to attach to a bug report.
+
+**Q: `display-message -p`, `list-panes` or `capture-pane -p` print nothing, or fail with "no response from server" or "no reply from server", and `new-session` reports "failed to create session" although `psmux ls` shows the session. Why?**
+A: Something on the machine is filtering psmux's local connections. psmux's commands talk to their server over a TCP connection to `127.0.0.1`, and some ad blockers and security suites can inspect local traffic too. AdGuard for Windows does this when the **Filter localhost** option in its advanced settings is on. Its 8.x network driver then drops some of psmux's replies, while commands that only send something, like `send-keys`, keep working. Fix it in the filtering product with either of these:
+
+- Turn off its localhost filtering (in AdGuard: untick **Filter localhost** in the advanced settings).
+- Exclude `psmux.exe` (and `tmux.exe` and `pmux.exe` if you use those names) from filtering.
+
+To confirm the cause, pause the product's protection for a minute and run `psmux display-message -p '#{session_name}'` inside a session: it answers at once. psmux itself never prints an empty result for a lost reply. It reports the loss on stderr and exits 1, and it asks again once on a fresh connection for commands that only read (`display-message -p`, `list-*`, `show-*`, `capture-pane -p`, `has-session`).
 
 ---
 
@@ -2413,6 +2421,7 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `synchronize-panes` | Bool | `off` | Send input to all panes |
 | `remain-on-exit` | Choice | `off` | Whether a pane stays after its program exits, as in tmux: `off`, `on`, `failed` (only when it exited with a nonzero status), `key` (until a key is typed in it in a client; `send-keys` does not close it) or `failed-key` (tmux 3.8: a clean exit closes it, a failed one stays until a key is typed in it). `split-window -k` sets `key` on the new pane |
 | `remain-on-exit-format` | Str | `Pane is dead (status N, time)` | Text written on the bottom line of a pane `remain-on-exit` kept, a format expanded for that pane (`#{pane_dead_status}`, `#{t:pane_dead_time}`). Empty writes nothing. Window and pane scope; `split-window -m text` sets it on the new pane |
+| `scroll-on-clear` | Bool | `on` | Whether clearing the whole screen sends what it showed to history first, as in tmux: `ESC[2J`, `ESC[H ESC[J`, RIS (`ESC c`) and `send-keys -R`, not in the alternate screen. PSReadLine's Ctrl+L is an `ESC[2J`, so what it clears stays in copy mode. `cls`, `Clear-Host` and `clear` also clear the history, so they leave nothing. Window and pane scope. On the inbox console host `ESC[H ESC[J` reaches psmux as a redraw of the screen, which cannot be told apart from one after a resize, so that form keeps nothing there. A program that writes `ESC[2J` instead keeps its screen on both console hosts |
 | `@kill-descendants` | Bool | `on` | Terminate a self-exited pane shell's background children (psmux extension) |
 | `@mouse-force` | Bool | `off` | Pane scoped only (`set-option -p -t %N @mouse-force on`). Forward the wheel into this pane even though its application registered for the mouse through neither channel psmux can see. psmux normally forwards only to a pane that asked, either by sending a mouse DECSET or by holding `ENABLE_MOUSE_INPUT` on its console, and it keeps that authorization for as long as the process that earned it is alive, so a `node` child entering raw mode can no longer take it away. Some applications never register through either channel on Windows: conhost can swallow their DECSET before psmux parses it, and libuv raw mode leaves their console without the mouse bit. Set this for that pane. Leave it off for panes running programs that do not read the mouse, which receive the report as literal keystrokes (psmux extension) |
 | `aggressive-resize` | Bool | `off` | Resize to smallest client |
@@ -2439,9 +2448,9 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `warm` | Bool | `on` | Pre-spawn shells for instant window/pane creation (see [warm-sessions.md](warm-sessions.md)) |
 | `copy-command` | Str | | Shell command for clipboard pipe |
 | `codepoint-widths` | Str | | Array of overrides for how many columns Unicode codepoints occupy, comma separated or one element with `codepoint-widths[N]` (see [Codepoint widths](#codepoint-widths)) |
-| `terminal-features` | Str | *(tmux 3.8 defaults)* | Array of `pattern:feature:feature` entries, comma separated or one element with `terminal-features[N]`, starting as tmux's `xterm*:clipboard:ccolour:cstyle:focus:title`, `screen*:title` and `rxvt*:ignorefkeys`. psmux keeps it for `set`, `show` and `#{terminal-features}` so a tmux config carries over, but takes a client's features from the client itself at attach, so the entries change nothing |
+| `terminal-features` | Str | *(tmux 3.8 defaults)* | Array of `pattern:feature:feature` entries, comma separated or one element with `terminal-features[N]`, starting as tmux's `xterm*:clipboard:ccolour:cstyle:focus:title`, `screen*:title` and `rxvt*:ignorefkeys`, then `*:progressbar`, which is psmux's own. Only `progressbar` is read, for whether a client writes the progress indicator (`*:progressbar@` stops it, see [Progress Indicator](compatibility.md#progress-indicator-osc-94)). psmux keeps the rest for `set`, `show` and `#{terminal-features}` so a tmux config carries over, and takes a client's other features from the client itself at attach |
 | `user-keys` | Str | | Array of key sequences the outer terminal sends, comma separated or one element with `user-keys[N]`; the sequence of element N is the key `UserN` for `bind-key`. Read where psmux parses VT input itself, which the console input route does not (see [User keys](#user-keys)) |
-| `terminal-overrides` | Str | `linux*:AX@` | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen (see [Terminal overrides](#terminal-overrides)) |
+| `terminal-overrides` | Str | `linux*:AX@` | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen, and `Spb` changes or removes what it writes for the progress indicator (see [Terminal overrides](#terminal-overrides)) |
 | `set-clipboard` | Str | `external` | Clipboard interaction (`on`/`off`/`external`). A copy mode yank reaches the Windows clipboard on every value, with OSC 52 to the outer terminal unless `off`. An application's own OSC 52 creates a paste buffer only on `on`, as in tmux; on `external` psmux still forwards it to the outer terminal and the Windows clipboard, where tmux ignores it; `off` ignores it |
 | `main-pane-width` | String | `80` | Main pane width in the main-vertical layout, in cells or a percentage such as `30%` |
 | `main-pane-height` | String | `24` | Main pane height in the main-horizontal layout, in cells or a percentage such as `30%` |
@@ -3832,12 +3841,13 @@ where every key keeps its modifiers without any of this.
 `terminal-overrides` is the tmux option for adjusting what psmux assumes about
 the terminal a client is attached from. psmux has no terminfo database: the
 client writes VT sequences directly. So of all the capabilities tmux knows,
-psmux honours the two that change what the client sends on its own account:
+psmux honours the three that change what the client sends on its own account:
 
 | Capability | Effect |
 |---|---|
 | `smcup` | Entering the host terminal's alternate screen (`ESC[?1049h`) when a client attaches |
 | `rmcup` | Leaving it again (`ESC[?1049l`) when the client detaches or exits |
+| `Spb` | The progress indicator of the active pane, see [Progress Indicator](compatibility.md#progress-indicator-osc-94) |
 
 Every other capability is accepted, kept, shown by `show-options`, and ignored.
 
@@ -3874,7 +3884,8 @@ How entries are read, the same way tmux reads them:
 
 The option is read by the server, from the config file or from a `set` at
 runtime, and each client decides when it attaches. A change made while a
-client is attached applies from the next attach.
+client is attached applies from the next attach, except `Spb`, which applies
+from the next time the indicator changes.
 
 Read it back with:
 
@@ -5624,7 +5635,7 @@ ESC]104 ESC\                   put every index back
 ESC]4;4;? ESC\                 answered from this pane's entry, then from the host terminal
 ```
 
-A query for any index from 0 to 255 is answered from the pane's entry, set by OSC 4 or by `pane-colours`, as tmux answers it from `colour_palette_get`. With no entry, the sixteen ANSI colours are answered from the host terminal, whose values the client reports; tmux also asks the host terminal for the other indexes, which psmux does not do yet, so they go unanswered. Each reply ends the way its query did, BEL or ST, as tmux's `input_osc_colour_reply` ends it, and so do the OSC 10 and OSC 11 replies.
+A query for any index from 0 to 255 is answered from the pane's entry, set by OSC 4 or by `pane-colours`, as tmux answers it from `colour_palette_get`. With no entry, the sixteen ANSI colours are answered from the host terminal, whose values the client reports, and any index from 16 to 255 from the xterm 256 colour table (the 6x6x6 cube of 0, 95, 135, 175, 215 and 255, then 24 greys from 8 in steps of 10). This is a deliberate difference: tmux asks the host terminal for those indexes (`input_add_request`), holds the pane's later replies (DA1 and the rest) until the answer comes, and gives no reply at all when no client is attached or none answers within 500 ms. Nearly every terminal, Windows Terminal included, answers with the xterm table, so the colour is the same in practice, and psmux never makes a pane wait for it, detached or nested. Each reply ends the way its query did, BEL or ST, as tmux's `input_osc_colour_reply` ends it, and so do the OSC 10 and OSC 11 replies.
 
 This matters most for Windows console applications. A pane child on ConPTY announces its console colour table as OSC 4 and then paints with indexed SGR rather than true colour, so Far Manager's panels are `ESC[48;5;4m` against an OSC 4 that says index 4 is `#000080`. Before #685 psmux dropped the palette and re rendered the cell as a plain `ESC[44m`, which Windows Terminal painted with its own Campbell `#0037DA`. Far inside psmux now paints `#000080`, `#008080` and `#00FFFF` exactly as Far outside psmux does.
 
@@ -5636,9 +5647,89 @@ Three deliberate choices:
 
 One platform limit, measured on Windows 11 build 26200: conhost swallows a **bare** `ESC]104 ESC\` on the ConPTY output path, so a pane child running under ConPTY cannot reach the clear-everything form. `ESC]104;4 ESC\` arrives normally.
 
+### Scroll Region, Origin Mode and DECALN
+
+A pane's scroll region and origin mode are what `#{scroll_region_upper}`, `#{scroll_region_lower}` and `#{origin_flag}` show:
+
+| Sequence | Effect |
+|---|---|
+| `ESC [ top ; bottom r` (DECSTBM) | Sets the region and moves the cursor home: the top left of the screen, or of the region in origin mode. A missing or 0 bottom is the last row and a missing or 0 top the first, so `ESC [ r` and `ESC [ 0 ; 0 r` give the whole screen. A region of one line or less, or with its bottom past the screen, is ignored and the cursor stays |
+| `ESC [ ? 6 h` / `l` (DECOM) | Origin mode on or off, the cursor home either way |
+| `ESC [ row d` (VPA) | To `row`, counted from the top of the region in origin mode and stopping at its bottom, keeping the column |
+| `ESC # 8` (DECALN) | Fills the screen with `E` in the default colours, puts the region back to the whole screen, turns origin mode off and moves the cursor to the top left. The colours for text written after it are unchanged |
+
+Four of these follow the console hosts, which agree with each other, rather than tmux, so that psmux's screen stays where the host's is: tmux homes DECSTBM to the top left of the screen in origin mode, cuts a bottom past the screen to the last row, ignores `ESC [ 0 ; 0 r` as a one line region, and keeps origin mode across DECALN.
+
+The inbox conhost keeps the region and origin mode to itself and hands psmux the result, so the cursor and the screen are right there, and the three formats show the whole screen and `0`. Through OpenConsole (`PSMUX_CONPTY_DIR`) psmux reads the sequences, and the formats follow the program.
+
+### Sixel Limits Query (XTSMGRAPHICS)
+
+`CSI ? item ; action ; value S` asks a terminal for its sixel limits. psmux answers it itself and does not ask the outer terminal, as tmux's `input_csi_dispatch_sm_graphics` does not. Which answer a pane gets follows what its programs were told by DA1:
+
+| Pane's console host | DA1 reply | Colour registers (item 1, read, reset or maximum) | Anything else |
+|---|---|---|---|
+| OpenConsole (`PSMUX_CONPTY_DIR`) | psmux's, `CSI ? 1;2;4 c`, listing sixel | `CSI ? 1;0;1024 S`, as tmux | `CSI ? item;3;value S`, failure, as tmux |
+| Inbox conhost | its own, not listing sixel | `CSI ? 1;3;value S`, failure | `CSI ? item;3;value S`, failure |
+
+The inbox conhost differs from tmux on purpose: it drops a pane's sixel before psmux sees it, so reporting colour registers there would describe images nothing can draw. A query with more than three parameters gets no reply, as in tmux. psmux reads a parameter as at most 65535, where tmux reads up to `INT_MAX`.
+
+### Tab Stops (HTS, TBC, CBT, HPA)
+
+Each pane keeps a table of tab stops, every 8 columns to begin with, which `#{pane_tabs}` lists, as tmux keeps `s->tabs`:
+
+| Sequence | Effect |
+|---|---|
+| `HT` (tab) | To the next stop, or the last column when there is none. Nothing from the last column |
+| `ESC H` (HTS) | A stop at the cursor, unless it waits past the last column |
+| `ESC [ g` or `ESC [ 0 g` (TBC) | Clears the stop at the cursor. `ESC [ 3 g` clears them all, and any other value nothing |
+| `ESC [ n Z` (CBT) | Back `n` stops (0 counts as 1), or to column 0 |
+| ``ESC [ n ` `` (HPA) | To column `n`, the same as `ESC [ n G` |
+
+The normal and the alternate screen share the table. A change of width, RIS, `send-keys -R` and a respawn put the default back, and a change of height alone keeps it.
+
+The inbox conhost keeps a table of its own and hands psmux plain cursor moves instead of these sequences, so the cursor lands where it should there too, but `#{pane_tabs}` stays at the default. Through OpenConsole (`PSMUX_CONPTY_DIR`) psmux reads them, and the table follows the program.
+
+### Progress Indicator (OSC 9;4)
+
+A pane sets the progress indicator with `ESC]9;4;state;value ESC\`. Each pane keeps its own, `#{pane_pb_state}` (`hidden`, `normal`, `error`, `indeterminate` or `paused`) and `#{pane_pb_progress}` read it, and the client writes the active pane's to the host terminal when it changes. The fields are read as tmux's `input_osc_9` reads them:
+
+```
+ESC]9;4;1;50 ESC\              state and value
+ESC]9;4;3 ESC\                 state only (a trailing ; is the same), the value stays
+ESC]9;4;3;70 ESC\              indeterminate never takes a value, the value stays
+```
+
+The state is one digit, 0 hidden, 1 normal, 2 error, 3 indeterminate, 4 paused. The value is at most 100. Anything else leaves the indicator as it was. The client always writes both fields, so `ESC]9;4;3 ESC\` after a value of 50 reaches the host terminal as `ESC]9;4;3;50 ESC\`, as it does from tmux. RIS leaves the indicator alone, copy mode does not stop it, a dead pane keeps it, and a respawn clears it. A pane that never set one reads as `hidden` and `0`, so switching to it writes `ESC]9;4;0;0 ESC\`. A detach writes nothing, as in tmux, so the host terminal keeps showing what it last got.
+
+What the client writes is the `Spb` capability, which the `progressbar` feature of `terminal-features` gives it:
+
+| Config | The client writes |
+|---|---|
+| The default | `ESC]9;4;state;value ESC\` |
+| `set -as terminal-features '*:progressbar@'` | Nothing. A later `*:progressbar` does not bring it back |
+| `set -g terminal-features 'xterm*:title'` | Nothing, since that list no longer has the feature |
+| `set -as terminal-overrides '*:Spb@'` | Nothing, though `#{client_termfeatures}` still lists the feature |
+| `set -as terminal-overrides '*:Spb=\E]9;4;%p1%d;%p2%d\a'` | The same ending in BEL, with or without the feature |
+
+Three things differ from tmux:
+
+- `terminal-features` holds one more element, `*:progressbar`. tmux turns the feature on for the terminals it identifies, which do not include Windows Terminal, so there it has to be added by hand. psmux does not ask the terminal which one it is, so it starts on for all of them.
+- An option set while a client is attached counts from the next write. tmux reads both at attach.
+- `Spb` is expanded for `%p1`, `%p2`, `%d` and `%%`. A value with any other terminfo operator writes nothing, and so does a value that does not use `%p2`, which is also what tmux does for that one.
+
 ## Behavioral Differences from tmux
 
 A few commands intentionally behave differently from upstream tmux. These are deliberate choices, not bugs.
+
+### `allow-passthrough`
+
+A program that sees `TMUX` set may wrap a sequence meant for the outer terminal in a tmux passthrough, `ESC P tmux; ... ESC \`, with every inner ESC doubled. Claude Code does this for its OSC 52 copy, after writing the same copy unwrapped.
+
+- **`off` (the default) matches tmux.** The whole passthrough is dropped and nothing inside it is acted on, as in tmux (`input_dcs_dispatch`, input.c:2672). A wrapped OSC 52 does not copy, a wrapped title or clear screen does not apply. An unwrapped OSC 52 still copies under the `set-clipboard` rules.
+- **`on` and `all` differ from tmux.** tmux writes the wrapped sequence raw to the outer terminal of every client showing the pane (`on`: visible panes only, `all`: any pane). psmux does not forward it yet: it reads the wrapped sequence as if the pane had written it, so a wrapped OSC 52 copies through `set-clipboard` and any other wrapped sequence is read the same way. This keeps tools that only write the wrapped form working when you opt in. Raw forwarding is a later step, described in [design/allow-passthrough-forwarding.md](design/allow-passthrough-forwarding.md).
+- psmux keeps the option per server, not per window or pane as tmux does, and a change with `set -g allow-passthrough` applies to panes that already exist.
+- The inbox Windows console host drops the closing `ESC \` of every passthrough (#1026). psmux ends such a passthrough at the program's next escape sequence, or at text that follows the wrapped sequence's BEL, so the output after it is never swallowed. A passthrough still open after 5 seconds is ended at the next output, as tmux's parser returns to ground after 5 seconds.
+- Control mode clients (`-CC`) get the wrapped sequence unwrapped in `%output` whatever the option says (#1026), since a control client is the outer terminal.
 
 ### `kill-server` with Multiple Sockets
 
@@ -5806,7 +5897,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `link-window` | `linkw` | `abdks:t:` | CLI, SRV, CFG, CTL |
 | `list-buffers` | `lsb` | `F:t:` | CLI, SRV, CFG, CTL |
 | `list-clients` | `lsc` | `F:` (SRV and CTL only) | CLI, SRV, CFG, CTL |
-| `list-commands` | `lscm` | none | CLI, SRV, CFG, CTL |
+| `list-commands` | `lscm` | `F:` | CLI, SRV, CFG, CTL |
 | `list-keys` | `lsk` | `T:t:` | CLI, SRV, CFG, CTL |
 | `list-panes` | `lsp` | `asF:t:` | CLI, SRV, CFG, CTL |
 | `list-sessions` | `ls` | `F:f:` | CLI, SRV, CFG, CTL |
@@ -5853,7 +5944,7 @@ This is the reference for the commands **psmux itself** accepts and the flags **
 | `set-window-option` | `setw` | `guaqopswUt:` plus `--` | CLI, SRV, CFG, CTL |
 | `show-buffer` | `showb` | `b:` | CLI, SRV, CFG, CTL |
 | `show-environment` | `showenv` | `gsht:` | CLI, SRV, CFG, CTL |
-| `show-hooks` | *(none)* | `g` | CLI, SRV, CFG, CTL |
+| `show-hooks` | *(none)* | `gpwt:` | CLI, SRV, CFG, CTL |
 | `show-messages` | `showmsgs` | none | CLI, SRV, CFG, CTL |
 | `show-options` | `show`, `show-option` | `Agpqsvwt:` plus `--` | CLI, SRV, CFG, CTL |
 | `show-prompt-history` | `showphist` | none | SRV |
@@ -6242,7 +6333,8 @@ psmux show-options -w -A -t s:one    # remain-on-exit* off
 **set-hook** and **show-hooks**
 - Boolean: `-u` (unset, also as `-gu` or `-ug`), `-a` (append, also as `-ga` or `-ag`), `-g` (global, accepted and absorbed)
 - Not accepted: `-p`, `-R`, `-w`, `-t`
-- `set-hook` accepts **any** hook name with no validation, so a typo silently never fires.
+- `set-hook` and `show-hooks` refuse a name that is no hook or option (`invalid option: NAME`, exit 1).
+- `show-hooks` prints tmux's rows: `name[N] command` for every handler. Without `-g` only the hooks that are set; `-g` every session hook (bare names for empty ones); `-w` / `-gw` the window and pane hooks (`pane-exited`, `pane-died`, ...); `-p` the pane hooks; a hook name (or `name[N]`) prints that hook. See scripting.md, "show-hooks output".
 
 **set-environment** (`setenv`)
 - Boolean: `-g` (global), `-r` (remove from the environment), `-u` (unset), `-h` (hidden)
@@ -6259,8 +6351,9 @@ psmux show-options -w -A -t s:one    # remain-on-exit* off
 - One or more paths, each of which may be a glob. They are read in order.
 
 **list-commands** (`lscm`)
-- No flags.
-- Not accepted: `-F`
+- Value: `-F <format>`, expanded per command with `#{command_list_name}`, `#{command_list_alias}` and `#{command_list_usage}`; a row that expands to nothing is left out.
+- Operand: an optional command, found as tmux finds it (alias, name or unique prefix); an unknown or ambiguous one is an error at exit 1.
+- Without `-F` each row is tmux's `name (alias) usage`, in tmux's command order.
 
 ### Display and overlay commands
 
@@ -8519,6 +8612,9 @@ not part of it. Capture again after any split you want to keep.
 | `#{pane_current_command}` | Foreground process name |
 | `#{pane_current_path}` | Current working directory of the pane. Under `wsl` or `ssh` this needs shell integration, see [the FAQ](faq.md) |
 | `#{pane_path}` | Path the pane announced over `OSC 7` or `OSC 9;9`, untranslated, empty if none |
+| `#{pane_tabs}` | The pane's tab stops, comma separated, every 8 columns unless the program set its own (see [Tab Stops](compatibility.md#tab-stops-hts-tbc-cbt-hpa)) |
+| `#{pane_pb_state}` | Progress indicator state the pane set with `OSC 9;4`: `hidden`, `normal`, `error`, `indeterminate` or `paused`. `hidden` if it set none |
+| `#{pane_pb_progress}` | Progress indicator percentage the pane set with `OSC 9;4`, `0` if it set none |
 | `#{pane_start_command}` | Command the pane was started with, **empty** when it was started with the default shell. A `--` argv is reported as its token list, a single command string is quoted when it contains spaces (tmux `args_escape`). A respawn replaces it only when the respawn carried a command of its own |
 | `#{pane_pid}` | PID of the pane's shell |
 | `#{pane_tty}` | Pseudo terminal name, for example `/dev/pty1` |
@@ -8559,7 +8655,8 @@ bind-key -n C-h if-shell -F "#{pane_at_left}" "send-keys C-h" "select-pane -L"
 | `#{search_present}` | `1` if a copy mode search is active |
 | `#{search_match}` | The current search match |
 | `#{scroll_position}` | Lines scrolled back from the live bottom |
-| `#{scroll_region_lower}` | Lower bound of the scroll region |
+| `#{scroll_region_upper}` / `#{scroll_region_lower}` | Top and bottom rows of the pane's scroll region, counted from 0. The whole pane until a program sets one with `ESC [ top ; bottom r` (see [Scroll Region](compatibility.md#scroll-region-origin-mode-and-decaln)) |
+| `#{origin_flag}` | `1` while the pane is in origin mode (`ESC [ ? 6 h`) |
 
 ### Buffer variables
 
@@ -8591,9 +8688,9 @@ client attached, the identity variables (`client_name`, `client_pid`, `client_re
 | `#{client_activity}` / `#{client_created}` | Timestamps for the client |
 | `#{client_activity_string}` / `#{client_created_string}` | The same, already formatted |
 | `#{client_termname}` / `#{client_termtype}` | Terminal type reported by the client |
-| `#{client_termfeatures}` | Comma-separated terminal features reported at attach for the selected client; empty with no client |
+| `#{client_termfeatures}` | Comma-separated terminal features reported at attach for the selected client, and `progressbar` when `terminal-features` gives it that; empty with no client |
 
-Feature reporting covers these terminal profiles:
+Feature reporting covers these terminal profiles. `progressbar` is not part of a report: the server reads it from `terminal-features` against the `TERM` the client attached with, so with the default option each list below ends in `,progressbar`:
 
 | Terminal | Features |
 |---|---|
@@ -8628,12 +8725,13 @@ All other environments retain `256,RGB,hyperlinks,title` as a compatibility assu
 capability support. Clients that send no valid report receive the independently owned four-bit server
 fallback. Detection uses the attaching client's environment and passive local console observations at each
 attachment, including reconnection. It does not probe the terminal. The `terminal-features` option is kept
-as an array, as tmux keeps it, but nothing reads it, and feature-based output gating is not implemented;
-OSC 8 forwarding is unchanged.
+as an array, as tmux keeps it. Only its `progressbar` feature is read, which decides whether the client
+writes the progress indicator (see [Progress Indicator](compatibility.md#progress-indicator-osc-94));
+feature-based output gating is not implemented for the others, and OSC 8 forwarding is unchanged.
 
 The optional attach argument is `features=0x<hex digits>`, an unsigned 64-bit mask. Leading zeroes
 are optional. Bits 0, 1, 2, and 3 represent `256`, `RGB`, `hyperlinks`, and `title`, respectively.
-Unknown bits are retained, but only known feature names appear in `client_termfeatures`.
+Unknown bits are retained, but only known feature names appear in `client_termfeatures`. Bit 4 is `progressbar`, which a report does not set; the server decides it.
 Malformed or overflowing reports are ignored without rejecting the attachment; a zero mask is valid
 and produces an empty feature list.
 
@@ -8694,14 +8792,13 @@ rather than live state. They exist for tmux format compatibility. Do not build l
 | `#{window_cell_width}` / `#{window_cell_height}` | `8` / `16` |
 | `#{window_linked_sessions_list}` | empty |
 | `#{pane_dead_signal}` / `#{pane_dead_status}` / `#{pane_dead_time}` | `0` |
-| `#{pane_start_path}` / `#{pane_tabs}` | empty |
+| `#{pane_start_path}` | empty |
 | `#{cursor_flag}` | `0` |
-| `#{scroll_region_upper}` | `0` |
 | `#{client_utf8}` | `1` |
 | `#{client_cell_width}` / `#{client_cell_height}` | a fixed value |
 | `#{client_written}` / `#{client_discarded}` | `0` |
 | `#{alternate_saved_x}` / `#{alternate_saved_y}` | `0` |
-| `#{origin_flag}` / `#{insert_flag}` / `#{keypad_cursor_flag}` / `#{keypad_flag}` | `0` |
+| `#{insert_flag}` / `#{keypad_cursor_flag}` / `#{keypad_flag}` | `0` |
 | `#{wrap_flag}` | `1` |
 | `#{line}`, `#{command}`, `#{command_list_name}`, `#{command_list_alias}`, `#{command_list_usage}`, `#{config_files}` | empty |
 
@@ -8821,8 +8918,10 @@ Treat both as unavailable rather than as documented behaviour.
 ## Advanced Commands
 
 ```powershell
-# Discover supported commands
+# Discover supported commands (tmux's rows: name (alias) usage)
 psmux list-commands
+psmux list-commands split-window               # one command, by name, alias or prefix
+psmux list-commands -F '#{command_list_name}'  # names only
 
 # Server/session management
 psmux kill-server
@@ -8900,7 +8999,7 @@ psmux set-hook -g session-created "set -g status-left '[#S] ' \; display-message
 | `set-hook -ga <name> <command>` | The same, written globally. `-ag` is also accepted |
 | `set-hook -u <name>` | Unset, removing every handler for `<name>` |
 | `set-hook -gu <name>` | The same, globally. `-ug` is also accepted |
-| `show-hooks` | Print every registered hook and its handlers |
+| `show-hooks [-gpw] [hook]` | Print hooks and their handlers, as tmux does (see below) |
 
 The plain (non append) form **replaces**, so re-running a config cannot stack handlers on a hook
 you set with `set-hook`. Appends are **deduplicated**: appending a command that is already
@@ -8912,31 +9011,52 @@ psmux set-hook -ga after-new-window "display-message one"
 psmux set-hook -ga after-new-window "display-message one"   # ignored, identical
 psmux set-hook -ga after-new-window "display-message two"
 psmux show-hooks
-# after-new-window[0] -> display-message one
-# after-new-window[1] -> display-message two
+# after-new-window[0] display-message one
+# after-new-window[1] display-message two
 ```
 
-`show-hooks` prints `name -> command` when a hook has a single handler and `name[N] -> command`
-when it has several.
+### show-hooks output
 
-### Warning: hook names are not validated
+`show-hooks` prints what tmux 3.8 prints. Hooks are array options there, so every handler is one
+row `name[N] command`, indexed even when there is only one. Which hooks are listed depends on the
+scope, as in tmux:
 
-`set-hook` stores **any** name you give it. A misspelled hook is accepted silently, appears in
-`show-hooks`, and then simply never fires:
+| Form | Lists |
+|------|-------|
+| `show-hooks` | The session hooks that are set. Nothing at all when none is |
+| `show-hooks -g` | Every session hook in tmux's table order: set ones as `name[N] command` rows, empty ones as the bare name |
+| `show-hooks -w` / `-p` | The window and pane hooks that are set (`-p`: the pane hooks only) |
+| `show-hooks -gw` | Every window and pane hook (`pane-exited`, `pane-died`, `window-renamed`, ...), bare names for empty ones |
+| `show-hooks [-g] <hook>` | That hook's rows. Under `-g` an empty hook prints its bare name. `<hook>[N]` prints one row |
+
+Pane and window hooks such as `pane-died` and `pane-exited` are window options in tmux, so they
+are listed by `-w` / `-gw`, not by `-g`. After `set-hook -gu <name>` the hook is empty, so
+`show-hooks -g` still prints its bare name: check for `name[` to see whether a handler is set.
 
 ```powershell
-psmux set-hook -g after-new-windwo "display-message oops"   # accepted, never fires
-psmux show-hooks
-# after-new-windwo -> display-message oops
+psmux set-hook -g pane-exited "display-message bye"
+psmux show-hooks -gw | Select-String pane-exited
+# pane-exited[0] display-message bye
+psmux show-hooks -g session-created
+# session-created
 ```
 
-There is no error and no warning. After adding a hook, run `show-hooks` and check the name
-against the table below before assuming the hook is broken for some other reason.
+### Hook names are validated
+
+`set-hook` and `show-hooks` refuse a name that is no hook (or option), as tmux does:
+
+```powershell
+psmux set-hook -g after-new-windwo "display-message oops"
+# psmux: invalid option: after-new-windwo   (exit 1)
+```
+
+A name tmux knows but psmux does not fire yet is accepted. Check the table below for the hooks
+psmux fires.
 
 ### Available Hook Events
 
-Every hook below is fired by psmux. Names not in this table are accepted by `set-hook` but never
-fire.
+Every hook below is fired by psmux. Other tmux hook names are accepted by `set-hook` but never
+fire; a name that is no hook at all is refused.
 
 | Hook | Fires when... |
 |------|---------------|
@@ -11341,9 +11461,9 @@ of them work against psmux, and the whole sequence is pinned by an end to end te
 | `set-option -p -t %N remain-on-exit failed` | Pane scoped options. `-p` is the tmux pane scope flag, not a target flag. `remain-on-exit` follows tmux semantics per pane (`on`, `off`, `failed`, `key`, `failed-key`): a teammate that crashes stays visible with its error, a teammate that exits cleanly closes its pane, and `remain-on-exit-format` sets the line written on the dead pane |
 | `show-options -p -t %N` | Lists the pane's options as `name value` lines. The `-v` flag and an option name filter are not yet applied at pane scope (still open under #580), so parse the `name value` shape |
 
-The pane scoped catalog options are `remain-on-exit` and `remain-on-exit-format`, beside psmux's own `@mouse-force` (see
+The pane scoped catalog options are `remain-on-exit`, `remain-on-exit-format` and `scroll-on-clear`, beside psmux's own `@mouse-force` (see
 below) and any `@user` option. Any other name is refused with
-`pane-scoped option 'x' is not supported (supported: remain-on-exit, remain-on-exit-format, @mouse-force, any @user option)` at exit 1
+`pane-scoped option 'x' is not supported (supported: remain-on-exit, remain-on-exit-format, scroll-on-clear, @mouse-force, any @user option)` at exit 1
 rather than stored as a silent no-op, and a `%id` that does not exist answers
 `can't find pane: %N`.
 
@@ -11975,9 +12095,9 @@ in a tool that keys on them. Do not build on these:
 
 `session_stack`, `window_bigger`, `window_offset_x`, `window_offset_y`, `window_stack_index`,
 `window_cell_width`, `window_cell_height`, `window_linked_sessions_list`, `pane_dead_signal`,
-`pane_dead_status`, `pane_dead_time`, `pane_start_path`, `pane_tabs`, `cursor_flag`,
-`scroll_region_upper`, `client_utf8`, `client_cell_width`, `client_cell_height`,
-`client_written`, `client_discarded`, `alternate_saved_x`, `alternate_saved_y`, `origin_flag`,
+`pane_dead_status`, `pane_dead_time`, `pane_start_path`, `cursor_flag`,
+`client_utf8`, `client_cell_width`, `client_cell_height`,
+`client_written`, `client_discarded`, `alternate_saved_x`, `alternate_saved_y`,
 `insert_flag`, `keypad_cursor_flag`, `keypad_flag`, `wrap_flag`, `line`, `command`,
 `command_list_name`, `command_list_alias`, `command_list_usage`, `config_files`.
 
@@ -12235,10 +12355,11 @@ one place so the two documents cannot drift.
 
 Three things matter when a tool installs hooks rather than a human:
 
-1. **Hook names are not validated.** `set-hook` stores any name it is given. A typo is accepted
-   silently, shows up in `show-hooks` like a real hook, and simply never fires. There is no
-   error to catch. After installing hooks, read `show-hooks` back and diff it against what you
-   intended.
+1. **Read hooks back in tmux's format.** `set-hook` refuses a name that is no hook
+   (`invalid option: NAME`, exit 1), but a tmux hook psmux does not fire is accepted. Read the
+   hooks back with `show-hooks` (session hooks) or `show-hooks -w` (pane and window hooks such
+   as `pane-exited`); every handler is a `name[N] command` row. Under `-g` the empty hooks are
+   listed too, as bare names, so look for `name[` rather than the bare name.
 2. **Use `-a` / `-ga` to coexist with other tools.** The plain form replaces the whole handler
    list for that event, which will silently uninstall another tool's handler. The append form
    keeps both. Appends are deduplicated, so a tool that re-runs its own setup, or a user who
@@ -12249,8 +12370,8 @@ Three things matter when a tool installs hooks rather than a human:
 ```powershell
 psmux set-hook -ga after-new-window "run-shell 'my-tool notify window'"
 psmux show-hooks
-# after-new-window[0] -> select-layout tiled
-# after-new-window[1] -> run-shell 'my-tool notify window'
+# after-new-window[0] select-layout tiled
+# after-new-window[1] run-shell 'my-tool notify window'
 ```
 
 Many of these events also surface as control mode notifications (`%window-add`, `%window-close`,
@@ -12344,6 +12465,99 @@ When porting Unix tmux integrations to Windows:
 - [configuration.md](configuration.md) : All options and config file format
 - [claude-code.md](claude-code.md) : Claude Code agent team integration
 - [features.md](features.md) : Complete feature list
+
+---
+
+<!-- design/allow-passthrough-forwarding -->
+# Design: raw forwarding for `allow-passthrough on` and `all`
+
+Status: proposal, not implemented. Today `off` matches tmux (the passthrough
+is dropped) and `on`/`all` read the wrapped sequence as pane output; see
+`allow-passthrough` in [../compatibility.md](../compatibility.md). This page
+describes the step that would make `on` and `all` behave like tmux.
+
+## What tmux does
+
+A program writes `ESC P tmux; <body with every ESC doubled> ESC \`.
+
+- tmux keeps the whole DCS: in `dcs_handler` an ESC moves to `dcs_escape`,
+  where any byte but `\` goes back into the buffer and `\` dispatches
+  (input.c:683-702). A doubled ESC becomes one ESC.
+- At the ST, `input_dcs_dispatch` returns early when `allow-passthrough` is
+  off (input.c:2672-2674). Otherwise it calls
+  `screen_write_rawstring(sctx, buf + 5, len - 5, allow_passthrough == 2)`
+  (input.c:2676-2680).
+- `screen_write_rawstring` (screen-write.c:3029-3041) hands the bytes to
+  `tty_write(tty_cmd_rawstring, ...)`, which writes them to every client
+  whose tty is ready and that shows the pane. `tty_client_ready`
+  (tty.c:1610-1629) skips the redraw and freeze checks only with
+  `TTY_CTX_INVISIBLE_PANES`, which `all` sets: `on` reaches clients that show
+  the pane, `all` reaches every client of the session.
+- `tty_cmd_rawstring` (tty.c:2151-2156) writes the bytes and then calls
+  `tty_invalidate`, so the next redraw resends cursor position and
+  attributes.
+- The pane's own screen never sees the body.
+- Control clients have no tty (`server_client_open` returns early for them,
+  server-client.c:328), so this path never reaches them. They get the pane's
+  raw bytes in `%output`. psmux sends them the body unwrapped there (#1026),
+  which is unchanged by this design.
+- An unterminated DCS is bounded by `input-buffer-size` (past it the data is
+  discarded, input.c:1289) and by the 5 second ground timer started when the
+  DCS began (input.c:826-832, 2547).
+
+## Proposed psmux implementation
+
+1. **Parser (vt100-psmux).** `src/passthrough.rs` already skips the body of a
+   passthrough before vte sees it and ends it at `ESC \`, at a lone ESC or at
+   text after a BEL (the inbox conhost drops the closing ST, #1026), or after
+   5 seconds. For forwarding, the skipper also collects the body with each
+   `ESC ESC` folded to one ESC, up to `input-buffer-size` (over that the
+   wrapper is dropped, like tmux's discard). At the wrapper's end the body is
+   queued on the `Screen` (bounded queue, total bytes held to
+   `input-buffer-size`). Collection only runs while the option is `on` or
+   `all`, so `off` costs nothing. With forwarding in place the parser no longer
+   reads the body as pane output for `on`/`all` either, which is the tmux
+   behaviour; the current "read it as pane output" opt in goes away.
+2. **Server.** In `helpers::take_frame_oneshots`, drain every pane's queue.
+   `on`: forward bodies only from panes that are visible (in the active window
+   and not hidden by a zoomed pane). `all`: forward from any pane of the
+   session. With no frame receiver the bodies are dropped, as tmux writes only
+   to clients that exist.
+3. **Frame.** A new one shot field, `"passthrough":"<base64>"`, written by
+   `frame_oneshot::append` with the clipboard and bell fields and read back by
+   `take`. `merge_newer` and `supersede` concatenate bodies in order, with the
+   same byte bound, so a superseded frame does not lose them. The shared mode
+   frame builder (`server/shared/frame.rs`) gets the same field behind
+   `PSMUX_SERVER_MODE`.
+4. **Client.** Where the clipboard and bell one shots are written, write the
+   decoded bytes raw to stdout, then force the next draw to resend cursor and
+   attributes (the equivalent of `tty_invalidate`).
+5. **Control clients.** Unchanged: `%output` carries the unwrapped body once;
+   frames never go to control clients, so nothing is delivered twice.
+
+## Gaps and risks
+
+- tmux's option is per window and per pane (options-table.c:1257-1259). psmux
+  keeps one value per server (`app.allow_passthrough`, applied to the parsers
+  through `vt100::set_allow_passthrough`). In shared server mode the value is
+  one per process for every session in it.
+- Images: an iTerm2 `OSC 1337 File=` or a kitty graphics body draws at the
+  outer terminal's cursor. tmux writes it wherever its tty cursor is at that
+  moment, and so would the client; neither places it on the pane exactly.
+- Frame size: a body of up to 1 MiB becomes about 1.4 MiB of base64 in one
+  frame. The frame one shot parser reads from the end of the frame, so it
+  needs the same quoting care as `clipboard_osc52`.
+- Remote and ssh attached clients take the same frame path.
+
+## Measurements to take
+
+- A/B with alternate builds, several runs: frame build time and the client
+  main loop with `allow-passthrough off` (expected no change) and `on` under
+  a pane that writes a passthrough per frame.
+- E2E: an attached client inside a ConPTY capture (as in the #1026 review
+  harness) shows the body once with `on` from the active pane, not from a
+  pane in another window, and once with `all` from either; never in `%output`
+  twice; never with `off`.
 
 ---
 
@@ -12870,7 +13084,9 @@ spares inside the process; and per session status-interval hooks. A command run
 from inside the loop (a hook, the config) that targets ANOTHER session of the
 same server goes over TCP to that session's listener, which this same loop
 serves, so it waits for its reply timeout; the server wide writes are delivered
-from connection threads for exactly that reason. The config is loaded once per
+from connection threads for exactly that reason. A hook's `set` of a user
+option of a different session is different in some conditions. The known
+differences below give these conditions. The config is loaded once per
 session (as each per session server loads it), so a config's `run-shell` runs per
 session.
 
@@ -12891,6 +13107,61 @@ session at the next frame of that session. With no `-c` or a relative `-c`, the
 start directory of the hook's session must be an absolute directory that is on
 the disk. If it is not, the start gives an error, but the `per-session` mode
 makes the session.
+
+A hook of A can set a user option of a different session B, or remove it with
+`-u`. The command then operates on the state of B in the loop, after the
+request of A. This occurs only when the command agrees with all of these
+conditions, after psmux changes the target `B`, `B*` or `=B` to `B:`:
+
+- The command is `set` or `set-option`, with no flags other than `-t`, `-q`
+  and `-u`.
+- The command has one `-t`, and its target names only the session, for
+  example `B` or `B:`.
+- The option name starts with `@`, has one or more ASCII letters, numbers,
+  `_` or `-` after it, and is not `@plugin`.
+- The command has no value with `-u`, and one value without `-u`.
+- No word has a space, a quote, `;`, `\` or `#`, and the value does not start
+  with `-`.
+- The words have one space between them.
+
+Two such commands for B in one hook keep their sequence, thus
+`set -t B: @x 1 \; set -t B: @x 2` gives `2` on B. If B stops before the loop
+gets to the command, the command does not operate.
+
+The loop operates these commands at four points of each cycle. The part of the
+cycle between two such points is an interval. An interval is one request, the
+`upkeep` of all the sessions, or all the session starts in the queue of the
+hooks. When a command for B goes to the control port of B, each subsequent
+command for B in the interval also goes to the port. This occurs also when the
+command agrees with the conditions.
+
+Thus the two commands of `set -t B: @x "a b" \; set -t B: @x c` go to the
+port, as before. An interval can hold more than one hook. If a hook sends a
+command for B to the port, a `set` for B in a subsequent hook of the interval
+also goes there.
+
+The errors of other commands for a different session show where they showed
+before. For example, the hook `kill-window -t B:9 \; set -t B: @x 1` shows
+`can't find window: 9` on the status line of B, and the `set` also sets `@x`
+on B. In `tmux`, the error stops the remaining commands of the group
+(`cmd-queue.c`).
+
+Other commands for a different session keep the previous path through the
+control port of that session. These include `new-window`, `split-window`,
+`send-keys`, each server wide write, and each other `set`. Such a command can
+operate after a subsequent command of the same hook.
+
+A command for B on the port can come from one interval, and a `set` for B in
+the loop from a subsequent interval. These two commands can operate in the
+opposite sequence. This also applies to a server wide write and to a command
+from a thread other than the loop. This can change the result when they write
+or read the same option.
+
+This also applies to a hook of B that the command on the port starts. For
+example, the hook of one request sends
+`new-window -t B:`, the `after-new-window` hook of B sets `@x`, and the hook of
+the next request sends `set -t B: @x c`. The `set` can operate before the hook
+of B, and then B keeps the value from the hook of B.
 
 **Measured** (`tests/perf_issue798_shared_vs_per_session.ps1`, 5 rounds of three
 `new-session -d` in a fresh namespace, Windows 11 26200, metrics JSON in
@@ -13151,6 +13422,10 @@ Step 3, the next one, each item its own PR and still entirely behind the switch:
      selected there by the destination's own copied arm (its hooks fire
      there), then the client switches as for a session target. A target
      that does not resolve is the error, and nothing changes anywhere.
+   * A hook's `set` of a user option of a different session can operate on
+     that session in the loop (`set -t B: @x 1`). The known differences give
+     the conditions. Most other commands of a hook for a different session go
+     to the control port of that session.
    * `new-session` from a binding or the prompt: the protocol handler runs it
      on a connection thread and starts `psmux server -s NAME ...` as a per
      session server would; inside the shared server `check_server_start`
@@ -13169,9 +13444,6 @@ Step 3, the next one, each item its own PR and still entirely behind the switch:
      (one more loopback hop per frame, and `#{client_pid}` and the read
      only check would have to be carried over), or a narrow hook in
      `connection.rs`.
-   * Commands the in server route runs in place rather than sending them to
-     the listener (`set -t B: ...`, `kill-window -t B:1`, ...) from a hook:
-     they act on, or fail in, the hook's own session.
    * `new-session` from a hook: the call in `commands.rs`
      (`queue_loop_start`) puts the start in a queue of the loop. The loop
      makes the session after the hook, in the same loop cycle or in the next
