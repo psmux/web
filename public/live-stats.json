@@ -1,13 +1,13 @@
 {
-  "stars": 3844,
-  "forks": 265,
-  "contributors": 51,
+  "stars": 3869,
+  "forks": 268,
+  "contributors": 53,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 1931
+      "contributions": 2008
     },
     {
       "login": "computersrmyfriends",
@@ -19,19 +19,19 @@
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 132
+      "contributions": 154
     },
     {
       "login": "MattKotsenas",
       "avatarUrl": "https://avatars.githubusercontent.com/u/51421?v=4",
       "url": "https://github.com/MattKotsenas",
-      "contributions": 42
+      "contributions": 43
     },
     {
       "login": "YuruDeveloper",
       "avatarUrl": "https://avatars.githubusercontent.com/u/101876010?v=4",
       "url": "https://github.com/YuruDeveloper",
-      "contributions": 29
+      "contributions": 30
     },
     {
       "login": "tarikguney",
@@ -52,15 +52,15 @@
       "contributions": 15
     },
     {
-      "login": "tscodeplus",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
-      "url": "https://github.com/tscodeplus",
-      "contributions": 13
-    },
-    {
       "login": "krhougs",
       "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
       "url": "https://github.com/krhougs",
+      "contributions": 13
+    },
+    {
+      "login": "tscodeplus",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
+      "url": "https://github.com/tscodeplus",
       "contributions": 13
     },
     {
@@ -76,8 +76,8 @@
       "contributions": 9
     }
   ],
-  "issues": 39,
-  "companiesRepresented": 637,
+  "issues": 41,
+  "companiesRepresented": 641,
   "topCompanies": [
     {
       "name": "Microsoft",
@@ -877,46 +877,46 @@
     },
     {
       "month": "2026-03",
-      "total": 826
+      "total": 827
     },
     {
       "month": "2026-04",
-      "total": 1577
+      "total": 1578
     },
     {
       "month": "2026-05",
-      "total": 2265
+      "total": 2266
     },
     {
       "month": "2026-06",
-      "total": 2705
+      "total": 2706
     },
     {
       "month": "2026-07",
-      "total": 3084
+      "total": 3085
     },
     {
       "month": "2026-08",
-      "total": 3365
+      "total": 3366
     },
     {
       "month": "2026-09",
-      "total": 3562
+      "total": 3563
     },
     {
       "month": "2026-10",
-      "total": 3775
+      "total": 3776
     },
     {
       "month": "2026-11",
-      "total": 3844
+      "total": 3869
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9882,
+      "followers": 9885,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -924,7 +924,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5450,
+      "followers": 5640,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -932,7 +932,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4821,
+      "followers": 4823,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -940,7 +940,7 @@
     {
       "login": "pcaversaccio",
       "name": "sudo rm -rf --no-preserve-root /",
-      "followers": 2195,
+      "followers": 2193,
       "title": "𝐖𝐨𝐫𝐤𝐢𝐧𝐠 𝐨𝐧 𝐰𝐡𝐚𝐭'𝐬 𝐧𝐞𝐱𝐭.",
       "company": "",
       "highlight": false
@@ -948,7 +948,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2135,
+      "followers": 2136,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -956,7 +956,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1916,
+      "followers": 1920,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -964,7 +964,7 @@
     {
       "login": "mehdihadeli",
       "name": "Mehdi Hadeli",
-      "followers": 1582,
+      "followers": 1583,
       "title": "Software Architect | AI Engineer | Interested in AI, Microservices, Cloud Native💙",
       "company": "",
       "highlight": false
@@ -972,7 +972,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1427,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -988,7 +988,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 994,
+      "followers": 995,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -1004,7 +1004,7 @@
     {
       "login": "shunkakinoki",
       "name": "Shun Kakinoki",
-      "followers": 896,
+      "followers": 897,
       "title": "OBLITERATE THE GALAXY",
       "company": "",
       "highlight": false
@@ -1012,7 +1012,7 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 837,
+      "followers": 838,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1036,7 +1036,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 748,
+      "followers": 752,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1044,7 +1044,7 @@
     {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 737,
+      "followers": 738,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
@@ -1058,12 +1058,12 @@
       "highlight": false
     }
   ],
-  "ecosystemRepos": 41,
+  "ecosystemRepos": 42,
   "ecosystemProjects": [
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 71,
+      "stars": 73,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1173,6 +1173,13 @@
       "category": "tool"
     },
     {
+      "name": "flow",
+      "author": "Ver-Solitaire",
+      "stars": 0,
+      "description": "FLOW — lanceur Claude Code × psmux : profils, multi-comptes, équipe de Claude, Bureau animé",
+      "category": "claude-code"
+    },
+    {
       "name": "flux",
       "author": "reddley",
       "stars": 0,
@@ -1262,29 +1269,21 @@
       "stars": 0,
       "description": "A conda-smithy repository for psmux.",
       "category": "tool"
-    },
-    {
-      "name": "psmux-scrollback-oom-repro",
-      "author": "ColinKennedy",
-      "stars": 0,
-      "description": "Minimal reproduction + analysis: psmux scrollback stores every line as a full-width row, causing multi-GB server memory. Includes tmux comparison.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
     {
       "repo": "ThomasMichon/copilot-extensions",
       "issues": [
-        "#11539",
-        "#8797",
+        "#12850",
         "#4102",
         "#4564",
         "#2830",
         "#10945",
         "#11559",
         "#10627",
-        "#2619",
         "#10879",
+        "#2619",
         "#10840",
         "#10841",
         "#10836",
@@ -1294,39 +1293,35 @@
         "#5898",
         "#10946",
         "#8490",
-        "#11718",
-        "#11255",
         "#4417",
-        "#8811"
+        "#11718",
+        "#11255"
       ],
-      "context": "Restore safe prompted Windows Resume without executing PSMux discovery"
+      "context": "agent-worktrees: scope tmux/psmux configuration to worktree sessions; do not modify global config"
     },
     {
       "repo": "takushio2525/tako",
       "issues": [
-        "#2484",
-        "#724",
-        "#729",
+        "#2954",
         "#1282",
-        "#641",
-        "#2428",
-        "#728",
-        "#885",
-        "#2454",
         "#2433",
+        "#728",
+        "#2941",
         "#1594",
         "#525",
+        "#1886",
+        "#1538",
         "#842",
-        "#2432",
         "#730",
+        "#937",
         "#519",
         "#647",
         "#628",
-        "#1538",
-        "#2462",
-        "#1073"
+        "#2484",
+        "#1073",
+        "#2935"
       ],
-      "context": "[改善][Windows] 本番の器（psmux）の conf に warm off が無い・クライアントの実行ファイルが backend とずれている（#885 の続き）"
+      "context": "[調査][Windows] 器（psmux）のペインは tako が渡す PATH を継がない（psmux 同梱の portable-pty がレジストリの Path で置き換える）"
     },
     {
       "repo": "vybestack/llxprt-jefe",
@@ -1346,19 +1341,6 @@
       "context": "Support native Windows with psmux and feature parity"
     },
     {
-      "repo": "lamngockhuong/termote",
-      "issues": [
-        "#772",
-        "#771",
-        "#237",
-        "#796",
-        "#801",
-        "#252",
-        "#798"
-      ],
-      "context": "Worktrees on Windows for psmux and herdr-core (and Zellij)"
-    },
-    {
       "repo": "CochranResearchGroup/codex-wake",
       "issues": [
         "#568",
@@ -1370,10 +1352,31 @@
       "context": "Qualify current tab and session management on native Windows psmux"
     },
     {
+      "repo": "the9ball/.dotfiles",
+      "issues": [
+        "#201",
+        "#278",
+        "#265",
+        "#214",
+        "#185"
+      ],
+      "context": "psmuxの貼り付け検出・Escape待ち時間設定をchezmoiで管理する"
+    },
+    {
+      "repo": "lamngockhuong/termote",
+      "issues": [
+        "#771",
+        "#861",
+        "#237",
+        "#252",
+        "#772"
+      ],
+      "context": "Worktrees on Windows for psmux and herdr-core (and Zellij)"
+    },
+    {
       "repo": "anthropics/claude-code",
       "issues": [
         "#104688",
-        "#92757",
         "#102905",
         "#24384",
         "#102928"
@@ -1381,14 +1384,23 @@
       "context": "[BUG] Windows: `claude attach` in a psmux pane with no client attached takes no keystrokes from `tmux send-keys`, though other raw-mode programs there do"
     },
     {
-      "repo": "the9ball/.dotfiles",
+      "repo": "vanman2024/claude-crew",
       "issues": [
-        "#201",
-        "#265",
-        "#214",
-        "#185"
+        "#22",
+        "#14",
+        "#13",
+        "#15"
       ],
-      "context": "psmuxの貼り付け検出・Escape待ち時間設定をchezmoiで管理する"
+      "context": "Move orchestration and review outside psmux; require native Playwright design verification"
+    },
+    {
+      "repo": "libtmux/libtmux-cxx",
+      "issues": [
+        "#80",
+        "#177",
+        "#167"
+      ],
+      "context": "Add psmux to CI"
     },
     {
       "repo": "wainmann/agent-manager",
@@ -1400,13 +1412,13 @@
       "context": "Windows (non wsl) lag"
     },
     {
-      "repo": "vanman2024/claude-crew",
+      "repo": "JonathanRosado/duet-agents",
       "issues": [
-        "#22",
-        "#14",
-        "#13"
+        "#13",
+        "#16",
+        "#21"
       ],
-      "context": "Move orchestration and review outside psmux; require native Playwright design verification"
+      "context": "Windows: port native session pairing and rejoin to PowerShell/psmux"
     },
     {
       "repo": "savoy9/tackle",
@@ -1416,23 +1428,6 @@
         "#62"
       ],
       "context": "opening an old agent session doesn't work."
-    },
-    {
-      "repo": "ARCJ137442/anymate-cc",
-      "issues": [
-        "#13",
-        "#23",
-        "#19"
-      ],
-      "context": "feat: cross-platform split-window support beyond tmux"
-    },
-    {
-      "repo": "libtmux/libtmux-cxx",
-      "issues": [
-        "#80",
-        "#79"
-      ],
-      "context": "Add psmux to CI"
     }
   ],
   "dotfilesRepos": [
@@ -1449,10 +1444,6 @@
       "detail": "psmux.conf"
     },
     {
-      "repo": "daisukekobayashi/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
       "repo": "Liya2199/dotfiles",
       "detail": "dot_psmux.conf"
     },
@@ -1462,10 +1453,6 @@
     },
     {
       "repo": "maxrzaw/dotfiles",
-      "detail": "psmux.conf"
-    },
-    {
-      "repo": "churchilldu/dotfile",
       "detail": "psmux.conf"
     },
     {
@@ -1509,6 +1496,10 @@
       "detail": ".psmux.conf"
     },
     {
+      "repo": "RichardEpure/new_dotfiles",
+      "detail": "psmux.conf"
+    },
+    {
       "repo": "vivy-company/vvterm",
       "detail": "AGENTS.md"
     },
@@ -1531,6 +1522,10 @@
     {
       "repo": "ctrueden/dotfiles",
       "detail": "setup.ps1"
+    },
+    {
+      "repo": "kuan-er/sjtu-agent",
+      "detail": "CLAUDE.md"
     }
   ],
   "dotfilesReferences": 24,
@@ -1549,7 +1544,7 @@
       "lat": 35.9,
       "lng": 104.2,
       "label": "China",
-      "detail": "82 developers · Ke, erasin.wang, Home",
+      "detail": "83 developers · Ke, erasin.wang, Home",
       "size": "lg",
       "country": "China",
       "continent": "Asia"
@@ -1568,7 +1563,7 @@
       "lat": 51.2,
       "lng": 10.4,
       "label": "Germany",
-      "detail": "40 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
+      "detail": "41 developers · Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V., Linkboosting.com, Techland GmbH",
       "size": "lg",
       "country": "Germany",
       "continent": "Europe"
@@ -1666,6 +1661,16 @@
       "continent": "Oceania"
     },
     {
+      "lat": 47.6,
+      "lng": -122.3,
+      "label": "Seattle",
+      "detail": "19 developers · Microsoft, Meta, University of Washington",
+      "size": "lg",
+      "country": "United States",
+      "continent": "North America",
+      "color": "#60a5fa"
+    },
+    {
       "lat": 52.2,
       "lng": 21.0,
       "label": "Warsaw",
@@ -1685,10 +1690,10 @@
       "continent": "Europe"
     },
     {
-      "lat": 47.6,
-      "lng": -122.3,
-      "label": "Seattle",
-      "detail": "18 developers · Microsoft, Meta, University of Washington",
+      "lat": 40.7,
+      "lng": -74.0,
+      "label": "New York",
+      "detail": "17 developers · Gentrace, NomosArtificial, Microsoft",
       "size": "lg",
       "country": "United States",
       "continent": "North America",
@@ -1704,14 +1709,13 @@
       "continent": "Europe"
     },
     {
-      "lat": 40.7,
-      "lng": -74.0,
-      "label": "New York",
-      "detail": "16 developers · Gentrace, NomosArtificial, Microsoft",
+      "lat": 30.6,
+      "lng": -96.3,
+      "label": "Texas",
+      "detail": "16 developers · energyworldnet, Trading & Commodities, Nutiliti",
       "size": "lg",
       "country": "United States",
-      "continent": "North America",
-      "color": "#60a5fa"
+      "continent": "North America"
     },
     {
       "lat": 51.5,
@@ -1727,15 +1731,6 @@
       "lng": -122.1,
       "label": "San Francisco Bay Area",
       "detail": "15 developers · XeroSecInc, Forbes Asset Management Inc., Code Crafters",
-      "size": "lg",
-      "country": "United States",
-      "continent": "North America"
-    },
-    {
-      "lat": 30.6,
-      "lng": -96.3,
-      "label": "Texas",
-      "detail": "15 developers · energyworldnet, Trading & Commodities, Nutiliti",
       "size": "lg",
       "country": "United States",
       "continent": "North America"
@@ -1769,6 +1764,16 @@
       "continent": "Europe"
     },
     {
+      "lat": 55.8,
+      "lng": 37.6,
+      "label": "Moscow",
+      "detail": "14 developers · ОКОЛО Маркет, Diasoft, Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University",
+      "size": "lg",
+      "country": "Russia",
+      "continent": "Europe",
+      "color": "#fbbf24"
+    },
+    {
       "lat": 40.4,
       "lng": -3.7,
       "label": "Madrid",
@@ -1794,16 +1799,6 @@
       "size": "lg",
       "country": "Czechia",
       "continent": "Europe"
-    },
-    {
-      "lat": 55.8,
-      "lng": 37.6,
-      "label": "Moscow",
-      "detail": "13 developers · ОКОЛО Маркет, Diasoft, Vysokovsky Graduate School of Urbanism + SPEM Lab, HSE University",
-      "size": "lg",
-      "country": "Russia",
-      "continent": "Europe",
-      "color": "#fbbf24"
     },
     {
       "lat": 59.9,
@@ -1987,5 +1982,5 @@
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-11-12T14:50:11Z"
+  "lastUpdated": "2026-11-16T15:10:24Z"
 }
