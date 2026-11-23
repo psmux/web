@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-11-19 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-11-23 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -2453,6 +2453,7 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `user-keys` | Str | | Array of key sequences the outer terminal sends, comma separated or one element with `user-keys[N]`; the sequence of element N is the key `UserN` for `bind-key`. Read where psmux parses VT input itself, which the console input route does not (see [User keys](#user-keys)) |
 | `terminal-overrides` | Str | `linux*:AX@` | Array of `pattern:cap:cap` entries matched against the client's `TERM`. `smcup@` and `rmcup@` keep the attached client off the host terminal's alternate screen, and `Spb` changes or removes what it writes for the progress indicator (see [Terminal overrides](#terminal-overrides)) |
 | `set-clipboard` | Str | `external` | Clipboard interaction (`on`/`off`/`external`). A copy mode yank reaches the Windows clipboard on every value, with OSC 52 to the outer terminal unless `off`. An application's own OSC 52 creates a paste buffer only on `on`, as in tmux; on `external` psmux still forwards it to the outer terminal and the Windows clipboard, where tmux ignores it; `off` ignores it |
+| `get-clipboard` | Str | `buffer` | What a pane program's clipboard query (`OSC 52 ; ?`) is answered with: `off` nothing, `buffer` the newest automatic paste buffer, `request` the Windows clipboard, `both` the Windows clipboard kept as a buffer too. `request` and `both` need a client attached. Read only with `set-clipboard on`, as in tmux: no reply on `external` (the default) or `off`, nor on the inbox conhost of Windows 11, which drops the query. See [Clipboard Read](compatibility.md#clipboard-read-osc-52--) |
 | `main-pane-width` | String | `80` | Main pane width in the main-vertical layout, in cells or a percentage such as `30%` |
 | `main-pane-height` | String | `24` | Main pane height in the main-horizontal layout, in cells or a percentage such as `30%` |
 | `session-group` | Str | | Name of the session group this session joins. `none` or an empty value clears it. See [Session Groups](#session-groups) |
@@ -2490,7 +2491,7 @@ As in tmux, a name that is neither in this table, nor in tmux's own options tabl
 | `popup-border-lines` | Str | `single` | Popup border glyph set: `single`, `double`, `heavy`, `simple`, `rounded`, `padded`, `none`. `display-popup -b` overrides it for one popup, `-B` draws no border |
 | `popup-style` | Str | | Colours of the popup content area: cells the program leaves at the terminal default take them. `display-popup -s` overrides its colours for one popup |
 | `clock-mode-colour` | Str | | Colour of the `clock-mode` digits |
-| `clock-mode-style` | Str | | Accepted and stored, but never read. See [Accepted but Not Functional](#accepted-but-not-functional) |
+| `clock-mode-style` | Choice | `24-with-seconds` | Time format of the `clock-mode` clock: `12`, `24`, `12-with-seconds` or `24-with-seconds`, as in tmux. `set -w` sets it for one window. tmux's default is `24`; psmux keeps the seconds its clock always showed |
 | `window-status-format` | Str | `#I:#W#{?window_flags,#{window_flags}, }` | Inactive tab format. See [program-attention opt-in](program-status.md#opt-in-to-attention-indicators) |
 | `window-status-current-format` | Str | `#I:#W#{?window_flags,#{window_flags}, }` | Active tab format. |
 | `window-status-separator` | Str | `" "` | Tab separator |
@@ -2772,8 +2773,6 @@ set -g window-active-style "bg=colour52"
 ```
 
 `popup-border-lines` accepts the tmux set: `single` (the default), `double`, `heavy`, `simple` (`+`, `-` and `|`), `rounded`, `padded` (blank cells) and `none`. With `none`, or `display-popup -B`, the popup has no frame and its command gets the whole `-w` by `-h` area. As in tmux, only the colours of `popup-border-style` and `popup-style` are used, a popup has no title unless `display-popup -T` gives one, and the `-S` and `-s` flags of `display-popup` win over the options for that popup.
-
-> **Note:** `clock-mode-style` is accepted and stored but never read. See [Accepted but Not Functional](#accepted-but-not-functional).
 
 ### Bell
 
@@ -3205,7 +3204,6 @@ setting that was never wired up.
 |---|---|
 | `lock-after-time` | Accepted and stored. Session locking is not implemented, so the timer never runs. `lock-client`, `lock-server` and `lock-session` exist as commands but nothing locks on a timer |
 | `lock-command` | Accepted and stored. Never read, for the same reason |
-| `clock-mode-style` | Accepted and stored. Use `clock-mode-colour`, which is read |
 
 Setting any of these produces no warning, because the values are stored verbatim in the user options
 map instead of being validated against a known option. For most of them `show-options` will read the
@@ -4126,6 +4124,8 @@ so muscle memory carries over.
 | `Enter` | Switch to the selected entry (or to the jump buffer index if non-empty). A window or pane of another session switches to that session on that window or pane |
 | `f` | Enter session-name filter mode (choose-session only) |
 | `p` | Toggle live preview |
+| `/`, `?` or `C-s` | Search: type at the `(search) ` prompt and press `Enter` to move to the next row it matches (choose-tree: a session or window name, or the command running in a pane; choose-session: a session name; choose-buffer: a buffer name or its content). All lower case ignores case. `Esc` closes the prompt |
+| `n` / `N` | Repeat the last search forward / backward, wrapping around the list |
 | `x` | Kill the highlighted entry (session in choose-session, window in choose-tree), with confirmation |
 | `Esc` | Answer a pending kill question with no; otherwise clear an active session filter; otherwise close the chooser |
 | `q` / `C-g` | Close the chooser (`q` types into an active session filter instead) |
@@ -5773,6 +5773,23 @@ Three things differ from tmux:
 - An option set while a client is attached counts from the next write. tmux reads both at attach.
 - `Spb` is expanded for `%p1`, `%p2`, `%d` and `%%`. A value with any other terminfo operator writes nothing, and so does a value that does not use `%p2`, which is also what tmux does for that one.
 
+### Clipboard Read (OSC 52 ; ?)
+
+A pane program asks for the clipboard with `ESC ] 52 ; c ; ? ESC \`. As in tmux, the query is read only with `set-clipboard on`; with `external`, the default, or `off`, it gets no reply, so nothing a program prints can read back what you copied unless you turn this on. With `on`, psmux answers as the `get-clipboard` server option says, as tmux's `input_osc_52_reply` does:
+
+| `get-clipboard` | The reply |
+|---|---|
+| `off` | none |
+| `buffer` (the default) | the newest automatic paste buffer, none without one; a named buffer (`set-buffer -b`) is not read |
+| `request` | the Windows clipboard's text, as `refresh-client -l` reads it, where tmux asks the terminal of the most recently used client; none with no client attached, as in tmux |
+| `both` | the same, kept as a new paste buffer too |
+
+The reply is `ESC ] 52 ; selection ; base64 data`, ended the way the query was, and names the first selection character tmux knows (`cpqs01234567`) that the query gave, or none. A clipboard write earlier in the same output is read back on `set-clipboard on`, where it makes a buffer. When another window holds the Windows clipboard open, `request` and `both` wait for it for up to a second, as a paste does, and the pane's other replies wait behind it, while other panes go on; past that the query gets no reply. tmux waits up to 5 seconds for its terminal's answer. `request` and `both` let any pane program read what you copied, so leave them off unless you want that.
+
+One difference:
+
+- **Not through the inbox conhost of Windows 11.** It drops the query before psmux sees it (builds 26200 and 26300), so a pane there gets no reply whatever the options. The Windows 10 one (build 19045) passes it on when it next draws, and OpenConsole (`PSMUX_CONPTY_DIR`) passes it on.
+
 ## Behavioral Differences from tmux
 
 A few commands intentionally behave differently from upstream tmux. These are deliberate choices, not bugs.
@@ -5782,9 +5799,9 @@ A few commands intentionally behave differently from upstream tmux. These are de
 A program that sees `TMUX` set may wrap a sequence meant for the outer terminal in a tmux passthrough, `ESC P tmux; ... ESC \`, with every inner ESC doubled. Claude Code does this for its OSC 52 copy, after writing the same copy unwrapped.
 
 - **`off` (the default) matches tmux.** The whole passthrough is dropped and nothing inside it is acted on, as in tmux (`input_dcs_dispatch`, input.c:2672). A wrapped OSC 52 does not copy, a wrapped title or clear screen does not apply. An unwrapped OSC 52 still copies under the `set-clipboard` rules.
-- **`on` and `all` differ from tmux.** tmux writes the wrapped sequence raw to the outer terminal of every client showing the pane (`on`: visible panes only, `all`: any pane). psmux does not forward it yet: it reads the wrapped sequence as if the pane had written it, so a wrapped OSC 52 copies through `set-clipboard` and any other wrapped sequence is read the same way. This keeps tools that only write the wrapped form working when you opt in. Raw forwarding is a later step, described in [design/allow-passthrough-forwarding.md](design/allow-passthrough-forwarding.md).
+- **`on` and `all` forward the unescaped body raw to attached terminals.** `on` forwards from visible panes in the active window (respecting zoom), `all` from any pane of the session. The pane screen never interprets the body. Delivery is consume-once and survives frame coalescing; raw writes invalidate the client screen cache. A pane's own unwrapped notification OSCs (OSC 9, 99, 777, 9001) are never forwarded, as in tmux: wrap them in a passthrough. See [design/allow-passthrough-forwarding.md](design/allow-passthrough-forwarding.md) for bounds.
 - psmux keeps the option per server, not per window or pane as tmux does, and a change with `set -g allow-passthrough` applies to panes that already exist.
-- The inbox Windows console host drops the closing `ESC \` of every passthrough (#1026). psmux ends such a passthrough at the program's next escape sequence, or at text that follows the wrapped sequence's BEL, so the output after it is never swallowed. A passthrough still open after 5 seconds is ended at the next output, as tmux's parser returns to ground after 5 seconds.
+- The inbox Windows console host can consume ST-terminated wrappers or unwrap their contents before psmux receives them. BEL-terminated OSC wrappers can arrive with their closing `ESC \` missing (#1026). psmux ends such a passthrough at the program's next escape sequence, or at text that follows the wrapped sequence's BEL, so the output after it is never swallowed. A passthrough still open after 5 seconds is ended at the next output, as tmux's parser returns to ground after 5 seconds.
 - Control mode clients (`-CC`) get the wrapped sequence unwrapped in `%output` whatever the option says (#1026), since a control client is the outer terminal.
 
 ### `kill-server` with Multiple Sockets
@@ -6165,7 +6182,8 @@ Five mouse wire commands are an exception and are genuinely usable for scripting
 **respawn-window** (`respawnw`)
 - Boolean: `-k`
 - Value: `-c` (start directory), `-e` (`KEY=VALUE`, repeatable), `-t` (target window)
-- Respawns the active pane of the window, keeping its history like `respawn-pane`.
+- As in tmux, the window keeps only its FIRST pane: every other pane (floating ones too) is closed, its process tree ended, with no `pane-exited` or `pane-died` hook; the window is unzoomed, the first pane becomes active at the full window size and is respawned with its pane id and history kept, like `respawn-pane`. Earlier releases respawned the active pane and left the others running.
+- Without `-k`, a window with any pane whose process is still running is refused, as in tmux: `respawn window failed: window <session>:<index> still active`, exit 1. A window whose panes have all exited (kept by `remain-on-exit`) is respawned. Earlier releases killed the running process with or without `-k`.
 
 **list-windows** (`lsw`)
 - Boolean: `-a` (all sessions), `-J` (JSON output, a psmux extension)
@@ -12528,10 +12546,22 @@ When porting Unix tmux integrations to Windows:
 <!-- design/allow-passthrough-forwarding -->
 # Design: raw forwarding for `allow-passthrough on` and `all`
 
-Status: proposal, not implemented. Today `off` matches tmux (the passthrough
-is dropped) and `on`/`all` read the wrapped sequence as pane output; see
-`allow-passthrough` in [../compatibility.md](../compatibility.md). This page
-describes the step that would make `on` and `all` behave like tmux.
+Status: implemented for normal attached clients in the legacy and shared server.
+
+Only an explicit tmux passthrough reaches the host terminal, as in tmux 3.8.
+A pane's own notification OSCs (OSC 9 text, `777;notify`, OSC 99, OSC 7501,
+OSC 9001) are not forwarded, whatever `allow-passthrough` says: tmux's
+`input_exit_osc` (input.c) acts on OSC 9;4 progress and drops every other
+OSC 9 and every OSC it does not know. A program that wants a desktop
+notification inside tmux or psmux wraps it, `ESC P tmux; ESC ESC ]9;text BEL
+ESC \`, and the user opts in with `set -g allow-passthrough on`. With the
+default `off` nothing a pane writes is sent raw to the host terminal.
+
+OSC 99 identifiers share the host terminal's namespace. Programs in visible
+split panes should use distinct identifiers; psmux does not rewrite IDs or
+merge chunks from separate panes. Visibility is evaluated when the server
+drains pane output; hidden and detached events are discarded, not replayed
+on a later window switch or attach.
 
 ## What tmux does
 
@@ -12562,38 +12592,58 @@ A program writes `ESC P tmux; <body with every ESC doubled> ESC \`.
   discarded, input.c:1289) and by the 5 second ground timer started when the
   DCS began (input.c:826-832, 2547).
 
-## Proposed psmux implementation
+## Implementation
 
-1. **Parser (vt100-psmux).** `src/passthrough.rs` already skips the body of a
-   passthrough before vte sees it and ends it at `ESC \`, at a lone ESC or at
-   text after a BEL (the inbox conhost drops the closing ST, #1026), or after
-   5 seconds. For forwarding, the skipper also collects the body with each
-   `ESC ESC` folded to one ESC, up to `input-buffer-size` (over that the
-   wrapper is dropped, like tmux's discard). At the wrapper's end the body is
-   queued on the `Screen` (bounded queue, total bytes held to
-   `input-buffer-size`). Collection only runs while the option is `on` or
-   `all`, so `off` costs nothing. With forwarding in place the parser no longer
-   reads the body as pane output for `on`/`all` either, which is the tmux
-   behaviour; the current "read it as pane output" opt in goes away.
-2. **Server.** In `helpers::take_frame_oneshots`, drain every pane's queue.
-   `on`: forward bodies only from panes that are visible (in the active window
-   and not hidden by a zoomed pane). `all`: forward from any pane of the
-   session. With no frame receiver the bodies are dropped, as tmux writes only
-   to clients that exist.
-3. **Frame.** A new one shot field, `"passthrough":"<base64>"`, written by
-   `frame_oneshot::append` with the clipboard and bell fields and read back by
-   `take`. `merge_newer` and `supersede` concatenate bodies in order, with the
-   same byte bound, so a superseded frame does not lose them. The shared mode
-   frame builder (`server/shared/frame.rs`) gets the same field behind
-   `PSMUX_SERVER_MODE`.
-4. **Client.** Where the clipboard and bell one shots are written, write the
-   decoded bytes raw to stdout, then force the next draw to resend cursor and
-   attributes (the equivalent of `tty_invalidate`).
-5. **Control clients.** Unchanged: `%output` carries the unwrapped body once;
-   frames never go to control clients, so nothing is delivered twice.
+1. **Parser.** The tmux passthrough skipper collects unescaped bodies only while enabled;
+   the pane screen never interprets them. Fragmented reads, doubled inner ESC,
+   lost ConPTY closing ST recovery and the existing five second DCS timeout
+   retain their parser behavior. A complete single allowlisted OSC ending in
+   BEL is committed immediately, even if ConPTY drops the outer ST and the
+   writer goes silent. It is removed from the collected body, so a later ST
+   cannot replay it. This commits a notification prefix before the parser can
+   know whether generic content follows. A later suffix waits for normal
+   wrapper completion/recovery and can be dropped on timeout, overflow or
+   disabling passthrough without recalling the already delivered prefix.
+   Bodies with generic content before a notification are not committed early.
+2. **Server.** Each pane has an ordered consume-once event queue. The server
+   drains the live parser during copy mode; snapshots contain no pending events.
+   Passthrough `on` forwards from visible panes (active window, zoom aware),
+   `all` permits hidden panes too, and `off` drops passthrough bodies. A
+   process wide pending count lets the server skip the per pane drain (and
+   its parser locks) whenever nothing is queued, which is always the case
+   with `off`.
+   Tiled, floating and popup panes are covered. Events are discarded when the
+   session has no registered normal client; control clients and normal clients
+   in another shared-server session cannot retain events for a later attach.
+   Warm-pane claim reconciliation also discards its queued startup events.
+3. **Frames.** Exact bytes travel as a base64 array in one-shot `host_events`,
+   with `host_raw` requesting cache invalidation for arbitrary passthrough.
+   Clipboard, bell and image one-shots retain their existing semantics.
+   Every frame superseding location carries events forward in order. A legacy
+   dump-state reply absorbs the requester's older unread events before its new
+   events, and its confirming pushed screen omits those one-shots. Other clients
+   retain their own ordered events. Cached screen snapshots contain no events,
+   so redraw cannot replay them.
+4. **Client.** Event bytes are written once to stdout even when the screen
+   snapshot is unchanged. A raw passthrough write resets attributes and the
+   open hyperlink and invalidates the screen before the next redraw.
+5. **Bounds.** Each event is limited by the smaller of `input-buffer-size`
+   and 1 MiB. Pane, staged frame and coalesced client queues each hold at most
+   256 events and 1 MiB of raw bytes. When full, newer complete events are
+   discarded; no event is byte-truncated. These are transport bounds, so a
+   dropped OSC 99 chunk can leave the producer's notification incomplete.
+6. **Control clients.** Unchanged: `%output` carries unwrapped pane bytes;
+   normal frame side effects are not sent through the control stream.
 
 ## Gaps and risks
 
+- ConPTY can change bytes before psmux sees them. In direct control and raw
+  pane-reader captures, the tested inbox console host discarded whole
+  ST-terminated wrapped OSCs, unwrapped generic ANSI with normalized resets,
+  and retained BEL-terminated wrapped OSCs while dropping their outer ST.
+  Forwarding only applies to bytes received by psmux; an option cannot recover
+  a wrapper the console host already consumed. Regression captures must use
+  the direct control and raw pane ingress to distinguish these cases.
 - tmux's option is per window and per pane (options-table.c:1257-1259). psmux
   keeps one value per server (`app.allow_passthrough`, applied to the parsers
   through `vt100::set_allow_passthrough`). In shared server mode the value is
@@ -13555,15 +13605,39 @@ Step 3, the next one, each item its own PR and still entirely behind the switch:
    summary of the session. The `dispatch.rs` file had the arm, but `router.rs`
    stopped the line.
 
+   Second batch (round 16), again copied arms only: respawn-window,
+   resize-window, find-window, list-clients (`-F`, `-f` too) and
+   refresh-client, from an attached client and as one shot commands. Measured
+   on master first (shared mode): find-window, respawn-window, list-clients
+   and refresh-client answered `unknown command`, and `resize-window -x 90 -y
+   20` exited 0 while the window stayed 120x30. list-clients lists the
+   clients of the session it runs in, as a per session server does; the CLI
+   already asks each session for a bare `list-clients`, so the output is the
+   same as the default mode's. A one shot `refresh-client -C/-B/-A/-f` stays
+   the handler's own `not a control client` error, as in the default mode.
+   show-window-options was never refused as a one shot command (the handler
+   sends `ShowWindowOptionsFor`, which step 2 already served); only the old
+   `ShowWindowOptions` request, which nothing sends any more, still has a name
+   in `refused.rs`.
+
+   Several namespaces side by side (`tests/test_issue798_multi_namespace_shared.ps1`):
+   two `-L` namespaces in shared mode with the same session names, next to a
+   namespace in the default mode, in one data directory. Each shared namespace
+   has one process and its own marker, every session its own port, key and
+   files, names never resolve across namespaces, send-keys, capture-pane,
+   attach, switch-client, kill-session and kill-server stay inside their
+   namespace, and the default namespace keeps one server per session. Nothing
+   needed fixing.
+
    Still refused. A one shot command gets `unknown command`; an attached client's
    binding, prompt or menu puts `not supported in shared server mode yet: <name>`
    on that session's status line instead of doing nothing (`refused.rs`):
-   break-pane, join-pane, new-pane (floats), respawn-window, resize-window,
+   break-pane, join-pane, new-pane (floats),
    pipe-pane, move-window, swap-window, link-window, unlink-window,
-   find-window, rename-session (the registry rename), `new-session -t` (groups),
-   choose-buffer, display-menu, display-popup, customize-mode, list-clients,
+   rename-session (the registry rename), `new-session -t` (groups),
+   choose-buffer, display-menu, display-popup, customize-mode,
    detach-client (`-a`, `-s`, another client), lock-client, suspend-client,
-   refresh-client, source-file, show-window-options,
+   `refresh-client -f` from an attached client, source-file,
    list-commands, the prompt history commands, run-shell and wait-for. The
    `router.rs` file also stops the internal request `__config-warnings`. An
    attached client sees the name `show-messages` in the status line message for
