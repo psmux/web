@@ -1,6 +1,6 @@
 # psmux documentation
 
-Generated 2026-11-23 from https://github.com/psmux/psmux/tree/master/docs
+Generated 2026-11-26 from https://github.com/psmux/psmux/tree/master/docs
 
 <!-- tutorials/getting-started-windows -->
 # Getting Started with psmux: tmux on Windows in 10 Minutes
@@ -350,7 +350,7 @@ To copy from one pane only, let psmux do the selecting:
 A: Because that program never asked for the mouse, and psmux follows tmux here. tmux only writes a mouse report to a pane whose application has enabled a mouse mode (`input_key_mouse` in `input-keys.c` returns immediately otherwise), and its default `WheelUpPane` binding treats the alternate screen only as a reason NOT to fall through to copy mode. So over a full screen program with no mouse support the wheel is a no-op in tmux, and now in psmux too. Before psmux 3.3.9 psmux forwarded the report anyway, and a program that does not parse mouse reports read the bytes as keystrokes: htop opened its `Search:` prompt and typed the report into it, and codex lost its transcript ([#598](https://github.com/psmux/psmux/issues/598)). Turn the program's own mouse support on (`:set mouse=a` in vim and neovim, `--mouse` for `less`, the mouse setting in htop) and the wheel starts working again. Over a plain shell prompt the wheel still enters copy mode and scrolls psmux's own scrollback, unchanged.
 
 **Q: The mouse works in some programs but not in Claude Code on Windows 10. Why?**
-A: On Windows builds below 22523 (Windows 10 19041 and 19045, Windows Server 2019 and Server 2022 build 20348) conhost's inbound VT parser does not pass an SGR mouse report to the pane's child. psmux writes that report into the pane, and on those builds it dies inside conhost, so a program that reads the mouse as VT bytes on stdin never sees it. That covers node based TUIs such as Claude Code and anything reading raw stdin. Programs that read the mouse as console INPUT_RECORDs do get it, because psmux also injects a Win32 `MOUSE_EVENT` record straight into the pane's console input buffer, which skips that parser entirely. That covers crossterm and ratatui apps, Bubble Tea and other Go TUIs, PSReadLine, and native Windows TUIs, and since psmux 3.3.9 it covers clicks, releases and drags on those builds and not only the wheel. On 22523 and above both kinds of program work. This was measured on real 19045 hardware in [#597](https://github.com/psmux/psmux/issues/597): a crossterm app received every wheel notch while a node child reading stdin received zero bytes. There is no psmux level fix for the VT half, the data is lost inside conhost. Upgrading to a build of 22523 or later is the only way to get the mouse into a VT reading program.
+A: On Windows builds below 22523 (Windows 10 19041 and 19045, Windows Server 2019 and Server 2022 build 20348) conhost's inbound VT parser does not pass an SGR mouse report to the pane's child. psmux writes that report into the pane, and on those builds it dies inside conhost, so a program that reads the mouse as VT bytes on stdin never sees it. That covers node based TUIs such as Claude Code and anything reading raw stdin. Programs that read the mouse as console INPUT_RECORDs do get it, because psmux also injects a Win32 `MOUSE_EVENT` record straight into the pane's console input buffer, which skips that parser entirely. That covers crossterm and ratatui apps, Bubble Tea and other Go TUIs, PSReadLine, and native Windows TUIs, and since psmux 3.3.9 it covers clicks, releases and drags on those builds and not only the wheel. The console host on those builds does not tell psmux that such a program asked for the mouse, so psmux reads it from the program's console input mode instead: mouse input on, line input and echo off. On 22523 and above both kinds of program work. This was measured on real 19045 hardware in [#597](https://github.com/psmux/psmux/issues/597): a crossterm app received every wheel notch while a node child reading stdin received zero bytes. There is no psmux level fix for the VT half, the data is lost inside conhost. Upgrading to a build of 22523 or later is the only way to get the mouse into a VT reading program.
 
 **Q: What shells does psmux support?**
 A: PowerShell 7 (default), PowerShell 5, cmd.exe, Git Bash, WSL, nushell, and any Windows executable. Change with `set -g default-shell <shell>`. Panes get PowerShell 7 even when you started psmux from a Windows PowerShell 5.1 tab, so `$PROFILE` inside a pane is the `Documents\PowerShell\` one, not `Documents\WindowsPowerShell\`. If you want your 5.1 profile and bindings, set `set -g default-shell powershell`, or set the `SHELL` environment variable to `powershell.exe` (psmux seeds `default-shell` from `SHELL` like tmux does).
@@ -2646,6 +2646,9 @@ blinking both, rather than resetting the terminal to its own default. It asks
 the terminal at attach what it is drawing (DECRQSS for the shape, DECRQM for
 DEC private mode 12) and writes that back when the session ends. A terminal
 that will not answer gets the plain reset instead, which is where tmux stops.
+A program in a pane can ask psmux the same question, and it answers with the
+shape the program set, else with `cursor-style` (see Cursor Style Query in
+`compatibility.md`).
 
 `cursor-style` is the shape psmux asks for when you do want it to pick:
 
@@ -2940,6 +2943,8 @@ set -g alternate-screen off
 ```
 
 The flag lives in each pane's terminal parser, and psmux patches live panes and the warm pane when you change it, so the new value applies immediately without restarting anything.
+
+On Windows 10 (builds before 22000) the inbox `conhost.exe` keeps the switch to itself: it never passes DEC private mode 1049 on to psmux, it draws the program's alternate screen as an ordinary repaint, and it repaints the normal screen over it when the program leaves. psmux never sees the alternate screen there, so `#{alternate_on}` stays 0 and `alternate-screen off` has nothing to ignore: what the program drew does not stay in the scrollback either way. A console host that passes the switch on, an OpenConsole through `PSMUX_CONPTY_DIR`, behaves as on Windows 11 (see [The Console Host Seam](diagnostics.md#the-console-host-seam)).
 
 ### Session Groups
 
@@ -5565,6 +5570,12 @@ One place follows the console hosts, which agree with each other, rather than tm
 
 The inbox conhost does all of this itself and hands psmux the result. Through OpenConsole (`PSMUX_CONPTY_DIR`) psmux reads the sequences.
 
+### Hyperlinks Through an Attribute Reset (OSC 8)
+
+An OSC 8 hyperlink is not a graphic rendition, so SGR 0 (`ESC [ 0 m`, `ESC [ m`, `ESC [ 1 ; 0 m` and the like) resets the colours and attributes and leaves the link alone. Only OSC 8 itself ends the link, or a full reset (`ESC c`). tmux keeps the link the same way, and so do both console hosts: the inbox conhost even writes its own `ESC [ m` inside a link when the colour goes back to the default.
+
+One form follows the console hosts rather than tmux 3.8: tmux ends the link at an `ESC [ m` with no parameter, which psmux keeps as it keeps `ESC [ 0 m`.
+
 ### Window-scoped Options
 
 Every window carries its own option table, so a window-scoped write reaches one window and nothing else (#648, from the #647 WIN-01 report):
@@ -5728,6 +5739,20 @@ The inbox conhost keeps the region and origin mode to itself and hands psmux the
 | Inbox conhost | its own, not listing sixel | `CSI ? 1;3;value S`, failure | `CSI ? item;3;value S`, failure |
 
 The inbox conhost differs from tmux on purpose: it drops a pane's sixel before psmux sees it, so reporting colour registers there would describe images nothing can draw. A query with more than three parameters gets no reply, as in tmux. psmux reads a parameter as at most 65535, where tmux reads up to `INT_MAX`.
+
+### Cursor Style Query (DECRQSS)
+
+`DCS $ q SP q ST` asks the terminal for the cursor style. psmux answers it as tmux's `input_handle_decrqss` does: the style the program set with DECSCUSR (`CSI n SP q`), 1 to 6, or, when it set none or set 0, the number `cursor-style` gives, 0 for `default`. `CSI ? 12 h` and `l` turn the blink of a shape on and off. RIS and `respawn-pane` keep the shape and drop the blink, and `clear-history` keeps both. Any other setting asked this way (SGR, DECSTBM and the rest) gets `DCS 0 $ r ST`, a setting the terminal does not report, as in tmux.
+
+| Pane's console host | Cursor style | Any other setting |
+|---|---|---|
+| OpenConsole (`PSMUX_CONPTY_DIR`) | `DCS 1 $ r n SP q ST`, from psmux | `DCS 0 $ r ST`, from psmux |
+| Inbox conhost, build 26300 | `DCS 0 $ r ST`, the host's own | the host's own answer: it reports SGR, DECSTBM and DECSCA |
+| Inbox conhost, build 19045 (Windows 10) | no reply | no reply |
+
+The inbox conhost never passes DECRQSS on, so psmux cannot answer there. The Windows 10 one does not know it either: it drops the `DCS` and the `ST` and shows the rest, `$ q SP q`, as text.
+
+The reply differs from tmux's in one place. tmux writes `DCS 1 $ r SP q n SP q ST`, with the query's own `SP q` before the number. The VT510's DECRPSS reply carries "all the characters in the control function, except the CSI", so for `CSI 2 SP q` it is `DCS 1 $ r 2 SP q ST`, and a program that reads it that way, psmux's own client among them, reads tmux's form as an empty number, so as 0. psmux writes the standard form, with the same number tmux picks. `cursor-style` is one value for the whole server in psmux, so a pane's own `set -p cursor-style` is refused rather than answered.
 
 ### Tab Stops (HTS, TBC, CBT, HPA)
 
@@ -6514,10 +6539,11 @@ These are parsed before psmux looks at the command name.
 | `-CC` | Control mode without command echo. |
 | `-t <target>` | Target `session`, `session:window` or `session:window.pane` for the command that follows. |
 | `-S <path>` | Selects the server for that path, and wins over `-L` as in tmux. A path inside the psmux data dir (`<dir>/<label>`, what `#{socket_path}` prints) or the `$TMUX` first field selects that label; any other path selects a private namespace keyed by a hash of the normalized absolute path, so every spelling of one path reaches one server. `#{socket_path}` and the first field of `$TMUX` in its panes report the path as given. |
+| `-T <features>` | Features of the terminal the client runs in, as in tmux: names from the `terminal-features` list split at `,` or `:`, in any case, `name@` to take one back out, and a name tmux does not know ends the list. They are added to the ones the client detects and show in `#{client_termfeatures}`; `terminal-features` is read on top of them. psmux keeps `256`, `RGB`, `hyperlinks`, `title` and `progressbar`, and reads the other names without effect. |
 | `-h`, `--help` | Usage. |
 | `-V`, `-v`, `--version` | Version. |
 
-Glued short flags of the form `-x=VALUE` are normalized to `-x VALUE` before parsing. tmux's attached spellings are accepted too: `-Lwork` is `-L work`, and a command level `-tname` is `-t name`.
+Glued short flags of the form `-x=VALUE` are normalized to `-x VALUE` before parsing. tmux's attached spellings are accepted too: `-Lwork` is `-L work`, `-TRGB` is `-T RGB`, and a command level `-tname` is `-t name`.
 
 When a command carries no `-t` at all, psmux picks the session the way tmux's `cmd_find_best_session` does (#603): a `$TMUX` inherited from the pane you are typing in wins if it belongs to the requested namespace, otherwise the session with the newest activity does, where activity is stamped on attach, on `switch-client`, and on every key an attached client sends. The `last_session` file is only a tie break. See the target syntax section of [scripting.md](scripting.md) for the full rule.
 

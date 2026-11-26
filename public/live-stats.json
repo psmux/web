@@ -1,19 +1,19 @@
 {
-  "stars": 3900,
-  "forks": 271,
-  "contributors": 53,
+  "stars": 3913,
+  "forks": 274,
+  "contributors": 55,
   "topContributors": [
     {
       "login": "psmux",
       "avatarUrl": "https://avatars.githubusercontent.com/u/52248669?v=4",
       "url": "https://github.com/psmux",
-      "contributions": 2085
+      "contributions": 2099
     },
     {
       "login": "tanaeakihiko",
       "avatarUrl": "https://avatars.githubusercontent.com/u/61773469?v=4",
       "url": "https://github.com/tanaeakihiko",
-      "contributions": 173
+      "contributions": 193
     },
     {
       "login": "computersrmyfriends",
@@ -52,15 +52,15 @@
       "contributions": 15
     },
     {
-      "login": "krhougs",
-      "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
-      "url": "https://github.com/krhougs",
-      "contributions": 13
-    },
-    {
       "login": "tscodeplus",
       "avatarUrl": "https://avatars.githubusercontent.com/u/216669548?v=4",
       "url": "https://github.com/tscodeplus",
+      "contributions": 13
+    },
+    {
+      "login": "krhougs",
+      "avatarUrl": "https://avatars.githubusercontent.com/u/1382065?v=4",
+      "url": "https://github.com/krhougs",
       "contributions": 13
     },
     {
@@ -76,7 +76,7 @@
       "contributions": 9
     }
   ],
-  "issues": 55,
+  "issues": 41,
   "companiesRepresented": 647,
   "topCompanies": [
     {
@@ -536,7 +536,7 @@
       "logoUrl": "https://cdn.simpleicons.org/visa/ffffff"
     }
   ],
-  "universities": 90,
+  "universities": 91,
   "topUniversities": [
     {
       "name": "Tongji University",
@@ -725,10 +725,6 @@
       "domain": "uta.edu"
     },
     {
-      "name": "University of Science and Technology Beijing",
-      "domain": "ustb.edu.cn"
-    },
-    {
       "name": "University of Windsor"
     },
     {
@@ -868,6 +864,12 @@
     },
     {
       "name": "Sharif University of Technology"
+    },
+    {
+      "name": "King Mongkut's University of Technology North Bangkok (KMUTNB)"
+    },
+    {
+      "name": "Nanjing University of Information Science and Technology"
     }
   ],
   "starHistory": [
@@ -881,50 +883,50 @@
     },
     {
       "month": "2026-02",
-      "total": 244
+      "total": 243
     },
     {
       "month": "2026-03",
-      "total": 828
+      "total": 827
     },
     {
       "month": "2026-04",
-      "total": 1578
+      "total": 1577
     },
     {
       "month": "2026-05",
-      "total": 2266
+      "total": 2265
     },
     {
       "month": "2026-06",
-      "total": 2705
+      "total": 2704
     },
     {
       "month": "2026-07",
-      "total": 3083
+      "total": 3081
     },
     {
       "month": "2026-08",
-      "total": 3364
+      "total": 3362
     },
     {
       "month": "2026-09",
-      "total": 3559
+      "total": 3557
     },
     {
       "month": "2026-10",
-      "total": 3772
+      "total": 3769
     },
     {
       "month": "2026-11",
-      "total": 3900
+      "total": 3913
     }
   ],
   "notableUsers": [
     {
       "login": "ardalis",
       "name": "Steve \"Ardalis\" Smith",
-      "followers": 9887,
+      "followers": 9896,
       "title": "Software developer, training, architect with over 25 years of experience. Parallel entrepreneur. Cofounded NimblePros w/",
       "company": "NimblePros",
       "highlight": true
@@ -932,7 +934,7 @@
     {
       "login": "jeffersongoncalves",
       "name": "Jefferson Gonçalves",
-      "followers": 5874,
+      "followers": 5954,
       "title": "Full Stack PHP Developer | Filament | Laravel | Livewire | Alpine.js | Tailwind CSS",
       "company": "",
       "highlight": true
@@ -940,7 +942,7 @@
     {
       "login": "Yeachan-Heo",
       "name": "Bellman",
-      "followers": 4826,
+      "followers": 4829,
       "title": "Algo Trader / Bloated AI Slop Creator\r",
       "company": "Layoff-Labs",
       "highlight": false
@@ -956,7 +958,7 @@
     {
       "login": "dsherret",
       "name": "David Sherret",
-      "followers": 2138,
+      "followers": 2139,
       "title": "Prev @denoland",
       "company": "",
       "highlight": false
@@ -964,7 +966,7 @@
     {
       "login": "cheeaun",
       "name": "Chee Aun",
-      "followers": 1920,
+      "followers": 1919,
       "title": "Product-first Front-end Engineer. Interested in design, dataviz, maps, public transport & stickers.",
       "company": "Unemployed since Jul'22",
       "highlight": false
@@ -980,7 +982,7 @@
     {
       "login": "tarikguney",
       "name": "Tarik Guney",
-      "followers": 1427,
+      "followers": 1426,
       "title": "Principal Engineering Manager at @microsoft",
       "company": "microsoft",
       "highlight": false
@@ -996,7 +998,7 @@
     {
       "login": "tkersey",
       "name": "Tim Kersey",
-      "followers": 998,
+      "followers": 997,
       "title": "If you'd have asked me when I was 3 what I wanted to be when I grew up I would have said a bologna sandwich",
       "company": "thisisartium",
       "highlight": false
@@ -1004,7 +1006,7 @@
     {
       "login": "sigma7863",
       "name": "Sigma",
-      "followers": 901,
+      "followers": 900,
       "title": "HighScool Student・Vibe Coder\r",
       "company": "N-highschool",
       "highlight": false
@@ -1020,7 +1022,15 @@
     {
       "login": "MilleniumSpark",
       "name": "MilleniumSpark",
-      "followers": 834,
+      "followers": 837,
+      "title": "GitHub Developer",
+      "company": "",
+      "highlight": false
+    },
+    {
+      "login": "lovejiuwu",
+      "name": "久雾",
+      "followers": 758,
       "title": "GitHub Developer",
       "company": "",
       "highlight": false
@@ -1036,7 +1046,7 @@
     {
       "login": "dualface",
       "name": "dualface",
-      "followers": 755,
+      "followers": 753,
       "title": "20+ yrs in open source. Now building apps & games with an army of AI agents · Quick apps, kander & more OSS @ github.com",
       "company": "",
       "highlight": false
@@ -1044,7 +1054,7 @@
     {
       "login": "yuiseki",
       "name": "yuiseki",
-      "followers": 750,
+      "followers": 748,
       "title": "Product manager & Software engineer",
       "company": "Geolonia",
       "highlight": false
@@ -1052,26 +1062,18 @@
     {
       "login": "prabirshrestha",
       "name": "Prabir Shrestha",
-      "followers": 737,
+      "followers": 736,
       "title": "GitHub Developer",
       "company": "Microsoft",
       "highlight": false
-    },
-    {
-      "login": "andfanilo",
-      "name": "Fanilo Andrianasolo",
-      "followers": 728,
-      "title": "AI /CX Strategy Advisor / Solutions Architecture",
-      "company": "Magellan",
-      "highlight": false
     }
   ],
-  "ecosystemRepos": 41,
+  "ecosystemRepos": 42,
   "ecosystemProjects": [
     {
       "name": "termote",
       "author": "lamngockhuong",
-      "stars": 74,
+      "stars": 75,
       "description": "Self-hosted PWA to control Claude Code, Codex, GitHub Copilot or any terminal from your phone or desktop. Single Go binary streaming tmux/psmux/Herdr sessions to xterm.js, native or in a container.",
       "category": "claude-code"
     },
@@ -1164,6 +1166,13 @@
       "author": "avielf04",
       "stars": 1,
       "description": "Warp-style terminal stack for Windows: WezTerm + psmux + PowerShell 7 + AI error correction (ICommandPredictor)",
+      "category": "tool"
+    },
+    {
+      "name": "copilot-idle-compact",
+      "author": "theoriginaltudor",
+      "stars": 0,
+      "description": "Automatically compact idle GitHub Copilot CLI sessions in tmux/psmux before the 5-minute prompt cache expires.",
       "category": "tool"
     },
     {
@@ -1270,13 +1279,6 @@
       "stars": 0,
       "description": "A conda-smithy repository for psmux.",
       "category": "tool"
-    },
-    {
-      "name": "psmux-scrollback-oom-repro",
-      "author": "ColinKennedy",
-      "stars": 0,
-      "description": "Minimal reproduction + analysis: psmux scrollback stores every line as a full-width row, causing multi-GB server memory. Includes tmux comparison.",
-      "category": "tool"
     }
   ],
   "crossRepoMentions": [
@@ -1287,8 +1289,8 @@
         "#4102",
         "#13050",
         "#4564",
-        "#10945",
         "#2830",
+        "#10945",
         "#11559",
         "#10946",
         "#10627",
@@ -1301,6 +1303,7 @@
         "#10833",
         "#6266",
         "#5898",
+        "#14325",
         "#8490",
         "#4417"
       ],
@@ -1315,13 +1318,13 @@
         "#728",
         "#2941",
         "#525",
-        "#1594",
         "#1886",
+        "#1594",
         "#842",
         "#1538",
         "#730",
-        "#937",
         "#519",
+        "#937",
         "#647",
         "#628",
         "#1073",
@@ -1363,6 +1366,7 @@
       "repo": "the9ball/.dotfiles",
       "issues": [
         "#201",
+        "#325",
         "#278",
         "#265",
         "#308",
@@ -1372,12 +1376,22 @@
       "context": "psmuxの貼り付け検出・Escape待ち時間設定をchezmoiで管理する"
     },
     {
+      "repo": "wainmann/agent-manager",
+      "issues": [
+        "#1148",
+        "#828",
+        "#805",
+        "#802"
+      ],
+      "context": "Native Windows and WSL2"
+    },
+    {
       "repo": "vanman2024/claude-crew",
       "issues": [
         "#22",
         "#14",
-        "#15",
-        "#13"
+        "#13",
+        "#15"
       ],
       "context": "Move orchestration and review outside psmux; require native Playwright design verification"
     },
@@ -1403,19 +1417,10 @@
       "repo": "CochranResearchGroup/codex-wake",
       "issues": [
         "#568",
-        "#529",
-        "#519"
+        "#775",
+        "#766"
       ],
       "context": "Qualify current tab and session management on native Windows psmux"
-    },
-    {
-      "repo": "wainmann/agent-manager",
-      "issues": [
-        "#828",
-        "#805",
-        "#802"
-      ],
-      "context": "Windows (non wsl) lag"
     },
     {
       "repo": "lamngockhuong/termote",
@@ -1559,7 +1564,7 @@
       "lat": 35.7,
       "lng": 139.7,
       "label": "Tokyo",
-      "detail": "71 developers · backspacetokyo, Peking University, Sakane Dev Studio",
+      "detail": "70 developers · backspacetokyo, Peking University, Sakane Dev Studio",
       "size": "lg",
       "country": "Japan",
       "continent": "Asia",
@@ -1578,7 +1583,7 @@
       "lat": 31.2,
       "lng": 121.5,
       "label": "Shanghai",
-      "detail": "37 developers · Microsoft, Tongji University, 中国科学院数字生命研究所",
+      "detail": "38 developers · Microsoft, Tongji University, 中国科学院数字生命研究所",
       "size": "lg",
       "country": "China",
       "continent": "Asia",
@@ -1588,7 +1593,7 @@
       "lat": 20.6,
       "lng": 79.0,
       "label": "India",
-      "detail": "36 developers · midtown-technology-group, Visionary, intel-private",
+      "detail": "35 developers · midtown-technology-group, Visionary, intel-private",
       "size": "lg",
       "country": "India",
       "continent": "Asia"
@@ -1667,6 +1672,15 @@
       "continent": "Oceania"
     },
     {
+      "lat": 52.4,
+      "lng": -1.5,
+      "label": "United Kingdom",
+      "detail": "21 developers · Pixel Inspiration, everstack, newscred",
+      "size": "lg",
+      "country": "United Kingdom",
+      "continent": "Europe"
+    },
+    {
       "lat": 47.6,
       "lng": -122.3,
       "label": "Seattle",
@@ -1675,15 +1689,6 @@
       "country": "United States",
       "continent": "North America",
       "color": "#60a5fa"
-    },
-    {
-      "lat": 52.4,
-      "lng": -1.5,
-      "label": "United Kingdom",
-      "detail": "19 developers · Pixel Inspiration, everstack, newscred",
-      "size": "lg",
-      "country": "United Kingdom",
-      "continent": "Europe"
     },
     {
       "lat": 52.2,
@@ -1890,15 +1895,6 @@
       "continent": "South America"
     },
     {
-      "lat": 1.4,
-      "lng": 103.8,
-      "label": "Singapore",
-      "detail": "10 developers · Unemployed since Jul'22",
-      "size": "lg",
-      "country": "Singapore",
-      "continent": "Asia"
-    },
-    {
       "lat": 30.7,
       "lng": 104.1,
       "label": "Chengdu",
@@ -1947,6 +1943,15 @@
       "continent": "Europe"
     },
     {
+      "lat": 1.4,
+      "lng": 103.8,
+      "label": "Singapore",
+      "detail": "9 developers · Unemployed since Jul'22",
+      "size": "md",
+      "country": "Singapore",
+      "continent": "Asia"
+    },
+    {
       "lat": 53.3,
       "lng": -6.3,
       "label": "Ireland",
@@ -1954,6 +1959,16 @@
       "size": "md",
       "country": "Ireland",
       "continent": "Europe"
+    },
+    {
+      "lat": 13.8,
+      "lng": 100.5,
+      "label": "Bangkok",
+      "detail": "8 developers · ALSSoftware, King Mongkut's University of Technology North Bangkok (KMUTNB)",
+      "size": "md",
+      "country": "Thailand",
+      "continent": "Asia",
+      "color": "#fbbf24"
     },
     {
       "lat": 3.1,
@@ -1973,20 +1988,11 @@
       "country": "China",
       "continent": "Asia",
       "color": "#fbbf24"
-    },
-    {
-      "lat": 14.6,
-      "lng": 121.0,
-      "label": "Manila",
-      "detail": "7 developers · Ubiquitous Computing Laboratory, ARKRAY | XOO, xdx integral solutions",
-      "size": "md",
-      "country": "Philippines",
-      "continent": "Asia"
     }
   ],
   "cities": 75,
   "countries": 47,
   "continents": 6,
   "latestVersion": "3.4.0",
-  "lastUpdated": "2026-11-23T17:39:54Z"
+  "lastUpdated": "2026-11-26T16:35:42Z"
 }
